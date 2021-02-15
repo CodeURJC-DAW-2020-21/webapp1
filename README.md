@@ -4,10 +4,10 @@ It is a Social Network where you can find players of your same level to play wit
 
 
 ### ENTITIES
-- Player user:
-- Anonymous user:
-- Admin user:
-- Company user:
+- Player user: These are the main users who can control almost all the app. This users will have the posibility to search a teammate to play with, play and search some tournaments, and other aspects such as looking the rankings, move in different screens, change their profile, contact with the developing group and a lot of more.
+- Anonymous user: These users can visit our aplication, but they have soome restrictions because they aren't singing in. They can move over the screen and consult different information, however they won't be able to serch tournaments and matches or visit de differents categories and rankings.  
+- Admin user: This is the secondary user whose main function will be create and organize the tournaments, always keep in contact with the companies (Company user).
+- Company user: 
 #
 - Tournaments:
 - Matches:
