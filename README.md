@@ -5,7 +5,7 @@ It is a Social Network where you can find players of your same level to play wit
 
 # MEMBERS
 | Name | Email | User GitHub |
-| ------------- | ------------- |
+| ------------- | ------------- | ------------- |
 | Juan Guillo Bermejo | j.guillo.2018@alumnos.urjc.es  | JGBURJC  |
 | Eduardo Ivorra Salinas | e.ivorra.2018@alumnos.urjc.es | EduardoIvorra |
 | Eduardo Villaverde Espeso | e.villaverdee@alumnos.urjc.es | eduvilla97  |
