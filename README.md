@@ -1,4 +1,4 @@
- ![Alt text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/LOGO.png?raw=true "APP LOGO")
+ !(https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/LOGO.png?raw=true "APP LOGO")
 
 # Friends-Padel-Tour
 It is a Social Network where you can find players of your same level to play with. Create tournaments with your friends and compete with them in a friendly way.
