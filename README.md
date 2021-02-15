@@ -28,7 +28,7 @@ This user is similar to players, but with the diffence that they can organize so
 #### - Tournaments: 
 #### - Matches:
 #### - Padel Doubles:
-
+#
 ### SCREENS
 - Main Screen: This screen will be used to join the rest and to link all the screens. In this screen you can see interesting information about the recent events of padel like tournaments and friendly matches. 
 - Sign in
@@ -37,7 +37,7 @@ This user is similar to players, but with the diffence that they can organize so
 - Search for friendly matches
 - Search Tournamentent 
 - Organize a tournament
-
+#
 ### EXTRA FEATURES
 Our team has decided to implement one extra funcionality. When somenone win a tournament the app is going to give a prize to the winner user in the form of diploma. This diploma is going to generate a PDF that permits winners to download, keep and print it. 
 
