@@ -2,14 +2,14 @@
 It is a Social Network where you can find players of your same level to play with. Create tournaments with your friends and compete with them in a friendly way.
 
 # ENTITIES
--Player user:
--Anonymous user:
--Admin user:
+- Player user:
+- Anonymous user:
+- Admin user:
 -Company user:
 
--Tournaments:
--Matches:
--Padel Doubles:
+- Tournaments:
+- Matches:
+- Padel Doubles:
 
 # SCREENS
 - Main Screen (Inicio)
