@@ -7,4 +7,4 @@ It is a Social Network where you can find players of your same level to play wit
 
 # EXTRA FEATURES
 
-# EXTRA ALGORITHM
+# ALGORITHM
