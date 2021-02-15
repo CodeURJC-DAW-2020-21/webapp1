@@ -4,13 +4,13 @@ It is a Social Network where you can find players of your same level to play wit
 # ENTITIES
 
 # SCREENS
-Main Screen (Inicio)
-Sign in
-About us
-Your profile
-Search for friendly matches
-Search Tournamentent 
-Organize a tournament
+- Main Screen (Inicio)
+- Sign in
+- About us
+- Your profile
+- Search for friendly matches
+- Search Tournamentent 
+- Organize a tournament
 
 # EXTRA FEATURES
 
