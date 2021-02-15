@@ -9,12 +9,12 @@ It is a Social Network where you can find players of your same level to play wit
 - Admin user: This is the secondary user whose main function will be create and organize the tournaments, always keep in contact with the companies (Company user).
 - Company user: This user is similar to players, but with the diffence that they can organize some tournaments with admin's help. They have some padel courts that can offer to play the tournaments and making available to play. 
 #
-- Tournaments:
+- Tournaments: 
 - Matches:
 - Padel Doubles:
 
 ### SCREENS
-- Main Screen (Inicio)
+- Main Screen: This screen will be used to join the rest and to link all the screens. In this screen you can see interesting information about the recent events of padel like tournaments and friendly matches. 
 - Sign in
 - About us
 - Your profile
