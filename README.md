@@ -2,6 +2,16 @@
 
 # Friends-Padel-Tour
 It is a Social Network where you can find players of your same level to play with. Create tournaments with your friends and compete with them in a friendly way.
+
+# MEMBERS
+| Name | User GitHub |
+| ------------- | ------------- |
+| Juan Guillo Bermejo | JGBURJC  |
+| Eduardo Ivorra Salinas | EduardoIvorra |
+| Eduardo Villaverde Espeso| eduvilla97  |
+| Alberto Morán Cuenca | AlbertoMoranCuenca  |
+
+
 # FASE 0
 
 
