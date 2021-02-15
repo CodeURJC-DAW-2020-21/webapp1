@@ -4,12 +4,12 @@
 It is a Social Network where you can find players of your same level to play with. Create tournaments with your friends and compete with them in a friendly way.
 
 # MEMBERS
-| Name | User GitHub |
+| Name | Email | User GitHub |
 | ------------- | ------------- |
-| Juan Guillo Bermejo | JGBURJC  |
-| Eduardo Ivorra Salinas | EduardoIvorra |
-| Eduardo Villaverde Espeso| eduvilla97  |
-| Alberto Morán Cuenca | AlbertoMoranCuenca  |
+| Juan Guillo Bermejo | j.guillo.2018@alumnos.urjc.es  | JGBURJC  |
+| Eduardo Ivorra Salinas | e.ivorra.2018@alumnos.urjc.es | EduardoIvorra |
+| Eduardo Villaverde Espeso | e.villaverdee@alumnos.urjc.es | eduvilla97  |
+| Alberto Morán Cuenca | a.moranc.2018@alumnos.urjc.es | AlbertoMoranCuenca  |
 
 
 # FASE 0
