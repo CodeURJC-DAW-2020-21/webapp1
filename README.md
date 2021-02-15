@@ -5,8 +5,8 @@ It is a Social Network where you can find players of your same level to play wit
 - Player user:
 - Anonymous user:
 - Admin user:
--Company user:
-
+- Company user:
+#
 - Tournaments:
 - Matches:
 - Padel Doubles:
