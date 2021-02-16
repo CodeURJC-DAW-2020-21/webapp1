@@ -12,7 +12,7 @@ It is a Social Network where you can find players of your same level to play wit
 | Alberto Morán Cuenca | a.moranc.2018@alumnos.urjc.es | AlbertoMoranCuenca  |
 
 
-# PHASE 0
+# STAGE 0
 
 
 ### ENTITIES
