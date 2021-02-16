@@ -26,8 +26,11 @@ This is the secondary user whose main function will be create and organize the t
 This user is similar to players, but with the diffence that they can organize some tournaments with admin's help. They have some padel courts that can offer to play the tournaments and making available to play. 
 #
 #### - Tournaments: 
-#### - Matches:
+This entity will be used to organize tournaments where the players can participate. These tournaments will be created by the companies with the help of the admin. (The admin will receive a peticion by a company that wants to create it, and the admin develop and planificate everything according with the information the company has made).
+#### - Friendly Matches: 
+This entity will be very easy to use. In case some of the players want a friendly match only need to request a "Friendly match" until other players want to play versus him.
 #### - Padel Doubles:
+This will be used to create and collaborate with other players with the object of forming a new padel double, in case yuo don't have a teammate.
 #
 ### SCREENS
 - Main Screen: This screen will be used to join the rest and to link all the screens. In this screen you can see interesting information about the recent events of padel like tournaments and friendly matches. It's the principal screen of our app.
