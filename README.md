@@ -21,7 +21,7 @@ These are the main users who can control almost all the app. This users will hav
 #### - Anonymous user: 
 These users can visit our aplication, but they have some restrictions because they aren't singing in. They can move over the screens and consult different information, however they won't be able to search tournaments and matches or visit de differents categories and rankings.  
 #### - Admin user: 
-This is the secondary user whose main function will be create and organize the tournaments, always keep in contact with the companies (Company user).
+This is the secondary user whose main function will be create and organize the tournaments,who always keeps in contact with the companies (Company user).
 #### - Company user: 
 This user is similar to players, but with the diffence that they can organize some tournaments with admin's help. They have some padel courts that can offer to play the tournaments and making available to play. 
 #
