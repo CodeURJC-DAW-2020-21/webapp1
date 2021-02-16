@@ -28,7 +28,7 @@ This user is similar to players, but with the diffence that they can organize so
 #### - Tournaments: 
 This entity will be used to organize tournaments where the players can participate. These tournaments will be created by the companies with the help of the admin. (The admin will receive a peticion by a company that wants to create it, and the admin develop and planificate everything according with the information the company has made).
 #### - Matches: 
-This entity will be very easy to use. In case some of the players want a friendly match only need to request a "Friendly match" until other players want to play versus him. ALso include the tournaments' matches.
+This entity will be very easy to use. In case some of the players want a friendly match only need to request a "Friendly match" until other players want to play versus him. Also include the tournaments' matches.
 #### - Padel Doubles:
 This will be used to create and collaborate with other players with the object of forming a new padel double, in case yuo don't have a teammate.
 #
