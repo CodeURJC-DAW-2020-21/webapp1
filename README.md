@@ -34,11 +34,11 @@ This will be used to create and collaborate with other players with the object o
 #
 ### SCREENS
 - Main Screen: This screen will be used to join the rest and to link all the screens. In this screen you can see interesting information about the recent events of padel like tournaments and friendly matches. It's the principal screen of our app.
-- Sign in:
-- About us:
-- Your profile:
-- Search for friendly matches:
-- Search Tournamentent: 
+- Sign in: The team need a meeting to see what we are going to develop.
+- About us: The team need a meeting to see what we are going to develop.
+- Your profile: The team need a meeting to see what we are going to develop.
+- Search for friendly matches: The team need a meeting to see what we are going to develop.
+- Search Tournamentent: The team need a meeting to see what we are going to develop.
 - Organize a tournament: This screen can be used only by the admin and companies. In the screen you could organize a tournament,
 #
 ### EXTRA FEATURES
