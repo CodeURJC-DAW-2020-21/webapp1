@@ -1347,13 +1347,24 @@ a:hover {
   width:25%
 }
 
+.c-ranking-header--table .c-ranking-header__data-box-company {
+  padding-left: 0;
+  margin-left: 0;
+  text-align: center;
+  width:50%;
+  border-left: black;
+}
+
 .c-ranking-header .l-container--data {
   display: flex;
   margin-left: 0;
   margin-bottom:4rem
 }
 
-
+.image-players {
+  width: 60px;
+  height: 60px;
+}
 
 #tournament_button {
   display: inline-block;
