@@ -1246,7 +1246,6 @@ a:hover {
 
 .couple-image {
   margin-bottom: 5%;
-  opacity: ;
   height: 200px;
   width: 200px;
 
@@ -1408,10 +1407,9 @@ position: absolute;
 }
 .tournament {
   display: inline-block;
-  background-color: rgb(117, 131, 223);
   border: none;
   border-radius: 20px;
-  color: #FFFFFF;
+  color: #000000;
   text-align: center;
   font-size: 15px;
   padding: 5px;
@@ -1436,8 +1434,7 @@ position: absolute;
   display: block;
 }
 
-.tournament_head >#tournament_button{
-  background-color: rgb(110, 241, 110);
+#addTournament{
   font-size: 14px;
   float: right;
 }
