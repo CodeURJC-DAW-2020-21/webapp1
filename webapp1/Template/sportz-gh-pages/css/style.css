@@ -1427,3 +1427,12 @@ position: absolute;
   font-size: 14px;
   float: right;
 }
+
+.tournament-form{
+  border-left-style: solid;
+  border-right-style: solid;
+}
+
+.form-section{
+  border-bottom-style: solid;
+}
