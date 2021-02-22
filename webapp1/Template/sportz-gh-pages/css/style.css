@@ -30,6 +30,10 @@ a:hover {
   color: #000 !important;
 }
 
+.text-blue {
+  color: rgb(0, 23, 235) !important;
+}
+
 .bg-black {
   background: #000 !important;
 }
@@ -200,6 +204,12 @@ a:hover {
   background: #000;
   -webkit-box-shadow: 20px 0 0 #000, -20px 0 0 #000;
   box-shadow: 20px 0 0 #000, -20px 0 0 #000;
+}
+.bg-text-line2 {
+  display: inline;
+  background: rgb(0, 17, 255);
+  -webkit-box-shadow: 20px 0 0 rgb(0, 17, 255), -20px 0 0 rgb(0, 17, 255);;
+  box-shadow: 20px 0 0 rgb(0, 17, 255), -20px 0 0 rgb(0, 17, 255);
 }
 
 .bg-image {
