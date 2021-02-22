@@ -1234,6 +1234,7 @@ a:hover {
   
 }
 
+<<<<<<< HEAD
 .couple-image {
   margin-bottom: 5%;
   opacity: ;
@@ -1344,3 +1345,81 @@ a:hover {
   margin-bottom:4rem
 }
 
+=======
+
+
+#tournament_button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #cf2418;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 22px;
+  padding: 5px;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+#tournament_button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+#tournament_button span:after {
+content: '\00bb';  
+position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+#tournament_button:hover span {
+  padding-right: 25px;
+}
+#tournament_button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#tournament_name{
+  font-size: 32px;
+  font-weight: bold;
+}
+.tournament {
+  display: inline-block;
+  background-color: rgb(117, 131, 223);
+  border: none;
+  border-radius: 20px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px;
+  margin: 10px;
+  width: 500px;
+}
+
+.tournament_icon{
+  height: 30px;
+  width: 30px;
+}
+
+.tournaments{
+  margin-bottom: 30px;
+}
+.tournament_definition{
+  display: inline-block;
+  margin: 10px;
+}
+
+#tournament_name{
+  display: block;
+}
+
+.tournament_head >#tournament_button{
+  background-color: rgb(110, 241, 110);
+  font-size: 14px;
+  float: right;
+}
+>>>>>>> f3e075496a3180aa473cf4c625e57c573ab0ebff
