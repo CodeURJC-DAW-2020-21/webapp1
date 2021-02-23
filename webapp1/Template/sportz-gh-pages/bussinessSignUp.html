@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <title>Sportz &mdash; Colorlib Sports Team Template</title>
+    <title>Registrate - FPT</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -84,37 +84,111 @@
         </div>
       </nav>
     </header>
-  
+
     
-  
-    <div class="site-section feature-blocks-1 margin-top">
-      <div class="row mb-5 margin-top">
-        <div class="col-md-12 text-center">
-          <h1 class="text-red" style="background-color:#013660;">SELECCIONA EL TIPO DE USUARIO QUE SERAS</h1>
-        </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 " data-aos="fade" data-aos-delay="100">
-            <div class="p-3 p-md-5 feature-block-1 mb-5 mb-lg-0 bg" style="background-image: url('images/padel_court.jpg');">
-              <div class="text">
-                <h2 class="h5 text-white text-center">EMPRESA</h2>
-                <p>Organiza torneos y date visibilidad ante jugadores de distintos niveles.</p>
-                <p class="mb-0"><a href="bussinessSignUp.html" class="btn btn-primary btn-sm px-4 py-2 rounded-0">Continuar como empresa</a></p>
+    <div class="site-section">
+      <div class="row">
+        <div class="container col-md-4"></div>
+        <div class="container col-md-4 form">
+          <h1>Regístrese</h1>
+          <form>
+            <h2>Informacion personal</h2>
+              <div class="form-group">
+                <label for="userName">Nombre:</label>
+                <input type="text" class="form-control" id="userName">
               </div>
-            </div>
-          </div>
-          <div class="col-md-6 " data-aos="fade" data-aos-delay="200">
-            <div class="p-3 p-md-5 feature-block-1 mb-5 mb-lg-0 bg" style="background-image: url('images/normal_user.jpg');">
-              <div class="text">
-                <h2 class="h5 text-white text-center">JUGADOR</h2>
-                <p>Juega amistosos con otros jugadores de tu nivel, participa en tonreos, conoce gente...</p>
-                <p class="mb-0"><a href="userSignUp.html" class="btn btn-primary btn-sm px-4 py-2 rounded-0">Continuar como jugador</a></p>
+              <div class="form-group">
+                <label for="surname">Apellidos:</label>
+                <input type="text" class="form-control" id="userSurname">
               </div>
+              <label for="email">Correo electronico:</label>
+              <input type="email" class="form-control" id="userEmail" placeholder="ejemplo@gmail.com">
+            <div class="form-group">
+              <label for="pwd">Contraseña:</label>
+              <input type="password" class="form-control" id="userPwd" placeholder="contraseña">
             </div>
-          </div>
+            <div class="form-group">
+              <label for="confirm-pwd">Comfirme la contraseña:</label>
+              <input type="password" class="form-control" id="userConfirm" placeholder="confirme contraseña">
+            </div>
+            <h2>Informacion de su empresa</h2>
+            <div class="form-group">
+              <label for="bussinessName">Nombre:</label>
+              <input type="text" class="form-control" id="bussinessName">
+            </div>
+            <div class="form-group">
+              <label for="userLocation">Localidad:</label>
+              <input type="text" class="form-control" id="userLocation">
+            </div>
+            <label for="userProvince">Provincia:</label>
+            <select class="form-control" id="userProvince">
+                <option>Coruña (La Coruña)</option>
+                  <option>Álava</option>
+                  <option>Albacete</option>
+                  <option>Alicante</option>
+                  <option>Almería</option>
+                  <option>Asturias</option>
+                  <option>Ávila</option>
+                  <option>Badajoz</option>
+                  <option>Baleares</option>
+                  <option>Barcelona</option>
+                  <option>Burgos</option>
+                  <option>Cáceres</option>
+                  <option>Cádiz</option>
+                  <option>Cantabria</option>
+                  <option>Castellón</option>
+                  <option>Ciudad Real</option>
+                  <option>Córdoba</option>
+                  <option>Cuenca</option>
+                  <option>Girona</option>
+                  <option>Granada</option>
+                  <option>Guadalajara</option>
+                  <option>Gipuzkoa</option>
+                  <option>Huelva</option>
+                  <option>Huesca</option>
+                  <option>Jaén</option>
+                  <option>La Rioja</option>
+                  <option>Las Palmas</option>
+                  <option>León</option>
+                  <option>Lérida</option>
+                  <option>Lugo</option>
+                  <option>Madrid</option>
+                  <option>Málaga</option>
+                  <option>Murcia</option>
+                  <option>Navarra</option>
+                  <option>Ourense</option>
+                  <option>Palencia</option>
+                  <option>Pontevedra</option>
+                  <option>Salamanca</option>
+                  <option>Segovia</option>
+                  <option>Sevilla</option>
+                  <option>Soria</option>
+                  <option>Tarragona</option>
+                  <option>Santa Cruz de Tenerife</option>
+                  <option>Teruel</option>
+                  <option>Toledo</option>
+                  <option>Valencia</option>
+                  <option>Valladolid</option>
+                  <option>Vizcaya</option>
+                  <option>Zamora</option>
+                  <option>Zaragoza</option>
+            </select>
+            <br>
+            <label for="bussinessType">Tipo de negocio:</label>
+            <select class="form-control" id="bussinessType">
+                  <option>Escuela de padel</option>
+                  <option>Centro deportivo</option>
+                  <option>Tienda de material deportivo</option>
+                  <option>Otro</option>
+            </select>
+            <br>
+            <button type="submit" class="btn btn-default">Enviar</button>
+          </form>
         </div>
+        <div class="container col-md-4"></div>
       </div>
     </div>
+  
 
     <footer class="site-footer border-top">
       <div class="container">
