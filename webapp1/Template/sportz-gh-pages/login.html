@@ -16,13 +16,49 @@
         <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div class="login">
-            <h1>Inicio de sesión</h1>
-            <form method="post">
-                <input type="text" name="u" placeholder="Username" required="required" />
-                <input type="password" name="p" placeholder="Password" required="required" />
-                <a href="Index.html"><button class="btn btn-login-primary btn-login-block btn-login-large">Iniciar sesión</button></a>
-            </form>
+        <div class="login" style="background-image: url(images/FondoMatch1.png);">
+            <div class="wrap-login p-l-110 p-r-110 p-t-62 p-b-33" >
+                <form class="login-form validate-form flex-sb flex-w">
+                <span class="login-title">
+                    INICIO DE SESIÓN             
+                </span>
+                
+                <div class="">
+                    <span class="txt1">
+                        Nombre De Usuario
+                    </span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Username is required">
+                    <input class="input-name" type="text" name="username">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="p-t-13 p-b-9">
+                    <span class="txt1">
+                        Contraseña
+                    </span>
+                    <a href="#" class="txt2 bo1 m-l-5">
+                        He olvidado mi contraseña
+                    </a>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <input class="input-name" type="password" name="pass">
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="container-login100-form-btn m-t-17">
+                <button class="searchcouple">
+                Iniciar Sesión
+                </button>
+                </div>
+                <div class="forgotten-password">
+                    <span class="txt2">
+                    No tengo cuenta
+                    </span>
+                    <a href="#" class="txt2 bo1">
+                    Registrarme
+                    </a>
+                </div>
+                </form>
+                </div>
         </div>        
     </body>
 </html>
