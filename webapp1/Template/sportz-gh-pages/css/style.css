@@ -1417,6 +1417,18 @@ position: absolute;
   width: 500px;
 }
 
+.tournament-company {
+  display: inline-block;
+  border: none;
+  border-radius: 20px;
+  color: #000000;
+  text-align: center;
+  font-size: 15px;
+  padding: 5px;
+  margin: 10px;
+  width: 32%;
+}
+
 .tournament_icon{
   height: 30px;
   width: 30px;
@@ -1437,4 +1449,16 @@ position: absolute;
 #addTournament{
   font-size: 14px;
   float: right;
+}
+
+.table-timing {
+  border-collapse: collapse;
+      border: 2px solid rgb(200,200,200);
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+}
+
+.time-table-th{
+  border: 1px solid rgb(190,190,190);
+      padding: 10px 20px;
 }
