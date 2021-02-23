@@ -1655,6 +1655,9 @@ input:focus {
   border: 1px solid #e6e6e6;
   border-radius:10px;
   margin-bottom: 20px;
+  color:black;
+
+
 }
 .input100 {
   color: #333;
