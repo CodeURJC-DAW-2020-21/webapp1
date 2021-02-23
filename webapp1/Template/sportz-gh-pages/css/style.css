@@ -1451,7 +1451,6 @@ position: absolute;
   float: right;
 }
 
-<<<<<<< HEAD
 .table-timing {
   border-collapse: collapse;
       border: 2px solid rgb(200,200,200);
@@ -1463,7 +1462,6 @@ position: absolute;
   border: 1px solid rgb(190,190,190);
       padding: 10px 20px;
 }
-=======
 .tournament-form{
   border-left-style: solid;
   border-right-style: solid;
@@ -1472,4 +1470,3 @@ position: absolute;
 .form-section{
   border-bottom-style: solid;
 }
->>>>>>> 84b5c15bb1fc36d1639a55c5a15a6565fd911561
