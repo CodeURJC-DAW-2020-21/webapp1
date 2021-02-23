@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
-    <title>Sportz &mdash; Colorlib Sports Team Template</title>
+    <title>Organiza tu torneo - FPT</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -96,139 +96,164 @@
     </div>
     
     <div class="site-section">
-      <div class="container align-items-center form">
-          <form action="agenteProcesador" method="GET" >
-            <div class="form-section">
-              <h1>Datos del torneo</h1>
-              <p>Nombre del torneo: <br><input type="text" name="tournamentName" size="40"></p>
-              <p>Descripcion del torneo:<br> <textarea name="description" rows="5" cols="50"></textarea></p>
-              <div class="row align-items-center">
-                <div class="col-md-3">
-                  <p>Premio ganador:<br> <input type="number" name="winerPrize" min="0"></p>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="container col-md-6 form">
+            <form>
+              <div class="form-section">
+                <h1>Datos del torneo</h1>
+                <div class="form-group">
+                  <label for="tournamentName">Nombre del torneo:</label>
+                  <input type="text" class="form-control" id="tournamentName" size="50">
+                  <label for="description">Descripción del torneo:</label>
+                  <br>
+                  <textarea name="description" rows="5" cols="50"></textarea>
+                  <div class="row align-items-center">
+                    <div class="col-md-3">
+                      <label for="winerPrize">Premio ganador:</label>
+                      <input class="form-control" type="number" name="winerPrize" min="0"></p>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="finalistPrize">Premio ganador:</label>
+                      <input class="form-control" type="number" name="finalistPrize" min="0"></p>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                  <p>Premio finalista:<br> <input type="number" name="finalistPrize" min="0"></p>
+                <br>
+              </div>
+              <div class="form-group">
+                <div class="form-section">
+                  <br>
+                  <h1>Datos participantes</h1>
+                  <div class="row">
+                      <div class="col-md-4">
+                        <p>Numero mínimo de parejas que participan:<br> 
+                        <input class="form-control" type="number" name="minParticipants" min="1" width="40">
+                        </p>
+                      </div>
+                      <div class="col-md-4">
+                        <p>Numero máximo de parejas que participan:<br> 
+                        <input class="form-control" type="number" name="maxParticipants" min="minParticipants" width="40">
+                        </p>
+                      </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                <label for="tournamentCategories">Nivel/es del torneo:</label>
+                  <div class="row align-items-center">
+                    <div class="col-md-4">
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 1</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 2</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 3</label>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 4</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 5</label>
+                      </div>
+                      <div class="checkbox">
+                        <label><input type="checkbox" value="">Categoría 6</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="form-section">
+                <br>
+                <h1>Datos de la localización</h1>
+                <p>Nombre de la instalación deportiva:<br> <input class="form-control" type="text" name="locationName" size="40"></p>
+                <p>Linea de dirección 1:<br> <input class="form-control" type="text" name="adress1" size="40"></p>
+                <p>Linea de dirección 2:<br> <input class="form-control" type="text" name="adress2" size="40"></p>
+                <p>Localidad:<br> <input class="form-control" type="text" name="city"></p>
+                <p>Provincia:<br>
+                  <select name="province">
+                    <option>Coruña (La Coruña)</option>
+                    <option>Álava</option>
+                    <option>Albacete
+                    <option>Alicante</option>
+                    <option>Almería</option>
+                    <option>Asturias</option>
+                    <option>Ávila</option>
+                    <option>Badajoz</option>
+                    <option>Baleares</option>
+                    <option>Barcelona</option>
+                    <option>Burgos</option>
+                    <option>Cáceres</option>
+                    <option>Cádiz</option>
+                    <option>Cantabria</option>
+                    <option>Castellón</option>
+                    <option>Ciudad Real</option>
+                    <option>Córdoba</option>
+                    <option>Cuenca</option>
+                    <option>Girona</option>
+                    <option>Granada</option>
+                    <option>Guadalajara</option>
+                    <option>Gipuzkoa</option>
+                    <option>Huelva</option>
+                    <option>Huesca</option>
+                    <option>Jaén</option>
+                    <option>La Rioja</option>
+                    <option>Las Palmas</option>
+                    <option>León</option>
+                    <option>Lérida</option>
+                    <option>Lugo</option>
+                    <option>Madrid</option>
+                    <option>Málaga</option>
+                    <option>Murcia</option>
+                    <option>Navarra</option>
+                    <option>Ourense</option>
+                    <option>Palencia</option>
+                    <option>Pontevedra</option>
+                    <option>Salamanca</option>
+                    <option>Segovia</option>
+                    <option>Sevilla</option>
+                    <option>Soria</option>
+                    <option>Tarragona</option>
+                    <option>Santa Cruz de Tenerife</option>
+                    <option>Teruel</option>
+                    <option>Toledo</option>
+                    <option>Valencia</option>
+                    <option>Valladolid</option>
+                    <option>Vizcaya</option>
+                    <option>Zamora</option>
+                    <option>Zaragoza</option>
+                  </select>
+                </p>
+                <p>Codigo postal:<br> <input class="form-control" type="number" name="postCode"></p>
+                <br>
+              </div>
               <br>
-            </div>
-            <div class="form-section">
-              <br>
-              <h1>Datos participantes</h1>
+              <h1>Fechas</h1>
               <div class="row align-items-center">
                 <div class="col-md-4">
-                  <p>Numero mínimo de parejas que participan:<br> 
-                  <input type="number" name="minParticipants" min="1" width="40">
-                  </p>
+                  <p>Inicio de inscripción:<br> <input class="form-control" type="date" name="inscriptionStartDate"></p>
+                  <p>Inicio del torneo:<br> <input class="form-control" type="date" name="tournamentStartDate"></p>
                 </div>
                 <div class="col-md-4">
-                  <p>Numero máximo de parejas que participan:<br> 
-                  <input type="number" name="maxParticipants" min="minParticipants" width="40">
-                  </p>
+                  <p>Fin de inscripción:<br> <input class="form-control" type="date" name="inscriptionEndDate"></p>
+                  <p>Fin del torneo: <br><input class="form-control" type="date" name="tournamentEndDate"></p>
                 </div>
                 <div class="col-md-4"></div>
-            </div>
-              <p>Nivel/es del torneo:<br>
-                <div class="row align-items-center">
-                  <div class="col-md-3">
-                    <input type="checkbox" name="category1"> Categoria 1<br>
-                    <input type="checkbox" name="category2"> Categoria 2<br>
-                    <input type="checkbox" name="category3"> Categoria 3<br>
+              </div>
+              <br>
+                <div class="row">
+                  <div class="col-md-6">
+                    <input class="form-control" type="submit" value="Enviar">
                   </div>
-                  <div class="col-md-3">
-                    <input type="checkbox" name="category4"> Categoria 4<br>
-                    <input type="checkbox" name="category5"> Categoria 5<br>
-                    <input type="checkbox" name="category6"> Categoria 6<br>
+                  <div class="col-md-6">
+                    <input class="form-control" type="reset" value="Borrar todo">
                   </div>
-                  <div class="col-md-3"></div>
-                  <div class="col-md-3"></div>
-              </div>
-              </p>
-              <br>
-            </div>
-            <div class="form-section">
-              <br>
-              <h1>Datos de la localización</h1>
-              <p>Nombre de la instalación deportiva:<br> <input type="text" name="locationName" size="40"></p>
-              <p>Linea de dirección 1:<br> <input type="text" name="adress1" size="40"></p>
-              <p>Linea de dirección 2:<br> <input type="text" name="adress2" size="40"></p>
-              <p>Localidad:<br> <input type="text" name="city"></p>
-              <p>Provincia:<br>
-                <select name="province">
-                  <option>Coruña (La Coruña)</option>
-                  <option>Álava</option>
-                  <option>Albacete
-                  <option>Alicante</option>
-                  <option>Almería</option>
-                  <option>Asturias</option>
-                  <option>Ávila</option>
-                  <option>Badajoz</option>
-                  <option>Baleares</option>
-                  <option>Barcelona</option>
-                  <option>Burgos</option>
-                  <option>Cáceres</option>
-                  <option>Cádiz</option>
-                  <option>Cantabria</option>
-                  <option>Castellón</option>
-                  <option>Ciudad Real</option>
-                  <option>Córdoba</option>
-                  <option>Cuenca</option>
-                  <option>Girona</option>
-                  <option>Granada</option>
-                  <option>Guadalajara</option>
-                  <option>Gipuzkoa</option>
-                  <option>Huelva</option>
-                  <option>Huesca</option>
-                  <option>Jaén</option>
-                  <option>La Rioja</option>
-                  <option>Las Palmas</option>
-                  <option>León</option>
-                  <option>Lérida</option>
-                  <option>Lugo</option>
-                  <option>Madrid</option>
-                  <option>Málaga</option>
-                  <option>Murcia</option>
-                  <option>Navarra</option>
-                  <option>Ourense</option>
-                  <option>Palencia</option>
-                  <option>Pontevedra</option>
-                  <option>Salamanca</option>
-                  <option>Segovia</option>
-                  <option>Sevilla</option>
-                  <option>Soria</option>
-                  <option>Tarragona</option>
-                  <option>Santa Cruz de Tenerife</option>
-                  <option>Teruel</option>
-                  <option>Toledo</option>
-                  <option>Valencia</option>
-                  <option>Valladolid</option>
-                  <option>Vizcaya</option>
-                  <option>Zamora</option>
-                  <option>Zaragoza</option>
-                </select>
-              </p>
-              <p>Codigo postal:<br> <input type="number" name="postCode"></p>
-              <br>
-            </div>
-            <br>
-            <h1>Fechas</h1>
-            <div class="row align-items-center">
-              <div class="col-md-4">
-                <p>Fecha inicio de inscripción:<br> <input type="date" name="inscriptionStartDate"></p>
-                <p>Fecha inicio del torneo:<br> <input type="date" name="tournamentStartDate"></p>
-              </div>
-              <div class="col-md-4">
-                <p>Fecha fin de inscripción:<br> <input type="date" name="inscriptionEndDate"></p>
-                <p>Fecha fin del torneo: <br><input type="date" name="tournamentEndDate"></p>
-              </div>
-              <div class="col-md-4"></div>
-            </div>
-            <br>
-            <p>
-              <input type="submit" value="Enviar">
-              <input type="reset" value="Borrar todo">
-            </p>
-          </form>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
       </div>
     </div>
   
