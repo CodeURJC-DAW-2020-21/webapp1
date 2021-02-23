@@ -34,6 +34,10 @@ a:hover {
   color: rgb(0, 23, 235) !important;
 }
 
+.text-red {
+  color:#d40d2c;
+}
+
 .bg-black {
   background: #000 !important;
 }
@@ -1439,11 +1443,13 @@ position: absolute;
   float: right;
 }
 
-.tournament-form{
+.form{
+  border-color: #013660;
   border-left-style: solid;
   border-right-style: solid;
 }
 
 .form-section{
+  border-color: #d40d2c;
   border-bottom-style: solid;
 }
