@@ -1207,7 +1207,7 @@ a:hover {
 .my-favourite-couple:hover {
   transition: 0.3s ease-in-out;
   background-color: rgba(0, 0, 0, 0.9);
-
+  color: white;
 }
 
 .container-button { 
@@ -1725,4 +1725,23 @@ input:focus {
 
 .forgotten-password{
   margin-bottom: 20px;
+}
+
+.actual-couple {
+  color: white;
+  margin-top: 5px;
+}
+
+.image-player {
+  margin-top: 10px;
+}
+.image-main {
+    margin-bottom: 5%;
+    height: 400px;
+    width: 400px;
+}
+
+.image-main:hover {
+  opacity: 1;
+  border: 1px solid #777;
 }
