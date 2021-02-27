@@ -97,7 +97,7 @@ a:hover {
   font-weight: 300;
   letter-spacing: .2em;
   background-color: black;
-  border-color: yellow;
+  border-color: rgb(235, 169, 169);
   border-width: 4px;
 }
 
@@ -260,7 +260,7 @@ a:hover {
 }
 
 .bg-image.overlay-success:before {
-  background: rgba(238, 198, 10, 0.9);
+  background: rgba(218, 133, 133, 0.9);
 }
 
 /* Navbar */
@@ -1607,4 +1607,42 @@ input:focus {
 
 .form-section{
   border-bottom-style: solid;
+}
+
+.overlay-formulario {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 1;
+  
+}
+.overlay-formulario:target {
+  visibility: visible;
+  opacity: 1;
+  color:black;
+}
+#popup-Body{
+  width: 46%;
+  padding: 2%;
+  border-radius: 15px;
+  box-shadow: 0 0 5px #CCC;
+  background: #FFF;
+  position: relative;
+  margin: 20% auto;  
+  color: #000;  
+}
+#cerrarPestana{
+  position: absolute;
+  top: -15px;
+  right: 15px;
+  transition: all 200ms;
+  font-size: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #F00;
 }
