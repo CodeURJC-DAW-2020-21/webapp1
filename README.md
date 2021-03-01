@@ -56,14 +56,14 @@ In this stage we have made all the templates and design of the web. Then, we are
 
 #### - Previous signUp
 This screen will be used for all the users that want to sign up in our App. There are 2 differents users, bussiness user and normal user.
- ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/PreviousSingUp.png?raw=true "Previous SignUp Screen")
+ ![alt-text] (https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/PreviousSingUp.png?raw=true "Previous SignUp Screen")
 #### - User signUp
 Screen where the user can create his profile through a form and create a new account.
- ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/UserSignUp.png?raw=true "User SignUp Screen")
+ ![alt-text] (https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/UserSignUp.png?raw=true "User SignUp Screen")
 
 #### - Bussiness signUp
 Screen where the bussiness users can create his profile through a form and create a new account.
- ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/BussinessSignUp.png?raw=true "Bussiness SignUp Screen")
+ ![alt-text] (https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/BussinessSignUp.png?raw=true "Bussiness SignUp Screen")
 
 #### - Login
 This screen will be used when the users have an account and need to login and enter in our application
