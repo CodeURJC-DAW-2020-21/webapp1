@@ -48,3 +48,42 @@ Our team has decided to implement one extra funcionality. When somenone win a to
 The developing team is going to create an algorithm which automatically generates a ranking taking into account the player points and victories, even the category's player that is taking part for. The ranking is going to display in one of the screens we have created and the rest of users can see all the results and stadistics the top players have. The ranking is going to be updated everyday and will show all the changes which have been produced.
 #
 ### GRAPHICS
+#
+#
+# STAGE 1
+#
+In this stage we have made all the templates and design of the web. Then, we are going to include the screenshots of every screen and the navigation that every user can do in the web.
+### SCREENSHOTS
+
+#### Previous signUp
+
+#### User signUp
+
+#### Bussiness signUp
+
+#### Login
+
+#### Main page (Index)
+
+#### User profile
+
+#### Bussiness profile
+
+#### Friendly matches
+
+#### 1st-6th Division
+
+#### Tournaments
+
+#### Tournaments Request
+
+#### About Us
+
+#
+
+### Navigation Diagram
+
+
+
+
+
