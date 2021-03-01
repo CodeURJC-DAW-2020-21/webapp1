@@ -55,30 +55,43 @@ In this stage we have made all the templates and design of the web. Then, we are
 ### SCREENSHOTS
 
 #### - Previous signUp
+This screen will be used for all the users that want to sign up in our App. There are 2 differents users, bussiness user and normal user.
 
 #### - User signUp
+Screen where the user can create his profile through a form and create a new account.
 
 #### - Bussiness signUp
+Screen where the bussiness users can create his profile through a form and create a new account.
 
 #### - Login
+This screen will be used when the users have an account and need to login and enter in our application
 
 #### - Main page (Index)
+This is the principal page where all the users can access, even the anonymous users. In this page you can navigate to all the screens.
 
 #### - User profile
+All the users have a profile where they can see all their information and also edit their profiles.
 
 #### - Bussiness profile
+This is the bussiness profile, where this user can edit his profile and see all his information.
 
 #### - Friendly matches
+In this screen the user can choose a Division according to his level, and the user will navigate to other screen (1st-6th Division, depending on the division he choose)
 
-#### - 1st-6th Division
+#### - 1st-6th Division (team - team6)
+The user can join to a friendly a match in this screen and also create a new one through a form.
 
 #### - Tournaments
+In this screen the user can join and see tournaments. Previously, the admin user need to accept the tournament which has been created by the bussiness user in Tournament Request screen.
 
 #### - Tournaments Request
+In this screen the bussiness user can create a tournament. Only they need to fill a form and send it. The tournament will be created when the admin accept that tournament.
 
 #### - About Us
+Very simple screen where the team explain the main functions of the app and also different information about us.
 
-#
+#### - Tournamentent management
+In this screen the admin user can see all the tournament requests and accept all the tournaments the admin consider appropiated.
 
 ### Navigation Diagram
 
