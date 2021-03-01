@@ -54,29 +54,29 @@ In this stage we have made all the templates and design of the web. Then, we are
 #
 ### SCREENSHOTS
 
-#### Previous signUp
+#### - Previous signUp
 
-#### User signUp
+#### - User signUp
 
-#### Bussiness signUp
+#### - Bussiness signUp
 
-#### Login
+#### - Login
 
-#### Main page (Index)
+#### - Main page (Index)
 
-#### User profile
+#### - User profile
 
-#### Bussiness profile
+#### - Bussiness profile
 
-#### Friendly matches
+#### - Friendly matches
 
-#### 1st-6th Division
+#### - 1st-6th Division
 
-#### Tournaments
+#### - Tournaments
 
-#### Tournaments Request
+#### - Tournaments Request
 
-#### About Us
+#### - About Us
 
 #
 
