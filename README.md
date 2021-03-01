@@ -109,7 +109,7 @@ In this screen the admin user can see all the tournament requests and accept all
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/TournamentManagement.png?raw=true "Division 1")
 
 ### Navigation Diagram
-
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Navigation%20Diagram.png?raw=true "Division 1")
 
 
 
