@@ -118,6 +118,7 @@ a:hover {
 
 .form-control {
   height: 43px;
+  width: 500px;
 }
 
 .form-control:active, .form-control:focus {
@@ -1799,6 +1800,7 @@ input:focus {
   border: 1px solid #777;
 }
 
+
 #accept-button{
   display: inline-block;
   border-radius: 4px;
@@ -1827,3 +1829,10 @@ input:focus {
   cursor: pointer;
   margin: 5px;
 }
+
+.bg-white {
+  background-color: white;
+  border-radius: 2%;
+}
+
+
