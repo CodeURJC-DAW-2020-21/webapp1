@@ -91,7 +91,7 @@ In this screen the bussiness user can create a tournament. Only they need to fil
 
 #### - About Us
 Very simple screen where the team explain the main functions of the app and also different information about us.
-
+ ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/AboutUs.png?raw=true "About Us")
 #### - Tournamentent management
 In this screen the admin user can see all the tournament requests and accept all the tournaments the admin consider appropiated.
 
