@@ -51,8 +51,8 @@ The developing team is going to create an algorithm which automatically generate
 #
 #
 # STAGE 1
-#
 In this stage we have made all the templates and design of the web. Then, we are going to include the screenshots of every screen and the navigation that every user can do in the web.
+#
 ### SCREENSHOTS
 
 #### Previous signUp
