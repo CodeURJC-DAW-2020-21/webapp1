@@ -87,7 +87,7 @@ In this screen the user can choose a Division according to his level, and the us
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/FriendlyMatch.png?raw=true "Friendly Match")
 
 #### - 1st-6th Division (team - team6)
-The user can join to a friendly a match in this screen and also create a new one through a form.
+The user can join to a friendly a match in this screen and also create a new one through a form. In this case we are going to add only one screen because the others are the same the only difference are the names and the divisions.
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Team%20Division%201.png?raw=true "Division 1")
 
 
