@@ -68,34 +68,45 @@ Screen where the bussiness users can create his profile through a form and creat
 
 #### - Login
 This screen will be used when the users have an account and need to login and enter in our application
-![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Login.png "Login")
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Login.png?raw=true "Login")
 
 #### - Main page (Index)
 This is the principal page where all the users can access, even the anonymous users. In this page you can navigate to all the screens.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Index.png?raw=true "Index")
 
 #### - User profile
 All the users have a profile where they can see all their information and also edit their profiles.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/UserProfile.png?raw=true "User Profile")
 
 #### - Bussiness profile
 This is the bussiness profile, where this user can edit his profile and see all his information.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/BussinessProfile.png?raw=true "Bussiness Profile")
 
 #### - Friendly matches
 In this screen the user can choose a Division according to his level, and the user will navigate to other screen (1st-6th Division, depending on the division he choose)
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/FriendlyMatch.png?raw=true "Friendly Match")
 
 #### - 1st-6th Division (team - team6)
 The user can join to a friendly a match in this screen and also create a new one through a form.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Team%20Division%201.png?raw=true "Division 1")
+
 
 #### - Tournaments
 In this screen the user can join and see tournaments. Previously, the admin user need to accept the tournament which has been created by the bussiness user in Tournament Request screen.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Tournaments.png?raw=true "Tournaments")
+
 
 #### - Tournaments Request
 In this screen the bussiness user can create a tournament. Only they need to fill a form and send it. The tournament will be created when the admin accept that tournament.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/TournamentRequest.png?raw=true "Tournament Request")
 
 #### - About Us
 Very simple screen where the team explain the main functions of the app and also different information about us.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/AboutUs.png?raw=true "About Us")
 
 #### - Tournamentent management
 In this screen the admin user can see all the tournament requests and accept all the tournaments the admin consider appropiated.
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/TournamentManagement.png?raw=true "Division 1")
 
 ### Navigation Diagram
 
