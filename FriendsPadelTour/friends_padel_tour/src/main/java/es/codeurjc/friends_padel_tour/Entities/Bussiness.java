@@ -17,11 +17,12 @@ public class Bussiness{
     private long id;
 
     private String userName;
-    private String name;
+    private String bussinessName;
     private String userSurname;
     private String location;
     private String email;
     private String adress;
+
     @Lob
     @JsonIgnore
     private Blob image;
@@ -39,11 +40,11 @@ public class Bussiness{
     public String getAdress() {
         return adress;
     }
-    public String getName() {
-        return name;
+    public String getBussinessName() {
+        return bussinessName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setBussinessName(String bussinessName) {
+        this.bussinessName = bussinessName;
     }
     public String getSurname() {
         return userSurname;
