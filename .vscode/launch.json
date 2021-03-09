@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-FriendsPadelTourApplication<friends_padel_tour>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "es.codeurjc.friends_padel_tour.FriendsPadelTourApplication",
+            "projectName": "friends_padel_tour",
+            "args": ""
+        }
+    ]
+}
