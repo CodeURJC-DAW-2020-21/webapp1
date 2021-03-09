@@ -23,12 +23,29 @@ public class Player{
     private String location;
     private String email;
     private ArrayList<Double> doubles;
+    private String password;
 
     @Lob
     @JsonIgnore
     private Blob image;
     
     public Player(){}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Player(String name, String surname, String email, String password, String location){
+        this.name= name;
+        this.surname = surname;
+        this.email = email;
+        this.setPassword(password);
+        this.location = location;
+    }
 
     public String getSurname() {
         return surname;
