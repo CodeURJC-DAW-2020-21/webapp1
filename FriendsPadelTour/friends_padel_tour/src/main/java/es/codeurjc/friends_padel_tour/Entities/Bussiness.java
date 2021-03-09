@@ -31,7 +31,7 @@ public class Bussiness{
 
     public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2,
             String adress2) {
-                name = name2;
+                bussinessName = name2;
                 userName = userName2;
                 userSurname = userSurname2;
                 email = email2;
