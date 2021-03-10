@@ -22,7 +22,7 @@ public class Player{
     private String surname;
     private String location;
     private String email;
-    private ArrayList<Double> doubles;
+    private ArrayList<DoubleOfPlayers> doubles;
     private String password;
 
     @Lob
@@ -79,11 +79,11 @@ public class Player{
         this.name = name;
     }
 
-    public ArrayList<Double> getDoubles() {
+    public ArrayList<DoubleOfPlayers> getDoubles() {
         return doubles;
     }
 
-    public void setDoubles(ArrayList<Double> doubles) {
+    public void setDoubles(ArrayList<DoubleOfPlayers> doubles) {
         this.doubles = doubles;
     }
 

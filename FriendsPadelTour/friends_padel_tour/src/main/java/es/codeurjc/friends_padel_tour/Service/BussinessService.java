@@ -18,17 +18,17 @@ public class BussinessService {
     @Autowired
     private PlayerRepository playerRepository;
 
-    public boolean saveBussiness(String name, String userName, String userSurname, String email, String password, String location, String adress){
+    public boolean saveBussiness(String bussinessName, String userName, String userSurname, String email, String password, String location, String adress){
         Optional<Player> playerInDB = playerRepository.findByEmail(email);
         Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
         if(playerInDB.isPresent()) 
             return false;
         if(bussinessInDB.isPresent())
             return false;
-        bussinessInDB = bussinessRepository.findByName(name);
+        bussinessInDB = bussinessRepository.findByBussinessName(bussinessName);
         if(bussinessInDB.isPresent())
             return false;
-        Bussiness newBussiness = new Bussiness(name,userName,userSurname,location,email,adress);
+        Bussiness newBussiness = new Bussiness(bussinessName,userName,userSurname,location,email,adress);
         bussinessRepository.save(newBussiness);
         return true;
     }
