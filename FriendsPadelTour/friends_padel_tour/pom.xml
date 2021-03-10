@@ -14,14 +14,10 @@
 	<name>friends_padel_tour</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>15</java.version>
 	</properties>
 	<dependencies>
-<<<<<<< HEAD
-	<!--
-=======
 	
->>>>>>> 8a5dc1e63e594b06e1394172eee2176be8df3950
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -29,12 +25,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-<<<<<<< HEAD
-		</dependency>-->
-=======
 		</dependency>
 		
->>>>>>> 8a5dc1e63e594b06e1394172eee2176be8df3950
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mustache</artifactId>
@@ -59,22 +51,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--
+		
 		<dependency>
  			<groupId>mysql</groupId>
  			<artifactId>mysql-connector-java</artifactId>
-<<<<<<< HEAD
- 		</dependency>-->
-		<!-->
-=======
  		</dependency>
-		<!--
->>>>>>> 8a5dc1e63e594b06e1394172eee2176be8df3950
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency><-->
+		</dependency>
 	</dependencies>
 
 	<build>

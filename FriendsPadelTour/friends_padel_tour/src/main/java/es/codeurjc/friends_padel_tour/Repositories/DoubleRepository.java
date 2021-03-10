@@ -2,15 +2,12 @@ package es.codeurjc.friends_padel_tour.Repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import es.codeurjc.friends_padel_tour.Entities.Double;
+import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 
 import java.util.Optional;
 
-public interface DoubleRepository extends JpaRepository<Double,Long>{
+public interface DoubleRepository extends JpaRepository<DoubleOfPlayers,Long>{
     
-        Optional<Double> findById(Long id);
+        Optional<DoubleOfPlayers> findById(Long id);
     
-        Optional<Double> findByUser(Double user);
-    
-        Optional<Double> findByUserName(Double name);
     }
