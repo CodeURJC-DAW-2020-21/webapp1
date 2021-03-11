@@ -19,18 +19,18 @@
     <body>
         <div class="login" style="background-image: url(images/FondoMatch1.png);">
             <div class="wrap-login p-l-110 p-r-110 p-t-62 p-b-33" >
-                <form class="login-form validate-form flex-sb flex-w">
+                <form class="login-form validate-form flex-sb flex-w" action="/loginUser" method="GET">
                 <span class="login-title">
                     INICIO DE SESIÓN             
                 </span>
                 
                 <div class="">
                     <span class="txt1">
-                        Nombre De Usuario
+                        Correo electronico:
                     </span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Username is required">
-                    <input class="input-name" type="text" name="username">
+                    <input class="input-name" type="text" name="email">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="p-t-13 p-b-9">
@@ -42,19 +42,17 @@
                     </a>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <input class="input-name" type="password" name="pass">
+                    <input class="input-name" type="password" name="password">
                     <span class="focus-input100"></span>
                 </div>
                 <div class="container-login100-form-btn m-t-17">
-                <button class="searchcouple">
-                Iniciar Sesión
-                </button>
+                <input type="submit" class="searchcouple" value="Iniciar Sesion" name="/loginUser">
                 </div>
                 <div class="forgotten-password">
                     <span class="txt2">
                     No tengo cuenta
                     </span>
-                    <a href="previousSignUp.html" class="txt2 bo1">
+                    <a href="/goToSignUpPrev" class="txt2 bo1">
                     Registrarme
                     </a>
                 </div>
