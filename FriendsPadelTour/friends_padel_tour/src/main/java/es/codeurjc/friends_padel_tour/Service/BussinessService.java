@@ -32,5 +32,11 @@ public class BussinessService {
         bussinessRepository.save(newBussiness);
         return true;
     }
+
+    public Bussiness getBussiness(String email) {
+        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
+        if(bussinessInDB.isPresent()) return bussinessInDB.get();
+        return null;
+    }
     
 }

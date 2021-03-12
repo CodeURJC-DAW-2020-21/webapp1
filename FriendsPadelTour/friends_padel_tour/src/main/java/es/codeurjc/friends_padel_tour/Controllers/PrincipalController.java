@@ -4,10 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 
 
 @Controller
@@ -45,7 +49,7 @@ public class PrincipalController {
     @GetMapping(value="/userProfile")
     public String getMethodName5(Model model) {
         Object loggedUser = model.getAttribute("loggedUser");
-        if(loggedUser ==null){
+        if(loggedUser == null){
             return "login";
         }
         if(loggedUser instanceof Player){
@@ -86,7 +90,6 @@ public class PrincipalController {
     public String goToSignUpBussinessForm(Model model) {
         return "bussinessSignUp";
     }
-    
     
     
     
