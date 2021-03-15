@@ -126,6 +126,10 @@ public class Player{
         this.doubles = doubles;
     }
 
+    public long getId() {
+        return this.id;
+    }
+
     
     
 }
