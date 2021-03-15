@@ -19,17 +19,16 @@ public class PlayersService {
     @Autowired
     private BussinessRepository bussinessRepository;
 
-    public boolean savePlayer(String name, String surname, String email, String password, String location){
-        Optional<Player> playerInDB = playerRepository.findByEmail(email);
-        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
+    public boolean savePlayer(Player newPlayer){
+        Optional<Player> playerInDB = playerRepository.findByEmail(newPlayer.getEmail());
+        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(newPlayer.getEmail());
         if(playerInDB.isPresent()) 
             return false;
         if(bussinessInDB.isPresent())
             return false;
-        playerInDB = playerRepository.findByName(name);
+        playerInDB = playerRepository.findByName(newPlayer.getName());
         if(playerInDB.isPresent()) 
             return false;
-        Player newPlayer = new Player(name,surname,email,password,location);
         playerRepository.save(newPlayer);
         return true;
     }
@@ -37,5 +36,14 @@ public class PlayersService {
     public boolean uploadImage(Player player,MultipartFile imageFile){
         return false;
     }
+
+    public Player getPlayer(String email) {
+        Optional<Player> playerInDB = playerRepository.findByEmail(email);
+        if(playerInDB.isPresent())
+            return playerInDB.get();
+        return null;
+    }
+
+
         
 }
