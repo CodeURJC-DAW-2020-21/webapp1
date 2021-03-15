@@ -1,13 +1,14 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
 import java.sql.Blob;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,13 +23,17 @@ public class Player{
     private String surname;
     private String location;
     private String email;
-    private ArrayList<DoubleOfPlayers> doubles;
     private String password;
+    private int division;
 
     private int mathcesWon;
     private int matchesLost;
     private int mathesPlayed;
-    private int division;
+    @OneToMany
+    private List<DoubleOfPlayers> doubles;
+    @OneToMany
+    private List<Match> openMatches;
+    
 
     @Lob
     @JsonIgnore
@@ -82,7 +87,7 @@ public class Player{
         this.email = email;
         this.password= password;
         this.location = location;
-        this.setDivision(division);
+        this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
     }
 
@@ -118,11 +123,11 @@ public class Player{
         this.name = name;
     }
 
-    public ArrayList<DoubleOfPlayers> getDoubles() {
+    public List<DoubleOfPlayers> getDoubles() {
         return doubles;
     }
 
-    public void setDoubles(ArrayList<DoubleOfPlayers> doubles) {
+    public void setDoubles(List<DoubleOfPlayers> doubles) {
         this.doubles = doubles;
     }
 
