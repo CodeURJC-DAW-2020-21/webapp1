@@ -1,12 +1,15 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
 import java.sql.Blob;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,6 +25,9 @@ public class Bussiness{
     private String location;
     private String email;
     private String adress;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
+    private List<Tournament> tournaments;
 
     @Lob
     @JsonIgnore
@@ -76,6 +82,30 @@ public class Bussiness{
     }
     public void setAdress(String adress) {
         this.adress = adress;
+    }
+    public String getUserSurname() {
+        return userSurname;
+    }
+    public long getId() {
+        return id;
+    }
+    public Blob getImage() {
+        return image;
+    }
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+    public void setImage(Blob image) {
+        this.image = image;
+    }
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
+    }
+    public void setUserSurname(String userSurname) {
+        this.userSurname = userSurname;
+    }
+    public void setId(long id) {
+        this.id = id;
     }
     
 }

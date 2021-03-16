@@ -2,8 +2,10 @@ package es.codeurjc.friends_padel_tour.Entities;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,9 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @ManyToOne
+    private Bussiness bussiness;   
+
     private String name;
     private String description;
     private String tournamentStartDate;
@@ -24,30 +29,41 @@ public class Tournament {
     private String inscriptionFinishDate;
     private int minCouples;
     private int maxCouples;
-    private int registeredCouples = 0;
+    private int registeredCouples;
 
-    @OneToMany
+
+    @OneToMany(mappedBy="tournament", cascade = CascadeType.ALL)
     private ArrayList<Match> matches;
+
     private ArrayList<String> categories;
-    private int prize;
+    private int firstPrize;
+    private int secondPrize;
     private String localization;
     
-    public Tournament(String name, String tournamentStartDate, String tournamentFinishDate,
-            String inscriptionStartDate, String inscriptionFinishDate, int minCouples, int maxCouples, ArrayList<String> categories, int prize,
+    public Tournament(Bussiness bussiness, String name, String tournamentStartDate, String tournamentFinishDate,
+            String inscriptionStartDate, String inscriptionFinishDate, int minCouples, int maxCouples, ArrayList<String> categories, int firstPrize, int secondPrize,
             String localization) {
-        this.setName(name);
-        this.setDescription(description);
-        this.setTournamentStartDate(tournamentStartDate);
-        this.setTournamentFinishDate(tournamentFinishDate);
-        this.setInscriptionStartDate(inscriptionStartDate);
-        this.setInscriptionFinishDate(inscriptionFinishDate);
-        this.setMinCouples(minCouples);
-        this.setMaxCouples(maxCouples);
-        this.setRegisteredCouples(registeredCouples);
-        this.setMatches(matches);
-        this.setCategories(categories);
-        this.setPrize(prize);
-        this.setLocalization(localization);
+            this.setName(name);
+            this.setTournamentStartDate(tournamentStartDate);
+            this.setTournamentFinishDate(tournamentFinishDate);
+            this.setInscriptionStartDate(inscriptionStartDate);
+            this.setInscriptionFinishDate(inscriptionFinishDate);
+            this.setMinCouples(minCouples);
+            this.setMaxCouples(maxCouples);
+            this.setCategories(categories);
+            this.setFirstPrize(firstPrize);
+            this.setSecondPrize(secondPrize);
+            this.setLocalization(localization);
+            this.registeredCouples = 0;
+            this.setBussinnes(bussiness);
+    }
+
+    public Bussiness getBussinnes() {
+        return bussiness;
+    }
+
+    public void setBussinnes(Bussiness bussiness) {
+        this.bussiness = bussiness;
     }
 
     public String getLocalization() {
@@ -58,12 +74,20 @@ public class Tournament {
         this.localization = localization;
     }
 
-    public int getPrize() {
-        return prize;
+    public int getSecondPrize() {
+        return secondPrize;
     }
 
-    public void setPrize(int prize) {
-        this.prize = prize;
+    public void setSecondPrize(int prize) {
+        this.secondPrize = prize;
+    }
+
+    public int getFirstPrize() {
+        return firstPrize;
+    }
+
+    public void setFirstPrize(int prize) {
+        this.firstPrize = prize;
     }
 
     public ArrayList<String> getCategories() {

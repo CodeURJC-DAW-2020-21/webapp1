@@ -13,7 +13,6 @@ public class Admin{
 
     private String name;
     private String surname;
-    private String location;
     private String email;
 
     public Admin(){}
@@ -24,14 +23,6 @@ public class Admin{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public String getSurname() {
