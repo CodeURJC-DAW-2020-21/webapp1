@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
-import java.util.ArrayList;
+
+
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import java.util.List;
 
 
 @Entity
@@ -32,31 +33,42 @@ public class Tournament {
     private int registeredCouples;
 
 
-    @OneToMany(mappedBy="tournament", cascade = CascadeType.ALL)
-    private ArrayList<Match> matches;
 
-    private ArrayList<String> categories;
+   
+    private String category;
+
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    private List<Match> matches;
+    
     private int firstPrize;
     private int secondPrize;
     private String localization;
     
-    public Tournament(Bussiness bussiness, String name, String tournamentStartDate, String tournamentFinishDate,
-            String inscriptionStartDate, String inscriptionFinishDate, int minCouples, int maxCouples, ArrayList<String> categories, int firstPrize, int secondPrize,
-            String localization) {
-            this.setName(name);
-            this.setTournamentStartDate(tournamentStartDate);
-            this.setTournamentFinishDate(tournamentFinishDate);
-            this.setInscriptionStartDate(inscriptionStartDate);
-            this.setInscriptionFinishDate(inscriptionFinishDate);
-            this.setMinCouples(minCouples);
-            this.setMaxCouples(maxCouples);
-            this.setCategories(categories);
-            this.setFirstPrize(firstPrize);
-            this.setSecondPrize(secondPrize);
-            this.setLocalization(localization);
-            this.registeredCouples = 0;
-            this.setBussinnes(bussiness);
+
+    public Tournament(){}
+
+    
+
+    public String getCategory() {
+        return category;
     }
+
+
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
+    }
+
 
     public Bussiness getBussinnes() {
         return bussiness;
@@ -90,29 +102,7 @@ public class Tournament {
         this.firstPrize = prize;
     }
 
-    public ArrayList<String> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<String> categories) {
-        this.categories = categories;
-    }
-
-    public void addCategory(String category){
-        this.categories.add(category);
-    }
-
-    public ArrayList<Match> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(ArrayList<Match> matches) {
-        this.matches = matches;
-    }
-
-    public void addMatch(Match match){
-        this.matches.add(match);
-    }
+    
 
     public int getRegisteredCouples() {
         return registeredCouples;
