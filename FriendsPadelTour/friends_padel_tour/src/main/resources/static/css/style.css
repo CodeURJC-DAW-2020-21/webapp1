@@ -1835,4 +1835,9 @@ input:focus {
   border-radius: 2%;
 }
 
+.center-items{
+  justify-content: center;
+  text-align: center;
+}
+
 

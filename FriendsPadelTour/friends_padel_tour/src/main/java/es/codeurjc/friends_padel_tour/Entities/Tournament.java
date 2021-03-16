@@ -38,7 +38,7 @@ public class Tournament {
     private String category;
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
-    private List<Match> matches;
+    private List<PadelMatch> matches;
     
     private int firstPrize;
     private int secondPrize;
@@ -61,11 +61,11 @@ public class Tournament {
 
 
 
-    public List<Match> getMatches() {
+    public List<PadelMatch> getMatches() {
         return matches;
     }
 
-    public void setMatches(List<Match> matches) {
+    public void setMatches(List<PadelMatch> matches) {
         this.matches = matches;
     }
 
