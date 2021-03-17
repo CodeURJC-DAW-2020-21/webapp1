@@ -10,6 +10,7 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
+import net.bytebuddy.asm.Advice.Return;
 
 @Service
 public class PlayersService {
@@ -41,6 +42,12 @@ public class PlayersService {
         Optional<Player> playerInDB = playerRepository.findByEmail(email);
         if(playerInDB.isPresent())
             return playerInDB.get();
+        return null;
+    }
+
+    public Player findByName(String attribute) {
+        Optional<Player> playerInDB = playerRepository.findByName(attribute);
+        if(playerInDB.isPresent()) return playerInDB.get();
         return null;
     }
 

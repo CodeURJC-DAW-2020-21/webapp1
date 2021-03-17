@@ -32,7 +32,7 @@ public class Player{
     @OneToMany
     private List<DoubleOfPlayers> doubles;
     @OneToMany
-    private List<Match> openMatches;
+    private List<PadelMatch> openMatches;
     
 
     @Lob
@@ -131,10 +131,4 @@ public class Player{
         this.doubles = doubles;
     }
 
-    public long getId() {
-        return this.id;
-    }
-
-    
-    
 }
