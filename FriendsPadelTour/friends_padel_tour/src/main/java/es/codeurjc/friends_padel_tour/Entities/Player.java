@@ -32,11 +32,15 @@ public class Player{
     private int mathcesWon;
     private int matchesLost;
     private int mathesPlayed;
-    @ManyToMany
-    private List<DoubleOfPlayers> doubles;
 
-    @OneToMany
-    private List<PadelMatch> openMatches;
+    @OneToMany(mappedBy = "player1")
+    private List<DoubleOfPlayers> doubles1;
+
+    @OneToMany(mappedBy = "player2")
+    private List<DoubleOfPlayers> doubles2;
+
+    @OneToMany(mappedBy = "playerCreator")
+    private List<PadelMatch> createdMatches;
     
 
     @Lob
@@ -144,14 +148,6 @@ public class Player{
         this.name = name;
     }
 
-    public List<DoubleOfPlayers> getDoubles() {
-        return doubles;
-    }
-
-    public void setDoubles(List<DoubleOfPlayers> doubles) {
-        this.doubles = doubles;
-    }
-
     public Blob getImage() {
         return image;
     }
@@ -159,5 +155,38 @@ public class Player{
     public void setImage(Blob image) {
         this.image = image;
     }
+
+    public List<PadelMatch> getCreatedMatches() {
+        return createdMatches;
+    }
+
+    public void setCreatedMatches(List<PadelMatch> createdMatches) {
+        this.createdMatches = createdMatches;
+    }
+
+    public List<DoubleOfPlayers> getDoubles1() {
+        return doubles1;
+    }
+
+    public void setDoubles1(List<DoubleOfPlayers> doubles1) {
+        this.doubles1 = doubles1;
+    }
+
+    public List<DoubleOfPlayers> getDoubles2() {
+        return doubles2;
+    }
+
+    public void setDoubles2(List<DoubleOfPlayers> doubles2) {
+        this.doubles2 = doubles2;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 
 }

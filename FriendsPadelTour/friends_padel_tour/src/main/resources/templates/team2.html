@@ -11,110 +11,107 @@
           </div>
         </div>
             <h2 class="h5 text-black" style="text-align: center; font-size: 1.5cm; background-color: rgba(245, 99, 99, 0.507);">2ª DIVISIÓN</h2>
-            <div class="row">       
+            <div class="row">    
+              {{#matches}}
                 <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">     
-                  <div class="tournament_definition" id="tournament_name"><p>AMISTOSO 1</p></div>
+                  <div class="tournament_definition" id="tournament_name"><p>AMISTOSO {{-index}}</p></div>
                   <div >
-                    <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="/images/inscripcion.png"> 17/4/2021</p></div>
-                    <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/reloj.png">20:00</p></div>
-                    <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/place.jpg">MÓSTOLES MADRID</p></div>
-                  <div class="tournament_definition" id="tournament_date"><p>POLIDEPORTIVO VILLAFONTANA</p></div>
+                    <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="/images/inscripcion.png">{{date}}</p></div>
+                    <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/reloj.png">{{time}}</p></div>
+                    <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/place.jpg">{{city}} {{province}}</p></div>
+                    <br>
+                    <div class="tournament_definition" id="tournament_date"><p>{{facility}}</p></div>
                   </div>
                   <div >
-                    <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="/images/personas.png"> 1/4</p></div>
-                    <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="/images/categoria.png"> 2ª DIVISIÓN</p></div>               
+                    <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="/images/personas.png"> {{nPlayers}}/4</p></div>
+                    <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="/images/categoria.png"> {{division}}ª DIVISIÓN</p></div>               
                   </div>                 
-                  <button class="tournament_definition" id="tournament_button"><span>UNIRSE CON TU PAREJA</span></button>
-                  <button class="tournament_definition" id="tournament_button"><span>UNIRSE INDIVIDUAL</span></button>
+                  {{#logged}}
+                  <a href="/joinFriendlyMatch/{{id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE AL PARTIDO</span></a>
+                  {{/logged}}
                 </div>
-                  
+              {{/matches}}
+              
+              
               </div>
               <br>
-              <a href="#popup"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
-              <div id="popup" class="overlay-formulario">
-              <div id="popup-Body">
-                <h2 style="background-color: rgb(252, 186, 186);">Formulario para crear partidos amistosos</h2><br>
-                <a id="cerrarPestana" href="#">&times;</a>
-                <div class="popupContent">
-                  <form action="team2.html">
-                    <label for="fname" style="font-size: 25px;"><b>Nombre del amistoso:</b></label><br>
-                    <input type="text" id="fname" name="fname" required="required" style="background-color: rgb(219, 219, 255);"><br>
-                    <label for="lprov" style="font-size: 25px;"><b>Provincia: <br></b><select name="province">
-                      <option>Coruña (La Coruña)</option>
-                      <option>Álava</option>
-                      <option>Albacete
-                      <option>Alicante</option>
-                      <option>Almería</option>
-                      <option>Asturias</option>
-                      <option>Ávila</option>
-                      <option>Badajoz</option>
-                      <option>Baleares</option>
-                      <option>Barcelona</option>
-                      <option>Burgos</option>
-                      <option>Cáceres</option>
-                      <option>Cádiz</option>
-                      <option>Cantabria</option>
-                      <option>Castellón</option>
-                      <option>Ciudad Real</option>
-                      <option>Córdoba</option>
-                      <option>Cuenca</option>
-                      <option>Girona</option>
-                      <option>Granada</option>
-                      <option>Guadalajara</option>
-                      <option>Gipuzkoa</option>
-                      <option>Huelva</option>
-                      <option>Huesca</option>
-                      <option>Jaén</option>
-                      <option>La Rioja</option>
-                      <option>Las Palmas</option>
-                      <option>León</option>
-                      <option>Lérida</option>
-                      <option>Lugo</option>
-                      <option>Madrid</option>
-                      <option>Málaga</option>
-                      <option>Murcia</option>
-                      <option>Navarra</option>
-                      <option>Ourense</option>
-                      <option>Palencia</option>
-                      <option>Pontevedra</option>
-                      <option>Salamanca</option>
-                      <option>Segovia</option>
-                      <option>Sevilla</option>
-                      <option>Soria</option>
-                      <option>Tarragona</option>
-                      <option>Santa Cruz de Tenerife</option>
-                      <option>Teruel</option>
-                      <option>Toledo</option>
-                      <option>Valencia</option>
-                      <option>Valladolid</option>
-                      <option>Vizcaya</option>
-                      <option>Zamora</option>
-                      <option>Zaragoza</option>
-                    </select></label><br>
-                    
-                    <label for="lcity" style="font-size: 25px;"><b>Ciudad:</b></label><br>
-                    <input type="text" id="lcity" name="lcity"required="required" style="background-color: rgb(219, 219, 255);"><br>
-                    <label for="lname" style="font-size: 25px;"><b>Nombre de la instalación deportiva:</b></label><br>
-                    <input type="text" id="lname" name="lname"required="required" style="background-color: rgb(219, 219, 255);"><br><br>                    
-                    <label for="lname" style="font-size: 25px;"><b>Tienes compañero o juegas individual:</b></label><br>
-                    <label for="male">Juego con compañero</label>
-                    <input type="radio" id="Alta" name="prioridad" value="alta"required="required" ><br>
-                    <label for="female">Juego de forma individual</label>
-                    <input type="radio" id="Baja" name="prioridad" value="baja"required="required"> <br>                    
-                    <label for="ffecha" style="font-size: 25px;"><b>Fecha del amistoso:</b></label><br>
-                    <input type="date" id="ffecha" name="ffecha" required="required" style="background-color: rgb(219, 219, 255);"><br>   
-                    <label for="fhora" style="font-size: 25px;"><b>Hora del amistoso:</b></label><br>
-                    <input type="time" id="fhora" name="fhora" required="required" style="background-color: rgb(219, 219, 255);"><br>                 
-                    <label for="textarea" style="font-size: 25px;"><b>Datos de interés:</b></label><br>
-                    <textarea name="texto1" rows="10" cols="70"></textarea><br><br>
-                    <input type="submit" value ="Crear partido amistoso" style="font-size: 20px; color:black; font-style: normal; background-color: rgba(245, 99, 99, 0.507);">
-                  </form>
+              {{# logged }}
+                <a href="#popup1"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
+              {{/ logged }}
+              <div id="popup1" class="overlay-formulario">
+                <div id="popup-Body">
+                  <h2 style="background-color: rgb(252, 186, 186);">Formulario para crear partidos amistosos</h2><br>
+                  <a id="cerrarPestana" href="#">&times;</a>
+                  <div class="popupContent">
+                    <form action="/createFriendlyMatch/1" method="GET">
+                      <label for="lprov" style="font-size: 25px;"><b>Provincia: <br></b><select name="fmProvince">
+                        <option>Coruña (La Coruña)</option>
+                        <option>Álava</option>
+                        <option>Albacete
+                        <option>Alicante</option>
+                        <option>Almería</option>
+                        <option>Asturias</option>
+                        <option>Ávila</option>
+                        <option>Badajoz</option>
+                        <option>Baleares</option>
+                        <option>Barcelona</option>
+                        <option>Burgos</option>
+                        <option>Cáceres</option>
+                        <option>Cádiz</option>
+                        <option>Cantabria</option>
+                        <option>Castellón</option>
+                        <option>Ciudad Real</option>
+                        <option>Córdoba</option>
+                        <option>Cuenca</option>
+                        <option>Girona</option>
+                        <option>Granada</option>
+                        <option>Guadalajara</option>
+                        <option>Gipuzkoa</option>
+                        <option>Huelva</option>
+                        <option>Huesca</option>
+                        <option>Jaén</option>
+                        <option>La Rioja</option>
+                        <option>Las Palmas</option>
+                        <option>León</option>
+                        <option>Lérida</option>
+                        <option>Lugo</option>
+                        <option>Madrid</option>
+                        <option>Málaga</option>
+                        <option>Murcia</option>
+                        <option>Navarra</option>
+                        <option>Ourense</option>
+                        <option>Palencia</option>
+                        <option>Pontevedra</option>
+                        <option>Salamanca</option>
+                        <option>Segovia</option>
+                        <option>Sevilla</option>
+                        <option>Soria</option>
+                        <option>Tarragona</option>
+                        <option>Santa Cruz de Tenerife</option>
+                        <option>Teruel</option>
+                        <option>Toledo</option>
+                        <option>Valencia</option>
+                        <option>Valladolid</option>
+                        <option>Vizcaya</option>
+                        <option>Zamora</option>
+                        <option>Zaragoza</option>
+                      </select></label><br>
+                      <label for="lcity" style="font-size: 25px;"><b>Ciudad:</b></label><br>
+                      <input type="text" id="lcity" name="fmcity"required="required" style="background-color: rgb(219, 219, 255);"><br>
+                      <label for="lname" style="font-size: 25px;"><b>Nombre de la instalación deportiva:</b></label><br>
+                      <input type="text" id="lname" name="fmfacility"required="required" style="background-color: rgb(219, 219, 255);"><br><br>
+                      <label for="ffecha" style="font-size: 25px;"><b>Fecha del amistoso:</b></label><br>
+                      <input type="date" id="ffecha" name="fmdate" required="required" style="background-color: rgb(219, 219, 255);"><br>   
+                      <label for="fhora" style="font-size: 25px;"><b>Hora del amistoso:</b></label><br>
+                      <input type="time" id="fhora" name="fmtime" required="required" style="background-color: rgb(219, 219, 255);"><br>                 
+                      <input type="submit" value ="Crear partido amistoso" style="font-size: 20px; color:black; font-style: normal; background-color: rgba(245, 99, 99, 0.507);">
+                    </form>
+                  </div>
                 </div>
               </div>
+  
             </div>
           </div>
-          
-        </div>
 {{>footer}}
   </div>
 

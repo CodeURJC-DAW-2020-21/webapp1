@@ -20,6 +20,9 @@ public class PadelMatch {
     private String province;
     private String facility;
     private int nPlayers;
+
+    @ManyToOne
+    private Player playerCreator;
     
     @ManyToOne
     private DoubleOfPlayers double1;
@@ -38,9 +41,7 @@ public class PadelMatch {
         this.date = date;
         this.time = time;
         this.division = division;
-        //this.double1 = new DoubleOfPlayers();
-        //this.double1.setPlayer1(creator);
-        //this.nPlayers = 1;
+        this.playerCreator = creator;
     }
 
     public String getTime() {
@@ -116,4 +117,15 @@ public class PadelMatch {
         this.double1 = double1;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Player getCreator() {
+        return playerCreator;
+    }
 }
