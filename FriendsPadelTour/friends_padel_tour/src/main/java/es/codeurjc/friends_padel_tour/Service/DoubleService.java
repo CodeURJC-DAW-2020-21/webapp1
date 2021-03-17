@@ -1,6 +1,9 @@
 package es.codeurjc.friends_padel_tour.Service;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +15,14 @@ public class DoubleService {
     @Autowired
     private DoubleRepository doubleRepository;
 
-    public boolean saveDouble(){
-        doubleRepository.save(new DoubleOfPlayers());
-        return false;   
+    public void saveDouble(){
+        doubleRepository.save(new DoubleOfPlayers());  
+    }
+
+    public List<DoubleOfPlayers> findDoublesOf(String name) {
+        Optional<List<DoubleOfPlayers>> doublesInDB = doubleRepository.findDoublesOf(name);
+        if(doublesInDB.isPresent()) return doublesInDB.get();
+        else return null;
     }
     
 }

@@ -1,9 +1,12 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,6 +19,9 @@ public class DoubleOfPlayers {
     private Player player1;
     @ManyToOne
     private Player player2;
+
+    @ManyToMany
+    private List<Tournament> tournaments;
 
 
     public DoubleOfPlayers(){}
@@ -36,5 +42,12 @@ public class DoubleOfPlayers {
         this.player1 = player1;
     }
     
+    public List<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(List<Tournament> tournaments) {
+        this.tournaments = tournaments;
+    }
     
 }

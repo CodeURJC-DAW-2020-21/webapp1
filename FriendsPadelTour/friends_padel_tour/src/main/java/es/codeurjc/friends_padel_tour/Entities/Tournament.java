@@ -3,14 +3,14 @@ package es.codeurjc.friends_padel_tour.Entities;
 
 
 
-import javax.persistence.CascadeType;
+import java.util.List;
+
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import java.util.List;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -32,13 +32,10 @@ public class Tournament {
     private int maxCouples;
     private int registeredCouples;
 
+    @ManyToMany
+    private List<DoubleOfPlayers> players;
 
-
-   
     private String category;
-
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
-    private List<PadelMatch> matches;
     
     private int firstPrize;
     private int secondPrize;
@@ -49,6 +46,18 @@ public class Tournament {
 
     
 
+    public List<DoubleOfPlayers> getPlayers() {
+        return players;
+    }
+
+
+
+    public void setPlayers(List<DoubleOfPlayers> players) {
+        this.players = players;
+    }
+
+
+
     public String getCategory() {
         return category;
     }
@@ -58,17 +67,6 @@ public class Tournament {
     public void setCategory(String category) {
         this.category = category;
     }
-
-
-
-    public List<PadelMatch> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(List<PadelMatch> matches) {
-        this.matches = matches;
-    }
-
 
     public Bussiness getBussinnes() {
         return bussiness;

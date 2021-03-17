@@ -1,17 +1,38 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import java.io.IOException;
+import java.net.URI;
+import java.security.Principal;
+import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.connector.Response;
+import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.core.io.Resource;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 
 
 
@@ -23,6 +44,22 @@ public class UsersController {
     private PlayersService playerService;
     @Autowired
     private BussinessService bussinessService;
+
+    @ModelAttribute
+	public void addAttributes(Model model, HttpServletRequest request) {
+
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+
+			model.addAttribute("logged", true);
+			model.addAttribute("userName", principal.getName());
+			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+
+		} else {
+			model.addAttribute("logged", false);
+		}
+	}
 
     @GetMapping(value="/login")
     public String login(Model model) {
@@ -74,17 +111,48 @@ public class UsersController {
 
     @GetMapping(value="/users/{id}")
     public String playerProfile(Model model,@PathVariable long id) {
-        Object loggedUser = model.getAttribute("loggedUser");
-        if(loggedUser == null){
-            return "login";
-        }
-        if(loggedUser instanceof Player){
-            return "userProfile";
-        }else if(loggedUser instanceof Bussiness){
-            return "bussinessProfile";
-        }
+        Player loggedPlayer = playerService.findById(id);
+        model.addAttribute("loggedUser", loggedPlayer);
         return "userProfile";
     }
+
+    @RequestMapping(value="/editProfile/{id}", method=RequestMethod.GET)
+    public String editProfile(@PathVariable long id, String password, int division,Model model) {
+        Player loggedUser = playerService.findById(id);
+        if(division!=0){
+            loggedUser.setDivision(division);
+        }
+        if(!password.isBlank()){
+            loggedUser.setPassword(password);
+        }
+        playerService.savePlayer(loggedUser);
+        model.addAttribute("loggedUser", loggedUser);
+        return "userProfile";
+    }
+
+    @PostMapping(value="/update/{id}/image")
+    public String updateImage(@PathVariable long id, MultipartFile profilePicture,Model model) throws IOException {
+        Player loggedUser = playerService.findById(id);
+        loggedUser.setImage(BlobProxy.generateProxy(
+            profilePicture.getInputStream(), profilePicture.getSize()));
+        playerService.savePlayer(loggedUser);
+        model.addAttribute("loggedUser", loggedUser);
+        return "userProfile";
+    }
+
+    @GetMapping(value="/user/{id}/image")
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException{
+        Player loggedUser = playerService.findById(id);
+        if(loggedUser.getImage() != null){
+            Resource file = new  InputStreamResource(loggedUser.getImage().getBinaryStream());
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
+            .contentLength(loggedUser.getImage().length()).body(file);
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+    
+    
 
 
 }

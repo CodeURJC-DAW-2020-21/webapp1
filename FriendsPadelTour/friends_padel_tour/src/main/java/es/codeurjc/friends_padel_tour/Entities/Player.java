@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,18 +20,21 @@ public class Player{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String username;
     private String name;
     private String surname;
     private String location;
     private String email;
     private String password;
     private int division;
+    private boolean hasImage;
 
     private int mathcesWon;
     private int matchesLost;
     private int mathesPlayed;
-    @OneToMany
+    @ManyToMany
     private List<DoubleOfPlayers> doubles;
+
     @OneToMany
     private List<PadelMatch> openMatches;
     
@@ -40,6 +44,22 @@ public class Player{
     private Blob image;
     
     public Player(){}
+
+    public String getUserName() {
+        return username;
+    }
+
+    public void setUserName(String userName) {
+        this.username = userName;
+    }
+
+    public boolean isHasImage() {
+        return hasImage;
+    }
+
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
+    }
 
     public int getDivision() {
         return division;
@@ -89,6 +109,7 @@ public class Player{
         this.location = location;
         this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
+        this.hasImage = false;
     }
 
     public String getSurname() {
@@ -129,6 +150,14 @@ public class Player{
 
     public void setDoubles(List<DoubleOfPlayers> doubles) {
         this.doubles = doubles;
+    }
+
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
 }

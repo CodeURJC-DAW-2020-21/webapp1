@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  {{>header}}
+  <br><br><br>
+    <div class="container text-center">
+        <h2 class="center-items" style="background-color: rgb(252, 186, 186);">Unirse al partido</h2><br>
+        <div class="popupContent">
+        {{#double1Joined }}
+            <div class="row">
+                {{# player1Joined }}
+                    <div class="col-md-6 center-items">{{player1Name}}</div>
+                {{/ player1Joined }}
+                {{^ player1Joined }}
+                    <a class="col-md-6 center-items" href="/joinLonely/{{matchToJoin.id}}/1">Unirse solo</a>
+                {{/ player1Joined }}
+                {{# player2Joined }}
+                    <div class="col-md-6 center-items">{{player2Name}}</div>
+                {{/ player2Joined }}
+                {{^ player2Joined }}
+                    <a class="col-md-6 center-items" href="/joinLonely/{{matchToJoin.id}}/2">Unirse solo</a>
+                {{/ player2Joined }}
+            </div>
+        {{/double1Joined }}
+        {{^double1Joined}}
+            <div class="row">
+                <a class="text-center col-md-12" href="#popup1">Unirse con pareja</a>
+            </div>
+            <div class="row">
+                <a href="/joinLonely/{{matchToJoin.id}}/1" class="col-md-6 text-center">Unirse solo</a>
+                <a href="/joinLonely/{{matchToJoin.id}}/2" class="col-md-6 text-center">Unirse solo</a>
+            </div>
+        {{/double1Joined}}
+        </div>
+
+        <div class="center-items">
+            <img src="/images/padel_court_for_matches.jpg">
+        </div>
+
+        {{# double2Joined }}
+            <div class="row">
+                {{# player3Joined }}
+                    <div class="col-md-6 center-items">{{player3Name}}</div>
+                {{/ player3Joined }}
+                {{^ player3Joined }}
+                    <a class="col-md-6 center-items" href="/joinLonely/{{matchToJoin.id}}/3">Unirse solo</a>
+                {{/ player3Joined }}
+                {{# player4Joined }}
+                    <div class="col-md-6 center-items">{{player4Name}}</div>
+                {{/ player4Joined }}
+                {{^ player4Joined }}
+                    <a class="col-md-6 center-items" href="/joinLonely/{{matchToJoin.id}}/4">Unirse solo</a>
+                {{/ player4Joined }}
+            </div>
+        {{/ double2Joined }}
+        {{^double2Joined}}
+            <div class="row">
+                <a class="text-center col-md-12" href="/#popup2">Unirse con pareja</a>
+            </div>
+            <div class="row">
+                <a href="/joinLonely/{{matchToJoin.id}}/3" class="col-md-6 text-center">Unirse solo</a>
+                <a href="/joinLonely/{{matchToJoin.id}}/4" class="col-md-6 text-center">Unirse solo</a>
+            </div>
+        {{/double2Joined}}
+    </div>
+
+    <div id="popup1" class="overlay-formulario">
+        <div id="popup-Body">
+          <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
+          <a id="cerrarPestana" href="#">&times;</a>
+          <div class="popupContent">
+            <form action="/joinDouble/{{matchToJoin.id}}/1" method="GET">
+              <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect">
+                {{#userDoubles}}
+                    <option>{{player1}} y {{player2}}</option>
+                {{/userDoubles}}
+              </select></label><br>
+            </form>
+          </div>
+        </div>
+      </div>
+  {{>footer}}
+
+  <script src="/js/jquery-3.3.1.min.js"></script>
+  <script src="/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/js/jquery-ui.js"></script>
+  <script src="/js/popper.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/owl.carousel.min.js"></script>
+  <script src="/js/jquery.stellar.min.js"></script>
+  <script src="/js/jquery.countdown.min.js"></script>
+  <script src="/js/jquery.magnific-popup.min.js"></script>
+  <script src="/js/aos.js"></script>
+
+  <script src="/js/main.js"></script>
+    
+  </body>
+</html>

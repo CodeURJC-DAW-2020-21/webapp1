@@ -10,7 +10,6 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
-import net.bytebuddy.asm.Advice.Return;
 
 @Service
 public class PlayersService {
@@ -27,7 +26,7 @@ public class PlayersService {
             return false;
         if(bussinessInDB.isPresent())
             return false;
-        playerInDB = playerRepository.findByName(newPlayer.getName());
+        playerInDB = playerRepository.findByUsername(newPlayer.getName());
         if(playerInDB.isPresent()) 
             return false;
         playerRepository.save(newPlayer);
@@ -45,8 +44,14 @@ public class PlayersService {
         return null;
     }
 
-    public Player findByName(String attribute) {
-        Optional<Player> playerInDB = playerRepository.findByName(attribute);
+    public Player findByUsername(String attribute) {
+        Optional<Player> playerInDB = playerRepository.findByUsername(attribute);
+        if(playerInDB.isPresent()) return playerInDB.get();
+        return null;
+    }
+
+    public Player findById(long id) {
+        Optional<Player> playerInDB = playerRepository.findById(id);
         if(playerInDB.isPresent()) return playerInDB.get();
         return null;
     }

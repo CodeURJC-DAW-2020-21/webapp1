@@ -1,8 +1,6 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.security.Principal;
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,15 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -72,26 +71,83 @@ public class MatchController {
 
     @RequestMapping(value="/createFriendlyMatch/{num}", method=RequestMethod.GET)
     public String createFriendlyMatch(@PathVariable int num,@RequestParam String fmProvince,@RequestParam String fmcity,@RequestParam String fmfacility,@RequestParam String fmdate,@RequestParam String fmtime, Model model) {
-        Player creator = playerService.findByName((String) model.getAttribute("userName"));
+        Player creator = playerService.findByUsername((String) model.getAttribute("userName"));
         PadelMatch newMatch = new PadelMatch(fmProvince,fmcity,fmfacility,fmdate,fmtime,num,creator);
         matchesService.save(newMatch);
         return "succesfullMatchCreation";
     }
 
-    @GetMapping(value="/joinFriendlyMatchLonley/{id}")
-    public String joinFrienlyMatchLonely(@PathVariable long id,Model model) {
+    @GetMapping(value="/joinFriendlyMatch/{id}")
+    public String joinFrienlyMatch(@PathVariable long id,Model model) {
         PadelMatch matchToJoin = matchesService.findById(id);
-        if(matchToJoin.getnPlayers()==4){
-            //match full error
-            return "";
+        Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
+        model.addAttribute("matchToJoin", matchToJoin);
+        if(matchToJoin.getDouble1()==null){
+            model.addAttribute("double1Joined", false);
+            model.addAttribute("player1Joined", false);
+            model.addAttribute("player2Joined", false);
+        }else{
+            model.addAttribute("double1Joined", true);
+            if(matchToJoin.getDouble1().getPlayer1()==null){
+                model.addAttribute("player1Joined", false);
+                model.addAttribute("player2Joined", true);
+                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUserName());
+            }else{
+                model.addAttribute("player2Joined", false);
+                model.addAttribute("player1Joined", true);
+                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUserName());                
+            }
         }
-        Player playerWhoJoins = playerService.findByName((String) model.getAttribute("userName"));
-        return "";
+
+        if(matchToJoin.getDouble2()==null){
+            model.addAttribute("double2Joined", false);
+            model.addAttribute("player3Joined", false);
+            model.addAttribute("player4Joined", false);
+        }else{
+            model.addAttribute("double2Joined", true);
+            if(matchToJoin.getDouble2().getPlayer1()==null){
+                model.addAttribute("player3Joined", false);
+                model.addAttribute("player4Joined", true);
+                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUserName());
+            }else{
+                model.addAttribute("player4Joined", false);
+                model.addAttribute("player3Joined", true);
+                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUserName());                
+            }
+        }
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        model.addAttribute("userDoubles", userDoubles);
+        return "joiningMatch";
     }
-    
-    
-    
 
+    @GetMapping(value="/joinLonely/{id}/{slot}")
+    public String joinFriendlyMatchLonely(@PathVariable long id,@PathVariable int slot,Model model) {
+        PadelMatch matchToJoin = matchesService.findById(id);
+        Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
+        if(slot==1||slot==2){
+            if(matchToJoin.getDouble1()==null)
+                matchToJoin.setDouble1(new DoubleOfPlayers());
+        }
+        if(slot==3||slot==4){
+            if(matchToJoin.getDouble2()==null)
+                matchToJoin.setDouble2(new DoubleOfPlayers());
+        }
+        if(slot==1){
+            matchToJoin.getDouble1().setPlayer1(loggedPlayer);
+        }
+        if(slot==2){
+            matchToJoin.getDouble1().setPlayer2(loggedPlayer);
+        }
+        if(slot==3){
+            matchToJoin.getDouble2().setPlayer1(loggedPlayer);
+        }
+        if(slot==4){
+            matchToJoin.getDouble2().setPlayer2(loggedPlayer);
+        }
+        matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
+        return "joiningSuccesfull";
+    }
 
+    
     
 }
