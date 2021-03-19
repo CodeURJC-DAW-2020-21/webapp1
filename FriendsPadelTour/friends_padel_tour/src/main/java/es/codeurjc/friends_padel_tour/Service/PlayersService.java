@@ -56,6 +56,10 @@ public class PlayersService {
         return null;
     }
 
+    public void updatePlayer(Player player) {
+        playerRepository.save(player);
+    }
+
 
         
 }

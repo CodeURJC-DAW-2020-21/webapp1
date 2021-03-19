@@ -15,8 +15,8 @@ public class DoubleService {
     @Autowired
     private DoubleRepository doubleRepository;
 
-    public void saveDouble(){
-        doubleRepository.save(new DoubleOfPlayers());  
+    public void saveDouble(DoubleOfPlayers newDouble){
+        doubleRepository.save(newDouble);  
     }
 
     public List<DoubleOfPlayers> findDoublesOf(String name) {
