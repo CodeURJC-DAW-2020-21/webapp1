@@ -41,13 +41,45 @@ public class Player{
 
     @OneToMany(mappedBy = "playerCreator")
     private List<PadelMatch> createdMatches;
+
+    @ManyToMany
+    private List<PadelMatch> playedMatches;
+
+    @ManyToMany
+    private List<PadelMatch> pendingMatches;
     
 
     @Lob
     @JsonIgnore
     private Blob image;
+
+    private int score;
     
     public Player(){}
+
+    public List<PadelMatch> getPendingMatches() {
+        return pendingMatches;
+    }
+
+    public void setPendingMatches(List<PadelMatch> pendingMatches) {
+        this.pendingMatches = pendingMatches;
+    }
+
+    public List<PadelMatch> getPlayedMatches() {
+        return playedMatches;
+    }
+
+    public void setPlayedMatches(List<PadelMatch> playedMatches) {
+        this.playedMatches = playedMatches;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public String getUserName() {
         return username;
@@ -114,6 +146,7 @@ public class Player{
         this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
         this.hasImage = false;
+        this.setScore(0);
     }
 
     public String getSurname() {

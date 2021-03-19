@@ -20,6 +20,7 @@ public class PadelMatch {
     private String province;
     private String facility;
     private int nPlayers;
+    private boolean hasWinner;
 
     @ManyToOne
     private Player playerCreator;
@@ -30,9 +31,28 @@ public class PadelMatch {
     private DoubleOfPlayers double2;
 
     @ManyToOne
+    private DoubleOfPlayers doubleWinner;
+
+    @ManyToOne
     private Tournament tournament;
 
     public PadelMatch(){}
+
+    public boolean isHasWinner() {
+        return hasWinner;
+    }
+
+    public void setHasWinner(boolean hasWinner) {
+        this.hasWinner = hasWinner;
+    }
+
+    public DoubleOfPlayers getDoubleWinner() {
+        return doubleWinner;
+    }
+
+    public void setDoubleWinner(DoubleOfPlayers doubleWinner) {
+        this.doubleWinner = doubleWinner;
+    }
 
     public PadelMatch(String province, String city, String facility, String date, String time,int division,Player creator) {
         this.province = province;
@@ -42,6 +62,7 @@ public class PadelMatch {
         this.time = time;
         this.division = division;
         this.playerCreator = creator;
+        this.hasWinner =false;
     }
 
     public String getTime() {

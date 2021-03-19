@@ -73,8 +73,10 @@ public class MatchController {
     public String createFriendlyMatch(@PathVariable int num,@RequestParam String fmProvince,@RequestParam String fmcity,@RequestParam String fmfacility,@RequestParam String fmdate,@RequestParam String fmtime, Model model) {
         Player creator = playerService.findByUsername((String) model.getAttribute("userName"));
         PadelMatch newMatch = new PadelMatch(fmProvince,fmcity,fmfacility,fmdate,fmtime,num,creator);
+        creator.getCreatedMatches().add(newMatch);
         matchesService.save(newMatch);
-        return "succesfullMatchCreation";
+        playerService.updatePlayer(creator);
+        return "succesMatchCreation";
     }
 
     @GetMapping(value="/joinFriendlyMatch/{id}")
@@ -144,8 +146,13 @@ public class MatchController {
         if(slot==4){
             matchToJoin.getDouble2().setPlayer2(loggedPlayer);
         }
+        loggedPlayer.getPendingMatches().add(matchToJoin);
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
-        return "joiningSuccesfull";
+
+        playerService.updatePlayer(loggedPlayer);
+        matchesService.save(matchToJoin);
+
+        return "joiningSucces";
     }
 
     
