@@ -1,11 +1,13 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +31,7 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
@@ -221,8 +225,10 @@ public class UsersController {
     }
     
     
+    }
+
     
     
 
 
-}
+

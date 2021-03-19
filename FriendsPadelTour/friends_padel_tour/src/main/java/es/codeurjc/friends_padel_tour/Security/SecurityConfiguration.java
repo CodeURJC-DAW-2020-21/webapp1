@@ -26,12 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		// Public pages
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
-		http.authorizeRequests().antMatchers("/loginerror").permitAll();
+		http.authorizeRequests().antMatchers("/404").permitAll();
 		//http.authorizeRequests().antMatchers("/logout").permitAll();
         http.authorizeRequests().antMatchers("/Index").permitAll();
         http.authorizeRequests().antMatchers("/AboutUs").permitAll();
         http.authorizeRequests().antMatchers("/friendlyMatch").permitAll();
         http.authorizeRequests().antMatchers("/previousSignUp").permitAll();
+		//Generar PDF
+		http.authorizeRequests().antMatchers("/download-pdf").permitAll();
+		http.authorizeRequests().antMatchers("/userProfile").permitAll();
         http.authorizeRequests().antMatchers("/team/1").permitAll();
         http.authorizeRequests().antMatchers("/team/2").permitAll();
         http.authorizeRequests().antMatchers("/team/3").permitAll();
@@ -39,8 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/team/5").permitAll();
         http.authorizeRequests().antMatchers("/team/6").permitAll();
         http.authorizeRequests().antMatchers("/tournaments").permitAll();
+		http.authorizeRequests().antMatchers("/userSignUp").permitAll();
+		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();
         http.authorizeRequests().antMatchers("/css-min/**", "/css/main.css", "/css/**", "/js/**", "/images/**", "/fonts/**", "/dev-assets/**", "/vendor/**", "/html/**").permitAll();
-
+		
 		// Private pages (all other pages)
 		http.authorizeRequests().anyRequest().authenticated();
 
@@ -48,8 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.formLogin().loginPage("/login");
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("password");
-		http.formLogin().defaultSuccessUrl("/private");
-		http.formLogin().failureUrl("/loginerror");
+		http.formLogin().defaultSuccessUrl("/userProfile");
+		http.formLogin().failureUrl("/404");
 
 		// Logout
 		http.logout().logoutUrl("/logout");

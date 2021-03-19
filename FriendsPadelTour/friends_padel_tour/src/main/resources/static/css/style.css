@@ -1840,4 +1840,51 @@ input:focus {
   text-align: center;
 }
 
-
+.scrollmenu {
+  background-color: gray;
+  overflow-y: scroll;
+  width: 100%;
+  padding-right: 10%;
+  padding-left: 10%;
+  height: 300px;
+  border: 1px solid black;
+  }
+  
+  .best-players{
+  height: auto;
+  }
+  
+  
+  
+  .c-player-card__footer {
+  width: 100%;
+  height: 4.1rem;
+  display: table;
+  background-color:#69dfe2
+  }
+  
+  .c-player-card__header {
+  width: 100%;
+  height: 15.4rem;
+  padding: 2rem; 
+  background-color: rgba(217, 226, 228, .6); 
+  background-size:cover
+  
+  }
+  
+  .c-player-card__item {
+  width: 50%;
+  float: left; 
+  list-style:none
+  }
+  
+  
+  
+  .imgplayer {
+  z-index: 1; 
+  }
+  
+  
+  .c-player-card__name { 
+  color:#22356d
+  }

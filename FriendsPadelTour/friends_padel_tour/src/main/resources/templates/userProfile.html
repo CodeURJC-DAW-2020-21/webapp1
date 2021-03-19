@@ -44,25 +44,25 @@
       </div>
     </div>
 
-
+    {{#loggedUser.matchesPlayed}}
     <div class="l-grid"> 
       <div class="c-ranking-header c-ranking-header--no-image c-ranking-header--table"> 
         <div class="l-container l-container--data"> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos jugados</p>
-            <p class="c-ranking-header__data">100</p> 
+            <p class="c-ranking-header__data" id="matches_Played">{{loggedUser.matchesPlayed}}</p> 
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos ganados</p> 
-            <p class="c-ranking-header__data">75</p> 
+            <p class="c-ranking-header__data" id="matches_Won">{{loggedUser.matchesWon}}</p> 
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos perdidos</p> 
-            <p class="c-ranking-header__data">25</p> 
+            <p class="c-ranking-header__data" id="matches_Lost">{{loggedUser.matchesLost}}</p> 
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Efectividad</p> 
-            <p class="c-ranking-header__data">75</p> 
+            <p class="c-ranking-header__data">2</p> 
           </div> 
         </div> 
       </div>
@@ -71,6 +71,9 @@
      <div class="row">
       <canvas id="myChart" width="400" height="400"></canvas>
       <script>
+        var matchesPlayed = document.getElementById('matches_Played');
+        var matchesWon = document.getElementById('matches_Won');
+        var matchesLost = document.getElementById('matches_Lost');     
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
           type: 'bar',
@@ -78,7 +81,7 @@
               labels: ['Red', 'Blue', 'Yellow'],
               datasets: [{
                   label: '# of Votes',
-                  data: [1,2,3], 
+                  data: [matchesPlayed, matchesWon, matchesLost], 
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -105,7 +108,7 @@
       </script>
 
      </div>
-
+{{/loggedUser.matchesPlayed}}
 
 
     <div class="recent-matches">

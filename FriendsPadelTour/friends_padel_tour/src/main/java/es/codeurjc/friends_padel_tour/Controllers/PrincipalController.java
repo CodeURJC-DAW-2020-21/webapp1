@@ -1,13 +1,19 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 
 
 
@@ -32,14 +38,59 @@ public class PrincipalController {
 		}
 	}
     
+	@GetMapping("/")
+	public String Index() {
+		return "Index";
+	}
+
     @GetMapping(value="/AboutUs")
     public String getMethodName4(Model model) {
         return "AboutUs";
     }
-    
-    @GetMapping(value="/404")
-    public String error(Model model) {
+
+	@GetMapping(value="/previousSignUp")
+    public String getMethodpreviousSignUp(Model model) {
+        return "previousSignUp";
+    }
+
+	@GetMapping(value="/userProfile")
+    public String getMethodUserProfile(Model model) {
+        return "userProfile";
+    }
+
+	@GetMapping(value="/bussinessProfile")
+    public String getMethodbussinessProfile(Model model) {
+        return "bussinessProfile";
+    }
+
+	@GetMapping(value="/userSignUp")
+    public String getMethoduserSignUp(Model model) {
+        return "userSignUp";
+    }
+
+	@GetMapping(value="/bussinessSignUp")
+    public String getMethodbussinessSignUp(Model model) {
+        return "bussinessSignUp";
+    }
+
+	@GetMapping(value="/404")
+    public String getMethod404(Model model) {
         return "404";
     }
+	
+    @GetMapping("/download-pdf")
+        public void downloadFile(HttpServletResponse response) throws IOException {
+            pdfGenerator generator = new pdfGenerator();
+            byte[] pdfReport = generator.getPDF().toByteArray();
     
+            String mimeType =  "application/pdf";
+            response.setContentType(mimeType);
+            response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", "reporte.pdf"));
+    
+            response.setContentLength(pdfReport.length);
+    
+            ByteArrayInputStream inStream = new ByteArrayInputStream( pdfReport);
+    
+            FileCopyUtils.copy(inStream, response.getOutputStream());
+        }
 }
