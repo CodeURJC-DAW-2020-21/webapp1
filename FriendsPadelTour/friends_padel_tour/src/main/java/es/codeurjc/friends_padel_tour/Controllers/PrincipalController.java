@@ -32,7 +32,7 @@ public class PrincipalController {
 		}
 	}
     
-    @GetMapping(value="/aboutUs")
+    @GetMapping(value="/AboutUs")
     public String getMethodName4(Model model) {
         return "AboutUs";
     }
