@@ -7,13 +7,17 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
 
 
 
@@ -37,7 +41,9 @@ public class PrincipalController {
 			model.addAttribute("logged", false);
 		}
 	}
-    
+    @Autowired
+    private UserRepository userRepository;
+
 	@GetMapping("/")
 	public String Index() {
 		return "Index";
@@ -54,12 +60,24 @@ public class PrincipalController {
     }
 
 	@GetMapping(value="/userProfile")
-    public String getMethodUserProfile(Model model) {
+    public String userProfilePage(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+
+        User user = userRepository.findByName(name).orElseThrow();
+
+        model.addAttribute("username", user.getName());
+        model.addAttribute("user", request.isUserInRole("user"));
         return "userProfile";
     }
 
-	@GetMapping(value="/bussinessProfile")
-    public String getMethodbussinessProfile(Model model) {
+    @GetMapping(value="/bussinessProfile")
+    public String bussinessProfilePage(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+
+        User user = userRepository.findByName(name).orElseThrow();
+
+        model.addAttribute("username", user.getName());
+        model.addAttribute("bussiness", request.isUserInRole("bussiness"));
         return "bussinessProfile";
     }
 
