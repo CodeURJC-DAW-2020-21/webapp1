@@ -7,10 +7,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> f17d2ad90e8818957c1f9757344f3e697c9fe68c
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +15,16 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-<<<<<<< HEAD
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
-=======
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
->>>>>>> f17d2ad90e8818957c1f9757344f3e697c9fe68c
+
+import es.codeurjc.friends_padel_tour.Entities.User;
+import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
 
 
 
