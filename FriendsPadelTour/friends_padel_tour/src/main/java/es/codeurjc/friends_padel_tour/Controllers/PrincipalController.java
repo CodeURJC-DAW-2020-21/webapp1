@@ -7,6 +7,10 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f17d2ad90e8818957c1f9757344f3e697c9fe68c
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +18,15 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+<<<<<<< HEAD
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+=======
+import es.codeurjc.friends_padel_tour.Entities.User;
+import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
+>>>>>>> f17d2ad90e8818957c1f9757344f3e697c9fe68c
 
 
 
@@ -43,7 +53,9 @@ public class PrincipalController {
 			model.addAttribute("logged", false);
 		}
 	}
-    
+    @Autowired
+    private UserRepository userRepository;
+
 	@GetMapping("/")
 	public String Index() {
 
@@ -66,12 +78,24 @@ public class PrincipalController {
     }
 
 	@GetMapping(value="/userProfile")
-    public String getMethodUserProfile(Model model) {
+    public String userProfilePage(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+
+        User user = userRepository.findByName(name).orElseThrow();
+
+        model.addAttribute("username", user.getName());
+        model.addAttribute("user", request.isUserInRole("user"));
         return "userProfile";
     }
 
-	@GetMapping(value="/bussinessProfile")
-    public String getMethodbussinessProfile(Model model) {
+    @GetMapping(value="/bussinessProfile")
+    public String bussinessProfilePage(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+
+        User user = userRepository.findByName(name).orElseThrow();
+
+        model.addAttribute("username", user.getName());
+        model.addAttribute("bussiness", request.isUserInRole("bussiness"));
         return "bussinessProfile";
     }
 
