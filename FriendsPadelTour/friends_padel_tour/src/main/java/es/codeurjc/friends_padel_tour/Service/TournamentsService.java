@@ -34,7 +34,7 @@ public class TournamentsService {
     }
 
     public List<Tournament> getPending(){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findAccepted(false);
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByAccepted(false);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 

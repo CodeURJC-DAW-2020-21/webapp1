@@ -21,6 +21,6 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     int setSecondWinningCouple(DoubleOfPlayers couple, Long id);
 
     Optional<List<Tournament>> findByIdAndAccepted(Long id, boolean accepted);
-    Optional<List<Tournament>> findAccepted(boolean accepted);
+    Optional<List<Tournament>> findByAccepted(boolean accepted);
 
 }
