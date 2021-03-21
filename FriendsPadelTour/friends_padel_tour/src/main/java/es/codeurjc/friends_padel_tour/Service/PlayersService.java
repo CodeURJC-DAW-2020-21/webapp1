@@ -4,16 +4,18 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 
 @Service
 public class PlayersService {
-
+    
+    @Autowired
+    private UserService userService;
     @Autowired
     private PlayerRepository playerRepository;
     @Autowired
@@ -26,15 +28,13 @@ public class PlayersService {
             return false;
         if(bussinessInDB.isPresent())
             return false;
-        playerInDB = playerRepository.findByUsername(newPlayer.getName());
+        playerInDB = playerRepository.findByUsername(newPlayer.getUsername());
         if(playerInDB.isPresent()) 
             return false;
+        User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword());
+        newPlayer.setUser(newUser);
         playerRepository.save(newPlayer);
         return true;
-    }
-
-    public boolean uploadImage(Player player,MultipartFile imageFile){
-        return false;
     }
 
     public Player getPlayer(String email) {

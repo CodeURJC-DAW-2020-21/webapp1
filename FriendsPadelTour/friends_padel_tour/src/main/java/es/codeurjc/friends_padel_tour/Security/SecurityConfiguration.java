@@ -11,13 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import es.codeurjc.friends_padel_tour.Service.RepositoryUserDetailsService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	RepositoryUserDetailsService userDetailsService;
+	UserService userDetailsService;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {

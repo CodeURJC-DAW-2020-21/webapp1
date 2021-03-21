@@ -1,13 +1,8 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +12,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +24,6 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
-import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
@@ -54,21 +46,6 @@ public class UsersController {
     @Autowired
     private MatchesService matchesService;
 
-    @ModelAttribute
-	public void addAttributes(Model model, HttpServletRequest request) {
-
-		Principal principal = request.getUserPrincipal();
-
-		if (principal != null) {
-
-			model.addAttribute("logged", true);
-			model.addAttribute("userName", principal.getName());
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-
-		} else {
-			model.addAttribute("logged", false);
-		}
-	}
 
     @GetMapping(value="/login")
     public String login(Model model) {
@@ -90,12 +67,13 @@ public class UsersController {
         return "bussinessSignUp";
     }
 
-    @RequestMapping(value="/signUpPlayer", method=RequestMethod.GET)
+
+    @PostMapping(value="/signUpPlayer")
     public String signUpUser(Player loggedPlayer,Model model) {
         if(!playerService.savePlayer(loggedPlayer))
             return "404";
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
@@ -103,24 +81,22 @@ public class UsersController {
         return "userProfile";
     }
 
-    @RequestMapping(value="/loginUser", method=RequestMethod.GET)
+    @RequestMapping(value="/loginUser", method=RequestMethod.POST)
     public String logInUser(String email, String password,Model model) {
         if(email.equals("administradorSistema")&&password.equals("password"))//Comprobar si es el admin
             return "404";//Usuario administrador Logeado
         Player loggedPlayer= playerService.getPlayer(email);
         if(loggedPlayer == null){
             Bussiness loggedBussiness = bussinessService.getBussiness(email);
-            if(loggedBussiness != null){
-                
+            if(loggedBussiness != null){   
             }
-            //Mirar como pasar mensaje de que el correo no existe
             return "login";
         }
         if(!loggedPlayer.getPassword().equals(password))
             //Pasar mensaje de contraseña incorrecta
             return "login";
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
@@ -132,7 +108,7 @@ public class UsersController {
     public String playerProfile(Model model,@PathVariable long id) {
         Player loggedPlayer = playerService.findById(id);
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
@@ -151,7 +127,7 @@ public class UsersController {
         }
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -167,7 +143,7 @@ public class UsersController {
         loggedUser.setHasImage(true);
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -216,7 +192,7 @@ public class UsersController {
         playerService.updatePlayer(winner2);
 
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());

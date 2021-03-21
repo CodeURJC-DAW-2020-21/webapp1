@@ -3,6 +3,7 @@ package es.codeurjc.friends_padel_tour.Entities;
 import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -55,9 +56,20 @@ public class Player{
     @JsonIgnore
     private Blob image;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
     private int score;
     
     public Player(){}
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<PadelMatch> getPendingMatches() {
         return pendingMatches;
@@ -83,13 +95,6 @@ public class Player{
         this.score = score;
     }
 
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
 
     public boolean isHasImage() {
         return hasImage;
