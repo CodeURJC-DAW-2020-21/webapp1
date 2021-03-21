@@ -161,9 +161,11 @@ public class UsersController {
         model.addAttribute("acceptedTournaments",tournamentsService.getAccepted(loggedBussiness));
         model.addAttribute("nonAcceptedTournaments",tournamentsService.getNotAccepted(loggedBussiness));
         model.addAttribute("finished",tournamentsService.getNotAccepted(loggedBussiness));
+        model.addAttribute("bussinessId", loggedBussiness.getId());
+        model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
         return "bussinessProfile";
     }
-    
+
     @RequestMapping(value="/editProfile/{id}", method=RequestMethod.GET)
     public String editProfile(@PathVariable long id, String password, int division,Model model) {
         Player loggedUser = playerService.findById(id);
@@ -247,7 +249,30 @@ public class UsersController {
         return "userProfile";
     }
     
-
+    @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
+    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, String s1_0, String s1_1, String s1_2, String s1_3, String s1_4, String s1_5, String s1_6,String s2_0, String s2_1, String s2_2, String s2_3, String s2_4, String s2_5, String s2_6) {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
+        loggedBussiness.setSchedule(schedule);
+        if(!password.isBlank()){
+            loggedBussiness.setPassword(password);
+        }
+        bussinessService.updateBussiness(loggedBussiness);
+        model.addAttribute("loggedUser", loggedBussiness);
+        
+        return "succesEdit";
+    }
+    @PostMapping(value="/updateBussiness/{id}/image")
+    public String updateBussinessImage(@PathVariable long id, @RequestParam MultipartFile profilePicture,Model model) throws IOException {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        Boolean notMyProfile = false;
+        loggedBussiness.setImage(BlobProxy.generateProxy(
+            profilePicture.getInputStream(), profilePicture.getSize()));
+        loggedBussiness.setHasImage(true);
+        bussinessService.updateBussiness(loggedBussiness);
+        model.addAttribute("UserExtern", notMyProfile);
+        return "succesEdit";
+    }
     
     }
 

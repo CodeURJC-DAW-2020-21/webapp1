@@ -20,6 +20,7 @@ public class Bussiness{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String password;
     private String username;
     private String bussinessName;
     private String ownerName;
@@ -31,14 +32,30 @@ public class Bussiness{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     private List<Tournament> tournaments;
-    private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};; 
-
+    private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};
+    private boolean hasImage = false;
     @Lob
     @JsonIgnore
     private Blob image;
 
     public Bussiness(){
         
+    }
+
+    public boolean isHasImage() {
+        return hasImage;
+    }
+
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getCreatedTournaments() {

@@ -21,6 +21,9 @@ public class BussinessService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    public void updateBussiness(Bussiness bussiness) {
+        bussinessRepository.save(bussiness);
+    }
     public boolean saveBussiness(String bussinessName, String userName, String userSurname, String email, String password, String location, String adress){
         
         Optional<Player> playerInDB = playerRepository.findByEmail(email);
