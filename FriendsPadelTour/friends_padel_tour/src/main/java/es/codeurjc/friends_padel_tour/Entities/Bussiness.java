@@ -25,24 +25,45 @@ public class Bussiness{
     private String location;
     private String email;
     private String adress;
+    private int createdTournaments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     private List<Tournament> tournaments;
+    private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};; 
 
     @Lob
     @JsonIgnore
     private Blob image;
 
-    public Bussiness(){}
+    public Bussiness(){
+        
+    }
 
-    public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2,
-            String adress2) {
+    public int getCreatedTournaments() {
+        return createdTournaments;
+    }
+
+    public void setCreatedTournaments(int createdTournaments) {
+        this.createdTournaments = createdTournaments;
+    }
+
+    public String[][] getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String[][] schedule) {
+        this.schedule = schedule;
+    }
+
+    public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2, String adress2) {
                 bussinessName = name2;
                 userName = userName2;
                 userSurname = userSurname2;
                 email = email2;
                 location = location2;
                 adress = adress2;
+                createdTournaments = 0;
+                
     }
 
     public String getUserName() {
@@ -106,6 +127,18 @@ public class Bussiness{
     }
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Bussiness(long id, String userName, String bussinessName, String userSurname, String location, String email,
+            String adress, Blob image) {
+        this.id = id;
+        this.userName = userName;
+        this.bussinessName = bussinessName;
+        this.userSurname = userSurname;
+        this.location = location;
+        this.email = email;
+        this.adress = adress;
+        this.image = image;
     }
     
 }

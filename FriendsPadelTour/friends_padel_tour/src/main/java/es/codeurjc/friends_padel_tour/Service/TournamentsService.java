@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
@@ -37,16 +39,17 @@ public class TournamentsService {
         tournamentRepository.save(tournament);    
     }
 
-    public List<Tournament> getAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true);
+    public Page<Tournament> getAccepted(Bussiness bussiness, Pageable pageable){
+        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true, pageable);
+
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
         else return null;
     }
 
-    public List<Tournament> getNotAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false);
+    public Page<Tournament> getNotAccepted(Bussiness bussiness, Pageable pageable){
+        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false, pageable);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
@@ -54,10 +57,10 @@ public class TournamentsService {
     }
 
     public void setFirstWinnngCouple(DoubleOfPlayers couple, Long id){
-        tournamentRepository.setFirstWinningCouple(couple.getPlayer1().getName() +" " +couple.getPlayer2().getName(), id);
+        tournamentRepository.setFirstWinningCouple(couple, id);
     }
 
     public void setSecondWinnngCouple(DoubleOfPlayers couple, Long id){
-        tournamentRepository.setSecondWinningCouple(couple.getPlayer1().getName() +" " + couple.getPlayer2().getName(), id);
+        tournamentRepository.setSecondWinningCouple(couple, id);
     }
 }

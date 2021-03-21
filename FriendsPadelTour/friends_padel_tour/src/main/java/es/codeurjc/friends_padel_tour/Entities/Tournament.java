@@ -5,12 +5,15 @@ package es.codeurjc.friends_padel_tour.Entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 @Entity
@@ -31,9 +34,12 @@ public class Tournament {
     private int minCouples;
     private int maxCouples;
     private int registeredCouples;
+    private boolean finished;
     
-    private String firstWinnngCouple;
-    private String secondWinningCouple;
+    @OneToOne
+    private DoubleOfPlayers firstWinnngCouple;
+    @OneToOne
+    private DoubleOfPlayers secondWinningCouple;
     private boolean accepted;
 
     @ManyToMany
@@ -50,6 +56,18 @@ public class Tournament {
 
     
 
+    public boolean isFinished() {
+        return finished;
+    }
+
+
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+
+
     public boolean isAccepted() {
         return accepted;
     }
@@ -62,7 +80,7 @@ public class Tournament {
 
 
 
-    public String getSecondWinningCouple() {
+    public DoubleOfPlayers getSecondWinningCouple() {
         return secondWinningCouple;
     }
 
@@ -72,19 +90,19 @@ public class Tournament {
 
 
 
-    public void setSecondWinningCouple(String secondWinningCouple) {
+    public void setSecondWinningCouple(DoubleOfPlayers secondWinningCouple) {
         this.secondWinningCouple = secondWinningCouple;
     }
 
 
 
-    public String getFirstWinnngCouple() {
+    public DoubleOfPlayers getFirstWinnngCouple() {
         return firstWinnngCouple;
     }
 
 
 
-    public void setFirstWinnngCouple(String firstWinnngCouple) {
+    public void setFirstWinnngCouple(DoubleOfPlayers firstWinnngCouple) {
         this.firstWinnngCouple = firstWinnngCouple;
     }
 
@@ -216,6 +234,25 @@ public class Tournament {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+
+
+    public Tournament(long id, Bussiness bussiness, String name, String tournamentStartDate,
+            String tournamentFinishDate, String inscriptionStartDate, String inscriptionFinishDate, int minCouples,
+            int maxCouples) {
+        this.id = id;
+        this.bussiness = bussiness;
+        this.name = name;
+        this.tournamentStartDate = tournamentStartDate;
+        this.tournamentFinishDate = tournamentFinishDate;
+        this.inscriptionStartDate = inscriptionStartDate;
+        this.inscriptionFinishDate = inscriptionFinishDate;
+        this.minCouples = minCouples;
+        this.maxCouples = maxCouples;
+        this.accepted = false;
+        this.registeredCouples = 0;
+        this.finished = false;
     }
 
 
