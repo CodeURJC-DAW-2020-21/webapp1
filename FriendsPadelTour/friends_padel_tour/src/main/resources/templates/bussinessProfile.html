@@ -14,36 +14,24 @@
                   </div> -->
                 </div>
                     <div class="info-couple col-md-12">
-                      <p><h2>PADEL ARROYOMOLINOS</h2> <br> FUNDACIÓN: XX/XX/XXXX <br> Localizacion: C/ Alberto Sacristán Pol. Ind. 13 Leganés </p>
+                      <p><h2>{{bussinessName}}</h2> Localizacion: {{adress}} </p>
                       <div class="timetable">
                         <H3>Horario apertura</H3>
                         <table class="table">
                             <tr>
-                              <th class="time-table-th">L</th>
-                              <th class="time-table-th">M</th>
-                              <th class="time-table-th">X</th>
-                              <th class="time-table-th">J</th>
-                              <th class="time-table-th">V</th>
-                              <th class="time-table-th">S</th>
-                              <th class="time-table-th">D</th>
+                              {{#scheduleHeader}}
+                                <th class="time-table-th">{{.}}</th>
+                              {{/scheduleHeader}}
                             </tr>
                             <tr>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
-                              <td>8:00-14:00</td>
+                              {{#scheduleMorning}}
+                                <td>{{.}}</td>
+                              {{/scheduleMorning}}
                             </tr>
                             <tr>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
-                              <td>16:00-22:00</td>
+                              {{#scheduleAfternoon}}
+                                <td>{{.}}</td>
+                              {{/scheduleAfternoon}}  
                             </tr>
                             
                           </table>
@@ -57,97 +45,72 @@
     </div>
 
 
-    <div class="l-grid"> 
-      <div class="c-ranking-header c-ranking-header--no-image c-ranking-header--table"> 
-        <div class="l-container l-container--data"> 
-          <div class="c-ranking-header__data-box-company"> 
-            <p class="c-ranking-header__data-title">TORNEOS ORGANIZADOS</p>
-            <p class="c-ranking-header__data">100</p> 
-          </div> 
-          <div class="c-ranking-header__data-box-company"> 
-            <p class="c-ranking-header__data-title">MEJORES JUGADORES</p> 
-            <p class="c-ranking-header__data"></p> 
-            <div>
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-            </div>
-          </div> 
-        </div> 
-      </div>
-    </div>
-
 
 
 
     
     <div class="recent-matches">
-      <h1>TORNEOS RECIENTES</h1>
+      <h1>TORNEOS ACCEPTADOS</h1>
     </div>
+
     <div class="row">
         <div class="col-lg-12 tournaments">
-          <div class="row bg-white align-items-center match-entry tournament-company">
-    
-            <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
-            <div >
-              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
+          {{#acceptedTournament}}
+            <div class="row bg-white align-items-center match-entry tournament-company">
+      
+              <div class="tournament_definition" id="tournament_name"><p>{{acceptedTournament.name}}</p></div>
+              <div >
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {acceptedTournament.inscriptionStartDate}} - {{acceptedTournament.inscriptionFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{acceptedTournament.tournamentStartDate}} - {{acceptedTournament.tournamentFinnishDate}}</p></div>
+              </div>
+              <div >
+                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{acceptedTournament.category}}</p></div>
+                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{acceptedTournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{acceptedTournament.secondPrize}}</p></div>
+              </div>
+              <button class="tournament_definition" href=/delete/tournament/{{acceptedTournament.id}} id="tournament_button"><span>ELIMINAR TORNEO</span></button>
+              {{#acceptedTournament.finished}}
+                <button class="tournament_definition" id="tournament_button"><span>ELEGIR GANADORES</span></button>
+              {{/acceptedTournament.finished}}
+              {{^acceptedTournament.finished}}
+                <button class="tournament_definition" id="tournament_button"><span>TORNEO FINALIZADO</span></button>
+              {{/acceptedTournament.finished}}
             </div>
-            <div >
-              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> ORO</p></div>
-              <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
-            </div>
-            
-            <button class="tournament_definition" id="tournament_button"><span>VER RESULTADO</span></button>
-            <div>
-                <p>GANADORES</p>
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-            </div>
-          </div>
-
+          {{/acceptedTournament}}
+          {{#hasPrev}}
+            <a href="/?page={{prevPage}}">Anterior</a>
+          {{/hasPrev}}
+          {{#hasNext}}
+          <a href="/?page={{nextPage}}">Siguiente</a>
+          {{/hasNext}}
+          {{^acceptedTournament}}
+            <p>No tienes torneos acceptados.</p>
+          {{/acceptedTournament}}
           
-          <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-company">
-    
-            <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
-            <div >
-              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
-            </div>
-            <div >
-              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> ORO</p></div>
-              <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
-            </div>
-            
-            <button class="tournament_definition" id="tournament_button"><span>VER RESULTADO</span></button>
-            <div>
-                <p>GANADORES</p>
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-            </div>
+          
+          <div class="recent-matches">
+            <h1>TORNEOS PENDIENTES</h1>
           </div>
 
+          {{#nonAcceptedTournament}}
+            <div class="row bg-white align-items-center match-entry tournament-company">
+      
+              <div class="tournament_definition" id="tournament_name"><p>{{nonAcceptedTournament.name}}</p></div>
+              <div >
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{nonAcceptedTournament.inscriptionStartDate}} - {{nonAcceptedTournament.inscriptionFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{nonAcceptedTournament.tournamentStartDate}} - {{nonAcceptedTournament.tournamentFinnishDate}}</p></div>
+              </div>
+              <div >
+                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{nonAcceptedTournament.category}}</p></div>
+                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{nonAcceptedTournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{nonAcceptedTournament.secondPrize}}</p></div>
+              </div>
+              <button class="tournament_definition" href=/delete/tournament/{{nonAcceptedTournament.id}} id="tournament_button"><span>ELIMINAR TORNEO</span></button>
+            </div>
+          {{/nonAcceptedTournament}}
 
-          <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-company">
-    
-            <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
-            <div >
-              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
-            </div>
-            <div >
-              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> ORO</p></div>
-              <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
-            </div>
-            
-            <button class="tournament_definition" id="tournament_button"><span>VER RESULTADO</span></button>
-            <div>
-                <p>GANADORES</p>
-                <img class="image-players" src="images/usuariopareja.jpg">
-                <img class="image-players" src="images/usuariopareja.jpg">
-            </div>
-          </div>
+          {{^nonAcceptedTournament}}
+              <p>No tienes torneos pendientes de aceptación.</p>
+          {{/nonAcceptedTournament}}
+          
 
 
           <div class="container">
@@ -155,6 +118,7 @@
               <br>
               <h1>Edita tus datos</h1>
             </div>
+            <form action="/editBussinessProfile/{{bussinessId}}" method="GET">
             <div class="row">
               <div class="col-md-3"></div>
               <div class="col-md-6 bg-white">
@@ -162,42 +126,35 @@
                   <h3>Contraseña:</h3>
                   <input type="text" class="form-control" id="pwd" placeholder="Contraseña del usuario">
                 </div>
-                <h3>Imagen de perfil:</h3>
-                <input type="file" name="profilePicture">
+                
                 <h3>Horario apertura</h3>
                 <table class="table">
                     <tr>
-                      <th class="time-table-th">L</th>
-                      <th class="time-table-th">M</th>
-                      <th class="time-table-th">X</th>
-                      <th class="time-table-th">J</th>
-                      <th class="time-table-th">V</th>
-                      <th class="time-table-th">S</th>
-                      <th class="time-table-th">D</th>
+                      {{#scheduleHeader}}
+                        <th class="time-table-th">{{.}}</th>
+                      {{/scheduleHeader}}
                     </tr>
                     <tr>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
+                      {{#scheduleMorning}}
+                        <td><input type="text" name=s1_{{-index}} placeholder={{.}}></td>
+                      {{/scheduleMorning}}
                     </tr>
                     <tr>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
-                      <td><input type="text" placeholder="8:00-14:00"></td>
+                      {{#scheduleAfternoon}}
+                        <td><input type="text" name=s2_{{-index}} placeholder={{.}}></td>
+                      {{/scheduleAfternoon}}
                     </tr>
                   </table>
                 <button type="submit" class="btn btn-default">Aceptar</button>
               </div>
               <div class="col-md-3"></div>
             </div>
+          </form>
+          <form action="/updateBussiness/{{bussinessId}}/image" method="POST" enctype="multipart/form-data">
+            <h3>Imagen de perfil:</h3>
+            <input type="file" name="profilePicture" accept=".jpg, .jpeg">
+            <input type="submit" class="btn btn-default" value="Cambiar imagen">
+          </form>
           </div>      
 
 

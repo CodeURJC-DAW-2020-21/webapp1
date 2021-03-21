@@ -20,6 +20,7 @@ public class Bussiness{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private String password;
     private String username;
     private String bussinessName;
     private String ownerName;
@@ -27,18 +28,55 @@ public class Bussiness{
     private String location;
     private String email;
     private String adress;
+    private int createdTournaments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     private List<Tournament> tournaments;
-
+    private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};
+    private boolean hasImage = false;
     @Lob
     @JsonIgnore
     private Blob image;
 
+    public Bussiness(){
+        
+    }
+
+    public boolean isHasImage() {
+        return hasImage;
+    }
+
+    public void setHasImage(boolean hasImage) {
+        this.hasImage = hasImage;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getCreatedTournaments() {
+        return createdTournaments;
+    }
+
+    public void setCreatedTournaments(int createdTournaments) {
+        this.createdTournaments = createdTournaments;
+    }
+
+    public String[][] getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(String[][] schedule) {
+        this.schedule = schedule;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    public Bussiness(){}
 
     public String getUsername() {
         return username;
@@ -64,6 +102,8 @@ public class Bussiness{
                 email = email2;
                 location = location2;
                 adress = adress2;
+                createdTournaments = 0;
+                
                 this.user = user;
     }
 
@@ -115,6 +155,16 @@ public class Bussiness{
     }
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Bussiness(long id, String userName, String bussinessName, String userSurname, String location, String email,
+            String adress, Blob image) {
+        this.id = id;
+        this.bussinessName = bussinessName;
+        this.location = location;
+        this.email = email;
+        this.adress = adress;
+        this.image = image;
     }
     
 }

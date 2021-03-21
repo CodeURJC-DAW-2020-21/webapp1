@@ -15,6 +15,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,10 +29,13 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Service.TournamentsService;
+import net.bytebuddy.asm.Advice.Return;
 
 
 
@@ -49,6 +53,8 @@ public class UsersController {
     private DoubleService doubleService;
     @Autowired
     private MatchesService matchesService;
+    @Autowired
+    private TournamentsService tournamentsService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -93,7 +99,7 @@ public class UsersController {
         return "userSignUp";
     }
 
-    @GetMapping(value="/bussinessSignUpForm")
+    @GetMapping(value="/bussinesSignUpForm")
     public String bussinessSignUp(Model model) {
         return "bussinessSignUp";
     }
@@ -147,6 +153,23 @@ public class UsersController {
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
         return "userProfile";
+    }
+
+    @GetMapping(value="/bussinessProfile/{{id}}")
+    public String bussinessProfile(Model model,@PathVariable Long id) {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        TournamentsService tournamentsService = new TournamentsService();
+        model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
+        model.addAttribute("adress", loggedBussiness.getAdress());
+        model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
+        model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
+        model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
+        model.addAttribute("acceptedTournaments",tournamentsService.getAccepted(loggedBussiness));
+        model.addAttribute("nonAcceptedTournaments",tournamentsService.getNotAccepted(loggedBussiness));
+        model.addAttribute("finished",tournamentsService.getNotAccepted(loggedBussiness));
+        model.addAttribute("bussinessId", loggedBussiness.getId());
+        model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
+        return "bussinessProfile";
     }
 
     @RequestMapping(value="/editProfile/{id}", method=RequestMethod.GET)
@@ -229,8 +252,37 @@ public class UsersController {
     }
 
     
-
-}
+    @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
+    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, String s1_0, String s1_1, String s1_2, String s1_3, String s1_4, String s1_5, String s1_6,String s2_0, String s2_1, String s2_2, String s2_3, String s2_4, String s2_5, String s2_6) {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
+        loggedBussiness.setSchedule(schedule);
+        if(!password.isBlank()){
+            loggedBussiness.setPassword(password);
+        }
+        bussinessService.updateBussiness(loggedBussiness);
+        model.addAttribute("loggedUser", loggedBussiness);
+        
+        return "succesEdit";
+    }
+    @PostMapping(value="/updateBussiness/{id}/image")
+    public String updateBussinessImage(@PathVariable long id, @RequestParam MultipartFile profilePicture,Model model) throws IOException {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        Boolean notMyProfile = false;
+        loggedBussiness.setImage(BlobProxy.generateProxy(
+            profilePicture.getInputStream(), profilePicture.getSize()));
+        loggedBussiness.setHasImage(true);
+        bussinessService.updateBussiness(loggedBussiness);
+        model.addAttribute("UserExtern", notMyProfile);
+        return "succesEdit";
+    }
+    
+    @DeleteMapping("/delete/tournament/{id}")
+    public String deleteTournament(@PathVariable Long id){
+        tournamentsService.deleteById(id);
+        return "successTournamentDelete";
+    }
+    }
 
     
     

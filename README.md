@@ -118,6 +118,6 @@ In this screen the admin user can see all the tournament requests and accept all
 ## Entity–relationship DATABASE model
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaBD.jpeg?raw=true "DataBase Diagram")
 ## Class and template diagram
-
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaClases.png?raw=true "Class and Template Diagram")
 
 

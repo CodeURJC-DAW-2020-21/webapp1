@@ -37,6 +37,9 @@ public class DoubleOfPlayers {
     public Player getPlayer1() {
         return player1;
     }
+public long getId(){
+    return id;
+}
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;

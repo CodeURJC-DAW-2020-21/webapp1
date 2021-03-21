@@ -21,7 +21,11 @@ public class BussinessService {
     @Autowired
     private PlayerRepository playerRepository;
 
+    public void updateBussiness(Bussiness bussiness) {
+        bussinessRepository.save(bussiness);
+    }
     public boolean saveBussiness(String bussinessName, String userName, String userSurname, String email, String password, String location, String adress){
+        
         Optional<Player> playerInDB = playerRepository.findByEmail(email);
         Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
         if(playerInDB.isPresent()) 
@@ -36,7 +40,11 @@ public class BussinessService {
         bussinessRepository.save(newBussiness);
         return true;
     }
-
+    public Bussiness findById(long id) {
+        Optional<Bussiness> BussinessInDB = bussinessRepository.findById(id);
+        if(BussinessInDB.isPresent()) return BussinessInDB.get();
+        else return null;
+    }
     public Bussiness getBussiness(String email) {
         Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
         if(bussinessInDB.isPresent()) return bussinessInDB.get();
