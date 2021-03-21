@@ -13,5 +13,7 @@ public interface BussinessRepository extends JpaRepository<Bussiness,Long>{
     Optional<Bussiness> findById(Long id);
 
     Optional<Bussiness> findByBussinessName(String bussinessName);
+
+    Optional<Bussiness> findByUsername(String name);
 }
 

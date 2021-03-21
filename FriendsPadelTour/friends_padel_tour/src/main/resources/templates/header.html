@@ -81,17 +81,18 @@
               
                 
                 
-              {{#loggedUser}}
+              {{#logged}}
                 {{#user}}
-              <li><a href="/userProfile.html">Tu perfil</a></li>
+                  <li><a href="/users/{{userId}}">Tu perfil</a></li>
                 {{/user}}
-              {{/loggedUser}}
-              {{^loggedUser}}
                 {{#bussiness}}
-              <li><a href="/bussinessProfile.html">Tu perfil</a></li>
+                  <li><a href="/bussinessProfile.html">Tu perfil</a></li>
                 {{/bussiness}}
-              {{/loggedUser}}
-              <li><a href="/login">Iniciar sesión</a></li>
+              {{/logged}}
+              {{^logged}}
+                <li><a href="/login">Iniciar sesión</a></li>
+              {{/logged}}
+              
 
             </ul>
           </div>

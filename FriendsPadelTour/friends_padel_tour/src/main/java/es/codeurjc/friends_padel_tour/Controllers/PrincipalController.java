@@ -16,12 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
-import es.codeurjc.friends_padel_tour.Entities.User;
-import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
-import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
-
-import es.codeurjc.friends_padel_tour.Entities.User;
 
 
 
@@ -32,6 +28,8 @@ public class PrincipalController {
 
     @Autowired
     private PlayersService playerService;
+    @Autowired
+    private BussinessService bussinessService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -42,7 +40,17 @@ public class PrincipalController {
 
 			model.addAttribute("logged", true);
 			model.addAttribute("userName", principal.getName());
+            if(request.isUserInRole("USER")){
+                model.addAttribute("user", request.isUserInRole("USER"));
+                model.addAttribute("userId", playerService.findByUsername(principal.getName()).getId());
+            }
+            if(request.isUserInRole("BUSSINESS")){
+                model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
+                model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
+            }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            
+            
 
 		} else {
 			model.addAttribute("logged", false);
