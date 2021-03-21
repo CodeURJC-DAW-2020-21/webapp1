@@ -52,14 +52,31 @@ public class MatchController {
     @GetMapping(value="/team/{num}")
     public String friendlyMatchDivision(Model model, @PathVariable int num) {
          List<PadelMatch> matches = matchesService.findByDivision(num);
+         List<Player> top10 = playerService.findTOP10(num);
+         Player myplayer = playerService.findByUsername("username");
         model.addAttribute("matches", matches);
         switch (num) {
-            case 1: return "team";
-            case 2: return "team2";
-            case 3: return "team3";
-            case 4: return "team4";
-            case 5: return "team5";
-            case 6: return "team6";
+            case 1: 
+            model.addAttribute("top10players", top10);
+            model.addAttribute("player", myplayer);
+            return "team";
+
+            case 2:
+            //model.addAttribute("top10players", top10);
+             return "team2";
+            case 3:
+            //model.addAttribute("top10players", top10);
+             return "team3";
+            case 4: 
+            //model.addAttribute("top10players", top10);
+            return "team4";
+            case 5: 
+            //model.addAttribute("top10players", top10);
+            return "team5";
+            case 6: 
+            //model.addAttribute("top10players", top10);
+            return "team6";
+
             default: return "team";
         }
     }
@@ -73,8 +90,10 @@ public class MatchController {
     public String createFriendlyMatch(@PathVariable int num,@RequestParam String fmProvince,@RequestParam String fmcity,@RequestParam String fmfacility,@RequestParam String fmdate,@RequestParam String fmtime, Model model) {
         Player creator = playerService.findByUsername((String) model.getAttribute("userName"));
         PadelMatch newMatch = new PadelMatch(fmProvince,fmcity,fmfacility,fmdate,fmtime,num,creator);
+        creator.getCreatedMatches().add(newMatch);
         matchesService.save(newMatch);
-        return "succesfullMatchCreation";
+        playerService.updatePlayer(creator);
+        return "succesMatchCreation";
     }
 
     @GetMapping(value="/joinFriendlyMatch/{id}")
@@ -91,11 +110,11 @@ public class MatchController {
             if(matchToJoin.getDouble1().getPlayer1()==null){
                 model.addAttribute("player1Joined", false);
                 model.addAttribute("player2Joined", true);
-                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUserName());
+                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUsername());
             }else{
                 model.addAttribute("player2Joined", false);
                 model.addAttribute("player1Joined", true);
-                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUserName());                
+                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUsername());                
             }
         }
 
@@ -108,14 +127,14 @@ public class MatchController {
             if(matchToJoin.getDouble2().getPlayer1()==null){
                 model.addAttribute("player3Joined", false);
                 model.addAttribute("player4Joined", true);
-                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUserName());
+                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
             }else{
                 model.addAttribute("player4Joined", false);
                 model.addAttribute("player3Joined", true);
-                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUserName());                
+                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUsername());                
             }
         }
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         return "joiningMatch";
     }
@@ -144,8 +163,13 @@ public class MatchController {
         if(slot==4){
             matchToJoin.getDouble2().setPlayer2(loggedPlayer);
         }
+        loggedPlayer.getPendingMatches().add(matchToJoin);
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
-        return "joiningSuccesfull";
+
+        playerService.updatePlayer(loggedPlayer);
+        matchesService.save(matchToJoin);
+
+        return "joiningSucces";
     }
 
     

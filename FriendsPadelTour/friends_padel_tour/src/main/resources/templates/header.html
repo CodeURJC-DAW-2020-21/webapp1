@@ -76,14 +76,23 @@
                 </ul>
               </li>
               <li><a href="/tournaments">Torneos</a></li>
-              <li><a href="/aboutUs">Conócenos</a></li>
+              <li><a href="/AboutUs">Conócenos</a></li>
               
-              {{#logged}}
-              <li><a href="/userProfile">Tu perfil</a></li>
-              {{/logged}}
-              {{^logged}}
-              <li><a href="/login">Tu perfil</a></li>
-              {{/logged}}
+              
+                
+                
+              {{#loggedUser}}
+                {{#user}}
+              <li><a href="/userProfile.html">Tu perfil</a></li>
+                {{/user}}
+              {{/loggedUser}}
+              {{^loggedUser}}
+                {{#bussiness}}
+              <li><a href="/bussinessProfile.html">Tu perfil</a></li>
+                {{/bussiness}}
+              {{/loggedUser}}
+              <li><a href="/login">Iniciar sesión</a></li>
+
             </ul>
           </div>
         </nav>

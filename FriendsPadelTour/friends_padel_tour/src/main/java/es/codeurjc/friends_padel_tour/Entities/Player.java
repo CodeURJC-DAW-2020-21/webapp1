@@ -3,6 +3,7 @@ package es.codeurjc.friends_padel_tour.Entities;
 import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,12 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
 @Entity
 public class Player{
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -29,6 +32,7 @@ public class Player{
     private int division;
     private boolean hasImage;
 
+
     private int mathcesWon;
     private int matchesLost;
     private int mathesPlayed;
@@ -41,21 +45,57 @@ public class Player{
 
     @OneToMany(mappedBy = "playerCreator")
     private List<PadelMatch> createdMatches;
+
+    @ManyToMany
+    private List<PadelMatch> playedMatches;
+
+    @ManyToMany
+    private List<PadelMatch> pendingMatches;
     
 
     @Lob
     @JsonIgnore
     private Blob image;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    private int score;
     
     public Player(){}
 
-    public String getUserName() {
-        return username;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.username = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+    public List<PadelMatch> getPendingMatches() {
+        return pendingMatches;
+    }
+
+    public void setPendingMatches(List<PadelMatch> pendingMatches) {
+        this.pendingMatches = pendingMatches;
+    }
+
+    public List<PadelMatch> getPlayedMatches() {
+        return playedMatches;
+    }
+
+    public void setPlayedMatches(List<PadelMatch> playedMatches) {
+        this.playedMatches = playedMatches;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
 
     public boolean isHasImage() {
         return hasImage;
@@ -105,7 +145,8 @@ public class Player{
         this.password = password;
     }
 
-    public Player(String name, String surname, String email, String password, String location, int division){
+    public Player(String username, String name, String surname, String email, String password, String location, int division){
+        this.username = username;
         this.name= name;
         this.surname = surname;
         this.email = email;
@@ -114,6 +155,7 @@ public class Player{
         this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
         this.hasImage = false;
+        this.setScore(0);
     }
 
     public String getSurname() {

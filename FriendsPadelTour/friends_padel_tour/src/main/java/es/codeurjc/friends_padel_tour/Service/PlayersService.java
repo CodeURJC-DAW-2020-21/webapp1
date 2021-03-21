@@ -1,19 +1,22 @@
 package es.codeurjc.friends_padel_tour.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 
 @Service
 public class PlayersService {
-
+    
+    @Autowired
+    private UserService userService;
     @Autowired
     private PlayerRepository playerRepository;
     @Autowired
@@ -26,15 +29,13 @@ public class PlayersService {
             return false;
         if(bussinessInDB.isPresent())
             return false;
-        playerInDB = playerRepository.findByUsername(newPlayer.getName());
+        playerInDB = playerRepository.findByUsername(newPlayer.getUsername());
         if(playerInDB.isPresent()) 
             return false;
+        User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword());
+        newPlayer.setUser(newUser);
         playerRepository.save(newPlayer);
         return true;
-    }
-
-    public boolean uploadImage(Player player,MultipartFile imageFile){
-        return false;
     }
 
     public Player getPlayer(String email) {
@@ -56,6 +57,14 @@ public class PlayersService {
         return null;
     }
 
+    public void updatePlayer(Player player) {
+        playerRepository.save(player);
+    }
 
+    public List<Player> findTOP10(int division){
+        Optional<List<Player>> top10players = playerRepository.findTop10(division);
+        if(top10players.isPresent()) return top10players.get();
+        return null;  
+    }
         
 }
