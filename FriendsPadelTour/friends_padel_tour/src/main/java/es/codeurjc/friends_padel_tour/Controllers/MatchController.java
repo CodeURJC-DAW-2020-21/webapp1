@@ -110,11 +110,11 @@ public class MatchController {
             if(matchToJoin.getDouble1().getPlayer1()==null){
                 model.addAttribute("player1Joined", false);
                 model.addAttribute("player2Joined", true);
-                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUserName());
+                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUsername());
             }else{
                 model.addAttribute("player2Joined", false);
                 model.addAttribute("player1Joined", true);
-                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUserName());                
+                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUsername());                
             }
         }
 
@@ -127,14 +127,14 @@ public class MatchController {
             if(matchToJoin.getDouble2().getPlayer1()==null){
                 model.addAttribute("player3Joined", false);
                 model.addAttribute("player4Joined", true);
-                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUserName());
+                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
             }else{
                 model.addAttribute("player4Joined", false);
                 model.addAttribute("player3Joined", true);
-                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUserName());                
+                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUsername());                
             }
         }
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUserName());
+        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         return "joiningMatch";
     }

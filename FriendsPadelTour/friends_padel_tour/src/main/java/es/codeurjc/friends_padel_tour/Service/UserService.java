@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.User;
@@ -17,7 +18,9 @@ import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
 
 
 @Service
-public class RepositoryUserDetailsService implements UserDetailsService {
+public class UserService implements UserDetailsService {
+	@Autowired
+	private PasswordEncoder passwordEnconder;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -37,4 +40,11 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 				user.getEncodedPassword(), roles);
 
 	}
+
+	public User saveUser(String username, String password) {
+		User newUser =  new User(username,passwordEnconder.encode(password),"USER");
+		userRepository.save(newUser);
+		return newUser;
+	}
+
 }
