@@ -58,27 +58,21 @@
           {{#acceptedTournament}}
             <div class="row bg-white align-items-center match-entry tournament-company">
       
-              <div class="tournament_definition" id="tournament_name"><p>{{tournament.name}}</p></div>
+              <div class="tournament_definition" id="tournament_name"><p>{{acceptedTournament.name}}</p></div>
               <div >
-                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{tournament.inscriptionStartDate}} - {{tournament.inscriptionFinnishDate}}</p></div>
-                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{tournament.tournamentStartDate}} - {{tournament.tournamentFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {acceptedTournament.inscriptionStartDate}} - {{acceptedTournament.inscriptionFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{acceptedTournament.tournamentStartDate}} - {{acceptedTournament.tournamentFinnishDate}}</p></div>
               </div>
               <div >
-                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{tournament.category}}</p></div>
-                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{tournament.secondPrize}}</p></div>
+                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{acceptedTournament.category}}</p></div>
+                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{acceptedTournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{acceptedTournament.secondPrize}}</p></div>
               </div>
-              {{#finished}}
+              {{#acceptedTournament.finished}}
                 <button class="tournament_definition" id="tournament_button"><span>ELEGIR GANADORES</span></button>
-              {{/finished}}
-              {{^finished}}
+              {{/acceptedTournament.finished}}
+              {{^acceptedTournament.finished}}
                 <button class="tournament_definition" id="tournament_button"><span>TORNEO FINALIZADO</span></button>
-                <div>
-
-                    <p>GANADORES</p>
-                    <img class="image-players" src="images/usuariopareja.jpg">
-                    <img class="image-players" src="images/usuariopareja.jpg">
-                </div>
-              {{/finished}}
+              {{/acceptedTournament.finished}}
             </div>
           {{/acceptedTournament}}
           {{#hasPrev}}
@@ -99,14 +93,14 @@
           {{#nonAcceptedTournament}}
             <div class="row bg-white align-items-center match-entry tournament-company">
       
-              <div class="tournament_definition" id="tournament_name"><p>{{tournament.name}}</p></div>
+              <div class="tournament_definition" id="tournament_name"><p>{{nonAcceptedTournament.name}}</p></div>
               <div >
-                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{tournament.inscriptionStartDate}} - {{tournament.inscriptionFinnishDate}}</p></div>
-                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{tournament.tournamentStartDate}} - {{tournament.tournamentFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{nonAcceptedTournament.inscriptionStartDate}} - {{nonAcceptedTournament.inscriptionFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{nonAcceptedTournament.tournamentStartDate}} - {{nonAcceptedTournament.tournamentFinnishDate}}</p></div>
               </div>
               <div >
-                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{tournament.category}}</p></div>
-                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{tournament.secondPrize}}</p></div>
+                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png">{{nonAcceptedTournament.category}}</p></div>
+                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{nonAcceptedTournament.firstPrize}} <img class="tournament_icon" src="images/plata.png"> {{nonAcceptedTournament.secondPrize}}</p></div>
               </div>
               
             </div>

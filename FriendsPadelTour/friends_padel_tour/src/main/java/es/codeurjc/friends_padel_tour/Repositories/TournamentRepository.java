@@ -3,8 +3,6 @@ package es.codeurjc.friends_padel_tour.Repositories;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +20,6 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     @Query("update Tournament t set t.secondWinningCouple = ?1 where t.id = ?2")
     int setSecondWinningCouple(DoubleOfPlayers couple, Long id);
 
-    Optional<Page<Tournament>> findByIdAndAccepted(Long id, boolean accepted, Pageable page);
+    Optional<List<Tournament>> findByIdAndAccepted(Long id, boolean accepted);
 
 }

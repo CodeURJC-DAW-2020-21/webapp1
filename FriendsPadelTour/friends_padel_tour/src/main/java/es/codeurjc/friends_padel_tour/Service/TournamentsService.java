@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
@@ -39,17 +37,16 @@ public class TournamentsService {
         tournamentRepository.save(tournament);    
     }
 
-    public Page<Tournament> getAccepted(Bussiness bussiness, Pageable pageable){
-        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true, pageable);
-
+    public List<Tournament> getAccepted(Bussiness bussiness){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
         else return null;
     }
 
-    public Page<Tournament> getNotAccepted(Bussiness bussiness, Pageable pageable){
-        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false, pageable);
+    public List<Tournament> getNotAccepted(Bussiness bussiness){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 

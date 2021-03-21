@@ -32,6 +32,7 @@ import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 
 
 
@@ -148,6 +149,21 @@ public class UsersController {
         return "userProfile";
     }
 
+    @GetMapping(value="/bussinessProfile/{{id}}")
+    public String bussinessProfile(Model model,@PathVariable Long id) {
+        Bussiness loggedBussiness = bussinessService.findById(id);
+        TournamentsService tournamentsService = new TournamentsService();
+        model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
+        model.addAttribute("adress", loggedBussiness.getAdress());
+        model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
+        model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
+        model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
+        model.addAttribute("acceptedTournaments",tournamentsService.getAccepted(loggedBussiness));
+        model.addAttribute("nonAcceptedTournaments",tournamentsService.getNotAccepted(loggedBussiness));
+        model.addAttribute("finished",tournamentsService.getNotAccepted(loggedBussiness));
+        return "bussinessProfile";
+    }
+    
     @RequestMapping(value="/editProfile/{id}", method=RequestMethod.GET)
     public String editProfile(@PathVariable long id, String password, int division,Model model) {
         Player loggedUser = playerService.findById(id);
@@ -231,6 +247,7 @@ public class UsersController {
         return "userProfile";
     }
     
+
     
     }
 
