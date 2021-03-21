@@ -15,16 +15,16 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     
     @Modifying
     @Query("update tournament t set t.first_winning_couple = ? where t.id = id")
-    int  setFirstWinnngCouple(DoubleOfPlayers couple);
+    void  setFirstWinnngCouple(DoubleOfPlayers couple);
 
     @Modifying
     @Query("update tournament t set t.second_winning_couple = ? where t.id = id")
-    int setSecondWinnngCouple(DoubleOfPlayers couple);
+    void setSecondWinnngCouple(DoubleOfPlayers couple);
 
     @Query("select t from tournament t where t.bussiness_id = ? and accepted = true")
-    Optional<List<Tournament>> getAccepted(Bussiness bussiness);
+    Optional<List<Tournament>> getAccepted(Long id);
 
     @Query("select t from tournament t where t.bussiness_id = ? and accepted = false")
-    Optional<List<Tournament>> getNotAccepted();
+    Optional<List<Tournament>> getNotAccepted(Long id);
 
 }
