@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/404").permitAll();
-		//http.authorizeRequests().antMatchers("/logout").permitAll();
+		http.authorizeRequests().antMatchers("/logout").permitAll();
 		
         http.authorizeRequests().antMatchers("/AboutUs").permitAll();
         http.authorizeRequests().antMatchers("/friendlyMatch").permitAll();
@@ -54,14 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/tournaments").permitAll();
 		http.authorizeRequests().antMatchers("/signUpPlayer").permitAll();
 		http.authorizeRequests().antMatchers("/userSignUp").permitAll();
-		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();			
+		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();
+		http.authorizeRequests().antMatchers("/update/{\\d+}/image").permitAll();			
         http.authorizeRequests().antMatchers("/css-min/**", "/css/main.css", "/css/**", "/scss/**","/js/**","/icomoon/**", "/images/**", "/fonts/**", "/dev-assets/**", "/vendor/**", "/html/**").permitAll();
 		
 
 		// Private pages (all other pages)
-		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");	
-		http.authorizeRequests().antMatchers("/update/{\\d+}/image").hasAnyRole("USER");
-		http.authorizeRequests().antMatchers("/update/{\\d+}/image").hasAnyRole("BUSSINESS");
+		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/tournamentManagement").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/tournamentRequest").hasAnyRole("BUSSINESS");
@@ -72,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("password");
 		http.formLogin().defaultSuccessUrl("/");
-		http.formLogin().failureUrl("/404");
+		http.formLogin().failureUrl("/loginError");
 
 		// Logout
 		http.logout().logoutUrl("/logout");

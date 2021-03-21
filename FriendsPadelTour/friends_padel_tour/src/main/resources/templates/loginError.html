@@ -17,10 +17,8 @@
         <title>Inicia sesión - FPT</title>
     </head>
     <body>
+        <h1 class="center-items">Contraseña o usuario incorrecto</h1>
         <div class="login" style="background-image: url(images/FondoMatch1.png);">
-            {{# loginError }}
-                <p>Contraseña o usuario incorrecto</p>
-            {{/ loginError }}}
             <div class="wrap-login p-l-110 p-r-110 p-t-62 p-b-33" >
                 <form action="/login" method="POST">
                     <label>User Name:</label><input type="text" name="username" /><br />

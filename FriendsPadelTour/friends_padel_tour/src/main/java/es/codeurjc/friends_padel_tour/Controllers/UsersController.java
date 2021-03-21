@@ -107,45 +107,45 @@ public class UsersController {
         model.addAttribute("loggedUser", loggedPlayer);
         List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
+        model.addAttribute("efectivity", 0);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
         model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
         return "userProfile";
     }
 
-    @RequestMapping(value="/loginUser", method=RequestMethod.POST)
-    public String logInUser(String email, String password,Model model) {
-        if(email.equals("admin")&&password.equals("pass"))//Comprobar si es el admin
-            return "404";//Usuario administrador Logeado
-        Player loggedPlayer= playerService.getPlayer(email);
-        if(loggedPlayer == null){
-            Bussiness loggedBussiness = bussinessService.getBussiness(email);
-            if(loggedBussiness != null){   
-            }
-            return "login";
-        }
-        if(!loggedPlayer.getPassword().equals(password))
-            //Pasar mensaje de contraseña incorrecta
-            return "login";
-        model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
-        model.addAttribute("userDoubles", userDoubles);
-        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
-        model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
-        model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
-        return "userProfile";
-    }
+    @RequestMapping("/loginError")
+	public String loginerror() {
+		return "loginError";
+	}
 
         
-    @GetMapping(value="/users/{id}")
-    public String playerProfile(Model model,@PathVariable Long id) {
-        Player loggedPlayer = playerService.findById(id);
+
+    @GetMapping(value = "/users/{username}")
+    public String goToOtherPlayerProfile(Model model,@PathVariable String username) {
+        Player loggedPlayer = playerService.findByUsername(username);
+        int playedmatches = loggedPlayer.getMathesPlayed();
+        boolean hasplayedmatches = (playedmatches > 0);
+        Boolean notMyProfile;
+        if(model.getAttribute("userName")==null){
+            notMyProfile=true;
+        }else{
+            notMyProfile = !model.getAttribute("userName").equals(username);
+        }
         model.addAttribute("loggedUser", loggedPlayer);
         List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("loggedUser.matchesWon", loggedPlayer.getMathcesWon());
-        model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getPlayedMatches());
+        model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getMathesPlayed());
         model.addAttribute("loggedUser.matchesLost", loggedPlayer.getMatchesLost());
+        double efectivity;
+        if(loggedPlayer.getMathesPlayed()==0)
+            efectivity=0;
+        else
+            efectivity =  (((double) loggedPlayer.getMathcesWon())/ ((double)loggedPlayer.getMathesPlayed()))*100;
+        model.addAttribute("efectivity", efectivity);
+        model.addAttribute("UserExtern", notMyProfile);
+        model.addAttribute("hasplayedmatches", hasplayedmatches);
         return "userProfile";
     }
 
@@ -178,25 +178,21 @@ public class UsersController {
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
         List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
-        int playedmatches = loggedUser.getMathesPlayed();
-        boolean hasplayedmatches = (playedmatches > 0);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
         model.addAttribute("userPendingGames", loggedUser.getPendingMatches());
-        model.addAttribute("hasplayedmatches", hasplayedmatches);
+        
         return "succesEdit";
     }
 
     @PostMapping(value="/update/{id}/image")
     public String updateImage(@PathVariable long id, @RequestParam MultipartFile profilePicture,Model model) throws IOException {
         Player loggedUser = playerService.findById(id);
-        Boolean notMyProfile = false;
         loggedUser.setImage(BlobProxy.generateProxy(
             profilePicture.getInputStream(), profilePicture.getSize()));
         loggedUser.setHasImage(true);
         playerService.updatePlayer(loggedUser);
-        model.addAttribute("UserExtern", notMyProfile);
         return "succesEdit";
     }
 
@@ -248,6 +244,7 @@ public class UsersController {
         model.addAttribute("userPendingGames", loggedUser.getPendingMatches());
         return "userProfile";
     }
+
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
     public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, String s1_0, String s1_1, String s1_2, String s1_3, String s1_4, String s1_5, String s1_6,String s2_0, String s2_1, String s2_2, String s2_3, String s2_4, String s2_5, String s2_6) {
