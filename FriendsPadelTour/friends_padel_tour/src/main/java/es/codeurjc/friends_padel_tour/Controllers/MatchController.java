@@ -32,6 +32,8 @@ public class MatchController {
     private PlayersService playerService;
     @Autowired
     private DoubleService doubleService;
+    @Autowired
+    private PlayersService bussinessService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -42,7 +44,17 @@ public class MatchController {
 
 			model.addAttribute("logged", true);
 			model.addAttribute("userName", principal.getName());
+            if(request.isUserInRole("USER")){
+                model.addAttribute("user", request.isUserInRole("USER"));
+                model.addAttribute("userId", playerService.findByUsername(principal.getName()).getId());
+            }
+            if(request.isUserInRole("BUSSINESS")){
+                model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
+                model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
+            }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            
+            
 
 		} else {
 			model.addAttribute("logged", false);

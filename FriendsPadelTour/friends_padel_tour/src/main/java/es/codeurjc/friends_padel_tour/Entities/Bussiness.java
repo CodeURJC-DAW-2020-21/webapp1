@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -19,9 +20,10 @@ public class Bussiness{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String userName;
+    private String username;
     private String bussinessName;
-    private String userSurname;
+    private String ownerName;
+    private String ownerSurname;
     private String location;
     private String email;
     private String adress;
@@ -55,24 +57,39 @@ public class Bussiness{
         this.schedule = schedule;
     }
 
-    public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2, String adress2) {
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
+    }
+
+    public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2,
+            String adress2, User user) {
                 bussinessName = name2;
-                userName = userName2;
-                userSurname = userSurname2;
+                setUsername(userName2);
+                ownerSurname = userSurname2;
                 email = email2;
                 location = location2;
                 adress = adress2;
                 createdTournaments = 0;
                 
+                this.user = user;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public String getAdress() {
         return adress;
@@ -83,11 +100,11 @@ public class Bussiness{
     public void setBussinessName(String bussinessName) {
         this.bussinessName = bussinessName;
     }
-    public String getSurname() {
-        return userSurname;
+    public String getOwnerSurname() {
+        return ownerSurname;
     }
-    public void setSurname(String surname) {
-        this.userSurname = surname;
+    public void setOwnerSurname(String surname) {
+        this.ownerSurname = surname;
     }
     public String getLocation() {
         return location;
@@ -104,9 +121,6 @@ public class Bussiness{
     public void setAdress(String adress) {
         this.adress = adress;
     }
-    public String getUserSurname() {
-        return userSurname;
-    }
     public long getId() {
         return id;
     }
@@ -122,9 +136,6 @@ public class Bussiness{
     public void setTournaments(List<Tournament> tournaments) {
         this.tournaments = tournaments;
     }
-    public void setUserSurname(String userSurname) {
-        this.userSurname = userSurname;
-    }
     public void setId(long id) {
         this.id = id;
     }
@@ -132,9 +143,7 @@ public class Bussiness{
     public Bussiness(long id, String userName, String bussinessName, String userSurname, String location, String email,
             String adress, Blob image) {
         this.id = id;
-        this.userName = userName;
         this.bussinessName = bussinessName;
-        this.userSurname = userSurname;
         this.location = location;
         this.email = email;
         this.adress = adress;

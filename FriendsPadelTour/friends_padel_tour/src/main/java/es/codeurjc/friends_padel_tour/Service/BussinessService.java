@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 
+
 @Service
 public class BussinessService {
-
+    @Autowired
+    private UserService userService;
     @Autowired
     private BussinessRepository bussinessRepository;
     @Autowired
@@ -28,7 +31,8 @@ public class BussinessService {
         bussinessInDB = bussinessRepository.findByBussinessName(bussinessName);
         if(bussinessInDB.isPresent())
             return false;
-        Bussiness newBussiness = new Bussiness(bussinessName,userName,userSurname,location,email,adress);
+        User newUser = userService.saveUser(userName, password,"BUSSINESS");
+        Bussiness newBussiness = new Bussiness(bussinessName,userName,userSurname,location,email,adress,newUser);
         bussinessRepository.save(newBussiness);
         return true;
     }
@@ -36,6 +40,12 @@ public class BussinessService {
     public Bussiness getBussiness(String email) {
         Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
         if(bussinessInDB.isPresent()) return bussinessInDB.get();
+        return null;
+    }
+
+    public Bussiness findByUsername(String name) {
+        Optional<Bussiness> bussinesInDB = bussinessRepository.findByUsername(name);
+        if(bussinesInDB.isPresent()) return bussinesInDB.get();
         return null;
     }
     

@@ -8,6 +8,6 @@ import es.codeurjc.friends_padel_tour.Entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    Optional<User> findByName(String name);
+    Optional<User> findByUsername(String username);
 
 }

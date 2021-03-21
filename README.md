@@ -111,6 +111,13 @@ In this screen the admin user can see all the tournament requests and accept all
 ## Navigation Diagram
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/Navigation%20Diagram.png?raw=true "Division 1")
 
+# STAGE 2
+
+## DEMO  
+
+## Entity–relationship DATABASE model
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaBD.jpeg?raw=true "DataBase Diagram")
+## Class and template diagram
 
 
 

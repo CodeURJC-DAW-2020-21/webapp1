@@ -39,7 +39,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/404").permitAll();
 		//http.authorizeRequests().antMatchers("/logout").permitAll();
-        http.authorizeRequests().antMatchers("/Index").permitAll();
 		
         http.authorizeRequests().antMatchers("/AboutUs").permitAll();
         http.authorizeRequests().antMatchers("/friendlyMatch").permitAll();
@@ -53,16 +52,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/team/5").permitAll();
         http.authorizeRequests().antMatchers("/team/6").permitAll();
         http.authorizeRequests().antMatchers("/tournaments").permitAll();
+		http.authorizeRequests().antMatchers("/signUpPlayer").permitAll();
 		http.authorizeRequests().antMatchers("/userSignUp").permitAll();
-		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();		
-        http.authorizeRequests().antMatchers("/css-min/**", "/css/main.css", "/css/**", "/js/**", "/images/**", "/fonts/**", "/dev-assets/**", "/vendor/**", "/html/**").permitAll();
+		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();			
+        http.authorizeRequests().antMatchers("/css-min/**", "/css/main.css", "/css/**", "/scss/**","/js/**","/icomoon/**", "/images/**", "/fonts/**", "/dev-assets/**", "/vendor/**", "/html/**").permitAll();
 		
 
 		// Private pages (all other pages)
-		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("user");		
-		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("bussiness");
-		http.authorizeRequests().antMatchers("/tournamentManagement").hasAnyRole("");
-		http.authorizeRequests().antMatchers("/tournamentRequest").hasAnyRole("");
+		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");	
+		http.authorizeRequests().antMatchers("/update/{\\d+}/image").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/update/{\\d+}/image").hasAnyRole("BUSSINESS");
+		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("BUSSINESS");
+		http.authorizeRequests().antMatchers("/tournamentManagement").hasAnyRole("ADMIN");
+		http.authorizeRequests().antMatchers("/tournamentRequest").hasAnyRole("BUSSINESS");
+		
 
 		// Login form
 		http.formLogin().loginPage("/login");
@@ -75,8 +78,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
 
-		http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
-		http.headers().frameOptions().sameOrigin();
 	}
 
 }
