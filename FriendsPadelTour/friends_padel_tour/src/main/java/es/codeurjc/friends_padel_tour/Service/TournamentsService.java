@@ -32,6 +32,14 @@ public class TournamentsService {
         } 
         else return null;
     }
+
+    public List<Tournament> getPending(){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findAccepted(false);
+        if(tournamentsInDB.isPresent()){
+            return tournamentsInDB.get();
+        } 
+        else return null;
+    }
     
     public void save(Tournament tournament){
         tournamentRepository.save(tournament);    
