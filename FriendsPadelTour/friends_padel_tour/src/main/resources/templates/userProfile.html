@@ -9,7 +9,7 @@
             <div class="row align-items-center ">
 
               <div class="col-md-6" >
-                <h3 class="bg-text-line">Nombre: {{loggedUser.name}} {{loggedUser.surname}}<br> Nombre de usuario: {{loggedUser.userName}} <br> Categoria: {{loggedUser.division}} <br></h3>
+                <h3 class="bg-text-line">Nombre: {{loggedUser.name}} {{loggedUser.surname}}<br> Nombre de usuario: {{loggedUser.username}} <br> Categoria: {{loggedUser.division}} <br></h3>
                 <div class="image-player">
                   {{# loggedUser.hasImage }}
                     <img class="image-main" src="/user/{{loggedUser.id}}/image">
@@ -48,11 +48,11 @@
         <div class="l-container l-container--data"> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos jugados</p>
-            <p class="c-ranking-header__data" id="matches_Played">{{loggedUser.matchesPlayed}}</p> 
+            <p class="c-ranking-header__data" id="matches_Played">{{loggedUser.mathesPlayed}}</p> 
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos ganados</p> 
-            <p class="c-ranking-header__data" id="matches_Won">{{loggedUser.matchesWon}}</p> 
+            <p class="c-ranking-header__data" id="matches_Won">{{loggedUser.mathcesWon}}</p> 
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Partidos perdidos</p> 
@@ -60,7 +60,7 @@
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Efectividad</p> 
-            <p class="c-ranking-header__data"> 0 %</p> 
+            <p class="c-ranking-header__data"> {{efectivity}} %</p> 
           </div> 
         </div> 
       </div>
@@ -71,9 +71,9 @@
       <div class="row">
       <canvas id="myChart" width="400" height="300"></canvas>
       <script>
-        var matchesPlayed = document.getElementById('matches_Played');
-        var matchesWon = document.getElementById('matches_Won');
-        var matchesLost = document.getElementById('matches_Lost');     
+        var matchesPlayed = document.getElementById('matches_Played').innerHTML;
+        var matchesWon = document.getElementById('matches_Won').innerHTML;
+        var matchesLost = document.getElementById('matches_Lost').innerHTML;     
       var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
           type: 'bar',
@@ -81,7 +81,7 @@
               labels: ['JUGADOS', 'GANADOS', 'PERDIDOS'],
               datasets: [{
                   label: 'GRAFICA PARTIDOS',
-                  data: [1,2,3], //matchesPlayed, matchesWon, matchesLost],
+                  data: [matchesPlayed,matchesWon,matchesLost], //matchesPlayed, matchesWon, matchesLost],
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(54, 162, 235, 0.2)',
@@ -418,12 +418,14 @@
                 </div>
               </div>
               <input type="submit" class="btn btn-default" value="Aceptar">
+              <input type="hidden" name="_csrf" value="{{token}}"/>
               <BR>
             </form>
             <form action="/update/{{loggedUser.id}}/image" method="POST" enctype="multipart/form-data">
               <h3>Imagen de perfil:</h3>
               <input type="file" name="profilePicture" accept=".jpg, .jpeg">
               <input type="submit" class="btn btn-default" value="Cambiar imagen">
+              <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
           </div>
           <div class="col-md-3"></div>

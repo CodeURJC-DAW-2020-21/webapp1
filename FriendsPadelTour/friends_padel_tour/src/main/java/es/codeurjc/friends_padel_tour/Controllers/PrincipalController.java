@@ -59,9 +59,15 @@ public class PrincipalController {
 
 	@GetMapping("/")
 	public String Index() {
-
-        playerService.savePlayer(new Player("username","yo","apellido","email","contraseña","ciudad",1));
-        playerService.savePlayer(new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1));
+        Player newPlayer1 = new Player("username","yo","apellido","email","contraseña","ciudad",1);
+        Player newPlayer2 = new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1);
+        newPlayer2.setScore(500);
+        newPlayer1.setScore(200);
+        newPlayer1.setMathesPlayed(2);
+        newPlayer1.setMathcesWon(1);
+        newPlayer1.setMatchesLost(1);
+        playerService.savePlayer(newPlayer1);
+        playerService.savePlayer(newPlayer2);
         playerService.savePlayer(new Player("username3","yo3","apellido3","email3","contraseña3","ciudad3",1));
         playerService.savePlayer(new Player("username4","yo4","apellido4","email4","contraseña4","ciudad4",1));
 

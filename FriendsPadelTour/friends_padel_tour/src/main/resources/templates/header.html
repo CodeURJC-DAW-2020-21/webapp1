@@ -78,16 +78,19 @@
               <li><a href="/tournaments">Torneos</a></li>
               <li><a href="/AboutUs">Conócenos</a></li>
               
-              
-                
-                
+
               {{#logged}}
                 {{#user}}
-                  <li><a href="/users/{{userId}}">Tu perfil</a></li>
+                  <li><a href="/users/{{userName}}">Tu perfil</a></li>
                 {{/user}}
                 {{#bussiness}}
-                  <li><a href="/bussinessProfile.html">Tu perfil</a></li>
+                  <li><a href="/users/{{userName}}">Tu perfil</a></li>
                 {{/bussiness}}
+                <li><form action="/logout" method="post">
+                  <button class="btn btn-default navbar-btn" type="submit">Log
+                    Out</button>
+                  <input type="hidden" name="_csrf" value="{{token}}" />
+                </form></li>
               {{/logged}}
               {{^logged}}
                 <li><a href="/login">Iniciar sesión</a></li>
