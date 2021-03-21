@@ -113,30 +113,10 @@ public class UsersController {
         return "userProfile";
     }
 
-    @RequestMapping(value="/loginUser", method=RequestMethod.POST)
-    public String logInUser(String email, String password,Model model) {
-        if(email.equals("admin")&&password.equals("adminpass"))
-            return "Index";
-        Player loggedPlayer= playerService.getPlayer(email);
-        if(loggedPlayer == null){
-            Bussiness loggedBussiness = bussinessService.getBussiness(email);
-            if(loggedBussiness != null){
-                model.addAttribute("loginError", true);   
-            }
-            return "login";
-        }
-        if(!loggedPlayer.getPassword().equals(password)){
-            model.addAttribute("loginError", true);
-            return "login";
-        }
-        model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
-        model.addAttribute("userDoubles", userDoubles);
-        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
-        model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
-        model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
-        return "userProfile";
-    }
+    @RequestMapping("/loginError")
+	public String loginerror() {
+		return "loginError";
+	}
 
         
 

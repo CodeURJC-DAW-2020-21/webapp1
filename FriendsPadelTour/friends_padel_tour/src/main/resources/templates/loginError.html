@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+        <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/style.css">
+        <title>Inicia sesión - FPT</title>
+    </head>
+    <body>
+        <h1 class="center-items">Contraseña o usuario incorrecto</h1>
+        <div class="login" style="background-image: url(images/FondoMatch1.png);">
+            <div class="wrap-login p-l-110 p-r-110 p-t-62 p-b-33" >
+                <form action="/login" method="POST">
+                    <label>User Name:</label><input type="text" name="username" /><br />
+                    <label>Password:</label><input type="password" name="password" /><br />
+                    <input type="submit" value="Sign In" /><br />				
+		            <input type="hidden" name="_csrf" value="{{token}}"/>
+                </form>
+                <div class="forgotten-password" style="text-align: center;">
+                    <span class="txt2">
+                    No tengo cuenta
+                    </span>
+                    <a href="/goToSignUpPrev" class="txt2 bo1">
+                    Registrarme
+                    </a>
+                </div>
+                
+                </div>
+        </div>        
+    </body>
+</html>
