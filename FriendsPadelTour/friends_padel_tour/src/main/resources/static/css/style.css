@@ -1841,13 +1841,14 @@ input:focus {
 }
 
 .scrollmenu {
-  background-color: gray;
+  background-image: linear-gradient(black,white);
   overflow-y: scroll;
   width: 100%;
   padding-right: 10%;
   padding-left: 10%;
-  height: 300px;
+  height: 500px;
   border: 1px solid black;
+  color: black;
   }
   
   .best-players{
@@ -1875,15 +1876,23 @@ input:focus {
   .c-player-card__item {
   width: 50%;
   float: left; 
-  list-style:none
+  list-style:none;
+  border: 1px solid black;
+  background-color: white;
+  }
+
+
+  .c-player-card__position {
+    color: #013660;      
+    font-size: 50px;
   }
   
-  .c-player-card__details {
-    width: 50%
-}
-  
   .imgplayer {
-  z-index: 1; 
+  width: 50%;
+  height: 50%;
+  float: right;
+  color:#22356d;
+
   }
   
   
@@ -1892,21 +1901,20 @@ input:focus {
   width: 50%;
   }
 
+  .c-player-card__score{
+    z-index: 1;
+    color: #013660;
+    text-align: right;
+    font-size: 20px;
+    margin-right: 20px;
+  }
 
-.c-player-card__img{
-  width: 50%;
-  position: right;
-}
-
-.u-img-cropped {
-  border-color: #d9e2e4;
-  width: 13.8rem;
-  height: 13.8rem;
-  position: absolute;
-  top:-6.9rem
-}
-
-.u-img-cropped--blue {
-  border: .5rem solid #69dfe2;
-  background-color:#69dfe2
-}
+  .ranking-title{
+    color: black;
+    size: 30px;
+    text-align: center;
+  }
+   
+  .container{
+    z-index: 1;
+  }
