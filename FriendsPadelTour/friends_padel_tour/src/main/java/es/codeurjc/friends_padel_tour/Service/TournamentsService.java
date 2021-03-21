@@ -17,6 +17,7 @@ public class TournamentsService {
     @Autowired
     private TournamentRepository tournamentRepository;
 
+    
     public Tournament findById(long id) {
         Optional<Tournament> tournamentInDB = tournamentRepository.findById(id);
         if(tournamentInDB.isPresent()) return tournamentInDB.get();
@@ -52,11 +53,11 @@ public class TournamentsService {
         else return null;
     }
 
-    public void setFirstWinnngCouple(DoubleOfPlayers couple){
-        tournamentRepository.setFirstWinningCouple(couple.getPlayer1().getName() +" " +couple.getPlayer2().getName());
+    public void setFirstWinnngCouple(DoubleOfPlayers couple, Long id){
+        tournamentRepository.setFirstWinningCouple(couple.getPlayer1().getName() +" " +couple.getPlayer2().getName(), id);
     }
 
-    public void setSecondWinnngCouple(DoubleOfPlayers couple){
-        tournamentRepository.setSecondWinningCouple(couple.getPlayer1().getName() +" " + couple.getPlayer2().getName());
+    public void setSecondWinnngCouple(DoubleOfPlayers couple, Long id){
+        tournamentRepository.setSecondWinningCouple(couple.getPlayer1().getName() +" " + couple.getPlayer2().getName(), id);
     }
 }

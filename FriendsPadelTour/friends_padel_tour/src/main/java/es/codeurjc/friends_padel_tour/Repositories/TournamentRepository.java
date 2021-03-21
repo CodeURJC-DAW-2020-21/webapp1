@@ -14,12 +14,12 @@ import es.codeurjc.friends_padel_tour.Entities.Tournament;
 public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     
     @Modifying
-    @Query("update tournament t set t.firstWinnngCouple = ?1 where t.id = id")
-    int  setFirstWinningCouple(String couple);
+    @Query("update Tournament t set t.firstWinnngCouple = ?1 where t.id = ?2")
+    int  setFirstWinningCouple(String couple, Long id);
 
-    
-    @Query("update tournament t set t.SecondWinningCouple = ?1 where t.id = id")
-    int setSecondWinningCouple(String couple);
+    @Modifying
+    @Query("update Tournament t set t.secondWinningCouple = ?1 where t.id = ?2")
+    int setSecondWinningCouple(String couple, Long id);
 
     Optional<List<Tournament>> findByIdAndAccepted(Long id, boolean accepted);
 
