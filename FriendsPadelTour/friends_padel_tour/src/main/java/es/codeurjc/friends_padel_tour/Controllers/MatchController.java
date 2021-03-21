@@ -52,14 +52,31 @@ public class MatchController {
     @GetMapping(value="/team/{num}")
     public String friendlyMatchDivision(Model model, @PathVariable int num) {
          List<PadelMatch> matches = matchesService.findByDivision(num);
+         List<Player> top10 = playerService.findTOP10(num);
+         Player myplayer = playerService.findByUsername("username");
         model.addAttribute("matches", matches);
         switch (num) {
-            case 1: return "team";
-            case 2: return "team2";
-            case 3: return "team3";
-            case 4: return "team4";
-            case 5: return "team5";
-            case 6: return "team6";
+            case 1: 
+            model.addAttribute("top10players", top10);
+            model.addAttribute("player", myplayer);
+            return "team";
+
+            case 2:
+            //model.addAttribute("top10players", top10);
+             return "team2";
+            case 3:
+            //model.addAttribute("top10players", top10);
+             return "team3";
+            case 4: 
+            //model.addAttribute("top10players", top10);
+            return "team4";
+            case 5: 
+            //model.addAttribute("top10players", top10);
+            return "team5";
+            case 6: 
+            //model.addAttribute("top10players", top10);
+            return "team6";
+
             default: return "team";
         }
     }

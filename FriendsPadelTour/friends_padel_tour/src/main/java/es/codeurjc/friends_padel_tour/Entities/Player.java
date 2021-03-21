@@ -32,6 +32,7 @@ public class Player{
     private int division;
     private boolean hasImage;
 
+
     private int mathcesWon;
     private int matchesLost;
     private int mathesPlayed;
@@ -144,7 +145,8 @@ public class Player{
         this.password = password;
     }
 
-    public Player(String name, String surname, String email, String password, String location, int division){
+    public Player(String username, String name, String surname, String email, String password, String location, int division){
+        this.username = username;
         this.name= name;
         this.surname = surname;
         this.email = email;

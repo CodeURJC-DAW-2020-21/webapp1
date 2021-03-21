@@ -44,7 +44,6 @@
       </div>
     </div>
 
-    {{#loggedUser.matchesPlayed}}
     <div class="l-grid"> 
       <div class="c-ranking-header c-ranking-header--no-image c-ranking-header--table"> 
         <div class="l-container l-container--data"> 
@@ -62,12 +61,13 @@
           </div> 
           <div class="c-ranking-header__data-box"> 
             <p class="c-ranking-header__data-title">Efectividad</p> 
-            <p class="c-ranking-header__data">2</p> 
+            <p class="c-ranking-header__data"> 0 %</p> 
           </div> 
         </div> 
       </div>
      </div>
      
+     {{#hasplayedmatches}}
      <div class="row">
       <canvas id="myChart" width="400" height="400"></canvas>
       <script>
@@ -108,7 +108,10 @@
       </script>
 
      </div>
-{{/loggedUser.matchesPlayed}}
+     {{/hasplayedmatches}}
+     {{^hasplayedmatches}}
+     <h1>Este usuario todavia no ha jugado ningún partido</h1>
+     {{/hasplayedmatches}}
 
 
     <div class="recent-matches">
@@ -235,7 +238,7 @@
 
 
       
-
+      {{#UserExtern}}
       <div class="container">
         <div class="text-md-center">
           <br>
@@ -289,6 +292,7 @@
           <div class="col-md-3"></div>
         </div>
       </div>
+      {{/UserExtern}}
 
       {{>footer}}
 

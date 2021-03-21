@@ -7,13 +7,21 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Entities.User;
+import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
+import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
+
+import es.codeurjc.friends_padel_tour.Entities.User;
 
 
 
@@ -21,6 +29,9 @@ import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 
 @Controller
 public class PrincipalController {
+
+    @Autowired
+    private PlayersService playerService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -40,6 +51,12 @@ public class PrincipalController {
 
 	@GetMapping("/")
 	public String Index() {
+
+        playerService.savePlayer(new Player("username","yo","apellido","email","contraseña","ciudad",1));
+        playerService.savePlayer(new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1));
+        playerService.savePlayer(new Player("username3","yo3","apellido3","email3","contraseña3","ciudad3",1));
+        playerService.savePlayer(new Player("username4","yo4","apellido4","email4","contraseña4","ciudad4",1));
+
 		return "Index";
 	}
 
@@ -55,7 +72,11 @@ public class PrincipalController {
 	
     @GetMapping("/download-pdf")
         public void downloadFile(HttpServletResponse response) throws IOException {
+            String mystring = "Juan";
+            String mystring2 = "Padel Arroyomolinos";
             pdfGenerator generator = new pdfGenerator();
+            generator.setNameWinner(mystring);
+            generator.setNameTournament(mystring2);
             byte[] pdfReport = generator.getPDF().toByteArray();
     
             String mimeType =  "application/pdf";
@@ -68,4 +89,6 @@ public class PrincipalController {
     
             FileCopyUtils.copy(inStream, response.getOutputStream());
         }
+
+
 }

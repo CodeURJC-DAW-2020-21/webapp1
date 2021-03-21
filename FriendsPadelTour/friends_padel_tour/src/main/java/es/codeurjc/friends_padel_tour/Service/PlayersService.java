@@ -1,5 +1,6 @@
 package es.codeurjc.friends_padel_tour.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,10 @@ public class PlayersService {
         playerRepository.save(player);
     }
 
-
+    public List<Player> findTOP10(int division){
+        Optional<List<Player>> top10players = playerRepository.findTop10(division);
+        if(top10players.isPresent()) return top10players.get();
+        return null;  
+    }
         
 }

@@ -111,6 +111,34 @@
                 </div>
               </div>
             </div>
+            <div class="scrollmenu">
+              {{#top10players}}
+              <ul class="c-player-card u-list-clean">  
+                <li class="c-player-card__item">
+                  <a class="c-trigger" href="/users/{{username}}"> 
+                    <div class="c-player-card__header">
+                        <div class="c-player-card__details">
+                            <div class="c-player-card__position">1</div>
+                            <div class="c-player-card__name ">{{username}}<br>{{name}}<br>{{surname}}<br></div>
+
+                            <div class="c-player-card__img">
+                                <img src="/images/personas.png">
+                            </div> 
+                          </div>
+
+                            {{top10players}}
+                        </div>
+                        
+                    </div>
+                    <div class="c-player-card__footer">
+                        <div class="c-player-card__score">{{rankingPoints}}</div>
+                    </div>
+                  </a>
+                </li>
+               </ul> 
+              {{/top10players}}
+
+            </div>
 
           </div>
         </div>

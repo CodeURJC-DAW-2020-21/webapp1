@@ -1878,7 +1878,9 @@ input:focus {
   list-style:none
   }
   
-  
+  .c-player-card__details {
+    width: 50%
+}
   
   .imgplayer {
   z-index: 1; 
@@ -1886,5 +1888,25 @@ input:focus {
   
   
   .c-player-card__name { 
-  color:#22356d
+  color:#22356d;
+  width: 50%;
   }
+
+
+.c-player-card__img{
+  width: 50%;
+  position: right;
+}
+
+.u-img-cropped {
+  border-color: #d9e2e4;
+  width: 13.8rem;
+  height: 13.8rem;
+  position: absolute;
+  top:-6.9rem
+}
+
+.u-img-cropped--blue {
+  border: .5rem solid #69dfe2;
+  background-color:#69dfe2
+}

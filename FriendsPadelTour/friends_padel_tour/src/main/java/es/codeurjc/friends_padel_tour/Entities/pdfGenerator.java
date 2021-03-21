@@ -2,7 +2,7 @@ package es.codeurjc.friends_padel_tour.Entities;
 
 
 import com.itextpdf.text.*;
-
+import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
@@ -10,10 +10,16 @@ import java.io.ByteArrayOutputStream;
 
 public class pdfGenerator {
 
+    private String nameWinner;
+    private String nameTournament;
+    
     public ByteArrayOutputStream getPDF() {
+        
 
         // Creamos la instancia de memoria en la que se escribirá el archivo temporalmente
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+
+            
 
             Document document = new Document(PageSize.A4);            
             Font fuenteTitulo = new Font();
@@ -21,30 +27,42 @@ public class pdfGenerator {
 
 
             //Fonts
-            Font TituloFont = new Font();
-            TituloFont.setStyle(Font.BOLD);
-            TituloFont.setColor(1, 0, 0);
+            
+            Font TituloFont = new Font(FontFamily.TIMES_ROMAN,30.0f,Font.BOLD,BaseColor.BLACK);
+            Font HeaderFont = new Font(FontFamily.TIMES_ROMAN,10.0f,Font.UNDERLINE,BaseColor.BLUE);
+            
 
-
-
+            
            
-            // Asignamos la variable ByteArrayOutputStream bos donde se escribirá el documento
+
             PdfWriter.getInstance(document, bos);
             document.open();
-            //document.add(tabla);
-            Paragraph Titulo = new Paragraph("Enhorabuena, has sido galardonado con este diploma");
-            Chunk uno = new Chunk("Esto es una prueba");
-            Titulo.setFont(TituloFont);
+
+
+            Paragraph Titulo = new Paragraph("Enhorabuena, has sido galardonado con este diploma, " + nameWinner + " gracias a tu participación en el torneo disputado en las instalaciones '" + nameTournament +"'.", TituloFont);
+            Paragraph Header = new Paragraph("Documento expedido por la pagina en convenio con las instalaciones organizadoras del torneo", HeaderFont);
+
+            document.add(Header);
             document.add(Titulo);
-            document.add(uno);
 
             document.close();
-            // Retornamos la variable al finalizar
             return bos;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+    public String getNameWinner() {
+        return nameWinner;
+    }
+    public void setNameWinner(String nameWinner) {
+        this.nameWinner = nameWinner;
+    }
+    public String getNameTournament() {
+        return nameTournament;
+    }
+    public void setNameTournament(String nameTournament) {
+        this.nameTournament = nameTournament;
     }
 }
 
