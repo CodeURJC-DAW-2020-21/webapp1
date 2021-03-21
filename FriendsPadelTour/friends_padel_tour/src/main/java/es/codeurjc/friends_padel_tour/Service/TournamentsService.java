@@ -11,7 +11,7 @@ import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 @Service
 public class TournamentsService {
     @Autowired
-    TournamentRepository tournamentRepository;
+    private TournamentRepository tournamentRepository;
 
     public Tournament findById(long id) {
         Optional<Tournament> tournamentInDB = tournamentRepository.findById(id);

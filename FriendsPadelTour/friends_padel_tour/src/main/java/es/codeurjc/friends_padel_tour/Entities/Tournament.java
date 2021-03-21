@@ -31,6 +31,9 @@ public class Tournament {
     private int minCouples;
     private int maxCouples;
     private int registeredCouples;
+    private String firstWinnngCouple;
+    private String secondWinningCouple;
+    private boolean accepted;
 
     @ManyToMany
     private List<DoubleOfPlayers> players;
@@ -45,6 +48,46 @@ public class Tournament {
     public Tournament(){}
 
     
+
+    public boolean isAccepted() {
+        return accepted;
+    }
+
+
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+
+
+    public String getSecondWinningCouple() {
+        return secondWinningCouple;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public void setSecondWinningCouple(String secondWinningCouple) {
+        this.secondWinningCouple = secondWinningCouple;
+    }
+
+
+
+    public String getFirstWinnngCouple() {
+        return firstWinnngCouple;
+    }
+
+
+
+    public void setFirstWinnngCouple(String firstWinnngCouple) {
+        this.firstWinnngCouple = firstWinnngCouple;
+    }
+
+
 
     public List<DoubleOfPlayers> getPlayers() {
         return players;

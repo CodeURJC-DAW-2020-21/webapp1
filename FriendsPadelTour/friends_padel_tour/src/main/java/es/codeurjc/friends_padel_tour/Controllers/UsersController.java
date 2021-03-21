@@ -71,7 +71,7 @@ public class UsersController {
         return "userSignUp";
     }
 
-    @GetMapping(value="/bussinessSignUpForm")
+    @GetMapping(value="/bussinesSignUpForm")
     public String bussinessSignUp(Model model) {
         return "bussinessSignUp";
     }
