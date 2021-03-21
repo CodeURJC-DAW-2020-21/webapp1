@@ -31,6 +31,7 @@ public class Tournament {
     private int minCouples;
     private int maxCouples;
     private int registeredCouples;
+    
     private String firstWinnngCouple;
     private String secondWinningCouple;
     private boolean accepted;

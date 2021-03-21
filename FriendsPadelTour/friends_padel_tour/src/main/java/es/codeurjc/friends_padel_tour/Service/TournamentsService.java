@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
+
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 
 @Service
@@ -36,7 +37,7 @@ public class TournamentsService {
     }
 
     public List<Tournament> getAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.getAccepted(bussiness.getId());
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
@@ -44,7 +45,7 @@ public class TournamentsService {
     }
 
     public List<Tournament> getNotAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.getAccepted(bussiness.getId());
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
@@ -52,10 +53,10 @@ public class TournamentsService {
     }
 
     public void setFirstWinnngCouple(DoubleOfPlayers couple){
-        tournamentRepository.setFirstWinnngCouple(couple);
+        tournamentRepository.setFirstWinningCouple(couple.getPlayer1().getName() +" " +couple.getPlayer2().getName());
     }
 
     public void setSecondWinnngCouple(DoubleOfPlayers couple){
-        tournamentRepository.setSecondWinnngCouple(couple);
+        tournamentRepository.setSecondWinningCouple(couple.getPlayer1().getName() +" " + couple.getPlayer2().getName());
     }
 }
