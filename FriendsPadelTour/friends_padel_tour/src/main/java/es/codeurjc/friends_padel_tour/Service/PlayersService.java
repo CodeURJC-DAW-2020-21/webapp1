@@ -66,5 +66,9 @@ public class PlayersService {
         if(top10players.isPresent()) return top10players.get();
         return null;  
     }
+
+    public List<Player> findAll() {
+        return playerRepository.findAll();
+    }
         
 }

@@ -54,7 +54,7 @@
         {{/ double2Joined }}
         {{^double2Joined}}
             <div class="row">
-                <a class="text-center col-md-12" href="/#popup2">Unirse con pareja</a>
+                <a class="text-center col-md-12" href="#popup2">Unirse con pareja</a>
             </div>
             <div class="row">
                 <a href="/joinLonely/{{matchToJoin.id}}/3" class="col-md-6 text-center">Unirse solo</a>
@@ -71,9 +71,27 @@
             <form action="/joinDouble/{{matchToJoin.id}}/1" method="GET">
               <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect">
                 {{#userDoubles}}
-                    <option>{{player1}} y {{player2}}</option>
+                    <option>{{username}}</option>
                 {{/userDoubles}}
               </select></label><br>
+              <input type="submit" value="Aceptar">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="popup2" class="overlay-formulario">
+        <div id="popup-Body">
+          <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
+          <a id="cerrarPestana" href="#">&times;</a>
+          <div class="popupContent">
+            <form action="/joinDouble/{{matchToJoin.id}}/2" method="GET">
+              <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect">
+                {{#userDoubles}}
+                    <option>{{username}}</option>
+                {{/userDoubles}}
+              </select></label><br>
+              <input type="submit" value="Aceptar">
             </form>
           </div>
         </div>

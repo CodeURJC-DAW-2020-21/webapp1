@@ -26,6 +26,14 @@ public class User {
 	public User() {
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public User(String name, String encodedPassword, String... roles) {
 		this.username = name;
 		this.encodedPassword = encodedPassword;

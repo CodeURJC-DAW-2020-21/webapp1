@@ -143,6 +143,7 @@ public class UsersController {
         else
             efectivity =  (((double) loggedPlayer.getMathcesWon())/ ((double)loggedPlayer.getMathesPlayed()))*100;
         model.addAttribute("efectivity", efectivity);
+        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
         return "userProfile";

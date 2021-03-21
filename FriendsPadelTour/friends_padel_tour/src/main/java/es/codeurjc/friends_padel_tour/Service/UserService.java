@@ -2,6 +2,7 @@ package es.codeurjc.friends_padel_tour.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
 
@@ -45,6 +47,14 @@ public class UserService implements UserDetailsService {
 		User newUser =  new User(username,passwordEnconder.encode(password), role);
 		userRepository.save(newUser);
 		return newUser;
+	}
+
+	public User findByUsername(String name) {
+		Optional<User> userInDB = userRepository.findByUsername(name);
+		if(userInDB.isPresent())
+			return userInDB.get();
+		else
+			return null;
 	}
 	
 

@@ -111,7 +111,6 @@ public class MatchController {
     @GetMapping(value="/joinFriendlyMatch/{id}")
     public String joinFrienlyMatch(@PathVariable long id,Model model) {
         PadelMatch matchToJoin = matchesService.findById(id);
-        Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
         model.addAttribute("matchToJoin", matchToJoin);
         if(matchToJoin.getDouble1()==null){
             model.addAttribute("double1Joined", false);
@@ -119,14 +118,21 @@ public class MatchController {
             model.addAttribute("player2Joined", false);
         }else{
             model.addAttribute("double1Joined", true);
-            if(matchToJoin.getDouble1().getPlayer1()==null){
+            if(matchToJoin.getDouble1().getPlayer1()==null && matchToJoin.getDouble1().getPlayer2()!=null){
                 model.addAttribute("player1Joined", false);
                 model.addAttribute("player2Joined", true);
                 model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUsername());
-            }else{
+            }
+            if(matchToJoin.getDouble1().getPlayer1()!=null && matchToJoin.getDouble1().getPlayer2()==null){
                 model.addAttribute("player2Joined", false);
                 model.addAttribute("player1Joined", true);
                 model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUsername());                
+            }
+            if(matchToJoin.getDouble1().getPlayer1()!=null && matchToJoin.getDouble1().getPlayer2()!=null){
+                model.addAttribute("player2Joined", true);
+                model.addAttribute("player1Joined", true);
+                model.addAttribute("player1Name", matchToJoin.getDouble1().getPlayer1().getUsername());
+                model.addAttribute("player2Name", matchToJoin.getDouble1().getPlayer2().getUsername());
             }
         }
 
@@ -136,17 +142,24 @@ public class MatchController {
             model.addAttribute("player4Joined", false);
         }else{
             model.addAttribute("double2Joined", true);
-            if(matchToJoin.getDouble2().getPlayer1()==null){
+            if(matchToJoin.getDouble2().getPlayer1()==null && matchToJoin.getDouble2().getPlayer2()!=null){
                 model.addAttribute("player3Joined", false);
                 model.addAttribute("player4Joined", true);
                 model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
-            }else{
+            }
+            if(matchToJoin.getDouble2().getPlayer1()!=null && matchToJoin.getDouble2().getPlayer2()==null){
                 model.addAttribute("player4Joined", false);
                 model.addAttribute("player3Joined", true);
                 model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUsername());                
             }
+            if(matchToJoin.getDouble2().getPlayer1()!=null && matchToJoin.getDouble2().getPlayer2()!=null){
+                model.addAttribute("player4Joined", true);
+                model.addAttribute("player3Joined", true);
+                model.addAttribute("player3Name", matchToJoin.getDouble2().getPlayer1().getUsername());
+                model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
+            }
         }
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = playerService.findAll();
         model.addAttribute("userDoubles", userDoubles);
         return "joiningMatch";
     }
@@ -156,24 +169,38 @@ public class MatchController {
         PadelMatch matchToJoin = matchesService.findById(id);
         Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
         if(slot==1||slot==2){
-            if(matchToJoin.getDouble1()==null)
-                matchToJoin.setDouble1(new DoubleOfPlayers());
+            if(matchToJoin.getDouble1()==null){
+                DoubleOfPlayers newDoubleOfPlayers1 = new DoubleOfPlayers();
+                doubleService.saveDouble(newDoubleOfPlayers1);
+                matchToJoin.setDouble1(newDoubleOfPlayers1);
+            }
         }
         if(slot==3||slot==4){
-            if(matchToJoin.getDouble2()==null)
-                matchToJoin.setDouble2(new DoubleOfPlayers());
+            if(matchToJoin.getDouble2()==null){
+                DoubleOfPlayers newDoubleOfPlayers2 = new DoubleOfPlayers();
+                doubleService.saveDouble(newDoubleOfPlayers2);
+                matchToJoin.setDouble2(newDoubleOfPlayers2);
+            }
         }
         if(slot==1){
             matchToJoin.getDouble1().setPlayer1(loggedPlayer);
+            loggedPlayer.getDoubles1().add(matchToJoin.getDouble1());
+            doubleService.saveDouble(matchToJoin.getDouble1());
         }
         if(slot==2){
             matchToJoin.getDouble1().setPlayer2(loggedPlayer);
+            loggedPlayer.getDoubles2().add(matchToJoin.getDouble1());
+            doubleService.saveDouble(matchToJoin.getDouble1());
         }
         if(slot==3){
             matchToJoin.getDouble2().setPlayer1(loggedPlayer);
+            loggedPlayer.getDoubles1().add(matchToJoin.getDouble2());
+            doubleService.saveDouble(matchToJoin.getDouble2());
         }
         if(slot==4){
             matchToJoin.getDouble2().setPlayer2(loggedPlayer);
+            loggedPlayer.getDoubles2().add(matchToJoin.getDouble2());
+            doubleService.saveDouble(matchToJoin.getDouble2());
         }
         loggedPlayer.getPendingMatches().add(matchToJoin);
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
@@ -183,6 +210,36 @@ public class MatchController {
 
         return "joiningSucces";
     }
+
+    @GetMapping(value="/joinDouble/{id}/{slot}")
+    public String joinDouble(@RequestParam String doubleSelect,@PathVariable long id,@PathVariable int slot,Model model) {
+        PadelMatch matchToJoin = matchesService.findById(id);
+        Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
+        Player playerDouble = playerService.findByUsername(doubleSelect);
+        DoubleOfPlayers newDouble = new DoubleOfPlayers();
+        newDouble.setPlayer1(loggedPlayer);
+        newDouble.setPlayer2(playerDouble);
+        if(slot ==1){
+            matchToJoin.setDouble1(newDouble);
+        }else{
+            matchToJoin.setDouble2(newDouble);
+        }
+        matchToJoin.setnPlayers(matchToJoin.getnPlayers()+2);
+        
+        playerDouble.getDoubles2().add(newDouble);
+        loggedPlayer.getDoubles1().add(newDouble);
+
+        doubleService.saveDouble(newDouble);
+
+        playerService.updatePlayer(playerDouble);
+        playerService.updatePlayer(loggedPlayer);
+
+        
+        
+        matchesService.save(matchToJoin);
+        return "joiningSucces";
+    }
+    
 
     
     

@@ -18,6 +18,7 @@ import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
 
 
 
@@ -26,10 +27,13 @@ import es.codeurjc.friends_padel_tour.Service.PlayersService;
 @Controller
 public class PrincipalController {
 
+
     @Autowired
     private PlayersService playerService;
     @Autowired
     private BussinessService bussinessService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -49,7 +53,7 @@ public class PrincipalController {
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            
+            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
             
 
 		} else {
