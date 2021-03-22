@@ -6,11 +6,13 @@ import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Date;
+
 
 
 public class pdfGenerator {
 
-    private String nameWinner;
+    private String date;
     private String nameTournament;
     
     public ByteArrayOutputStream getPDF() {
@@ -41,7 +43,7 @@ public class pdfGenerator {
             document.open();
 
 
-            Paragraph Titulo = new Paragraph("AYUDA PARA LA CREACIÓN DE AMISTOSOS ", TituloFont);
+            Paragraph Titulo = new Paragraph("AYUDA PARA LA CREACIÓN DE AMISTOSOS "+ date, TituloFont);
             Paragraph HeaderX = new Paragraph("...........................................", TituloFont3);
             Paragraph Header = new Paragraph("1) Pincha en el lugar donde te permite rellenar un formulario y crea un partido amistoso ", TituloFont2);
             Paragraph Header2 = new Paragraph("2) Rellena todos los campos y pulsa el botón de crear", TituloFont2);
@@ -64,17 +66,21 @@ public class pdfGenerator {
         }
         return null;
     }
-    public String getNameWinner() {
-        return nameWinner;
-    }
-    public void setNameWinner(String nameWinner) {
-        this.nameWinner = nameWinner;
-    }
+    
     public String getNameTournament() {
         return nameTournament;
     }
     public void setNameTournament(String nameTournament) {
         this.nameTournament = nameTournament;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+    
 }
 
