@@ -18,6 +18,8 @@ import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 
 @Controller
 public class TournamentController {
+
+    //Autowired section
     @Autowired
     TournamentsService tournamentsService;
     @Autowired

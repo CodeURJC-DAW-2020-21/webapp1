@@ -14,16 +14,19 @@ import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 
 @Service
 public class TournamentsService {
+
+    //Autowired section
     @Autowired
     private TournamentRepository tournamentRepository;
 
-    
+    //Find a tournament
     public Tournament findById(long id) {
         Optional<Tournament> tournamentInDB = tournamentRepository.findById(id);
         if(tournamentInDB.isPresent()) return tournamentInDB.get();
         else return null;
     }
 
+    //Delete a tournament
     public Tournament deleteById(long id){
         Optional<Tournament> tournamentInDB = tournamentRepository.findById(id);
         if(tournamentInDB.isPresent()){
@@ -33,6 +36,7 @@ public class TournamentsService {
         else return null;
     }
 
+    //Method that takes the pending tournament
     public List<Tournament> getPending(){
         Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByAccepted(false);
         if(tournamentsInDB.isPresent()){
@@ -41,10 +45,12 @@ public class TournamentsService {
         else return null;
     }
     
+    //Save a tournament
     public void save(Tournament tournament){
         tournamentRepository.save(tournament);    
     }
 
+    //get an Accept the tournament
     public List<Tournament> getAccepted(Bussiness bussiness){
         Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true);
         if(tournamentsInDB.isPresent()){
@@ -53,6 +59,7 @@ public class TournamentsService {
         else return null;
     }
 
+    //Get NotAccepted tournament
     public List<Tournament> getNotAccepted(Bussiness bussiness){
         Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false);
         if(tournamentsInDB.isPresent()){
@@ -61,10 +68,12 @@ public class TournamentsService {
         else return null;
     }
 
+    //Set First winning couple 
     public void setFirstWinnngCouple(DoubleOfPlayers couple, Long id){
         tournamentRepository.setFirstWinningCouple(couple, id);
     }
 
+    //Set second winning couple
     public void setSecondWinnngCouple(DoubleOfPlayers couple, Long id){
         tournamentRepository.setSecondWinningCouple(couple, id);
     }

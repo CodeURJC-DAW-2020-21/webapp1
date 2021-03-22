@@ -27,7 +27,7 @@ import es.codeurjc.friends_padel_tour.Service.UserService;
 @Controller
 public class PrincipalController {
 
-
+    //Autowired section
     @Autowired
     private PlayersService playerService;
     @Autowired

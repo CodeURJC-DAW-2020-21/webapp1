@@ -14,6 +14,7 @@ public interface PlayerRepository extends JpaRepository<Player,Long>{
 
     Optional<Player> findByUsername(String username);
 
+    //Find the top 10 players of one division according to their score
     @Query("select p from Player p where p.division = ?1 order by score desc")
         Optional<List<Player>> findTop10(int divisionOfPlayer);
     

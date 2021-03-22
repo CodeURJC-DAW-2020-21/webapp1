@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		// Public pages
+		// Public pages that we all users can access
 		http.authorizeRequests().antMatchers("/").permitAll();
 		http.authorizeRequests().antMatchers("/login").permitAll();
 		http.authorizeRequests().antMatchers("/404").permitAll();
@@ -43,8 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/AboutUs").permitAll();
         http.authorizeRequests().antMatchers("/friendlyMatch").permitAll();
         http.authorizeRequests().antMatchers("/previousSignUp").permitAll();
-		//Generar PDF
-		http.authorizeRequests().antMatchers("/download-pdf").permitAll();
+		
+		http.authorizeRequests().antMatchers("/download-pdf").permitAll(); //Generate the PDF 
         http.authorizeRequests().antMatchers("/team/1").permitAll();
         http.authorizeRequests().antMatchers("/team/2").permitAll();
         http.authorizeRequests().antMatchers("/team/3").permitAll();
@@ -73,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.formLogin().defaultSuccessUrl("/");
 		http.formLogin().failureUrl("/loginError");
 
-		// Logout
+		// Logout button
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
 

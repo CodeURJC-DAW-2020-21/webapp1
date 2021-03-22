@@ -45,6 +45,7 @@ import net.bytebuddy.asm.Advice.Return;
 @Controller
 public class UsersController {
 
+    //Autowired section
     @Autowired
     private PlayersService playerService;
     @Autowired

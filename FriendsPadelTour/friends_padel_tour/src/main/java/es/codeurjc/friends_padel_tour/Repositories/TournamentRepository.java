@@ -12,10 +12,12 @@ import es.codeurjc.friends_padel_tour.Entities.Tournament;
 
 public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     
+    //Query that permits to update the first place of the Tournament
     @Modifying
     @Query("update Tournament t set t.firstWinnngCouple = ?1 where t.id = ?2")
     int  setFirstWinningCouple(DoubleOfPlayers couple, Long id);
 
+    //Query that permits to update the first place of the Tournament
     @Modifying
     @Query("update Tournament t set t.secondWinningCouple = ?1 where t.id = ?2")
     int setSecondWinningCouple(DoubleOfPlayers couple, Long id);
