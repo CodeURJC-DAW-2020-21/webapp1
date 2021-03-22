@@ -115,14 +115,14 @@ In this screen the admin user can see all the tournament requests and accept all
 
 # Development direction:
 
-Repository: https://github.com/CodeURJC-DAW-2020-21/webapp1
-Development tools: Visual Studio Code, Spring Tool Suite4
-Dependencies: PDFGenerator, MySQL connector
-Follow the next steps to execute the files:
-Open the project with your development tool
-Start a MySQL service in the local host in the port 3306 with a schema called "fptdb"
-Start running the application
-Enter from a browser to: https://localhost:8443
+- Repository: https://github.com/CodeURJC-DAW-2020-21/webapp1
+- Development tools: Visual Studio Code, Spring Tool Suite4
+- Dependencies: PDFGenerator, MySQL connector
+- Follow the next steps to execute the files:
+- Open the project with your development tool
+- Start a MySQL service in the local host in the port 3306 with a schema called "fptdb"
+- Start running the application
+- Enter from a browser to: https://localhost:8443
 
 ## DEMO  
 
