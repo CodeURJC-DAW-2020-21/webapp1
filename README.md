@@ -122,10 +122,15 @@ In this screen the admin user can see all the tournament requests and accept all
 
 ## 5 COMMITS
 
-| Name |Commits|
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Juan Guillo Bermejo | f17d2ad90e8818957c1f9757344f3e697c9fe68c  |  2afc3810884330fa6069ca80a81bab5bd1bf9ab5 |  31bf60e0870490f23a28e836412d26776888770e |   |   |
-| Eduardo Ivorra Salinas |  |  |   |   |   |
-| Eduardo Villaverde Espeso |  |   |   |   |   |
-| Alberto Morán Cuenca |  |   |   |   |   |
+| Name | Github user | Most Important | 2 | 3 | 4 | 5 |
+|--------|--------|--------|--------|--------|--------|--------|
+|Juan Guillo Bermejo | JGBURJC |[Security Configuration](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f17d2ad90e8818957c1f9757344f3e697c9fe68c)|[HTTP conexion and control users](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f17d2ad90e8818957c1f9757344f3e697c9fe68c)|[CSRFHandlerConfiguration](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f17d2ad90e8818957c1f9757344f3e697c9fe68c)|[DataBaseUsersLoader](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f17d2ad90e8818957c1f9757344f3e697c9fe68c)|[Errors and fix comments (TEMPLATES)](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/31bf60e0870490f23a28e836412d26776888770e)|
+
+|Eduardo Ivorra Salinas| EduardoIvorra |[Graphics](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Ver perfiles externos](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[PDFgenerator](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Alghorithm ranking](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Profile](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|
+
+|Eduardo Villaverde Espeso | eduvilla97 |[Admin and player user](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Controllers](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Login](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Error handling and repositories](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Sign Up](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|
+
+|Alberto Morán Cuenca | AlbertoMoranCuenca |[Ajax](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Tournaments Creation](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Bussiness user](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Join tournaments](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|[Bussiness and tournaments database](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/)|
+
+
 
