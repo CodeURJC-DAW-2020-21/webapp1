@@ -70,7 +70,7 @@ public class PrincipalController {
         Player newPlayer1 = new Player("username","yo","apellido","email","contraseña","ciudad",1);
         Player newPlayer2 = new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1);
         bussinessService.saveBussiness("Padel Arroyo Molinos", "userName", "userSurname", "email@gmail.com", "password", "Madrid", "adress");
-        Tournament tournament = new Tournament(bussinessService.findByUsername("userName"), "Torneo1", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 20,1);
+        Tournament tournament = new Tournament(bussinessService.findByUsername("userName"), "Torneo1", "Un torneo para novatos","11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 20,1,500,200,"Madrid");
         tournamentService.save(tournament);
         newPlayer2.setScore(500);
         newPlayer1.setScore(200);
