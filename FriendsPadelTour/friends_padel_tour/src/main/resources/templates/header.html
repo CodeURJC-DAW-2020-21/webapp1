@@ -86,6 +86,9 @@
                 {{#bussiness}}
                   <li><a href="/bussinessProfile/{{userId}}">Tu perfil</a></li>
                 {{/bussiness}}
+                {{# admin }}
+                <li><a href="/tournamentManagement">Gestion de torneos</a></li>
+                {{/ admin }}
                 <li><form action="/logout" method="post">
                   <button class="btn btn-default navbar-btn" type="submit">Log
                     Out</button>

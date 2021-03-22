@@ -20,69 +20,26 @@
         </div>
         <div class="row">
           <div class="col-md-12 tournaments">
+            {{#pendingTournaments }}
             <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-management">
       
-              <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
+              <div class="tournament_definition" id="tournament_name"><p>{{name}}</p></div>
               <div >
-                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{inscriptionStartDate}} - {{inscriptionFinishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{tournamentStartDate}} - {{tournamentFinishDate}}</p></div>
               </div>
               <div >
-                <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="images/personas.png"> 0/40</p></div>
-                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> 1ª División</p></div>
-                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
+                <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="images/personas.png"> {{registeredCouples}} / {{maxCouples}}</p></div>
+                <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> {{category}}ª División</p></div>
+                <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> {{firstPrize}}€        <img class="tournament_icon" src="images/plata.png"> {{secondPrize}}€</p></div>
               </div>
               <div>
-                  <h4>EMPRESA SOLICITANTE: <a href="bussinessProfile.html"> PADEL ARROYOMOLINOS</a></h4>
+                  <h4>EMPRESA SOLICITANTE: <a href="bussinessProfile.html">{{bussiness.bussinessName}}</a></h4>
               </div>
-              <button class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></button>
-              <button class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></button>
+              <a href="/aceptTournament/{{id}}" class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></a>
+              <a href="/declineTournament/{{id}}" class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></a>
             </div>
-
-            
-            <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-management">
-      
-                <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
-                <div >
-                  <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-                  <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
-                </div>
-                <div >
-                  <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="images/personas.png"> 0/40</p></div>
-                  <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> 1ª División</p></div>
-                  <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
-                </div>
-                <div>
-                    <h4>EMPRESA SOLICITANTE: <a href="bussinessProfile.html"> PADEL ARROYOMOLINOS</a></h4>
-                </div>
-                <button class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></button>
-                <button class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></button>
-              </div>
-
-
-              <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-management">
-      
-                <div class="tournament_definition" id="tournament_name"><p>NOMBRE DEL TORNEO</p></div>
-                <div >
-                  <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> 17/4/2021 - 17/5/2021</p></div>
-                  <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> 17/6/2021 - 17/7/2021</p></div>
-                </div>
-                <div >
-                  <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="images/personas.png"> 0/40</p></div>
-                  <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> 1ª División</p></div>
-                  <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png"> 200€        <img class="tournament_icon" src="images/plata.png"> 50€</p></div>
-                </div>
-                <div>
-                    <h4>EMPRESA SOLICITANTE: <a href="bussinessProfile.html"> PADEL ARROYOMOLINOS</a></h4>
-                </div>
-                <button class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></button>
-                <button class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></button>
-              </div>
-
-
-            
-          
-        
+            {{/pendingTournaments }}
         </div>
       </div>
     </div>

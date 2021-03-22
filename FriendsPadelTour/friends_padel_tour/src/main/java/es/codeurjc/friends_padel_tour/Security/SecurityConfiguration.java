@@ -55,6 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/signUpPlayer").permitAll();
 		http.authorizeRequests().antMatchers("/userSignUp").permitAll();
 		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();
+		http.authorizeRequests().antMatchers("/bussinessSignUpForm").permitAll();
 		http.authorizeRequests().antMatchers("/update/{\\d+}/image").permitAll();			
         http.authorizeRequests().antMatchers("/css-min/**", "/css/main.css", "/css/**", "/scss/**","/js/**","/icomoon/**", "/images/**", "/fonts/**", "/dev-assets/**", "/vendor/**", "/html/**").permitAll();
 		

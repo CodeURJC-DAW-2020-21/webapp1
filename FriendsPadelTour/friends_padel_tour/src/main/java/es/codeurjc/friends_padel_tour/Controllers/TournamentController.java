@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,6 +21,9 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -32,6 +36,8 @@ public class TournamentController {
     PlayersService playerService;
     @Autowired
     private PlayersService bussinessService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -51,9 +57,7 @@ public class TournamentController {
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            
-            
-
+            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -71,6 +75,14 @@ public class TournamentController {
         
         return new String();
     }
+
+    @GetMapping(value="/tournamentManagement")
+    public String goToTournamentManagment(Model model) {
+        List<Tournament> pendingTournaments = tournamentsService.getPending();
+        model.addAttribute("pendingTournaments", pendingTournaments);
+        return "tournamentManagement";
+    }
+    
     
     @RequestMapping(value="/create/{id}/tournament", method=RequestMethod.GET)
     public String createFriendlyMatch(@PathVariable Bussiness id,@RequestParam String name,@RequestParam String description,@RequestParam int fPrize,@RequestParam int sPrize,@RequestParam int min,@RequestParam int max,@RequestParam int category,@RequestParam String d1,@RequestParam String d2, @RequestParam String d3,@RequestParam String locality,@RequestParam String province,@RequestParam String postalCode,@RequestParam String date1,@RequestParam String date2,@RequestParam String date3,@RequestParam String date4,  Model model) {
