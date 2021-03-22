@@ -20,9 +20,9 @@ public class DatabaseUsersLoader {
 
     @PostConstruct
     private void initDatabase() {
+    	//In this part we initialize the admin user with his own password
     	
-    	//userRepository.save(new User("user", passwordEncoder.encode("pass"), "USER"));
 		userRepository.save(new User("admin", passwordEncoder.encode("adminpass"), "ADMIN"));
-        //userRepository.save(new User("bussiness", passwordEncoder.encode("bussinesspass"), "USER", "bussiness"));
+        
     }
 }

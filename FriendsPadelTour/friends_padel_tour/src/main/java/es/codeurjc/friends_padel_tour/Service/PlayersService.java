@@ -15,6 +15,7 @@ import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 @Service
 public class PlayersService {
     
+    //Autowired section
     @Autowired
     private UserService userService;
     @Autowired
@@ -22,6 +23,7 @@ public class PlayersService {
     @Autowired
     private BussinessRepository bussinessRepository;
 
+    //Save a player having in mind his role
     public boolean savePlayer(Player newPlayer){
         Optional<Player> playerInDB = playerRepository.findByEmail(newPlayer.getEmail());
         Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(newPlayer.getEmail());
@@ -38,6 +40,7 @@ public class PlayersService {
         return true;
     }
 
+    //Get a player according to his email
     public Player getPlayer(String email) {
         Optional<Player> playerInDB = playerRepository.findByEmail(email);
         if(playerInDB.isPresent())
@@ -45,28 +48,33 @@ public class PlayersService {
         return null;
     }
 
+    //Find a player by his Username
     public Player findByUsername(String attribute) {
         Optional<Player> playerInDB = playerRepository.findByUsername(attribute);
         if(playerInDB.isPresent()) return playerInDB.get();
         return null;
     }
 
+    //Find a player by his id
     public Player findById(long id) {
         Optional<Player> playerInDB = playerRepository.findById(id);
         if(playerInDB.isPresent()) return playerInDB.get();
         return null;
     }
 
+    //Update a player
     public void updatePlayer(Player player) {
         playerRepository.save(player);
     }
 
+    //Find the top 10 players in the repository
     public List<Player> findTOP10(int division){
         Optional<List<Player>> top10players = playerRepository.findTop10(division);
         if(top10players.isPresent()) return top10players.get();
         return null;  
     }
 
+    //Find all players
     public List<Player> findAll() {
         return playerRepository.findAll();
     }

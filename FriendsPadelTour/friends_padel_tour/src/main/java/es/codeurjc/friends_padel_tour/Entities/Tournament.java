@@ -238,22 +238,33 @@ public class Tournament {
 
 
 
-    public Tournament( Bussiness bussiness, String name, String tournamentStartDate,
+
+    public Tournament(Bussiness bussiness, String name, String description, String tournamentStartDate,
             String tournamentFinishDate, String inscriptionStartDate, String inscriptionFinishDate, int minCouples,
-            int maxCouples,int category) {
+            int maxCouples, int category, int firstPrize, int secondPrize, String localization) {
         this.bussiness = bussiness;
         this.name = name;
+        this.description = description;
         this.tournamentStartDate = tournamentStartDate;
         this.tournamentFinishDate = tournamentFinishDate;
         this.inscriptionStartDate = inscriptionStartDate;
         this.inscriptionFinishDate = inscriptionFinishDate;
         this.minCouples = minCouples;
         this.maxCouples = maxCouples;
+        this.category = category;
+        this.firstPrize = firstPrize;
+        this.secondPrize = secondPrize;
+        this.localization = localization;
         this.accepted = false;
         this.registeredCouples = 0;
         this.finished = false;
         this.category = category;
     }
+
+
+
+
+
 
 
 }

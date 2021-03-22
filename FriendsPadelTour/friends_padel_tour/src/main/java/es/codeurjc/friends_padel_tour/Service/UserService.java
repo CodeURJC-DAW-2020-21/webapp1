@@ -21,12 +21,15 @@ import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
 
 @Service
 public class UserService implements UserDetailsService {
+
+	//Autowired section
 	@Autowired
 	private PasswordEncoder passwordEnconder;
 
 	@Autowired
 	private UserRepository userRepository;
 
+	//Load a user accordin to his username having in mind his role ant the password
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -43,12 +46,14 @@ public class UserService implements UserDetailsService {
 
 	}
 
+	//Save a user 
 	public User saveUser(String username, String password, String role) {
 		User newUser =  new User(username,passwordEnconder.encode(password), role);
 		userRepository.save(newUser);
 		return newUser;
 	}
 
+	//Find a user
 	public User findByUsername(String name) {
 		Optional<User> userInDB = userRepository.findByUsername(name);
 		if(userInDB.isPresent())

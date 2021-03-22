@@ -61,10 +61,12 @@
                   <ul class="list-unstyled">
                     <li><a href="/AboutUs">Conócenos</a></li>
                     {{#logged}}
-                    <li><a href="/userProfile">Tu perfil</a></li>
-                    {{/logged}}
-                    {{^logged}}
-                    <li><a href="/login">Tu perfil</a></li>
+                        {{#user}}
+                          <li><a href="/users/{{userName}}">Tu perfil</a></li>
+                        {{/user}}
+                        {{#bussiness}}
+                          <li><a href="/bussinessProfile/{{userId}}">Tu perfil</a></li>
+                        {{/bussiness}}
                     {{/logged}}
                   </ul>
                 </div>
