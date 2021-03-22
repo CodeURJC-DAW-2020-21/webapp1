@@ -68,5 +68,10 @@ public class BussinessService {
         if(bussinesInDB.isPresent()) return bussinesInDB.get();
         return null;
     }
+
+    public void saveBussiness(Bussiness loggedBussiness) {
+        userService.saveUser(loggedBussiness.getUsername(), loggedBussiness.getPassword(), "BUSSINESS");
+        bussinessRepository.save(loggedBussiness);
+    }
     
 }

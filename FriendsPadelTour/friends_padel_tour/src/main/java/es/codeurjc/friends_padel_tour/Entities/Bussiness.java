@@ -26,8 +26,10 @@ public class Bussiness{
     private String ownerName;
     private String ownerSurname;
     private String location;
+    private String city;
     private String email;
     private String adress;
+    private String bussinessType;
     private int createdTournaments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
@@ -38,8 +40,28 @@ public class Bussiness{
     @JsonIgnore
     private Blob image;
 
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
+
     public Bussiness(){
         
+    }
+
+    public String getBussinessType() {
+        return bussinessType;
+    }
+
+    public void setBussinessType(String bussinessType) {
+        this.bussinessType = bussinessType;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public boolean isHasImage() {
@@ -74,8 +96,7 @@ public class Bussiness{
         this.schedule = schedule;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private User user;
+    
 
 
     public String getUsername() {

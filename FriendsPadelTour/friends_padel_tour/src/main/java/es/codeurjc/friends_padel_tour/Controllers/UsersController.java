@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
@@ -106,11 +106,29 @@ public class UsersController {
         return "userSignUp";
     }
 
-    @GetMapping(value="/bussinesSignUpForm")
+    @GetMapping(value="/bussinessSignUpForm")
     public String bussinessSignUp(Model model) {
         return "bussinessSignUp";
     }
 
+
+    @PostMapping(value = "/signUpBussiness")
+    public String signUpBussiness(Bussiness loggedBussiness,Model model){
+        bussinessService.saveBussiness(loggedBussiness);
+        model.addAttribute("bussiness", loggedBussiness);
+        model.addAttribute("userId", loggedBussiness.getId());
+        model.addAttribute("logged", true);
+        model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
+        model.addAttribute("adress", loggedBussiness.getAdress());
+        model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
+        model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
+        model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
+        model.addAttribute("acceptedTournaments",null);
+        model.addAttribute("nonAcceptedTournaments",null);
+        model.addAttribute("bussinessId", loggedBussiness.getId());
+        model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
+        return "bussinessProfile";
+    }
 
     @PostMapping(value="/signUpPlayer")
     public String signUpUser(Player loggedPlayer,Model model) {
@@ -162,11 +180,10 @@ public class UsersController {
         return "userProfile";
     }
 
-    @GetMapping(value="/bussinessProfile/{{id}}")
-    public String bussinessProfile(Model model,@PathVariable Long id,@PageableDefault(page=0, size=10) Pageable pageable,@PageableDefault(page=0, size=10)  Pageable pageable2) {
+    @GetMapping(value="/bussinessProfile/{username}")
+    public String bussinessProfile(Model model,@PathVariable String username,@Qualifier("accepted")@PageableDefault(page=0, size=10) Pageable pageable,@Qualifier("nonAccepted")@PageableDefault(page=0, size=10)  Pageable pageable2) {
         
-        Bussiness loggedBussiness = bussinessService.findById(id);
-        TournamentsService tournamentsService = new TournamentsService();
+        Bussiness loggedBussiness = bussinessService.findByUsername(username);
         Page<Tournament> acceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable);
         Page<Tournament> nonAcceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable2);
 
@@ -176,18 +193,10 @@ public class UsersController {
         model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
         model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
         model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",acceptedTournaments);
-        model.addAttribute("nonAcceptedTournaments",nonAcceptedTournaments);
+        model.addAttribute("acceptedTournaments",null);
+        model.addAttribute("nonAcceptedTournaments",null);
         model.addAttribute("bussinessId", loggedBussiness.getId());
         model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
-        model.addAttribute("hasPrev", acceptedTournaments.hasPrevious());
-        model.addAttribute("hasNext", acceptedTournaments.hasNext());
-        model.addAttribute("nextPage", acceptedTournaments.getNumber()+1);
-        model.addAttribute("prevPage", acceptedTournaments.getNumber()-1);
-        model.addAttribute("hasPrev2", nonAcceptedTournaments.hasPrevious());
-        model.addAttribute("hasNext2", nonAcceptedTournaments.hasNext());
-        model.addAttribute("nextPage2", nonAcceptedTournaments.getNumber()+1);
-        model.addAttribute("prevPage2", nonAcceptedTournaments.getNumber()-1);
         return "bussinessProfile";
     }
 

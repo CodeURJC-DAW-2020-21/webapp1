@@ -8,21 +8,25 @@
         <div class="container col-md-4"></div>
         <div class="container col-md-4 form">
           <h1>Regístrese</h1>
-          <form>
+          <form action="/signUpBussiness" method="POST">
             <h2>Informacion personal</h2>
               <div class="form-group">
                 <label for="userName">Nombre:</label>
-                <input type="text" class="form-control" id="userName">
+                <input type="text" class="form-control" name="ownerName">
               </div>
               <div class="form-group">
                 <label for="surname">Apellidos:</label>
-                <input type="text" class="form-control" id="userSurname">
+                <input type="text" class="form-control" name="ownerSurname">
               </div>
               <label for="email">Correo electronico:</label>
-              <input type="email" class="form-control" id="userEmail" placeholder="ejemplo@gmail.com">
+              <input type="email" class="form-control" name="email" placeholder="ejemplo@gmail.com">
             <div class="form-group">
+              <div class="form-group">
+                <label for="userName">Nombre de usuario:</label>
+                <input type="text" class="form-control" name="username">
+              </div>
               <label for="pwd">Contraseña:</label>
-              <input type="password" class="form-control" id="userPwd" placeholder="contraseña">
+              <input type="password" class="form-control" name="password" placeholder="contraseña">
             </div>
             <div class="form-group">
               <label for="confirm-pwd">Comfirme la contraseña:</label>
@@ -31,14 +35,18 @@
             <h2>Informacion de su empresa</h2>
             <div class="form-group">
               <label for="bussinessName">Nombre:</label>
-              <input type="text" class="form-control" id="bussinessName">
+              <input type="text" class="form-control" name="bussinessName">
             </div>
             <div class="form-group">
               <label for="userLocation">Localidad:</label>
-              <input type="text" class="form-control" id="userLocation">
+              <input type="text" class="form-control" name="city">
+            </div>
+            <div class="form-group">
+              <label for="adress">Direccion:</label>
+              <input type="text" class="form-control" name="adress">
             </div>
             <label for="userProvince">Provincia:</label>
-            <select class="form-control" id="userProvince">
+            <select class="form-control" name="location">
                 <option>Coruña (La Coruña)</option>
                   <option>Álava</option>
                   <option>Albacete</option>
@@ -92,7 +100,7 @@
             </select>
             <br>
             <label for="bussinessType">Tipo de negocio:</label>
-            <select class="form-control" id="bussinessType">
+            <select class="form-control" name="bussinessType">
                   <option>Escuela de padel</option>
                   <option>Centro deportivo</option>
                   <option>Tienda de material deportivo</option>
@@ -100,6 +108,7 @@
             </select>
             <br>
             <button type="submit" class="btn btn-default">Enviar</button>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
           </form>
         </div>
         <div class="container col-md-4"></div>
