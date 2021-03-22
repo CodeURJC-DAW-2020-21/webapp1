@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -24,6 +28,8 @@ public class TournamentController {
     PlayersService playerService;
     @Autowired
     private PlayersService bussinessService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -43,9 +49,7 @@ public class TournamentController {
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            
-            
-
+            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -63,6 +67,14 @@ public class TournamentController {
         
         return new String();
     }
+
+    @GetMapping(value="/tournamentManagement")
+    public String goToTournamentManagment(Model model) {
+        List<Tournament> pendingTournaments = tournamentsService.getPending();
+        model.addAttribute("pendingTournaments", pendingTournaments);
+        return "tournamentManagement";
+    }
+    
     
     
 }

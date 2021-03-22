@@ -45,7 +45,7 @@ public class Tournament {
     @ManyToMany
     private List<DoubleOfPlayers> players;
 
-    private String category;
+    private int category;
     
     private int firstPrize;
     private int secondPrize;
@@ -120,13 +120,13 @@ public class Tournament {
 
 
 
-    public String getCategory() {
+    public int getCategory() {
         return category;
     }
 
 
 
-    public void setCategory(String category) {
+    public void setCategory(int category) {
         this.category = category;
     }
 
@@ -238,10 +238,9 @@ public class Tournament {
 
 
 
-    public Tournament(long id, Bussiness bussiness, String name, String tournamentStartDate,
+    public Tournament( Bussiness bussiness, String name, String tournamentStartDate,
             String tournamentFinishDate, String inscriptionStartDate, String inscriptionFinishDate, int minCouples,
-            int maxCouples) {
-        this.id = id;
+            int maxCouples,int category) {
         this.bussiness = bussiness;
         this.name = name;
         this.tournamentStartDate = tournamentStartDate;
@@ -253,6 +252,7 @@ public class Tournament {
         this.accepted = false;
         this.registeredCouples = 0;
         this.finished = false;
+        this.category = category;
     }
 
 

@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Entities.pdfGenerator;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
 
 
@@ -26,8 +28,8 @@ import es.codeurjc.friends_padel_tour.Service.UserService;
 
 @Controller
 public class PrincipalController {
-
-
+    @Autowired
+    private TournamentsService tournamentService;
     @Autowired
     private PlayersService playerService;
     @Autowired
@@ -65,6 +67,9 @@ public class PrincipalController {
 	public String Index() {
         Player newPlayer1 = new Player("username","yo","apellido","email","contraseña","ciudad",1);
         Player newPlayer2 = new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1);
+        bussinessService.saveBussiness("Padel Arroyo Molinos", "userName", "userSurname", "email@gmail.com", "password", "Madrid", "adress");
+        Tournament tournament = new Tournament(bussinessService.findByUsername("userName"), "Torneo1", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 20,1);
+        tournamentService.save(tournament);
         newPlayer2.setScore(500);
         newPlayer1.setScore(200);
         newPlayer1.setMathesPlayed(2);

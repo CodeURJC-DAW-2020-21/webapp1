@@ -21,6 +21,7 @@ import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
 
 
 @Controller
@@ -34,6 +35,8 @@ public class MatchController {
     private DoubleService doubleService;
     @Autowired
     private PlayersService bussinessService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -53,6 +56,7 @@ public class MatchController {
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
             
             
 

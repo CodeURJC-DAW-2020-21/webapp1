@@ -35,6 +35,7 @@ import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
+import es.codeurjc.friends_padel_tour.Service.UserService;
 import net.bytebuddy.asm.Advice.Return;
 
 
@@ -44,7 +45,6 @@ import net.bytebuddy.asm.Advice.Return;
 
 @Controller
 public class UsersController {
-
     @Autowired
     private PlayersService playerService;
     @Autowired
@@ -55,6 +55,8 @@ public class UsersController {
     private MatchesService matchesService;
     @Autowired
     private TournamentsService tournamentsService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -75,9 +77,7 @@ public class UsersController {
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
 			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            
-            
-
+            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
 		} else {
 			model.addAttribute("logged", false);
 		}
