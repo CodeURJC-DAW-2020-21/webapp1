@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.classmate.members.RawMethod;
 
+import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,6 +66,8 @@ public class TournamentController {
 
     @GetMapping(value="/tournaments")
     public String getMethodName3(Model model) {
+        List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
+        model.addAttribute("tournaments", tournamentsaccepted);
         return "tournaments";
     }
 
@@ -97,5 +100,20 @@ public class TournamentController {
         Bussiness bussiness = id;
         model.addAttribute("id", bussiness);
         return "tournamentRequest";
+    }
+
+    @GetMapping(value="/acceptTournament/{id}")
+    public String acceptTournament(@PathVariable int id, Model model){
+        Tournament tournament = tournamentsService.findById(id);
+        tournament.setAccepted(true);
+        tournamentsService.save(tournament);
+        return "successEditTournament";
+    }
+
+    @GetMapping(value="/declineTournament/{id}")
+    public String declineTournament(@PathVariable int id, Model model){
+        tournamentsService.deleteById(id);
+        
+        return "successEditTournament";
     }
 }
