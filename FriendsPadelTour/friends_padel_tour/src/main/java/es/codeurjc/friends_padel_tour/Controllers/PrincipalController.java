@@ -3,6 +3,8 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -97,10 +99,12 @@ public class PrincipalController {
 	
     @GetMapping("/download-pdf")
         public void downloadFile(HttpServletResponse response) throws IOException {
-            String mystring = "Juan";
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'a las' HH:mm:ss z"); 
+            Date date = new Date(System.currentTimeMillis());
+            String date2 = formatter.format(date);
             String mystring2 = "Padel Arroyomolinos";
             pdfGenerator generator = new pdfGenerator();
-            generator.setNameWinner(mystring);
+            generator.setDate(date2);
             generator.setNameTournament(mystring2);
             byte[] pdfReport = generator.getPDF().toByteArray();
     
