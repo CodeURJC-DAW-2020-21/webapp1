@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
@@ -45,16 +47,16 @@ public class TournamentsService {
         tournamentRepository.save(tournament);    
     }
 
-    public List<Tournament> getAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true);
+    public Page<Tournament> getAccepted(Bussiness bussiness, Pageable pageable){
+        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true, pageable);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
         else return null;
     }
 
-    public List<Tournament> getNotAccepted(Bussiness bussiness){
-        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false);
+    public Page<Tournament> getNotAccepted(Bussiness bussiness, Pageable pageable){
+        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false, pageable);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 

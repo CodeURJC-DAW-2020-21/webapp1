@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,6 +33,7 @@ import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
@@ -156,19 +161,31 @@ public class UsersController {
     }
 
     @GetMapping(value="/bussinessProfile/{{id}}")
-    public String bussinessProfile(Model model,@PathVariable Long id) {
+    public String bussinessProfile(Model model,@PathVariable Long id,@PageableDefault(page=0, size=10) Pageable pageable,@PageableDefault(page=0, size=10)  Pageable pageable2) {
+        
         Bussiness loggedBussiness = bussinessService.findById(id);
         TournamentsService tournamentsService = new TournamentsService();
+        Page<Tournament> acceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable);
+        Page<Tournament> nonAcceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable2);
+
+
         model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
         model.addAttribute("adress", loggedBussiness.getAdress());
         model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
         model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
         model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",tournamentsService.getAccepted(loggedBussiness));
-        model.addAttribute("nonAcceptedTournaments",tournamentsService.getNotAccepted(loggedBussiness));
-        model.addAttribute("finished",tournamentsService.getNotAccepted(loggedBussiness));
+        model.addAttribute("acceptedTournaments",acceptedTournaments);
+        model.addAttribute("nonAcceptedTournaments",nonAcceptedTournaments);
         model.addAttribute("bussinessId", loggedBussiness.getId());
         model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
+        model.addAttribute("hasPrev", acceptedTournaments.hasPrevious());
+        model.addAttribute("hasNext", acceptedTournaments.hasNext());
+        model.addAttribute("nextPage", acceptedTournaments.getNumber()+1);
+        model.addAttribute("prevPage", acceptedTournaments.getNumber()-1);
+        model.addAttribute("hasPrev2", nonAcceptedTournaments.hasPrevious());
+        model.addAttribute("hasNext2", nonAcceptedTournaments.hasNext());
+        model.addAttribute("nextPage2", nonAcceptedTournaments.getNumber()+1);
+        model.addAttribute("prevPage2", nonAcceptedTournaments.getNumber()-1);
         return "bussinessProfile";
     }
 
@@ -253,7 +270,7 @@ public class UsersController {
 
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
-    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, String s1_0, String s1_1, String s1_2, String s1_3, String s1_4, String s1_5, String s1_6,String s2_0, String s2_1, String s2_2, String s2_3, String s2_4, String s2_5, String s2_6) {
+    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
         Bussiness loggedBussiness = bussinessService.findById(id);
         String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
         loggedBussiness.setSchedule(schedule);
@@ -282,6 +299,8 @@ public class UsersController {
         tournamentsService.deleteById(id);
         return "successTournamentDelete";
     }
+
+
     }
 
     
