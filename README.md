@@ -120,4 +120,12 @@ In this screen the admin user can see all the tournament requests and accept all
 ## Class and template diagram
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaClases.png?raw=true "Class and Template Diagram")
 
+## 5 COMMITS
+
+| Name |Commits|
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Juan Guillo Bermejo | f17d2ad90e8818957c1f9757344f3e697c9fe68c  |  2afc3810884330fa6069ca80a81bab5bd1bf9ab5 |  31bf60e0870490f23a28e836412d26776888770e |   |   |
+| Eduardo Ivorra Salinas |  |  |   |   |   |
+| Eduardo Villaverde Espeso |  |   |   |   |   |
+| Alberto Morán Cuenca |  |   |   |   |   |
 
