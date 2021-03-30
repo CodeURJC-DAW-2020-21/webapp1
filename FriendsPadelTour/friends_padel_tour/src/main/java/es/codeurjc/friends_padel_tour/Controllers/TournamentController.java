@@ -5,25 +5,20 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.fasterxml.classmate.members.RawMethod;
-
-import org.hibernate.transform.ToListResultTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -32,11 +27,11 @@ public class TournamentController {
 
     //Autowired section
     @Autowired
-    TournamentsService tournamentsService;
+    private TournamentsService tournamentsService;
     @Autowired
-    PlayersService playerService;
+    private PlayersService playerService;
     @Autowired
-    private PlayersService bussinessService;
+    private BussinessService bussinessService;
     @Autowired
     private UserService userService;
 
@@ -57,15 +52,17 @@ public class TournamentController {
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
 	}
 
     @GetMapping(value="/tournaments")
-    public String getMethodName3(Model model) {
+    public String showTournaments(Model model) {
         List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
         model.addAttribute("tournaments", tournamentsaccepted);
         return "tournaments";
@@ -87,19 +84,15 @@ public class TournamentController {
     }
     
     
-    @RequestMapping(value="/create/{id}/tournament", method=RequestMethod.GET)
-    public String createFriendlyMatch(@PathVariable Bussiness id,@RequestParam String name,@RequestParam String description,@RequestParam int fPrize,@RequestParam int sPrize,@RequestParam int min,@RequestParam int max,@RequestParam int category,@RequestParam String d1,@RequestParam String d2, @RequestParam String d3,@RequestParam String locality,@RequestParam String province,@RequestParam String postalCode,@RequestParam String date1,@RequestParam String date2,@RequestParam String date3,@RequestParam String date4,  Model model) {
-        
-        Tournament tournament = new Tournament(id, name, description, date1, date2, date3, date4, min, max, category, fPrize, sPrize, locality);
+    @PostMapping(value="/create/tournament")
+    public String createTournament(Tournament tournament,Model model) {
+        Long bussinessId = (Long) model.getAttribute("userId");
+        Bussiness loggedBussiness = bussinessService.findById(bussinessId);
+        tournament.setBussinnes(loggedBussiness);
         tournamentsService.save(tournament);
+        loggedBussiness.getTournaments().add(tournament);
+        bussinessService.updateBussiness(loggedBussiness);
         return "successTournamentCreation";
-    }
-
-    @GetMapping(value="/create/{id}")
-    public String requestTournament(@PathVariable Bussiness id, Model model) {
-        Bussiness bussiness = id;
-        model.addAttribute("id", bussiness);
-        return "tournamentRequest";
     }
 
     @GetMapping(value="/acceptTournament/{id}")
@@ -113,7 +106,12 @@ public class TournamentController {
     @GetMapping(value="/declineTournament/{id}")
     public String declineTournament(@PathVariable int id, Model model){
         tournamentsService.deleteById(id);
-        
         return "successEditTournament";
     }
+
+    @GetMapping(value="/tournamentRequest")
+    public String tournamentReque(Model model) {
+        return "tournamentRequest";
+    }
+    
 }

@@ -61,6 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 
 		// Private pages (all other pages)
+		http.authorizeRequests().antMatchers("/create/tournament").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/tournamentManagement").hasAnyRole("ADMIN");

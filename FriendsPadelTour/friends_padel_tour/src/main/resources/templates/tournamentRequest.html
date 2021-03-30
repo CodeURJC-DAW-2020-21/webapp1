@@ -16,23 +16,23 @@
       <div class="row">
         <div class="col-md-3"></div>
         <div class="container col-md-6 form">
-            <form action="/create/tournament/{{id}}" method="GET">
+            <form action="/create/tournament" method="POST">
               <div class="form-section">
                 <h1>Datos del torneo</h1>
                 <div class="form-group">
                   <label for="tournamentName">Nombre del torneo:</label>
-                  <input type="text" class="form-control" id="tournamentName" size="50">
+                  <input type="text" class="form-control" id="tournamentName" name="name" size="50">
                   <label for="description">Descripción del torneo:</label>
                   <br>
                   <textarea name="description" rows="5" cols="50"></textarea>
                   <div class="row align-items-center">
                     <div class="col-md-3">
                       <label for="winerPrize">Premio ganador:</label>
-                      <input class="form-control" type="number" name="winerPrize" min="0"></p>
+                      <input class="form-control" type="number" name="firstPrize" min="0"></p>
                     </div>
                     <div class="col-md-3">
                       <label for="finalistPrize">Premio ganador:</label>
-                      <input class="form-control" type="number" name="finalistPrize" min="0"></p>
+                      <input class="form-control" type="number" name="secondPrize" min="0"></p>
                     </div>
                   </div>
                 </div>
@@ -45,12 +45,12 @@
                   <div class="row">
                       <div class="col-md-4">
                         <p>Numero mínimo de parejas que participan:<br> 
-                        <input class="form-control" type="number" name="minParticipants" min="1" width="40">
+                        <input class="form-control" type="number" name="minCouples" min="1" width="40">
                         </p>
                       </div>
                       <div class="col-md-4">
                         <p>Numero máximo de parejas que participan:<br> 
-                        <input class="form-control" type="number" name="maxParticipants" min="minParticipants" width="40">
+                        <input class="form-control" type="number" name="maxCouples" min="minParticipants" width="40">
                         </p>
                       </div>
                     <div class="col-md-4"></div>
@@ -58,25 +58,25 @@
                 <label for="tournamentCategories">Nivel/es del torneo:</label>
                   <div class="row align-items-center">
                     <div class="col-md-4">
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">1ª División</label>
+                      <div class="radio">
+                        <label><input type="radio" name="category" value="1">1ª División</label>
                       </div>
                       <div class="checkbox">
-                        <label><input type="checkbox" value="">2ª División</label>
+                        <label><input type="radio" name="category" value="2">2ª División</label>
                       </div>
                       <div class="checkbox">
-                        <label><input type="checkbox" value="">3ª División</label>
+                        <label><input type="radio" name="category" value="3">3ª División</label>
                       </div>
                     </div>
                     <div class="col-md-4">
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">4ª División</label>
+                      <div class="radio">
+                        <label><input type="radio" name="category" value="4">4ª División</label>
                       </div>
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">5ª División</label>
+                      <div class="radio">
+                        <label><input type="radio" name="category" value="5">5ª División</label>
                       </div>
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">6ª División</label>
+                      <div class="radio">
+                        <label><input type="radio" name="category" value="6">6ª División</label>
                       </div>
                     </div>
                   </div>
@@ -85,12 +85,12 @@
               <div class="form-section">
                 <br>
                 <h1>Datos de la localización</h1>
-                <p>Nombre de la instalación deportiva:<br> <input class="form-control" type="text" name="locationName" size="40"></p>
-                <p>Linea de dirección 1:<br> <input class="form-control" type="text" name="adress1" size="40"></p>
-                <p>Linea de dirección 2:<br> <input class="form-control" type="text" name="adress2" size="40"></p>
+                <p>Nombre de la instalación deportiva:<br>
+                  <input class="form-control" type="text" name="facility" size="40"></p>
+                <p>Dirección:<br> <input class="form-control" type="text" name="adress" size="40"></p>
                 <p>Localidad:<br> <input class="form-control" type="text" name="city"></p>
                 <p>Provincia:<br>
-                  <select name="province">
+                  <select name="localization">
                     <option>Coruña (La Coruña)</option>
                     <option>Álava</option>
                     <option>Albacete
@@ -143,7 +143,7 @@
                     <option>Zaragoza</option>
                   </select>
                 </p>
-                <p>Codigo postal:<br> <input class="form-control" type="number" name="postCode"></p>
+                <p>Codigo postal:<br> <input class="form-control" type="number" name="postalCode"></p>
                 <br>
               </div>
               <br>
@@ -154,8 +154,8 @@
                   <p>Inicio del torneo:<br> <input class="form-control" type="date" name="tournamentStartDate"></p>
                 </div>
                 <div class="col-md-4">
-                  <p>Fin de inscripción:<br> <input class="form-control" type="date" name="inscriptionEndDate"></p>
-                  <p>Fin del torneo: <br><input class="form-control" type="date" name="tournamentEndDate"></p>
+                  <p>Fin de inscripción:<br> <input class="form-control" type="date" name="inscriptionFinishDate"></p>
+                  <p>Fin del torneo: <br><input class="form-control" type="date" name="tournamentFinishDate"></p>
                 </div>
                 <div class="col-md-4"></div>
               </div>
@@ -163,6 +163,7 @@
                 <div class="row">
                   <div class="col-md-6">
                     <input class="form-control" type="submit" value="Enviar">
+                    <input type="hidden" name="_csrf" value="{{token}}">
                   </div>
                   <div class="col-md-6">
                     <input class="form-control" type="reset" value="Borrar todo">

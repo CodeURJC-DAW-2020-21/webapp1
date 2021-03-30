@@ -56,11 +56,10 @@ public class MatchController {
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
-            
-            
-
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}

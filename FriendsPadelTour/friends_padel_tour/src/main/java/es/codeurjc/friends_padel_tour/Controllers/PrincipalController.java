@@ -58,10 +58,10 @@ public class PrincipalController {
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
-            
-
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -71,8 +71,8 @@ public class PrincipalController {
 	public String Index() {
         Player newPlayer1 = new Player("username","yo","apellido","email","contraseña","ciudad",1);
         Player newPlayer2 = new Player("username2","yo2","apellido2","email2","contraseña2","ciudad2",1);
-        bussinessService.saveBussiness("Padel Arroyo Molinos", "bussinessUserName", "userSurname", "email@gmail.com", "password", "Madrid", "adress");
-        Tournament tournament = new Tournament(bussinessService.findByUsername("userName"), "Torneo1", "Un torneo para novatos","11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 20,1,500,200,"Madrid");
+        bussinessService.saveBussiness("Padel Arroyo Molinos", "bussinessUsername", "userSurname", "email@gmail.com", "password", "Madrid", "adress");
+        Tournament tournament = new Tournament(bussinessService.findByUsername("bussinessUsername"), "Torneo1", "Un torneo para novatos","11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 20,1,500,200,"Madrid");
         tournamentService.save(tournament);
         newPlayer2.setScore(500);
         newPlayer1.setScore(200);

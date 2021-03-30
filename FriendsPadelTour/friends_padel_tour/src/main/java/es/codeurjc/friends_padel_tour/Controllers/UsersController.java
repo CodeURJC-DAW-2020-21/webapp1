@@ -3,6 +3,7 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -77,14 +78,15 @@ public class UsersController {
             if(request.isUserInRole("USER")){
                 model.addAttribute("user", request.isUserInRole("USER"));
                 model.addAttribute("userId", playerService.findByUsername(principal.getName()).getId());
-                model.addAttribute("loggedUser", playerService.findByUsername(principal.getName()));
             }
             if(request.isUserInRole("BUSSINESS")){
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -184,8 +186,17 @@ public class UsersController {
     public String bussinessProfile(Model model,@PathVariable String username,@Qualifier("accepted")@PageableDefault(page=0, size=10) Pageable pageable,@Qualifier("nonAccepted")@PageableDefault(page=0, size=10)  Pageable pageable2) {
         
         Bussiness loggedBussiness = bussinessService.findByUsername(username);
-        Page<Tournament> acceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable);
-        Page<Tournament> nonAcceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable2);
+        ArrayList<Tournament> acceptedTournaments = new ArrayList<>();
+        ArrayList<Tournament> nonAcceptedTournaments = new ArrayList<>();
+
+        for( Tournament t : loggedBussiness.getTournaments()){
+            if(t.isAccepted()){ 
+                acceptedTournaments.add(t);
+            }
+            else {
+                nonAcceptedTournaments.add(t);
+            }
+        }
 
 
         model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
@@ -193,8 +204,8 @@ public class UsersController {
         model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
         model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
         model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",null);
-        model.addAttribute("nonAcceptedTournaments",null);
+        model.addAttribute("acceptedTournaments",acceptedTournaments);
+        model.addAttribute("nonAcceptedTournaments",nonAcceptedTournaments);
         model.addAttribute("bussinessId", loggedBussiness.getId());
         model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
         return "bussinessProfile";

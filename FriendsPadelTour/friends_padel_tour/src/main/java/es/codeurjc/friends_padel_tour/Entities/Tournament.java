@@ -50,11 +50,62 @@ public class Tournament {
     private int firstPrize;
     private int secondPrize;
     private String localization;
-    
+    private String adress;
+    private String city;
+    private String facility;
+    private int postalCode;
 
     public Tournament(){}
 
     
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+
+
+    public String getFacility() {
+        return facility;
+    }
+
+
+
+    public void setFacility(String facility) {
+        this.facility = facility;
+    }
+
+
+
+    public String getCity() {
+        return city;
+    }
+
+
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
+    public String getAdress() {
+        return adress;
+    }
+
+
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+
 
     public boolean isFinished() {
         return finished;
