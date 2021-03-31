@@ -30,24 +30,6 @@ public class BussinessService {
         bussinessRepository.save(bussiness);
     }
 
-    //Save bussiness
-    public boolean saveBussiness(String bussinessName, String userName, String userSurname, String email, String password, String location, String adress){
-        
-        Optional<Player> playerInDB = playerRepository.findByEmail(email);
-        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(email);
-        if(playerInDB.isPresent()) 
-            return false;
-        if(bussinessInDB.isPresent())
-            return false;
-        bussinessInDB = bussinessRepository.findByBussinessName(bussinessName);
-        if(bussinessInDB.isPresent())
-            return false;
-        User newUser = userService.saveUser(userName, password,"BUSSINESS");
-        Bussiness newBussiness = new Bussiness(bussinessName,userName,userSurname,location,email,adress,newUser);
-        bussinessRepository.save(newBussiness);
-        return true;
-    }
-
     //Find bussiness by id
     public Bussiness findById(long id) {
         Optional<Bussiness> BussinessInDB = bussinessRepository.findById(id);

@@ -137,7 +137,7 @@ public class UsersController {
         if(!playerService.savePlayer(loggedPlayer))
             return "404";
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("efectivity", 0);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
@@ -165,7 +165,7 @@ public class UsersController {
             notMyProfile = !model.getAttribute("userName").equals(username);
         }
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("loggedUser.matchesWon", loggedPlayer.getMathcesWon());
         model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getMathesPlayed());
@@ -222,7 +222,7 @@ public class UsersController {
         }
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -282,7 +282,7 @@ public class UsersController {
         playerService.updatePlayer(winner2);
 
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
