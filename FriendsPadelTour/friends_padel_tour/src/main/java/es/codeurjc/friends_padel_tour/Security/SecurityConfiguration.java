@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/previousSignUp").permitAll();
 		
 		http.authorizeRequests().antMatchers("/download-pdf").permitAll(); //Generate the PDF 
+		http.authorizeRequests().antMatchers("/tournamentInfo/{\\d+}}").permitAll();
         http.authorizeRequests().antMatchers("/team/1").permitAll();
         http.authorizeRequests().antMatchers("/team/2").permitAll();
         http.authorizeRequests().antMatchers("/team/3").permitAll();

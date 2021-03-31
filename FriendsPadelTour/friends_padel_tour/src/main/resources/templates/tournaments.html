@@ -28,7 +28,7 @@
             {{#tournaments}}
             <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
       
-              <div class="tournament_definition" id="tournament_name"><p>{{name}}</p></div>
+              <div class="tournament_definition" id="tournament_name"><a href="/tournamentInfo/{{id}}">{{name}}</a></div>
               <div >
                 <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{inscriptionStartDate}} - {{inscriptionFinishDate}}</p></div>
                 <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{tournamentStartDate}} - {{tournamentFinishDate}}</p></div>

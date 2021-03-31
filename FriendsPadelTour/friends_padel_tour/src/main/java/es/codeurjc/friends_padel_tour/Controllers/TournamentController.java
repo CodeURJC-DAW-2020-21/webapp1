@@ -135,6 +135,15 @@ public class TournamentController {
         tournamentsService.uptdate(tournamentToJoin);
         return "joiningSucces";
     }
+
+    @GetMapping(value="/tournamentInfo/{id}")
+    public String tournamentInfo(@PathVariable long id, Model model) {
+        Tournament tournament = tournamentsService.findById(id);
+        model.addAttribute("tournament", tournament);
+        model.addAttribute("doubles", tournament.getPlayers());
+        return "tournamentInfo";
+    }
+    
     
     
 }
