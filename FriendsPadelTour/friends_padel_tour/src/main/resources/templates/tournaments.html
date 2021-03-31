@@ -39,7 +39,7 @@
                 <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png">{{firstPrize}}<img class="tournament_icon" src="images/plata.png">{{secondPrize}}</p></div>
               </div>
               {{# user }}
-                {{^isFull }}
+                {{^isFull}}
                   <a href="#popup" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
 
                   <div id="popup" class="overlay-formulario">
@@ -54,6 +54,7 @@
                             {{/userDoubles}}
                           </select></label><br>
                           <input type="submit" value="Aceptar">
+                          <input type="hidden" name="_csrf" value="{{token}}"/>
                         </form>
                       </div>
                     </div>

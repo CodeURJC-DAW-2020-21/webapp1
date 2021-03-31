@@ -131,7 +131,9 @@ public class TournamentController {
         if(tournamentToJoin.getRegisteredCouples()==tournamentToJoin.getMaxCouples()){
             tournamentToJoin.setFull(true);
         }
-        return "";
+        doubleService.update(doubleWhoJoin);
+        tournamentsService.uptdate(tournamentToJoin);
+        return "joiningSucces";
     }
     
     

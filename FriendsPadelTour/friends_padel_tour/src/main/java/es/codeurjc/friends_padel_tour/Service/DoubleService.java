@@ -48,5 +48,9 @@ public class DoubleService {
         }
         return null;
     }
+
+    public void update(DoubleOfPlayers doubleToUpdate) {
+        doubleRepository.save(doubleToUpdate);
+    }
     
 }
