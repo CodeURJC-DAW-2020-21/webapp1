@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -57,7 +58,7 @@ public class Player{
     @JsonIgnore
     private Blob image;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private User user;
 
     private int score;
@@ -163,6 +164,8 @@ public class Player{
         this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
         this.hasImage = false;
+        this.doubles1 = new ArrayList<>();
+        this.doubles2 = new ArrayList<>();
         this.setScore(0);
     }
 

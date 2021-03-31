@@ -41,7 +41,7 @@ public class Bussiness{
     private Blob image;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private User user;
 
     public Bussiness(){
@@ -115,16 +115,14 @@ public class Bussiness{
         this.ownerName = ownerName;
     }
 
-    public Bussiness(String name2, String userName2, String userSurname2, String location2, String email2,
-            String adress2, User user) {
-                bussinessName = name2;
-                setUsername(userName2);
-                ownerSurname = userSurname2;
+    public Bussiness(String bussinessName, String userName, String location2, String email2,
+            String password, User user) {
+                this.bussinessName = bussinessName;
+                setUsername(userName);
                 email = email2;
                 location = location2;
-                adress = adress2;
+                this.password = password;
                 createdTournaments = 0;
-                
                 this.user = user;
     }
 
@@ -187,5 +185,5 @@ public class Bussiness{
         this.adress = adress;
         this.image = image;
     }
-    
+
 }
