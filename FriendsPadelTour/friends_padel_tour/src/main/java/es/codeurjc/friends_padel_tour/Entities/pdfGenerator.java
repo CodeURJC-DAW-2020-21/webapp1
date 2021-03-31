@@ -1,12 +1,15 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.Font.FontFamily;
-import com.itextpdf.text.pdf.PdfWriter;
-
 import java.io.ByteArrayOutputStream;
-import java.util.Date;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 
 

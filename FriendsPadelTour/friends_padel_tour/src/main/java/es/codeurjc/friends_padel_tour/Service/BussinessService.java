@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
-import es.codeurjc.friends_padel_tour.Entities.Player;
-import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
-import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 
 
 @Service
@@ -21,9 +18,6 @@ public class BussinessService {
 
     @Autowired
     private BussinessRepository bussinessRepository;
-
-    @Autowired
-    private PlayerRepository playerRepository;
 
     //Update bussiness
     public void updateBussiness(Bussiness bussiness) {
