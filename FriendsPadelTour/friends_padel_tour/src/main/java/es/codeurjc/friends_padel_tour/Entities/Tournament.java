@@ -35,6 +35,7 @@ public class Tournament {
     private int maxCouples;
     private int registeredCouples;
     private boolean finished;
+    private boolean isFull;
     
     @OneToOne
     private DoubleOfPlayers firstWinnngCouple;
@@ -58,6 +59,18 @@ public class Tournament {
     public Tournament(){}
 
     
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+
+
+    public void setFull(boolean isFull) {
+        this.isFull = isFull;
+    }
+
+
 
     public int getPostalCode() {
         return postalCode;
@@ -310,6 +323,7 @@ public class Tournament {
         this.registeredCouples = 0;
         this.finished = false;
         this.category = category;
+        this.isFull = false;
     }
 
 

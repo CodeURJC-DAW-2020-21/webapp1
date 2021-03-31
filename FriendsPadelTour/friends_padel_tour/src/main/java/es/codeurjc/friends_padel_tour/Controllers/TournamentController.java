@@ -14,11 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
+import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
+import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
+import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -34,6 +40,8 @@ public class TournamentController {
     private BussinessService bussinessService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private DoubleService doubleService;
 
     @ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -63,17 +71,15 @@ public class TournamentController {
 
     @GetMapping(value="/tournaments")
     public String showTournaments(Model model) {
+        Player loggedPlayer = playerService.findById((long) model.getAttribute("userId"));
+        List<Player> userDoubles = null;
+        if(loggedPlayer !=null){
+            userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        }
         List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
+        model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("tournaments", tournamentsaccepted);
         return "tournaments";
-    }
-
-    @GetMapping(value="/joinTournament/{id}")
-    public String joinTournament(@PathVariable long id,Model model) {
-        Tournament tournamentToJoin = tournamentsService.findById(id);
-        String userWhoJoinsName = (String) model.getAttribute("userName");
-        
-        return new String();
     }
 
     @GetMapping(value="/tournamentManagement")
@@ -113,5 +119,21 @@ public class TournamentController {
     public String tournamentReque(Model model) {
         return "tournamentRequest";
     }
+
+    @PostMapping(value="/joinTournament/{id}")
+    public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, Model model) {
+        DoubleOfPlayers doubleWhoJoin = doubleService.findDouble((String)model.getAttribute("userName"),doubleSelect);
+        Tournament tournamentToJoin = tournamentsService.findById(id);
+
+        doubleWhoJoin.getTournaments().add(tournamentToJoin);
+        tournamentToJoin.getPlayers().add(doubleWhoJoin);
+        
+        tournamentToJoin.setRegisteredCouples(tournamentToJoin.getRegisteredCouples()+1);
+        if(tournamentToJoin.getRegisteredCouples()==tournamentToJoin.getMaxCouples()){
+            tournamentToJoin.setFull(true);
+        }
+        return "";
+    }
+    
     
 }
