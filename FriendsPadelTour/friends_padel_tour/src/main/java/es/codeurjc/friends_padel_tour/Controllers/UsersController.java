@@ -163,6 +163,11 @@ public class UsersController {
         }
         model.addAttribute("loggedUser", loggedPlayer);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("loggedUser.matchesWon", loggedPlayer.getMathcesWon());
         model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getMathesPlayed());
@@ -220,6 +225,12 @@ public class UsersController {
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
+        model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -280,6 +291,11 @@ public class UsersController {
 
         model.addAttribute("loggedUser", loggedUser);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -320,7 +336,7 @@ public class UsersController {
     }
 
 
-    }
+}
 
     
     
