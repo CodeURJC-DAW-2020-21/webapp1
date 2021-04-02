@@ -3,7 +3,11 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.text.DecimalFormat;
+=======
+import java.util.ArrayList;
+>>>>>>> bc70c83cf53dca67fe1117f4cb8da8ed9475dc91
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -35,14 +38,12 @@ import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
-import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import net.bytebuddy.asm.Advice.Return;
 
 
 
@@ -78,14 +79,15 @@ public class UsersController {
             if(request.isUserInRole("USER")){
                 model.addAttribute("user", request.isUserInRole("USER"));
                 model.addAttribute("userId", playerService.findByUsername(principal.getName()).getId());
-                model.addAttribute("loggedUser", playerService.findByUsername(principal.getName()));
             }
             if(request.isUserInRole("BUSSINESS")){
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -136,7 +138,7 @@ public class UsersController {
         if(!playerService.savePlayer(loggedPlayer))
             return "404";
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("efectivity", 0);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
@@ -164,7 +166,12 @@ public class UsersController {
             notMyProfile = !model.getAttribute("userName").equals(username);
         }
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("loggedUser.matchesWon", loggedPlayer.getMathcesWon());
         model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getMathesPlayed());
@@ -186,8 +193,17 @@ public class UsersController {
     public String bussinessProfile(Model model,@PathVariable String username,@Qualifier("accepted")@PageableDefault(page=0, size=10) Pageable pageable,@Qualifier("nonAccepted")@PageableDefault(page=0, size=10)  Pageable pageable2) {
         
         Bussiness loggedBussiness = bussinessService.findByUsername(username);
-        Page<Tournament> acceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable);
-        Page<Tournament> nonAcceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable2);
+        ArrayList<Tournament> acceptedTournaments = new ArrayList<>();
+        ArrayList<Tournament> nonAcceptedTournaments = new ArrayList<>();
+
+        for( Tournament t : loggedBussiness.getTournaments()){
+            if(t.isAccepted()){ 
+                acceptedTournaments.add(t);
+            }
+            else {
+                nonAcceptedTournaments.add(t);
+            }
+        }
 
 
         model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
@@ -195,8 +211,8 @@ public class UsersController {
         model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
         model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
         model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",null);
-        model.addAttribute("nonAcceptedTournaments",null);
+        model.addAttribute("acceptedTournaments",acceptedTournaments);
+        model.addAttribute("nonAcceptedTournaments",nonAcceptedTournaments);
         model.addAttribute("bussinessId", loggedBussiness.getId());
         model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
         return "bussinessProfile";
@@ -213,7 +229,13 @@ public class UsersController {
         }
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
+        model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -306,6 +328,13 @@ public class UsersController {
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
         List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        model.addAttribute("loggedUser", loggedUser);
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -355,8 +384,12 @@ public class UsersController {
         return "successDelete";
     }
 
+<<<<<<< HEAD
     
     }
+=======
+}
+>>>>>>> bc70c83cf53dca67fe1117f4cb8da8ed9475dc91
 
     
     

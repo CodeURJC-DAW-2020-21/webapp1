@@ -15,5 +15,8 @@ public interface DoubleRepository extends JpaRepository<DoubleOfPlayers,Long>{
         //Select a player who belongs to different doubles
         @Query("select d from DoubleOfPlayers d where d.player1.username = ?1 or d.player2.username = ?1")
         Optional<List<DoubleOfPlayers>> findDoublesOf(String name);
+
+        @Query("select d from DoubleOfPlayers d where (d.player1.username = ?1 and d.player2.username = ?2)or(d.player2.username = ?1 and d.player1.username = ?2)")
+        Optional<DoubleOfPlayers> findDouble(String player1, String player2);
     
     }

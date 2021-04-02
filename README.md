@@ -113,7 +113,33 @@ In this screen the admin user can see all the tournament requests and accept all
 
 # STAGE 2
 
+# Development direction:
+
+- Repository: https://github.com/CodeURJC-DAW-2020-21/webapp1
+- Development tools: Visual Studio Code, Spring Tool Suite4
+- Dependencies: PDFGenerator, MySQL connector
+- Follow the next steps to execute the files:
+- Open the project with your development tool
+- Start a MySQL service in the local host in the port 3306 with a schema called "fptdb"
+- Start running the application
+- Enter from a browser to: https://localhost:8443
+
 ## DEMO  
+
+1) Anonymous user browsing the screens, we see that he cannot access certain functionalities
+2) Register with business (Explain about the tournaments)
+3) Login with player username2 (password2)
+4) View profile
+5) Modify image, password and division
+6) See graph (related to the games played, etc)
+7) Go to the ranking and show that you can access another user's profile but you cannot edit it (if you access yours, yes)
+8) Create party
+9) Join party, join with the couple
+10) Log out and see that you cannot access certain functionalities
+11) Register a new player and join the previous match individually
+12) Download PDF of friendly matches
+13) Log out and join as admin
+14) Manage tournaments, see tournaments managed, pending, accept and reject.
 
 ## Entity–relationship DATABASE model
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaBD.jpeg?raw=true "DataBase Diagram")

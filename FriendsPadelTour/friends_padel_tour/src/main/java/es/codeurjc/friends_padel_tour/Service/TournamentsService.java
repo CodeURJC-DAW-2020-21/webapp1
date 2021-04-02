@@ -85,4 +85,8 @@ public class TournamentsService {
     public void setSecondWinnngCouple(DoubleOfPlayers couple, Long id){
         tournamentRepository.setSecondWinningCouple(couple, id);
     }
+
+    public void uptdate(Tournament tournamentToUpdate) {
+        tournamentRepository.save(tournamentToUpdate);
+    }
 }

@@ -26,18 +26,18 @@
                       <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="/images/personas.png"> {{nPlayers}}/4</p></div>
                       <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="/images/categoria.png"> {{division}}ª DIVISIÓN</p></div>               
                     </div>                 
-                    {{#logged}}
+                    {{#user}}
                     <a href="/joinFriendlyMatch/{{id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE AL PARTIDO</span></a>
-                    {{/logged}}
+                    {{/user}}
                   </div>
                 {{/matches}}
                 
                 
                 </div>
                 <br>
-                {{# logged }}
+                {{# user }}
                   <a href="#popup1"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
-                {{/ logged }}
+                {{/ user }}
                 <div id="popup1" class="overlay-formulario">
                   <div id="popup-Body">
                     <h2 style="background-color: rgb(252, 186, 186);">Formulario para crear partidos amistosos</h2><br>

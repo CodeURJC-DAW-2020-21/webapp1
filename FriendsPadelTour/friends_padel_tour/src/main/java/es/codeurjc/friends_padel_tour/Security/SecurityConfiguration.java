@@ -45,6 +45,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/previousSignUp").permitAll();
 		
 		http.authorizeRequests().antMatchers("/download-pdf").permitAll(); //Generate the PDF 
+		http.authorizeRequests().antMatchers("/tournamentInfo/{\\d+}}").permitAll();
         http.authorizeRequests().antMatchers("/team/1").permitAll();
         http.authorizeRequests().antMatchers("/team/2").permitAll();
         http.authorizeRequests().antMatchers("/team/3").permitAll();
@@ -64,6 +65,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 
 		// Private pages (all other pages)
+		http.authorizeRequests().antMatchers("/joinTournament/{\\d+}").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/create/tournament").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/delete/{\\d+}").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("BUSSINESS");
