@@ -70,7 +70,11 @@ public class TournamentController {
 
     @GetMapping(value="/tournaments")
     public String showTournaments(Model model) {
-        Player loggedPlayer = playerService.findById((long) model.getAttribute("userId"));
+        Player loggedPlayer;
+        if(model.getAttribute("userId")==null){
+            loggedPlayer= null;
+        }
+        loggedPlayer = playerService.findById((long) model.getAttribute("userId"));
         List<Player> userDoubles = null;
         if(loggedPlayer !=null){
             userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
