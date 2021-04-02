@@ -1,5 +1,8 @@
 package es.codeurjc.friends_padel_tour.Security;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,8 @@ public class DatabaseUsersLoader {
 	private PasswordEncoder passwordEncoder;
 
     @PostConstruct
-    private void initDatabase() {
+    private void initDatabase() throws IOException, URISyntaxException {
+        
     	//In this part we initialize the admin user with his own password
     	
 		userRepository.save(new User("admin", passwordEncoder.encode("adminpass"), "ADMIN"));

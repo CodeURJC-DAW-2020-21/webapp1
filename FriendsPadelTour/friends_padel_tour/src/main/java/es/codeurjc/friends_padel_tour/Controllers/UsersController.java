@@ -3,6 +3,7 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -173,7 +174,8 @@ public class UsersController {
             efectivity=0;
         else
             efectivity =  (((double) loggedPlayer.getMathcesWon())/ ((double)loggedPlayer.getMathesPlayed()))*100;
-        model.addAttribute("efectivity", efectivity);
+            double efectivity2 = Math.floor(efectivity);
+        model.addAttribute("efectivity", efectivity2);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
@@ -241,41 +243,77 @@ public class UsersController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value="/selectMatchWinner/{id}/{index}/{doubleWiner}")
-    public String selectMatchWinner(@PathVariable long id,@PathVariable int index,@PathVariable int doubleWinnerSlot,Model model) {
+    @GetMapping(value="/selectMatchWinner/{id}/{index}/{doubleWinnerSlot}")
+    public String selectMatchWinner(@PathVariable long id, @PathVariable int index, @PathVariable int doubleWinnerSlot, Model model) {
         Player loggedUser = playerService.findById(id);
-        PadelMatch match = loggedUser.getCreatedMatches().get(index);
+        PadelMatch match = loggedUser.getCreatedMatches().get(index - 1);
         DoubleOfPlayers doubleWinner;
+        DoubleOfPlayers doubleLoss;
         if(doubleWinnerSlot==1){
             doubleWinner = match.getDouble1();
+            doubleLoss = match.getDouble2();
         }else{
             doubleWinner = match.getDouble2();
+            doubleLoss = match.getDouble1();
         }
         match.setDoubleWinner(doubleWinner);
         match.setHasWinner(true);
-        loggedUser.getCreatedMatches().remove(index);
-        loggedUser.getPlayedMatches().add(match);
-
+        loggedUser.getCreatedMatches().remove(index - 1);
+        
         Player winner1 = doubleWinner.getPlayer1();
         Player winner2 = doubleWinner.getPlayer2();
-
-        winner1.setScore(winner1.getScore()+3);
-        winner2.setScore(winner2.getScore()+3);
-
-        doubleWinner.setPlayer1(winner1);
-        doubleWinner.setPlayer2(winner2);
+        Player loser1 = doubleLoss.getPlayer1();
+        Player loser2 = doubleLoss.getPlayer2();
 
         matchesService.save(match);
         doubleService.saveDouble(doubleWinner);
-        playerService.updatePlayer(winner1);
-        playerService.updatePlayer(winner2);
+        doubleService.saveDouble(doubleLoss);
+        winner1.getPlayedMatches().add(match);
+        winner2.getPlayedMatches().add(match);
+        loser1.getPlayedMatches().add(match);
+        loser2.getPlayedMatches().add(match);
+
+        winner1.setScore(winner1.getScore()+3);
+        winner2.setScore(winner2.getScore()+3);
+        loser1.setScore(loser1.getScore()-3);
+        loser2.setScore(loser2.getScore()-3);
 
         model.addAttribute("loggedUser", loggedUser);
+              
+        winner1.setMathcesWon(loggedUser.getMathcesWon()+1);
+        winner2.setMathcesWon(loggedUser.getMathcesWon()+1);
+        loser1.setMatchesLost(loggedUser.getMatchesLost()+1);
+        loser2.setMatchesLost(loggedUser.getMatchesLost()+1);
+
+        winner1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        winner2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        loser1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        loser2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+
+        double efectivity;
+        if(loggedUser.getMathesPlayed()==0)
+            efectivity=0;
+        else           
+            efectivity =  (((double) loggedUser.getMathcesWon())/ ((double)loggedUser.getMathesPlayed()))*100;
+            double efectivity2 = Math.floor(efectivity);
+        model.addAttribute("efectivity", efectivity2);
+           
+        model.addAttribute("loggedUser.matchesWon", loggedUser.getMathcesWon());
+        model.addAttribute("loggedUser.matchesPlayed", loggedUser.getMathesPlayed());
+        model.addAttribute("loggedUser.matchesLost", loggedUser.getMatchesLost());       
+        boolean hasplayedmatches = true;
+        boolean notMyProfile = false;
+        model.addAttribute("UserExtern", notMyProfile);
+        model.addAttribute("hasplayedmatches", hasplayedmatches);
         List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
         model.addAttribute("userPendingGames", loggedUser.getPendingMatches());
+        playerService.updatePlayer(winner1);
+        playerService.updatePlayer(winner2);
+        playerService.updatePlayer(loser1);
+        playerService.updatePlayer(loser2);
         return "userProfile";
     }
 
@@ -311,7 +349,13 @@ public class UsersController {
         return "successTournamentDelete";
     }
 
+    @GetMapping(value = "/delete/{id}")
+    public String deleteAMatch(@PathVariable long id, Model model){
+        matchesService.deleteMatch(id);
+        return "successDelete";
+    }
 
+    
     }
 
     
