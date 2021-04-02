@@ -41,12 +41,14 @@ public class DatabaseUsersLoader {
         User user2 = new User("username2", passwordEncoder.encode("contraseña2"), "USER");
         User user3 = new User("username3", passwordEncoder.encode("contraseña3"), "USER");
         User user4 = new User("username4", passwordEncoder.encode("contraseña4"), "USER");
+        User user5 = new User("username5", passwordEncoder.encode("contraseña5"), "USER");
         User userBussiness = new User("bussinessUsername", passwordEncoder.encode("contraseña"), "BUSSINESS");
 
         userRepository.save(user1);
         userRepository.save(user2);
         userRepository.save(user3);
         userRepository.save(user4);
+        userRepository.save(user5);
         userRepository.save(userBussiness);
 
     	Player newPlayer1 = new Player("username","yo","apellido","email","contraseña","ciudad",1);
@@ -66,35 +68,49 @@ public class DatabaseUsersLoader {
         Player newPlayer4 = new Player("username4","yo4","apellido4","email4","contraseña4","ciudad4",1);
         newPlayer4.setUser(user4);
 
+        Player newPlayer5 = new Player("username5","yo4","apellido4","email4","contraseña5","ciudad4",1);
+        newPlayer5.setUser(user5);
+
 
         DoubleOfPlayers newDouble1 = new DoubleOfPlayers();
         DoubleOfPlayers newDouble2 = new DoubleOfPlayers();
+        DoubleOfPlayers newDouble3 = new DoubleOfPlayers();
+        DoubleOfPlayers newDouble4 = new DoubleOfPlayers();
 
         newDouble1.setPlayer1(newPlayer1);
         newDouble1.setPlayer2(newPlayer2);
         newDouble2.setPlayer1(newPlayer4);
         newDouble2.setPlayer2(newPlayer3);
+        newDouble3.setPlayer1(newPlayer1);
+        newDouble3.setPlayer2(newPlayer4);
+        newDouble4.setPlayer2(newPlayer1);
+        newDouble4.setPlayer1(newPlayer5);
 
         newPlayer1.getDoubles1().add(newDouble1);
         newPlayer2.getDoubles2().add(newDouble1);
-        newPlayer3.getDoubles2().add(newDouble2);
         newPlayer4.getDoubles1().add(newDouble2);
+        newPlayer3.getDoubles2().add(newDouble2);
+        newPlayer1.getDoubles1().add(newDouble3);
+        newPlayer4.getDoubles2().add(newDouble3);
+        newPlayer5.getDoubles1().add(newDouble4);
+        newPlayer1.getDoubles2().add(newDouble4);
 
         playerRepository.save(newPlayer1);
         playerRepository.save(newPlayer2);
         playerRepository.save(newPlayer3);
         playerRepository.save(newPlayer4);
+        playerRepository.save(newPlayer5);
 
         doubleRepository.save(newDouble1);
         doubleRepository.save(newDouble2);
-
+        doubleRepository.save(newDouble3);
+        doubleRepository.save(newDouble4);
         
         Bussiness newBussiness = new Bussiness("Padel Arroyo Molinos", "bussinessUsername", "Madrid", "email@gmail.com", "password", userBussiness);
         newBussiness.setAdress("Calle de ejemplo");
         bussinessRepository.save(newBussiness);
 
         Tournament tournament = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
-        tournamentRepository.save(tournament);
-                
+        tournamentRepository.save(tournament);  
     }
 }

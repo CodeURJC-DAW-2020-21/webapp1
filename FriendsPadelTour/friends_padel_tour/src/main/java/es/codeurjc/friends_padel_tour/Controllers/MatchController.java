@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
@@ -35,7 +36,7 @@ public class MatchController {
     @Autowired
     private DoubleService doubleService;
     @Autowired
-    private PlayersService bussinessService;
+    private BussinessService bussinessService;
     @Autowired
     private UserService userService;
 
@@ -90,7 +91,6 @@ public class MatchController {
             case 6: 
             model.addAttribute("top10players", top10);
             return "team6";
-
             default: return "team";
         }
     }
@@ -161,7 +161,7 @@ public class MatchController {
                 model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
             }
         }
-        List<Player> userDoubles = playerService.findAll();
+        List<Player> userDoubles = doubleService.findDoublesOf((String) model.getAttribute("userName"));
         model.addAttribute("userDoubles", userDoubles);
         return "joiningMatch";
     }

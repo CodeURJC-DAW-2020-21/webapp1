@@ -354,6 +354,31 @@ public class UsersController {
         return "successDelete";
     }
 
+    @GetMapping(value="/makeDoubleWhith/{doubleName}")
+    public String makeDoubleWith(@PathVariable String doubleName, Model model) {
+        Player loggedUser = playerService.findByUsername((String) model.getAttribute("userName"));
+        Player userNewDouble = playerService.findByUsername(doubleName);
+        if(doubleService.findDouble(loggedUser.getUsername(), userNewDouble.getUsername())!=null){
+            model.addAttribute("message", "Ya eres pareja de este usuario.");
+            return "successDoubleCreation";
+        }
+        DoubleOfPlayers newDouble = new DoubleOfPlayers();
+        
+        newDouble.setPlayer1(loggedUser);
+        newDouble.setPlayer2(userNewDouble);
+
+        loggedUser.getDoubles1().add(newDouble);
+        userNewDouble.getDoubles2().add(newDouble);
+
+        playerService.updatePlayer(loggedUser);
+        playerService.updatePlayer(userNewDouble);
+
+        doubleService.saveDouble(newDouble);
+        model.addAttribute("message", "Exito creando la nueva pareja.");
+        return "successDoubleCreation";
+    }
+    
+
 }
 
 

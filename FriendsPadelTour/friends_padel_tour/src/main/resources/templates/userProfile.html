@@ -18,6 +18,15 @@
                     <img class="image-main" src="/images/usuariopareja.jpg">
                   {{/ loggedUser.hasImage }}
                 </div>
+                {{#logged}}
+                  {{#UserExtern}}
+                  <div class="container-button">
+                    <div class="center-button">
+                      <a class="center-button" href="/makeDoubleWhith/{{loggedUser.username}}">Invitar a ser pareja</a>
+                    </div>
+                  </div>
+                  {{/UserExtern}}
+                {{/logged}}
               </div>
               {{# principalDouble }}
                 <div class="my-favourite-couple col-md-6">

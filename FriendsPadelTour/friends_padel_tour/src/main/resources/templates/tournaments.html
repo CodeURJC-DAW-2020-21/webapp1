@@ -38,6 +38,7 @@
                 <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> {{category}}</p></div>
                 <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png">{{firstPrize}}<img class="tournament_icon" src="images/plata.png">{{secondPrize}}</p></div>
               </div>
+              {{#logged}}
               {{# user }}
                 {{^isFull}}
                   <a href="#popup" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
@@ -62,6 +63,7 @@
                 {{/isFull }}
                 
               {{/ user }}
+              {{/ logged }}
             </div>
             {{/tournaments}}   
             {{^tournaments}}
