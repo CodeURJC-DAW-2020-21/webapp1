@@ -204,8 +204,11 @@ public class MatchController {
             loggedPlayer.getDoubles2().add(matchToJoin.getDouble2());
             doubleService.saveDouble(matchToJoin.getDouble2());
         }
-        loggedPlayer.getPendingMatches().add(matchToJoin);
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
+
+        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+            loggedPlayer.getPendingMatches().add(matchToJoin);
+        }
 
         playerService.updatePlayer(loggedPlayer);
         matchesService.save(matchToJoin);
@@ -218,25 +221,25 @@ public class MatchController {
         PadelMatch matchToJoin = matchesService.findById(id);
         Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
         Player playerDouble = playerService.findByUsername(doubleSelect);
-        DoubleOfPlayers newDouble = new DoubleOfPlayers();
-        newDouble.setPlayer1(loggedPlayer);
-        newDouble.setPlayer2(playerDouble);
+        DoubleOfPlayers doubleWhoJoins = doubleService.findDouble(doubleSelect, loggedPlayer.getUsername());
         if(slot ==1){
-            matchToJoin.setDouble1(newDouble);
+            matchToJoin.setDouble1(doubleWhoJoins);
         }else{
-            matchToJoin.setDouble2(newDouble);
+            matchToJoin.setDouble2(doubleWhoJoins);
         }
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+2);
-        
-        playerDouble.getDoubles2().add(newDouble);
-        loggedPlayer.getDoubles1().add(newDouble);
 
-        doubleService.saveDouble(newDouble);
+        doubleService.saveDouble(doubleWhoJoins);
+
+        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+            loggedPlayer.getPendingMatches().add(matchToJoin);
+        }
+        if(!matchToJoin.getCreator().getUsername().equals(playerDouble.getUsername())){
+            playerDouble.getPendingMatches().add(matchToJoin);
+        }
 
         playerService.updatePlayer(playerDouble);
         playerService.updatePlayer(loggedPlayer);
-
-        
         
         matchesService.save(matchToJoin);
         return "joiningSucces";

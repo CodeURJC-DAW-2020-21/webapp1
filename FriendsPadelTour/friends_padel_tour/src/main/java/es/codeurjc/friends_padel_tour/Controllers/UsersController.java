@@ -157,6 +157,9 @@ public class UsersController {
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
+        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
+        model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
+        model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
         return "userProfile";
     }
 
@@ -257,14 +260,16 @@ public class UsersController {
         Player winner2 = doubleWinner.getPlayer2();
         Player loser1 = doubleLoss.getPlayer1();
         Player loser2 = doubleLoss.getPlayer2();
-
-        matchesService.save(match);
-        doubleService.saveDouble(doubleWinner);
-        doubleService.saveDouble(doubleLoss);
+        
         winner1.getPlayedMatches().add(match);
         winner2.getPlayedMatches().add(match);
         loser1.getPlayedMatches().add(match);
         loser2.getPlayedMatches().add(match);
+        winner1.getPendingMatches().remove(match);
+        winner2.getPendingMatches().remove(match);
+        loser1.getPendingMatches().remove(match);
+        loser2.getPendingMatches().remove(match);
+        loggedUser.getCreatedMatches().remove(match);
 
         winner1.setScore(winner1.getScore()+3);
         winner2.setScore(winner2.getScore()+3);
@@ -288,31 +293,34 @@ public class UsersController {
             efectivity=0;
         else           
             efectivity =  (((double) loggedUser.getMathcesWon())/ ((double)loggedUser.getMathesPlayed()))*100;
-            double efectivity2 = Math.floor(efectivity);
-        model.addAttribute("efectivity", efectivity2);
-           
-        model.addAttribute("loggedUser.matchesWon", loggedUser.getMathcesWon());
-        model.addAttribute("loggedUser.matchesPlayed", loggedUser.getMathesPlayed());
-        model.addAttribute("loggedUser.matchesLost", loggedUser.getMatchesLost());       
+            double efectivity2 = Math.floor(efectivity);       
         boolean hasplayedmatches = true;
         boolean notMyProfile = false;
-        model.addAttribute("UserExtern", notMyProfile);
-        model.addAttribute("hasplayedmatches", hasplayedmatches);
-        model.addAttribute("loggedUser", loggedUser);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         Player principalDouble = null;
         if(userDoubles != null && !userDoubles.isEmpty()){
             principalDouble = userDoubles.get(0);
         }
+        playerService.updatePlayer(winner1);
+        playerService.updatePlayer(winner2);
+        playerService.updatePlayer(loser1);
+        playerService.updatePlayer(loser2);
+        playerService.updatePlayer(loggedUser);
+        matchesService.save(match);
+        doubleService.saveDouble(doubleWinner);
+        doubleService.saveDouble(doubleLoss);
         model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
         model.addAttribute("userPendingGames", loggedUser.getPendingMatches());
-        playerService.updatePlayer(winner1);
-        playerService.updatePlayer(winner2);
-        playerService.updatePlayer(loser1);
-        playerService.updatePlayer(loser2);
+        model.addAttribute("UserExtern", notMyProfile);
+        model.addAttribute("hasplayedmatches", hasplayedmatches);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("loggedUser.matchesWon", loggedUser.getMathcesWon());
+        model.addAttribute("loggedUser.matchesPlayed", loggedUser.getMathesPlayed());
+        model.addAttribute("loggedUser.matchesLost", loggedUser.getMatchesLost());
+        model.addAttribute("efectivity", efectivity2);
         return "userProfile";
     }
 
