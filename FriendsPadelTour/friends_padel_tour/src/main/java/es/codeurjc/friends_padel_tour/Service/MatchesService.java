@@ -34,5 +34,9 @@ public class MatchesService {
         if(matchInDB.isPresent()) return matchInDB.get();
         return null;
     }
+
+    public void deleteMatch(long id) {
+        matchesRepository.deleteById(id);     
+    }
     
 }

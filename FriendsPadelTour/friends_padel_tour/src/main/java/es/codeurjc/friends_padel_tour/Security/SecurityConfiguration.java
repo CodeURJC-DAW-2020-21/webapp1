@@ -53,8 +53,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/team/5").permitAll();
         http.authorizeRequests().antMatchers("/team/6").permitAll();
         http.authorizeRequests().antMatchers("/tournaments").permitAll();
+		
 		http.authorizeRequests().antMatchers("/signUpPlayer").permitAll();
 		http.authorizeRequests().antMatchers("/userSignUp").permitAll();
+		http.authorizeRequests().antMatchers("/successDelete").permitAll();
+		http.authorizeRequests().antMatchers("/succesEdit").permitAll();
 		http.authorizeRequests().antMatchers("/bussinessSignUp").permitAll();
 		http.authorizeRequests().antMatchers("/bussinessSignUpForm").permitAll();
 		http.authorizeRequests().antMatchers("/update/{\\d+}/image").permitAll();			
@@ -65,10 +68,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/joinTournament/{\\d+}").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/create/tournament").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/userProfile").hasAnyRole("USER");
+		http.authorizeRequests().antMatchers("/delete/{\\d+}").hasAnyRole("USER");
 		http.authorizeRequests().antMatchers("/bussinessProfile").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/tournamentManagement").hasAnyRole("ADMIN");
 		http.authorizeRequests().antMatchers("/tournamentRequest").hasAnyRole("BUSSINESS");
 		http.authorizeRequests().antMatchers("/acceptTournament/{\\d+}").hasAnyRole("ADMIN");
+
+		
 		
 
 		// Login form
