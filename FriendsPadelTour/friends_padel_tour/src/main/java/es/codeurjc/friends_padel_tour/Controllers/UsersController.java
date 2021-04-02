@@ -114,6 +114,7 @@ public class UsersController {
     @PostMapping(value = "/signUpBussiness")
     public String signUpBussiness(Bussiness loggedBussiness,Model model){
         bussinessService.saveBussiness(loggedBussiness);
+        model.addAttribute("userName", loggedBussiness.getUsername());
         model.addAttribute("bussiness", loggedBussiness);
         model.addAttribute("userId", loggedBussiness.getId());
         model.addAttribute("logged", true);
@@ -135,6 +136,7 @@ public class UsersController {
             return "404";
         model.addAttribute("loggedUser", loggedPlayer);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        model.addAttribute("userName", loggedPlayer.getUsername());
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("efectivity", 0);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
@@ -305,7 +307,7 @@ public class UsersController {
 
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
-    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
+    public String editBussinessProfile(@PathVariable long id, String password,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
         Bussiness loggedBussiness = bussinessService.findById(id);
         String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
         loggedBussiness.setSchedule(schedule);
