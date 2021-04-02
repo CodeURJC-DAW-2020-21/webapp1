@@ -3,11 +3,7 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-<<<<<<< HEAD
-import java.text.DecimalFormat;
-=======
 import java.util.ArrayList;
->>>>>>> bc70c83cf53dca67fe1117f4cb8da8ed9475dc91
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -329,7 +325,6 @@ public class UsersController {
         boolean notMyProfile = false;
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         model.addAttribute("loggedUser", loggedUser);
         List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
         Player principalDouble = null;
@@ -386,12 +381,8 @@ public class UsersController {
         return "successDelete";
     }
 
-<<<<<<< HEAD
-    
-    }
-=======
 }
->>>>>>> bc70c83cf53dca67fe1117f4cb8da8ed9475dc91
+
 
     
     
