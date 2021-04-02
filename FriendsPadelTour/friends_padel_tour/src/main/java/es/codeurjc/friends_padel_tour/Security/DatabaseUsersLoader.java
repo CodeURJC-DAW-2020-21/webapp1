@@ -1,8 +1,5 @@
 package es.codeurjc.friends_padel_tour.Security;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +90,7 @@ public class DatabaseUsersLoader {
 
         
         Bussiness newBussiness = new Bussiness("Padel Arroyo Molinos", "bussinessUsername", "Madrid", "email@gmail.com", "password", userBussiness);
+        newBussiness.setAdress("Calle de ejemplo");
         bussinessRepository.save(newBussiness);
 
         Tournament tournament = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
