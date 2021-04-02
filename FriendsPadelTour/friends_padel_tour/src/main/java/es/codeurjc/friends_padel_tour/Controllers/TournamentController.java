@@ -73,8 +73,9 @@ public class TournamentController {
         Player loggedPlayer;
         if(model.getAttribute("userId")==null){
             loggedPlayer= null;
+        }else{
+            loggedPlayer = playerService.findById((long) model.getAttribute("userId"));
         }
-        loggedPlayer = playerService.findById((long) model.getAttribute("userId"));
         List<Player> userDoubles = null;
         if(loggedPlayer !=null){
             userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
