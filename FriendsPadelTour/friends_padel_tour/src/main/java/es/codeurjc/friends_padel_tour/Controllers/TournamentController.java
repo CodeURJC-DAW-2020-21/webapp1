@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -69,7 +70,7 @@ public class TournamentController {
 	}
 
     @GetMapping(value="/tournaments")
-    public String showTournaments(Model model) {
+    public String showTournaments(Model model,@RequestParam(required = false, defaultValue = "3") int pageSize) {
         Player loggedPlayer;
         if(model.getAttribute("userId")==null){
             loggedPlayer= null;
@@ -83,6 +84,12 @@ public class TournamentController {
         List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("tournaments", tournamentsaccepted);
+
+
+
+        Page<Tournament> tournaments = tournamentsService.getPageTournaments(0, pageSize);
+        
+        model.addAttribute("tournamentspage", tournaments);
         return "tournaments";
     }
 

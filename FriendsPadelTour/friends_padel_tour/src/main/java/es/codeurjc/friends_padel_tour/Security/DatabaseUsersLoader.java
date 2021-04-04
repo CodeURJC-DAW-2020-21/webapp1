@@ -1,5 +1,8 @@
 package es.codeurjc.friends_padel_tour.Security;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +114,44 @@ public class DatabaseUsersLoader {
         bussinessRepository.save(newBussiness);
 
         Tournament tournament = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        tournament.setAccepted(true);
+        Tournament tournament2 = new Tournament(newBussiness, "Torneo 2", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament3 = new Tournament(newBussiness, "Torneo 3", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament4 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament5 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament6 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament7 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament8 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament9 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament10 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        Tournament tournament11 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+        
+        Tournament tournament12 = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
+
+
+        tournament2.setAccepted(true);
+        tournament3.setAccepted(true);
+        tournament4.setAccepted(true);
+        tournament5.setAccepted(true);
+        tournament6.setAccepted(true);
+        tournament7.setAccepted(true);
+        tournament8.setAccepted(true);
+        tournament9.setAccepted(true);
+
+        
         tournamentRepository.save(tournament);  
+        tournamentRepository.save(tournament2);  
+        tournamentRepository.save(tournament3);  
+        tournamentRepository.save(tournament4);  
+        tournamentRepository.save(tournament5);  
+        tournamentRepository.save(tournament6);  
+        tournamentRepository.save(tournament7);  
+        tournamentRepository.save(tournament8);  
+        tournamentRepository.save(tournament9);  
+        tournamentRepository.save(tournament10);  
+        tournamentRepository.save(tournament11);  
+        tournamentRepository.save(tournament12);  
+          
+
     }
 }

@@ -1,11 +1,13 @@
 package es.codeurjc.friends_padel_tour.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
@@ -89,4 +91,9 @@ public class TournamentsService {
     public void uptdate(Tournament tournamentToUpdate) {
         tournamentRepository.save(tournamentToUpdate);
     }
+
+    public Page<Tournament> getPageTournaments(int pageNumber, int pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+		return tournamentRepository.findAll(p);
+	}
 }
