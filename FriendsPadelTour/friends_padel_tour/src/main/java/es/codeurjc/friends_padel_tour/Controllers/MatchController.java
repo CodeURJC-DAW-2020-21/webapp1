@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
@@ -35,7 +36,7 @@ public class MatchController {
     @Autowired
     private DoubleService doubleService;
     @Autowired
-    private PlayersService bussinessService;
+    private BussinessService bussinessService;
     @Autowired
     private UserService userService;
 
@@ -56,11 +57,10 @@ public class MatchController {
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
-            
-            
-
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -91,7 +91,6 @@ public class MatchController {
             case 6: 
             model.addAttribute("top10players", top10);
             return "team6";
-
             default: return "team";
         }
     }
@@ -162,7 +161,7 @@ public class MatchController {
                 model.addAttribute("player4Name", matchToJoin.getDouble2().getPlayer2().getUsername());
             }
         }
-        List<Player> userDoubles = playerService.findAll();
+        List<Player> userDoubles = doubleService.findDoublesOf((String) model.getAttribute("userName"));
         model.addAttribute("userDoubles", userDoubles);
         return "joiningMatch";
     }
@@ -205,8 +204,11 @@ public class MatchController {
             loggedPlayer.getDoubles2().add(matchToJoin.getDouble2());
             doubleService.saveDouble(matchToJoin.getDouble2());
         }
-        loggedPlayer.getPendingMatches().add(matchToJoin);
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
+
+        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+            loggedPlayer.getPendingMatches().add(matchToJoin);
+        }
 
         playerService.updatePlayer(loggedPlayer);
         matchesService.save(matchToJoin);
@@ -219,25 +221,25 @@ public class MatchController {
         PadelMatch matchToJoin = matchesService.findById(id);
         Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
         Player playerDouble = playerService.findByUsername(doubleSelect);
-        DoubleOfPlayers newDouble = new DoubleOfPlayers();
-        newDouble.setPlayer1(loggedPlayer);
-        newDouble.setPlayer2(playerDouble);
+        DoubleOfPlayers doubleWhoJoins = doubleService.findDouble(doubleSelect, loggedPlayer.getUsername());
         if(slot ==1){
-            matchToJoin.setDouble1(newDouble);
+            matchToJoin.setDouble1(doubleWhoJoins);
         }else{
-            matchToJoin.setDouble2(newDouble);
+            matchToJoin.setDouble2(doubleWhoJoins);
         }
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+2);
-        
-        playerDouble.getDoubles2().add(newDouble);
-        loggedPlayer.getDoubles1().add(newDouble);
 
-        doubleService.saveDouble(newDouble);
+        doubleService.saveDouble(doubleWhoJoins);
+
+        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+            loggedPlayer.getPendingMatches().add(matchToJoin);
+        }
+        if(!matchToJoin.getCreator().getUsername().equals(playerDouble.getUsername())){
+            playerDouble.getPendingMatches().add(matchToJoin);
+        }
 
         playerService.updatePlayer(playerDouble);
         playerService.updatePlayer(loggedPlayer);
-
-        
         
         matchesService.save(matchToJoin);
         return "joiningSucces";

@@ -3,6 +3,7 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
@@ -34,18 +34,12 @@ import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
-import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import net.bytebuddy.asm.Advice.Return;
-
-
-
-
 
 
 @Controller
@@ -77,14 +71,15 @@ public class UsersController {
             if(request.isUserInRole("USER")){
                 model.addAttribute("user", request.isUserInRole("USER"));
                 model.addAttribute("userId", playerService.findByUsername(principal.getName()).getId());
-                model.addAttribute("loggedUser", playerService.findByUsername(principal.getName()));
             }
             if(request.isUserInRole("BUSSINESS")){
                 model.addAttribute("bussiness", request.isUserInRole("BUSSINESS"));
                 model.addAttribute("userId", bussinessService.findByUsername(principal.getName()).getId());
             }
-			model.addAttribute("admin", request.isUserInRole("ADMIN"));
-            model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            if(request.isUserInRole("ADMIN")){
+                model.addAttribute("admin", request.isUserInRole("ADMIN"));
+                model.addAttribute("userId", userService.findByUsername(principal.getName()).getId());
+            }
 		} else {
 			model.addAttribute("logged", false);
 		}
@@ -115,41 +110,20 @@ public class UsersController {
     @PostMapping(value = "/signUpBussiness")
     public String signUpBussiness(Bussiness loggedBussiness,Model model){
         bussinessService.saveBussiness(loggedBussiness);
-        model.addAttribute("bussiness", loggedBussiness);
-        model.addAttribute("userId", loggedBussiness.getId());
-        model.addAttribute("logged", true);
-        model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
-        model.addAttribute("adress", loggedBussiness.getAdress());
-        model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
-        model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
-        model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",null);
-        model.addAttribute("nonAcceptedTournaments",null);
-        model.addAttribute("bussinessId", loggedBussiness.getId());
-        model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
-        return "bussinessProfile";
+        return "successSignUp";
     }
 
     @PostMapping(value="/signUpPlayer")
     public String signUpUser(Player loggedPlayer,Model model) {
         if(!playerService.savePlayer(loggedPlayer))
             return "404";
-        model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
-        model.addAttribute("userDoubles", userDoubles);
-        model.addAttribute("efectivity", 0);
-        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
-        model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
-        model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
-        return "userProfile";
+        return "successSignUp";
     }
 
     @RequestMapping("/loginError")
 	public String loginerror() {
 		return "loginError";
 	}
-
-        
 
     @GetMapping(value = "/users/{username}")
     public String goToOtherPlayerProfile(Model model,@PathVariable String username) {
@@ -163,7 +137,12 @@ public class UsersController {
             notMyProfile = !model.getAttribute("userName").equals(username);
         }
         model.addAttribute("loggedUser", loggedPlayer);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("loggedUser.matchesWon", loggedPlayer.getMathcesWon());
         model.addAttribute("loggedUser.matchesPlayed", loggedPlayer.getMathesPlayed());
@@ -173,10 +152,14 @@ public class UsersController {
             efectivity=0;
         else
             efectivity =  (((double) loggedPlayer.getMathcesWon())/ ((double)loggedPlayer.getMathesPlayed()))*100;
-        model.addAttribute("efectivity", efectivity);
+            double efectivity2 = Math.floor(efectivity);
+        model.addAttribute("efectivity", efectivity2);
         model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
         model.addAttribute("UserExtern", notMyProfile);
         model.addAttribute("hasplayedmatches", hasplayedmatches);
+        model.addAttribute("userCreatedGames", loggedPlayer.getCreatedMatches());
+        model.addAttribute("userPlayedGames", loggedPlayer.getPlayedMatches());
+        model.addAttribute("userPendingGames", loggedPlayer.getPendingMatches());
         return "userProfile";
     }
 
@@ -184,8 +167,17 @@ public class UsersController {
     public String bussinessProfile(Model model,@PathVariable String username,@Qualifier("accepted")@PageableDefault(page=0, size=10) Pageable pageable,@Qualifier("nonAccepted")@PageableDefault(page=0, size=10)  Pageable pageable2) {
         
         Bussiness loggedBussiness = bussinessService.findByUsername(username);
-        Page<Tournament> acceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable);
-        Page<Tournament> nonAcceptedTournaments = tournamentsService.getAccepted(loggedBussiness, pageable2);
+        ArrayList<Tournament> acceptedTournaments = new ArrayList<>();
+        ArrayList<Tournament> nonAcceptedTournaments = new ArrayList<>();
+
+        for( Tournament t : loggedBussiness.getTournaments()){
+            if(t.isAccepted()){ 
+                acceptedTournaments.add(t);
+            }
+            else {
+                nonAcceptedTournaments.add(t);
+            }
+        }
 
 
         model.addAttribute("bussinessName", loggedBussiness.getBussinessName());
@@ -193,8 +185,8 @@ public class UsersController {
         model.addAttribute("scheduleHeader", loggedBussiness.getSchedule()[0]);
         model.addAttribute("scheduleMorning", loggedBussiness.getSchedule()[1]);
         model.addAttribute("scheduleAfternoon", loggedBussiness.getSchedule()[2]);
-        model.addAttribute("acceptedTournaments",null);
-        model.addAttribute("nonAcceptedTournaments",null);
+        model.addAttribute("acceptedTournaments",acceptedTournaments);
+        model.addAttribute("nonAcceptedTournaments",nonAcceptedTournaments);
         model.addAttribute("bussinessId", loggedBussiness.getId());
         model.addAttribute("createdTournaments", loggedBussiness.getCreatedTournaments());
         return "bussinessProfile";
@@ -211,7 +203,13 @@ public class UsersController {
         }
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        model.addAttribute("principalDouble", principalDouble);
+        model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
@@ -241,47 +239,94 @@ public class UsersController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping(value="/selectMatchWinner/{id}/{index}/{doubleWiner}")
-    public String selectMatchWinner(@PathVariable long id,@PathVariable int index,@PathVariable int doubleWinnerSlot,Model model) {
+    @GetMapping(value="/selectMatchWinner/{id}/{index}/{doubleWinnerSlot}")
+    public String selectMatchWinner(@PathVariable long id, @PathVariable int index, @PathVariable int doubleWinnerSlot, Model model) {
         Player loggedUser = playerService.findById(id);
-        PadelMatch match = loggedUser.getCreatedMatches().get(index);
+        PadelMatch match = loggedUser.getCreatedMatches().get(index - 1);
         DoubleOfPlayers doubleWinner;
+        DoubleOfPlayers doubleLoss;
         if(doubleWinnerSlot==1){
             doubleWinner = match.getDouble1();
+            doubleLoss = match.getDouble2();
         }else{
             doubleWinner = match.getDouble2();
+            doubleLoss = match.getDouble1();
         }
         match.setDoubleWinner(doubleWinner);
         match.setHasWinner(true);
-        loggedUser.getCreatedMatches().remove(index);
-        loggedUser.getPlayedMatches().add(match);
-
+        loggedUser.getCreatedMatches().remove(index - 1);
+        
         Player winner1 = doubleWinner.getPlayer1();
         Player winner2 = doubleWinner.getPlayer2();
+        Player loser1 = doubleLoss.getPlayer1();
+        Player loser2 = doubleLoss.getPlayer2();
+        
+        winner1.getPlayedMatches().add(match);
+        winner2.getPlayedMatches().add(match);
+        loser1.getPlayedMatches().add(match);
+        loser2.getPlayedMatches().add(match);
+        winner1.getPendingMatches().remove(match);
+        winner2.getPendingMatches().remove(match);
+        loser1.getPendingMatches().remove(match);
+        loser2.getPendingMatches().remove(match);
+        loggedUser.getCreatedMatches().remove(match);
 
         winner1.setScore(winner1.getScore()+3);
         winner2.setScore(winner2.getScore()+3);
-
-        doubleWinner.setPlayer1(winner1);
-        doubleWinner.setPlayer2(winner2);
-
-        matchesService.save(match);
-        doubleService.saveDouble(doubleWinner);
-        playerService.updatePlayer(winner1);
-        playerService.updatePlayer(winner2);
+        loser1.setScore(loser1.getScore()-3);
+        loser2.setScore(loser2.getScore()-3);
 
         model.addAttribute("loggedUser", loggedUser);
-        List<DoubleOfPlayers> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+              
+        winner1.setMathcesWon(loggedUser.getMathcesWon()+1);
+        winner2.setMathcesWon(loggedUser.getMathcesWon()+1);
+        loser1.setMatchesLost(loggedUser.getMatchesLost()+1);
+        loser2.setMatchesLost(loggedUser.getMatchesLost()+1);
+
+        winner1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        winner2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        loser1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+        loser2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
+
+        double efectivity;
+        if(loggedUser.getMathesPlayed()==0)
+            efectivity=0;
+        else           
+            efectivity =  (((double) loggedUser.getMathcesWon())/ ((double)loggedUser.getMathesPlayed()))*100;
+            double efectivity2 = Math.floor(efectivity);       
+        boolean hasplayedmatches = true;
+        boolean notMyProfile = false;
+        List<Player> userDoubles = doubleService.findDoublesOf(loggedUser.getUsername());
+        Player principalDouble = null;
+        if(userDoubles != null && !userDoubles.isEmpty()){
+            principalDouble = userDoubles.get(0);
+        }
+        playerService.updatePlayer(winner1);
+        playerService.updatePlayer(winner2);
+        playerService.updatePlayer(loser1);
+        playerService.updatePlayer(loser2);
+        playerService.updatePlayer(loggedUser);
+        matchesService.save(match);
+        doubleService.saveDouble(doubleWinner);
+        doubleService.saveDouble(doubleLoss);
+        model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
         model.addAttribute("userPlayedGames", loggedUser.getPlayedMatches());
         model.addAttribute("userPendingGames", loggedUser.getPendingMatches());
+        model.addAttribute("UserExtern", notMyProfile);
+        model.addAttribute("hasplayedmatches", hasplayedmatches);
+        model.addAttribute("loggedUser", loggedUser);
+        model.addAttribute("loggedUser.matchesWon", loggedUser.getMathcesWon());
+        model.addAttribute("loggedUser.matchesPlayed", loggedUser.getMathesPlayed());
+        model.addAttribute("loggedUser.matchesLost", loggedUser.getMatchesLost());
+        model.addAttribute("efectivity", efectivity2);
         return "userProfile";
     }
 
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
-    public String editBussinessProfile(@PathVariable long id, String password, int division,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
+    public String editBussinessProfile(@PathVariable long id, String password,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
         Bussiness loggedBussiness = bussinessService.findById(id);
         String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
         loggedBussiness.setSchedule(schedule);
@@ -311,8 +356,39 @@ public class UsersController {
         return "successTournamentDelete";
     }
 
-
+    @GetMapping(value = "/delete/{id}")
+    public String deleteAMatch(@PathVariable long id, Model model){
+        matchesService.deleteMatch(id);
+        return "successDelete";
     }
+
+    @GetMapping(value="/makeDoubleWhith/{doubleName}")
+    public String makeDoubleWith(@PathVariable String doubleName, Model model) {
+        Player loggedUser = playerService.findByUsername((String) model.getAttribute("userName"));
+        Player userNewDouble = playerService.findByUsername(doubleName);
+        if(doubleService.findDouble(loggedUser.getUsername(), userNewDouble.getUsername())!=null){
+            model.addAttribute("message", "Ya eres pareja de este usuario.");
+            return "successDoubleCreation";
+        }
+        DoubleOfPlayers newDouble = new DoubleOfPlayers();
+        
+        newDouble.setPlayer1(loggedUser);
+        newDouble.setPlayer2(userNewDouble);
+
+        loggedUser.getDoubles1().add(newDouble);
+        userNewDouble.getDoubles2().add(newDouble);
+
+        playerService.updatePlayer(loggedUser);
+        playerService.updatePlayer(userNewDouble);
+
+        doubleService.saveDouble(newDouble);
+        model.addAttribute("message", "Exito creando la nueva pareja.");
+        return "successDoubleCreation";
+    }
+    
+
+}
+
 
     
     

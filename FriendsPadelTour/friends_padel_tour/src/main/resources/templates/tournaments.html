@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-md-12 tournament_head">
             {{#bussiness}}
-            <a href="/create/{{userId}}"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
+            <a href="/tournamentRequest"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
             {{/bussiness}}
           </div>
         </div>
@@ -28,7 +28,7 @@
             {{#tournaments}}
             <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
       
-              <div class="tournament_definition" id="tournament_name"><p>{{name}}</p></div>
+              <div class="tournament_definition" id="tournament_name"><a href="/tournamentInfo/{{id}}">{{name}}</a></div>
               <div >
                 <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{inscriptionStartDate}} - {{inscriptionFinishDate}}</p></div>
                 <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{tournamentStartDate}} - {{tournamentFinishDate}}</p></div>
@@ -38,8 +38,32 @@
                 <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="images/categoria.png"> {{category}}</p></div>
                 <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="images/oro.png">{{firstPrize}}<img class="tournament_icon" src="images/plata.png">{{secondPrize}}</p></div>
               </div>
-              
-              <a href="/joinTournament/{{id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
+              {{#logged}}
+              {{# user }}
+                {{^isFull}}
+                  <a href="#popup" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
+
+                  <div id="popup" class="overlay-formulario">
+                    <div id="popup-Body">
+                      <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
+                      <a id="cerrarPestana" href="#">&times;</a>
+                      <div class="popupContent">
+                        <form action="/joinTournament/{{id}}" method="POST">
+                          <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect" required>
+                            {{#userDoubles}}
+                                <option>{{username}}</option>
+                            {{/userDoubles}}
+                          </select></label><br>
+                          <input type="submit" value="Aceptar">
+                          <input type="hidden" name="_csrf" value="{{token}}"/>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                {{/isFull }}
+                
+              {{/ user }}
+              {{/ logged }}
             </div>
             {{/tournaments}}   
             {{^tournaments}}

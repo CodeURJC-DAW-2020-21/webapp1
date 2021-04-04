@@ -18,25 +18,43 @@
                     <img class="image-main" src="/images/usuariopareja.jpg">
                   {{/ loggedUser.hasImage }}
                 </div>
-              </div>  
-              <div class="my-favourite-couple col-md-6">
-                <h2 class="actual-couple">PAREJA ACTUAL</h2>
-                <div class="container-button">
-                  <div class="center-button">
-                    <button class="searchcouple">JUAN LEBRON</button>
+                {{#logged}}
+                  {{#UserExtern}}
+                  <div class="container-button">
+                    <div class="center-button">
+                      <a class="center-button" href="/makeDoubleWhith/{{loggedUser.username}}">Invitar a ser pareja</a>
+                    </div>
                   </div>
-                </div>
-                    <div class="info-couple col-md-12">
-                      <p>Posicion: Drive<br><br> Categoria: 2 </p>
-                      <img class="couple-image" src="/images/usuariopareja.jpg"> 
-                    </div>
-                    <div class="dropdown-couples">
-                      <span>Otras parejas</span>
-                      <div class="dropdown-content">
-                        <button class="searchcouple">Paquito Navarro</button>
-                      </div>
-                    </div>
+                  {{/UserExtern}}
+                {{/logged}}
               </div>
+              {{# principalDouble }}
+                <div class="my-favourite-couple col-md-6">
+                  <h2 class="actual-couple">PAREJA ACTUAL</h2>
+                  <div class="container-button">
+                    <div class="center-button">
+                      <a href="/users/{{username}}" class="searchcouple">{{principalDouble.username}}</a>
+                    </div>
+                  </div>
+                      <div class="info-couple col-md-12">
+                        <br> Categoria: {{principalDouble.division}} </p>
+                        {{#principalDouble.hasImage}}
+                          <img class="couple-image" src="/user/{{principalDouble.id}}/image"> 
+                        {{/principalDouble.hasImage}}
+                        {{^ principalDouble.hasImage }}
+                          <img class="image-main" src="/images/usuariopareja.jpg">
+                        {{/ principalDouble.hasImage }}
+                      </div>
+                      <div class="dropdown-couples">
+                        <span>Otras parejas</span>
+                        <div class="dropdown-content">
+                          {{# userDoubles }}
+                            <a href="/users/{{username}}" class="searchcouple">{{username}}</a>
+                          {{/ userDoubles }}
+                        </div>
+                      </div>
+                </div>
+              {{/ principalDouble }}
             </div>
           </div>
         </div>
@@ -260,12 +278,12 @@
           <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
             <div class="text-center text-lg-left">
               <div class="d-block d-lg-flex align-items-center">
-                <div class="image image-small text-center mb-3 mb-lg-0 mr-lg-3">
+                <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                   <img src="/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="text">
-                  <h3 class="h5 mb-0 text-black">{{double1.player1.userName}}</h3>
-                  <h3 class="h5 mb-0 text-black">{{double1.player2.userName}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double1.player1.username}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double1.player2.username}}</h3>
                   <a href="/selectMatchWinner/{{loggedUser.id}}/{{-index}}/1">Elegir como ganadores del partido</a>
                 </div>
               </div>
@@ -274,7 +292,7 @@
 
           <div class="col-md-4 col-lg-4 text-center mb-4 mb-lg-0">
             <div class="d-inline-block">
-              <div class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded"><a href="/deleteMatch/{{loggedUser.id}}/{{-index}}">Eliminar Partido</a></div>
+              <div class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded"><a href="/delete/{{id}}">Eliminar Partido</a></div>
             </div>
           </div>
 
@@ -285,8 +303,8 @@
                   <img src="/images/lima_tapia.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="text order-1 w-100">
-                  <h3 class="h5 mb-0 text-black">{{double2.player1.userName}}</h3>
-                  <h3 class="h5 mb-0 text-black">{{double2.player2.userName}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.player1.username}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.player2.username}}</h3>
                   <a href="/selectMatchWinner/{{loggedUser.id}}/{{-index}}/2">Elegir como ganadores del partido</a>
                 </div>
               </div>
@@ -304,12 +322,12 @@
           <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
             <div class="text-center text-lg-left">
               <div class="d-block d-lg-flex align-items-center">
-                <div class="image image-small text-center mb-3 mb-lg-0 mr-lg-3">
+                <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                   <img src="/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="text">
-                  <h3 class="h5 mb-0 text-black">{{double1.player1.userName}}</h3>
-                  <h3 class="h5 mb-0 text-black">{{double1.player2.userName}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double1.player1.username}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double1.player2.username}}</h3>
                 </div>
               </div>
             </div>
@@ -322,8 +340,8 @@
                   <img src="/images/lima_tapia.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="text order-1 w-100">
-                  <h3 class="h5 mb-0 text-black">{{double2.player1.userName}}</h3>
-                  <h3 class="h5 mb-0 text-black">{{double2.player2.userName}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.player1.username}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.player2.username}}</h3>
                 </div>
               </div>
             </div>
@@ -359,8 +377,8 @@
                   <img src="/images/lima_tapia.jpg" alt="Image" class="img-fluid">
                 </div>
                 <div class="text order-1 w-100">
-                  <h3 class="h5 mb-0 text-black">{{double2.playe1.userName}}</h3>
-                  <h3 class="h5 mb-0 text-black">{{double2.playe2.userName}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.playe1.username}}</h3>
+                  <h3 class="h5 mb-0 text-black">{{double2.playe2.username}}</h3>
                 </div>
               </div>
             </div>

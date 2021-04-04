@@ -10,5 +10,5 @@ import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 public interface MatchesRepository extends JpaRepository<PadelMatch,Long> {
 
     Optional<List<PadelMatch>> findByDivision(int num);
-    
+
 }

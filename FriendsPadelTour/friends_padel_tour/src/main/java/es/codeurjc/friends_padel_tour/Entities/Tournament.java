@@ -5,14 +5,12 @@ package es.codeurjc.friends_padel_tour.Entities;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -35,6 +33,7 @@ public class Tournament {
     private int maxCouples;
     private int registeredCouples;
     private boolean finished;
+    private boolean isFull;
     
     @OneToOne
     private DoubleOfPlayers firstWinnngCouple;
@@ -50,11 +49,74 @@ public class Tournament {
     private int firstPrize;
     private int secondPrize;
     private String localization;
-    
+    private String adress;
+    private String city;
+    private String facility;
+    private int postalCode;
 
     public Tournament(){}
 
     
+
+    public boolean isFull() {
+        return isFull;
+    }
+
+
+
+    public void setFull(boolean isFull) {
+        this.isFull = isFull;
+    }
+
+
+
+    public int getPostalCode() {
+        return postalCode;
+    }
+
+
+
+    public void setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
+    }
+
+
+
+    public String getFacility() {
+        return facility;
+    }
+
+
+
+    public void setFacility(String facility) {
+        this.facility = facility;
+    }
+
+
+
+    public String getCity() {
+        return city;
+    }
+
+
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+
+    public String getAdress() {
+        return adress;
+    }
+
+
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+
 
     public boolean isFinished() {
         return finished;
@@ -259,6 +321,7 @@ public class Tournament {
         this.registeredCouples = 0;
         this.finished = false;
         this.category = category;
+        this.isFull = false;
     }
 
 
