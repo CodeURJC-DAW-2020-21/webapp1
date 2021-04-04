@@ -326,9 +326,9 @@ public class UsersController {
 
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
-    public String editBussinessProfile(@PathVariable long id, String password,Model model, @RequestParam String s1_0, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6,@RequestParam String s2_0,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4, @RequestParam String s2_5, @RequestParam String s2_6) {
+    public String editBussinessProfile(@PathVariable long id, @RequestParam String password, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6, @RequestParam String s1_7,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4,@RequestParam String s2_5, @RequestParam String s2_6, @RequestParam String s2_7, Model model) {
         Bussiness loggedBussiness = bussinessService.findById(id);
-        String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_0, s1_1, s1_2, s1_3, s1_4, s1_5, s1_6},{s2_0, s2_1, s2_2, s2_3, s2_4, s2_5, s2_6}};
+        String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_1, s1_2, s1_3, s1_4, s1_5, s1_6, s1_7},{s2_1, s2_2, s2_3, s2_4, s2_5, s2_6, s2_7}};
         loggedBussiness.setSchedule(schedule);
         if(!password.isBlank()){
             loggedBussiness.setPassword(password);
