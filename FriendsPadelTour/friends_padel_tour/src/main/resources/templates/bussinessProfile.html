@@ -41,8 +41,7 @@
 
 
 
-
-    <button class="tournament_definition" href="/create/{{bussinessId}}" id="tournament_button"><span>CREAR TORNEO</span></button>
+    <a href="/create/{{bussinessId}}"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
     <div class="recent-matches">
       <h1>TORNEOS ACCEPTADOS</h1>
     </div>
@@ -54,7 +53,7 @@
       
               <div class="tournament_definition" id="tournament_name"><p>{{acceptedTournament.name}}</p></div>
               <div >
-                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {acceptedTournament.inscriptionStartDate}} - {{acceptedTournament.inscriptionFinnishDate}}</p></div>
+                <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="images/inscripcion.png"> {{acceptedTournament.inscriptionStartDate}} - {{acceptedTournament.inscriptionFinnishDate}}</p></div>
                 <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="images/reloj.png"> {{acceptedTournament.tournamentStartDate}} - {{acceptedTournament.tournamentFinnishDate}}</p></div>
               </div>
               <div >

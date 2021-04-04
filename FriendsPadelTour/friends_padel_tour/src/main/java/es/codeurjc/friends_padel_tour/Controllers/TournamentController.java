@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
@@ -36,7 +37,7 @@ public class TournamentController {
     @Autowired
     PlayersService playerService;
     @Autowired
-    private PlayersService bussinessService;
+    private BussinessService bussinessService;
     @Autowired
     private UserService userService;
 
@@ -88,17 +89,16 @@ public class TournamentController {
     
     
     @RequestMapping(value="/create/{id}/tournament", method=RequestMethod.GET)
-    public String createFriendlyMatch(@PathVariable Bussiness id,@RequestParam String name,@RequestParam String description,@RequestParam int fPrize,@RequestParam int sPrize,@RequestParam int min,@RequestParam int max,@RequestParam int category,@RequestParam String d1,@RequestParam String d2, @RequestParam String d3,@RequestParam String locality,@RequestParam String province,@RequestParam String postalCode,@RequestParam String date1,@RequestParam String date2,@RequestParam String date3,@RequestParam String date4,  Model model) {
-        
-        Tournament tournament = new Tournament(id, name, description, date1, date2, date3, date4, min, max, category, fPrize, sPrize, locality);
+    public String createFriendlyMatch(@PathVariable Long id,@RequestParam String name,@RequestParam String description,@RequestParam int fPrize,@RequestParam int sPrize,@RequestParam int min,@RequestParam int max,@RequestParam int category,@RequestParam String d1,@RequestParam String d2, @RequestParam String d3,@RequestParam String locality,@RequestParam String province,@RequestParam String postalCode,@RequestParam String date1,@RequestParam String date2,@RequestParam String date3,@RequestParam String date4,  Model model) {
+        Bussiness bussiness = bussinessService.findById(id);
+        Tournament tournament = new Tournament(bussiness, name, description, date1, date2, date3, date4, min, max, category, fPrize, sPrize, locality);
         tournamentsService.save(tournament);
         return "successTournamentCreation";
     }
 
     @GetMapping(value="/create/{id}")
-    public String requestTournament(@PathVariable Bussiness id, Model model) {
-        Bussiness bussiness = id;
-        model.addAttribute("id", bussiness);
+    public String requestTournament(@PathVariable Long id, Model model) {
+        model.addAttribute("id", id);
         return "tournamentRequest";
     }
 
