@@ -94,6 +94,6 @@ public class TournamentsService {
 
     public Page<Tournament> getPageTournaments(int pageNumber, int pageSize) {
         Pageable p = PageRequest.of(pageNumber, pageSize);
-		return tournamentRepository.findAll(p);
+		return tournamentRepository.findAllByAccepted(true,p);
 	}
 }

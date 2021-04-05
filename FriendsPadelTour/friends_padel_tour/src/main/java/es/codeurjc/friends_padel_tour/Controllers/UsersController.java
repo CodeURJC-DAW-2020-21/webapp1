@@ -352,11 +352,6 @@ public class UsersController {
         return "succesEdit";
     }
     
-    @DeleteMapping("/delete/tournament/{id}")
-    public String deleteTournament(@PathVariable Long id){
-        tournamentsService.deleteById(id);
-        return "successTournamentDelete";
-    }
 
     @GetMapping(value = "/delete/{id}")
     public String deleteAMatch(@PathVariable long id, Model model){

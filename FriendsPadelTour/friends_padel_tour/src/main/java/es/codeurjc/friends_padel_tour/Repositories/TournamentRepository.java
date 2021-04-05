@@ -28,4 +28,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     Optional<Page<Tournament>> findByIdAndAccepted(Long id, boolean accepted, Pageable pageable);
     Optional<List<Tournament>> findByAccepted(boolean accepted);
 
+    
+    Page<Tournament> findAllByAccepted(boolean b, Pageable p);
+
 }

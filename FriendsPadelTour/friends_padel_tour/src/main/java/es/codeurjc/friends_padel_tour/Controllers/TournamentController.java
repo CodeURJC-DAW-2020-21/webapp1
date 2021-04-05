@@ -24,6 +24,8 @@ import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -155,7 +157,29 @@ public class TournamentController {
         model.addAttribute("doubles", tournament.getPlayers());
         return "tournamentInfo";
     }
+
+    @GetMapping(value="/deleteTournament/{id}")
+    public String deleteTournamen(@PathVariable long id, Model model) {
+        Long bussinessId = (Long) model.getAttribute("userId");
+        Bussiness loggedBussiness = bussinessService.findById(bussinessId);
+        Tournament torunament = tournamentsService.findById(id);
+
+        loggedBussiness.getTournaments().remove(torunament);
+
+        tournamentsService.deleteById(id);
+        return "successEditTournament";
+    }
     
+    @PostMapping(value="/selectTournamentWinner/{id}")
+    public String selectTournamentWinner(@PathVariable long id,Model model,@RequestParam int doubleSelect) {
+        Tournament tournament = tournamentsService.findById(id);
+        DoubleOfPlayers winners = tournament.getPlayers().get(doubleSelect-1);
+        tournament.setFirstWinnngCouple(winners);
+        tournament.setFinished(true);
+
+        tournamentsService.uptdate(tournament);
+        return "successEditTournament";
+    }
     
-    
+
 }
