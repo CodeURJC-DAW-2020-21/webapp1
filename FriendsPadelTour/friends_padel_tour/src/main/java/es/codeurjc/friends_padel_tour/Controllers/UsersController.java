@@ -200,6 +200,7 @@ public class UsersController {
         }
         if(!password.isBlank()){
             loggedUser.setPassword(password);
+            userService.updatePasswordOf(loggedUser.getUser(),password);
         }
         playerService.updatePlayer(loggedUser);
         model.addAttribute("loggedUser", loggedUser);
@@ -332,6 +333,7 @@ public class UsersController {
         loggedBussiness.setSchedule(schedule);
         if(!password.isBlank()){
             loggedBussiness.setPassword(password);
+            userService.updatePasswordOf(loggedBussiness.getUser(), password);
         }
         bussinessService.updateBussiness(loggedBussiness);
         model.addAttribute("loggedUser", loggedBussiness);
@@ -358,6 +360,23 @@ public class UsersController {
 
     @GetMapping(value = "/delete/{id}")
     public String deleteAMatch(@PathVariable long id, Model model){
+        PadelMatch matchToDelete = matchesService.findById(id);
+        if(matchToDelete!=null){
+            DoubleOfPlayers d1= matchToDelete.getDouble1();
+            if(d1!=null){
+                d1.getPlayer1().getCreatedMatches().remove(matchToDelete);
+                d1.getPlayer1().getPendingMatches().remove(matchToDelete);
+                d1.getPlayer2().getCreatedMatches().remove(matchToDelete);
+                d1.getPlayer2().getPendingMatches().remove(matchToDelete);
+            }
+            DoubleOfPlayers d2= matchToDelete.getDouble1();
+            if(d2!=null){
+                d2.getPlayer1().getCreatedMatches().remove(matchToDelete);
+                d2.getPlayer1().getPendingMatches().remove(matchToDelete);
+                d2.getPlayer2().getCreatedMatches().remove(matchToDelete);
+                d2.getPlayer2().getPendingMatches().remove(matchToDelete);
+            }
+        }
         matchesService.deleteMatch(id);
         return "successDelete";
     }

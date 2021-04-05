@@ -60,6 +60,10 @@ public class UserService implements UserDetailsService {
 		else
 			return null;
 	}
+
+    public void updatePasswordOf(User user, String password) {
+		user.setEncodedPassword(passwordEnconder.encode(password));
+    }
 	
 
 }

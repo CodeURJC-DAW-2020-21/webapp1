@@ -48,6 +48,14 @@ public class Bussiness{
         
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public String getBussinessType() {
         return bussinessType;
     }
@@ -123,7 +131,7 @@ public class Bussiness{
                 location = location2;
                 this.password = password;
                 createdTournaments = 0;
-                this.user = user;
+                this.setUser(user);
     }
 
 
