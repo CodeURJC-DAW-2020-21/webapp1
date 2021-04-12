@@ -1,19 +1,17 @@
 package es.codeurjc.friends_padel_tour.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
-
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 
 @Service
