@@ -24,7 +24,6 @@ import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 

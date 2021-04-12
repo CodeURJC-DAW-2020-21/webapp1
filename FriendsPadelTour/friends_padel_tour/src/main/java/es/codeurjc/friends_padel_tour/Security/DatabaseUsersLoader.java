@@ -1,6 +1,5 @@
 package es.codeurjc.friends_padel_tour.Security;
 
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
