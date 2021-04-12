@@ -104,9 +104,7 @@ public class MatchController {
     public String createFriendlyMatch(@PathVariable int num,@RequestParam String fmProvince,@RequestParam String fmcity,@RequestParam String fmfacility,@RequestParam String fmdate,@RequestParam String fmtime, Model model) {
         Player creator = playerService.findByUsername((String) model.getAttribute("userName"));
         PadelMatch newMatch = new PadelMatch(fmProvince,fmcity,fmfacility,fmdate,fmtime,num,creator);
-        creator.getCreatedMatches().add(newMatch);
-        matchesService.save(newMatch);
-        playerService.updatePlayer(creator);
+        matchesService.createFriendlyMatch(newMatch,creator);
         return "succesMatchCreation";
     }
 
@@ -170,49 +168,7 @@ public class MatchController {
     public String joinFriendlyMatchLonely(@PathVariable long id,@PathVariable int slot,Model model) {
         PadelMatch matchToJoin = matchesService.findById(id);
         Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
-        if(slot==1||slot==2){
-            if(matchToJoin.getDouble1()==null){
-                DoubleOfPlayers newDoubleOfPlayers1 = new DoubleOfPlayers();
-                doubleService.saveDouble(newDoubleOfPlayers1);
-                matchToJoin.setDouble1(newDoubleOfPlayers1);
-            }
-        }
-        if(slot==3||slot==4){
-            if(matchToJoin.getDouble2()==null){
-                DoubleOfPlayers newDoubleOfPlayers2 = new DoubleOfPlayers();
-                doubleService.saveDouble(newDoubleOfPlayers2);
-                matchToJoin.setDouble2(newDoubleOfPlayers2);
-            }
-        }
-        if(slot==1){
-            matchToJoin.getDouble1().setPlayer1(loggedPlayer);
-            loggedPlayer.getDoubles1().add(matchToJoin.getDouble1());
-            doubleService.saveDouble(matchToJoin.getDouble1());
-        }
-        if(slot==2){
-            matchToJoin.getDouble1().setPlayer2(loggedPlayer);
-            loggedPlayer.getDoubles2().add(matchToJoin.getDouble1());
-            doubleService.saveDouble(matchToJoin.getDouble1());
-        }
-        if(slot==3){
-            matchToJoin.getDouble2().setPlayer1(loggedPlayer);
-            loggedPlayer.getDoubles1().add(matchToJoin.getDouble2());
-            doubleService.saveDouble(matchToJoin.getDouble2());
-        }
-        if(slot==4){
-            matchToJoin.getDouble2().setPlayer2(loggedPlayer);
-            loggedPlayer.getDoubles2().add(matchToJoin.getDouble2());
-            doubleService.saveDouble(matchToJoin.getDouble2());
-        }
-        matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
-
-        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
-            loggedPlayer.getPendingMatches().add(matchToJoin);
-        }
-
-        playerService.updatePlayer(loggedPlayer);
-        matchesService.save(matchToJoin);
-
+        matchesService.joinLonely(matchToJoin,loggedPlayer,slot);
         return "joiningSucces";
     }
 
@@ -221,27 +177,7 @@ public class MatchController {
         PadelMatch matchToJoin = matchesService.findById(id);
         Player loggedPlayer = playerService.findByUsername((String) model.getAttribute("userName"));
         Player playerDouble = playerService.findByUsername(doubleSelect);
-        DoubleOfPlayers doubleWhoJoins = doubleService.findDouble(doubleSelect, loggedPlayer.getUsername());
-        if(slot ==1){
-            matchToJoin.setDouble1(doubleWhoJoins);
-        }else{
-            matchToJoin.setDouble2(doubleWhoJoins);
-        }
-        matchToJoin.setnPlayers(matchToJoin.getnPlayers()+2);
-
-        doubleService.saveDouble(doubleWhoJoins);
-
-        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
-            loggedPlayer.getPendingMatches().add(matchToJoin);
-        }
-        if(!matchToJoin.getCreator().getUsername().equals(playerDouble.getUsername())){
-            playerDouble.getPendingMatches().add(matchToJoin);
-        }
-
-        playerService.updatePlayer(playerDouble);
-        playerService.updatePlayer(loggedPlayer);
-        
-        matchesService.save(matchToJoin);
+        matchesService.joinDouble(matchToJoin,loggedPlayer,playerDouble,slot);
         return "joiningSucces";
     }
     

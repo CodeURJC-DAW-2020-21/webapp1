@@ -149,4 +149,8 @@ public class PadelMatch {
     public Player getCreator() {
         return playerCreator;
     }
+
+    public long getId() {
+        return this.id;
+    }
 }
