@@ -1,8 +1,5 @@
 package es.codeurjc.friends_padel_tour.Security;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
