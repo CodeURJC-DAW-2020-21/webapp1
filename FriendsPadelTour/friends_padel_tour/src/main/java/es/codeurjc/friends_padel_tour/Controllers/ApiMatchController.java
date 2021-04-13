@@ -59,7 +59,7 @@ public class ApiMatchController {
         return ResponseEntity.created(location).body(newMatch);
     }
 
-    @PutMapping(value="/{id}/{slot}")
+    @PutMapping(value="/{id}/lonely/{slot}")
     public ResponseEntity<PadelMatch> joinMatchInDouble(@PathVariable long id, @RequestBody Player player1, @RequestBody Player player2, @PathVariable int slot) {
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
@@ -69,13 +69,14 @@ public class ApiMatchController {
         return ResponseEntity.ok(matchToJoin);
     }
 
-    @PutMapping(value="/{id}/{slot}")
+    @PutMapping(value="/{id}/inDouble/{slot}")
     public ResponseEntity<PadelMatch> joinMatchLonely(@PathVariable long id, @RequestBody Player playerWhoJoin, @PathVariable int slot) {
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.status(500).build();
+        matchesService.joinLonely(matchToJoin, playerWhoJoin, slot);
+        return ResponseEntity.ok(matchToJoin);
     }
 
     @DeleteMapping(value = "/{id}")
