@@ -240,51 +240,7 @@ public class UsersController {
     public String selectMatchWinner(@PathVariable long id, @PathVariable int index, @PathVariable int doubleWinnerSlot, Model model) {
         Player loggedUser = playerService.findById(id);
         PadelMatch match = loggedUser.getCreatedMatches().get(index - 1);
-        DoubleOfPlayers doubleWinner;
-        DoubleOfPlayers doubleLoss;
-        if(doubleWinnerSlot==1){
-            doubleWinner = match.getDouble1();
-            doubleLoss = match.getDouble2();
-        }else{
-            doubleWinner = match.getDouble2();
-            doubleLoss = match.getDouble1();
-        }
-        match.setDoubleWinner(doubleWinner);
-        match.setHasWinner(true);
-        loggedUser.getCreatedMatches().remove(index - 1);
-        
-        Player winner1 = doubleWinner.getPlayer1();
-        Player winner2 = doubleWinner.getPlayer2();
-        Player loser1 = doubleLoss.getPlayer1();
-        Player loser2 = doubleLoss.getPlayer2();
-        
-        winner1.getPlayedMatches().add(match);
-        winner2.getPlayedMatches().add(match);
-        loser1.getPlayedMatches().add(match);
-        loser2.getPlayedMatches().add(match);
-        winner1.getPendingMatches().remove(match);
-        winner2.getPendingMatches().remove(match);
-        loser1.getPendingMatches().remove(match);
-        loser2.getPendingMatches().remove(match);
-        loggedUser.getCreatedMatches().remove(match);
-
-        winner1.setScore(winner1.getScore()+3);
-        winner2.setScore(winner2.getScore()+3);
-        loser1.setScore(loser1.getScore()-3);
-        loser2.setScore(loser2.getScore()-3);
-
-        model.addAttribute("loggedUser", loggedUser);
-              
-        winner1.setMathcesWon(loggedUser.getMathcesWon()+1);
-        winner2.setMathcesWon(loggedUser.getMathcesWon()+1);
-        loser1.setMatchesLost(loggedUser.getMatchesLost()+1);
-        loser2.setMatchesLost(loggedUser.getMatchesLost()+1);
-
-        winner1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
-        winner2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
-        loser1.setMathesPlayed(loggedUser.getMathesPlayed()+1);
-        loser2.setMathesPlayed(loggedUser.getMathesPlayed()+1);
-
+        matchesService.selectMatchWinner(match,doubleWinnerSlot,loggedUser);
         double efectivity;
         if(loggedUser.getMathesPlayed()==0)
             efectivity=0;
@@ -298,14 +254,7 @@ public class UsersController {
         if(userDoubles != null && !userDoubles.isEmpty()){
             principalDouble = userDoubles.get(0);
         }
-        playerService.updatePlayer(winner1);
-        playerService.updatePlayer(winner2);
-        playerService.updatePlayer(loser1);
-        playerService.updatePlayer(loser2);
-        playerService.updatePlayer(loggedUser);
-        matchesService.save(match);
-        doubleService.saveDouble(doubleWinner);
-        doubleService.saveDouble(doubleLoss);
+        model.addAttribute("loggedUser", loggedUser);
         model.addAttribute("principalDouble", principalDouble);
         model.addAttribute("userDoubles", userDoubles);
         model.addAttribute("userCreatedGames", loggedUser.getCreatedMatches());
@@ -351,23 +300,6 @@ public class UsersController {
 
     @GetMapping(value = "/delete/{id}")
     public String deleteAMatch(@PathVariable long id, Model model){
-        PadelMatch matchToDelete = matchesService.findById(id);
-        if(matchToDelete!=null){
-            DoubleOfPlayers d1= matchToDelete.getDouble1();
-            if(d1!=null){
-                d1.getPlayer1().getCreatedMatches().remove(matchToDelete);
-                d1.getPlayer1().getPendingMatches().remove(matchToDelete);
-                d1.getPlayer2().getCreatedMatches().remove(matchToDelete);
-                d1.getPlayer2().getPendingMatches().remove(matchToDelete);
-            }
-            DoubleOfPlayers d2= matchToDelete.getDouble1();
-            if(d2!=null){
-                d2.getPlayer1().getCreatedMatches().remove(matchToDelete);
-                d2.getPlayer1().getPendingMatches().remove(matchToDelete);
-                d2.getPlayer2().getCreatedMatches().remove(matchToDelete);
-                d2.getPlayer2().getPendingMatches().remove(matchToDelete);
-            }
-        }
         matchesService.deleteMatch(id);
         return "successDelete";
     }

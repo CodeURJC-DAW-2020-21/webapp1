@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,9 @@ public class ApiMatchController {
 
     @GetMapping(value="/{num}")
     public ResponseEntity<List<PadelMatch>> getfriendlyMatchesByDivision(@PathVariable int num) {
+        if(num<1 || num>6){
+            return ResponseEntity.notFound().build();
+        }
         List<PadelMatch> mathces = matchesService.findByDivision(num);
         return ResponseEntity.ok(mathces);
     }
@@ -72,6 +76,26 @@ public class ApiMatchController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.status(500).build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<PadelMatch> deleteAFriendlyMatch(@PathVariable long id){
+        PadelMatch matchToDelete = matchesService.findById(id);
+        if(matchToDelete==null){
+            return ResponseEntity.notFound().build();
+        }
+        matchesService.deleteMatch(id);
+        return ResponseEntity.ok(matchToDelete);
+    }
+
+    @PutMapping(value="/{id}/{winnerSlot}")
+    public ResponseEntity<PadelMatch> winAMatch(@PathVariable long id,@PathVariable int winnerSlot) {
+        PadelMatch match = matchesService.findById(id);
+        if(match==null){
+            return ResponseEntity.notFound().build();
+        }
+        matchesService.selectMatchWinner(match, winnerSlot, match.getCreator());
+        return ResponseEntity.ok(match);
     }
     
 }
