@@ -32,7 +32,7 @@ public class ApiMatchController {
     @Autowired
     private PlayersService playersService;
 
-    @GetMapping(value="/{num}")
+    @GetMapping(value="/division/{num}")
     public ResponseEntity<List<PadelMatch>> getfriendlyMatchesByDivision(@PathVariable int num) {
         if(num<1 || num>6){
             return ResponseEntity.notFound().build();
@@ -41,7 +41,7 @@ public class ApiMatchController {
         return ResponseEntity.ok(mathces);
     }
 
-    @GetMapping(value="/{num}/rankings")
+    @GetMapping(value="/division/{num}/ranking")
     public ResponseEntity<List<Player>> getRankingOfDivision(@PathVariable int num) {
         if(num<1 || num>6){
             return ResponseEntity.notFound().build();
