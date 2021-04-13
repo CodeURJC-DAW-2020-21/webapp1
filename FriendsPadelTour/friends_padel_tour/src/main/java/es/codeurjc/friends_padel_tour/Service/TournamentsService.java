@@ -20,6 +20,8 @@ public class TournamentsService {
     //Autowired section
     @Autowired
     private TournamentRepository tournamentRepository;
+    @Autowired
+    private DoubleService doubleService;
 
     //Find a tournament
     public Tournament findById(long id) {
@@ -94,4 +96,38 @@ public class TournamentsService {
         Pageable p = PageRequest.of(pageNumber, pageSize);
 		return tournamentRepository.findAllByAccepted(true,p);
 	}
+
+    public boolean joinTournament(long tournamentId, String doubleSelect, String userName){
+        DoubleOfPlayers doubleWhoJoin = doubleService.findDouble(userName,doubleSelect);
+        Tournament tournamentToJoin = this.findById(tournamentId);
+
+        if (doubleWhoJoin != null && tournamentToJoin != null){
+            if (!tournamentToJoin.isFinished()){
+                doubleWhoJoin.getTournaments().add(tournamentToJoin);
+                tournamentToJoin.getPlayers().add(doubleWhoJoin);
+                tournamentToJoin.setRegisteredCouples(tournamentToJoin.getRegisteredCouples()+1);
+                if(tournamentToJoin.getRegisteredCouples()==tournamentToJoin.getMaxCouples()){
+                    tournamentToJoin.setFull(true);
+                }
+                doubleService.update(doubleWhoJoin);
+                this.uptdate(tournamentToJoin);
+                return true;
+            }
+            return false;
+        }else{
+            return false;
+        }
+
+    }
+
+    public void setTournamentWinners(long tournamentId, int doubleSelect){
+        Tournament tournament = this.findById(tournamentId);
+        DoubleOfPlayers winners = tournament.getPlayers().get(doubleSelect-1);
+        if (tournament != null){
+            tournament.setFirstWinnngCouple(winners);
+            tournament.setFinished(true);
+            this.uptdate(tournament);
+        }
+    }
+
 }
