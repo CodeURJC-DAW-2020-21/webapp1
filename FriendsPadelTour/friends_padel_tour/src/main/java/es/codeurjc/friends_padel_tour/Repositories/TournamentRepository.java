@@ -25,6 +25,9 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
     @Query("update Tournament t set t.secondWinningCouple = ?1 where t.id = ?2")
     int setSecondWinningCouple(DoubleOfPlayers couple, Long id);
 
+
+    Optional<Tournament> findById(Long id);
+
     Optional<Page<Tournament>> findByIdAndAccepted(Long id, boolean accepted, Pageable pageable);
     Optional<List<Tournament>> findByAccepted(boolean accepted);
 
