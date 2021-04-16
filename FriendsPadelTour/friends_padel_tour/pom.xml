@@ -14,12 +14,7 @@
 	<name>friends_padel_tour</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-<<<<<<< HEAD
 		<java.version>11</java.version>
-		<start-class>es.codeurjc.friends_padel_tours.FriendsPadelTourApplication</start-class>
-=======
-		<java.version>15</java.version>
->>>>>>> 0dacc7d36b6839896668d0c2b91b7641ee72a481
 	</properties>
 	<dependencies>
 	
