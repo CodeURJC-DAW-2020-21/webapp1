@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,13 +32,16 @@ public class ApiMatchController {
     @Autowired
     private PlayersService playersService;
 
-    @GetMapping(value="/{num}")
+    @GetMapping(value="/division/{num}")
     public ResponseEntity<List<PadelMatch>> getfriendlyMatchesByDivision(@PathVariable int num) {
+        if(num<1 || num>6){
+            return ResponseEntity.notFound().build();
+        }
         List<PadelMatch> mathces = matchesService.findByDivision(num);
         return ResponseEntity.ok(mathces);
     }
 
-    @GetMapping(value="/{num}/rankings")
+    @GetMapping(value="/division/{num}/ranking")
     public ResponseEntity<List<Player>> getRankingOfDivision(@PathVariable int num) {
         if(num<1 || num>6){
             return ResponseEntity.notFound().build();
@@ -55,7 +59,7 @@ public class ApiMatchController {
         return ResponseEntity.created(location).body(newMatch);
     }
 
-    @PutMapping(value="/{id}/{slot}")
+    @PutMapping(value="/{id}/lonely/{slot}")
     public ResponseEntity<PadelMatch> joinMatchInDouble(@PathVariable long id, @RequestBody Player player1, @RequestBody Player player2, @PathVariable int slot) {
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
@@ -65,13 +69,34 @@ public class ApiMatchController {
         return ResponseEntity.ok(matchToJoin);
     }
 
-    @PutMapping(value="/{id}/{slot}")
+    @PutMapping(value="/{id}/inDouble/{slot}")
     public ResponseEntity<PadelMatch> joinMatchLonely(@PathVariable long id, @RequestBody Player playerWhoJoin, @PathVariable int slot) {
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.status(500).build();
+        matchesService.joinLonely(matchToJoin, playerWhoJoin, slot);
+        return ResponseEntity.ok(matchToJoin);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<PadelMatch> deleteAFriendlyMatch(@PathVariable long id){
+        PadelMatch matchToDelete = matchesService.findById(id);
+        if(matchToDelete==null){
+            return ResponseEntity.notFound().build();
+        }
+        matchesService.deleteMatch(id);
+        return ResponseEntity.ok(matchToDelete);
+    }
+
+    @PutMapping(value="/{id}/{winnerSlot}")
+    public ResponseEntity<PadelMatch> winAMatch(@PathVariable long id,@PathVariable int winnerSlot) {
+        PadelMatch match = matchesService.findById(id);
+        if(match==null){
+            return ResponseEntity.notFound().build();
+        }
+        matchesService.selectMatchWinner(match, winnerSlot, match.getCreator());
+        return ResponseEntity.ok(match);
     }
     
 }

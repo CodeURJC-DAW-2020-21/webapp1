@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
-import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
@@ -134,18 +133,7 @@ public class TournamentController {
 
     @PostMapping(value="/joinTournament/{id}")
     public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, Model model) {
-        DoubleOfPlayers doubleWhoJoin = doubleService.findDouble((String)model.getAttribute("userName"),doubleSelect);
-        Tournament tournamentToJoin = tournamentsService.findById(id);
-
-        doubleWhoJoin.getTournaments().add(tournamentToJoin);
-        tournamentToJoin.getPlayers().add(doubleWhoJoin);
-        
-        tournamentToJoin.setRegisteredCouples(tournamentToJoin.getRegisteredCouples()+1);
-        if(tournamentToJoin.getRegisteredCouples()==tournamentToJoin.getMaxCouples()){
-            tournamentToJoin.setFull(true);
-        }
-        doubleService.update(doubleWhoJoin);
-        tournamentsService.uptdate(tournamentToJoin);
+        tournamentsService.joinTournament(id, doubleSelect,(String)model.getAttribute("userName"));
         return "joiningSucces";
     }
 
@@ -171,12 +159,7 @@ public class TournamentController {
     
     @PostMapping(value="/selectTournamentWinner/{id}")
     public String selectTournamentWinner(@PathVariable long id,Model model,@RequestParam int doubleSelect) {
-        Tournament tournament = tournamentsService.findById(id);
-        DoubleOfPlayers winners = tournament.getPlayers().get(doubleSelect-1);
-        tournament.setFirstWinnngCouple(winners);
-        tournament.setFinished(true);
-
-        tournamentsService.uptdate(tournament);
+        tournamentsService.setTournamentWinners(id, doubleSelect);
         return "successEditTournament";
     }
     
