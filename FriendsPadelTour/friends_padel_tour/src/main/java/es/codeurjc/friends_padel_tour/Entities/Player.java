@@ -38,18 +38,23 @@ public class Player{
     private int mathesPlayed;
 
     @OneToMany(mappedBy = "player1")
+    @JsonIgnore
     private List<DoubleOfPlayers> doubles1;
 
     @OneToMany(mappedBy = "player2")
+    @JsonIgnore
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
+    @JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 
@@ -58,6 +63,7 @@ public class Player{
     private Blob image;
 
     @OneToOne
+    @JsonIgnore
     private User user;
 
     private int score;

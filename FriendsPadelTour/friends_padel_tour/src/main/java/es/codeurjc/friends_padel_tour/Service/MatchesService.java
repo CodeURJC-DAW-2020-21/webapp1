@@ -109,7 +109,7 @@ public class MatchesService {
         }
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
 
-        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+        if(!matchToJoin.getPlayerCreator().getUsername().equals(loggedPlayer.getUsername())){
             loggedPlayer.getPendingMatches().add(matchToJoin);
         }
 
@@ -129,10 +129,10 @@ public class MatchesService {
 
         doubleService.saveDouble(doubleWhoJoins);
 
-        if(!matchToJoin.getCreator().getUsername().equals(loggedPlayer.getUsername())){
+        if(!matchToJoin.getPlayerCreator().getUsername().equals(loggedPlayer.getUsername())){
             loggedPlayer.getPendingMatches().add(matchToJoin);
         }
-        if(!matchToJoin.getCreator().getUsername().equals(playerDouble.getUsername())){
+        if(!matchToJoin.getPlayerCreator().getUsername().equals(playerDouble.getUsername())){
             playerDouble.getPendingMatches().add(matchToJoin);
         }
 
