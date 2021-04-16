@@ -7,8 +7,6 @@ services:
     environment:
       - MYSQL_DATABASE=fptdb
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=123456
     ports:
       - 3306:3306
 

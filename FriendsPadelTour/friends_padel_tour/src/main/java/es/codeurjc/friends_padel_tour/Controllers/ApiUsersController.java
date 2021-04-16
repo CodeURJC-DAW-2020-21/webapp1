@@ -85,10 +85,6 @@ public class ApiUsersController {
         }
     }
 
-
-
-    
-
     @PutMapping(value="/player/{id}")
     public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody String password, @RequestBody int division) {
         Player newPlayer = playerService.findById(id);
