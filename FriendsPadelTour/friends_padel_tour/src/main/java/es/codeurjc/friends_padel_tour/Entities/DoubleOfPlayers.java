@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class DoubleOfPlayers {
     @Id
@@ -21,6 +23,7 @@ public class DoubleOfPlayers {
     private Player player2;
 
     @ManyToMany
+    @JsonIgnore
     private List<Tournament> tournaments;
 
 

@@ -95,7 +95,7 @@ public class ApiMatchController {
         if(match==null){
             return ResponseEntity.notFound().build();
         }
-        matchesService.selectMatchWinner(match, winnerSlot, match.getCreator());
+        matchesService.selectMatchWinner(match, winnerSlot, match.getPlayerCreator());
         return ResponseEntity.ok(match);
     }
     

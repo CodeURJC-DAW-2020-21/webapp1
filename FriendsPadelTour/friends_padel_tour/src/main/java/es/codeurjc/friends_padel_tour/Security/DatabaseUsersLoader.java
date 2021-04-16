@@ -1,5 +1,8 @@
 package es.codeurjc.friends_padel_tour.Security;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,11 +11,13 @@ import org.springframework.stereotype.Component;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
+import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.DoubleRepository;
+import es.codeurjc.friends_padel_tour.Repositories.MatchesRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
@@ -31,6 +36,8 @@ public class DatabaseUsersLoader {
     private UserRepository userRepository;
     @Autowired
     private DoubleRepository doubleRepository;
+    @Autowired
+    private MatchesRepository matchesRepository;
     @Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -109,6 +116,18 @@ public class DatabaseUsersLoader {
         Bussiness newBussiness = new Bussiness("Padel Arroyo Molinos", "bussinessUsername", "Madrid", "email@gmail.com", "password", userBussiness);
         newBussiness.setAdress("Calle de ejemplo");
         bussinessRepository.save(newBussiness);
+
+        PadelMatch match1 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 30).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
+        PadelMatch match2 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 29).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer2);
+        PadelMatch match3 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 28).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer3);
+        PadelMatch match4 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 27).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer4);
+        PadelMatch match5 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 26).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer5);
+
+        matchesRepository.save(match1);
+        matchesRepository.save(match2);
+        matchesRepository.save(match3);
+        matchesRepository.save(match4);
+        matchesRepository.save(match5);
 
         Tournament tournament = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
         tournament.setAccepted(true);

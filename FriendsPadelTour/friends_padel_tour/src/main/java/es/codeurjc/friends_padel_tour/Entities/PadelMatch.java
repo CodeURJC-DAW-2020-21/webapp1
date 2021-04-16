@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class PadelMatch {
     
@@ -23,20 +25,33 @@ public class PadelMatch {
     private boolean hasWinner;
 
     @ManyToOne
+    @JsonIgnore
     private Player playerCreator;
     
     @ManyToOne
+    @JsonIgnore
     private DoubleOfPlayers double1;
     @ManyToOne
+    @JsonIgnore
     private DoubleOfPlayers double2;
 
     @ManyToOne
+    @JsonIgnore
     private DoubleOfPlayers doubleWinner;
 
     @ManyToOne
+    @JsonIgnore
     private Tournament tournament;
 
     public PadelMatch(){}
+
+    public Player getPlayerCreator() {
+        return playerCreator;
+    }
+
+    public void setPlayerCreator(Player playerCreator) {
+        this.playerCreator = playerCreator;
+    }
 
     public boolean isHasWinner() {
         return hasWinner;
@@ -61,7 +76,7 @@ public class PadelMatch {
         this.date = date;
         this.time = time;
         this.division = division;
-        this.playerCreator = creator;
+        this.setPlayerCreator(creator);
         this.hasWinner =false;
     }
 
@@ -144,10 +159,6 @@ public class PadelMatch {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Player getCreator() {
-        return playerCreator;
     }
 
     public long getId() {

@@ -33,6 +33,7 @@ public class Bussiness{
     private int createdTournaments;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
+    @JsonIgnore
     private List<Tournament> tournaments;
     private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};
     private boolean hasImage = false;
