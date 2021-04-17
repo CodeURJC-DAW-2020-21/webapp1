@@ -28,9 +28,18 @@ public class ApiTournamentController {
     @Autowired
     TournamentsService tournamentsService;
 
-    @GetMapping(value = "/")
-    public ResponseEntity<Page<Tournament>> getTournaments(@RequestParam int page){
-        Page<Tournament> tournaments = tournamentsService.getPageTournaments(page, 3);
+    @GetMapping(value = "/acceptedTournaments")
+    public ResponseEntity<Page<Tournament>> getTournaments(@RequestParam int pageNumber){
+        Page<Tournament> tournaments = tournamentsService.getPageAcceptedTournaments(pageNumber, 3);
+        if(tournaments == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tournaments);
+    }
+
+    @GetMapping(value = "/nonAceceptedTournaments")
+    public ResponseEntity<Page<Tournament>> getNonAcceptedTournaments(@RequestParam int pageNumber){
+        Page<Tournament> tournaments = tournamentsService.getPageNoAcceptedTournaments(pageNumber, 3);
         if(tournaments == null){
             return ResponseEntity.notFound().build();
         }

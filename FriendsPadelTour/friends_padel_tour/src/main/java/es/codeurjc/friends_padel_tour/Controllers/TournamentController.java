@@ -84,7 +84,7 @@ public class TournamentController {
 
         model.addAttribute("userDoubles", userDoubles);
 
-        Page<Tournament> tournaments = tournamentsService.getPageTournaments(0, pageSize);
+        Page<Tournament> tournaments = tournamentsService.getPageAcceptedTournaments(0, pageSize);
         
         model.addAttribute("tournamentspage", tournaments);
         return "tournaments";

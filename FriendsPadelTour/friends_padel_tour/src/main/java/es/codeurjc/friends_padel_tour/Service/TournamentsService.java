@@ -92,9 +92,14 @@ public class TournamentsService {
         tournamentRepository.save(tournamentToUpdate);
     }
 
-    public Page<Tournament> getPageTournaments(int pageNumber, int pageSize) {
+    public Page<Tournament> getPageAcceptedTournaments(int pageNumber, int pageSize) {
         Pageable p = PageRequest.of(pageNumber, pageSize);
 		return tournamentRepository.findAllByAccepted(true,p);
+	}
+
+    public Page<Tournament> getPageNoAcceptedTournaments(int pageNumber, int pageSize) {
+        Pageable p = PageRequest.of(pageNumber, pageSize);
+		return tournamentRepository.findAllByAccepted(false,p);
 	}
 
     public boolean joinTournament(long tournamentId, String doubleSelect, String userName){
