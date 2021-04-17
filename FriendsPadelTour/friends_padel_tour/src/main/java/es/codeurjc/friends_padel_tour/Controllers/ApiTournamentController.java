@@ -1,9 +1,11 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
-import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
-import org.apache.catalina.connector.Response;
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 
@@ -28,13 +28,26 @@ public class ApiTournamentController {
     @Autowired
     TournamentsService tournamentsService;
 
-    @PostMapping(value="/{id}")
-    public ResponseEntity<Tournament> createTournament(@RequestBody Tournament tournament){
-        
-
+    @GetMapping(value = "/")
+    public ResponseEntity<Page<Tournament>> getTournaments(@RequestParam int page){
+        Page<Tournament> tournaments = tournamentsService.getPageTournaments(page, 3);
+        if(tournaments == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tournaments);
     }
 
-    @PutMapping(value="/TournamentAccepted/{id}")
+    @PostMapping(value="/{id}")
+    public ResponseEntity<Tournament> createTournament(@RequestBody Tournament tournament){
+        tournamentsService.save(tournament);
+
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(tournament.getId()).toUri();
+
+        return ResponseEntity.created(location).body(tournament);
+        
+    }
+
+    @PutMapping(value="/acceptedTournament/{id}")
     public ResponseEntity<Tournament> acceptTournament(@PathVariable long id){
         Tournament tournament = tournamentsService.findById(id);
         if (tournament==null){
@@ -56,7 +69,7 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournamentToDelete);
     }
 
-    @GetMapping(value = "/info/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Tournament> tournamentInfo(@PathVariable long id){
         Tournament tournament = tournamentsService.findById(id);
         if (tournament==null){
@@ -65,7 +78,7 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournament);
     }
 
-    @PutMapping(value = "/winner/{id}")
+    @PutMapping(value = "/acceptedTournament/winner/{id}")
     public ResponseEntity<Tournament> tournamentWinner(@PathVariable long id, @RequestBody int doublee){
         Tournament tournament = tournamentsService.findById(id);
         if (tournament==null){

@@ -22,6 +22,8 @@ import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -166,7 +168,18 @@ public class ApiUsersController {
         return ResponseEntity.created(location).body(newDouble);
             
     }
-    
-    
+
+    @GetMapping(value="/player/{username}/stats")
+    public ResponseEntity<int[]> getPlayerStats(@PathVariable String username) {
+        Player player = playerService.findByUsername(username);
+        if(player==null){
+            return ResponseEntity.notFound().build();
+        }
+        int[] stats = new int[3];
+        stats[0] = player.getMathesPlayed();
+        stats[1] = player.getMathcesWon();
+        stats[2] = player.getMatchesLost();
+        return ResponseEntity.ok().body(stats);
+    }
     
 }

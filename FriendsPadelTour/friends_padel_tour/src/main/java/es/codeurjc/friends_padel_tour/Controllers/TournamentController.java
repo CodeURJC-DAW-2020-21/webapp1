@@ -81,11 +81,8 @@ public class TournamentController {
         if(loggedPlayer !=null){
             userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         }
-        List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
+
         model.addAttribute("userDoubles", userDoubles);
-        model.addAttribute("tournaments", tournamentsaccepted);
-
-
 
         Page<Tournament> tournaments = tournamentsService.getPageTournaments(0, pageSize);
         
