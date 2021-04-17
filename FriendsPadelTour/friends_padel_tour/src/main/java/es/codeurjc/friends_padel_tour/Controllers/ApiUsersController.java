@@ -1,48 +1,26 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
-import java.io.IOException;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.net.URI;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
-import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
-import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
-import es.codeurjc.friends_padel_tour.Entities.Tournament;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController

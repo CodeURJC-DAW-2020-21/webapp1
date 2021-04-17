@@ -144,6 +144,7 @@ public class MatchesService {
 
     public void createFriendlyMatch(PadelMatch newMatch, Player creator) {
         creator.getCreatedMatches().add(newMatch);
+        newMatch.setPlayerCreator(creator);
         this.save(newMatch);
         playersService.updatePlayer(creator);
     }
