@@ -16,7 +16,7 @@ public class DoubleOfPlayers {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    
+
     @ManyToOne
     private Player player1;
     @ManyToOne
@@ -40,9 +40,14 @@ public class DoubleOfPlayers {
     public Player getPlayer1() {
         return player1;
     }
-public long getId(){
-    return id;
-}
+    
+    public long getId(){
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;

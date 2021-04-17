@@ -132,8 +132,8 @@ public class TournamentController {
     }
 
     @PostMapping(value="/joinTournament/{id}")
-    public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, Model model) {
-        tournamentsService.joinTournament(id, doubleSelect,(String)model.getAttribute("userName"));
+    public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, @RequestParam String username, Model model) {
+        tournamentsService.joinTournament(id, doubleSelect,username);
         return "joiningSucces";
     }
 

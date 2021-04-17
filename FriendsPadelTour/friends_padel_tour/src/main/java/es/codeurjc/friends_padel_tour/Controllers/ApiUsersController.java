@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
+import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
@@ -70,10 +71,6 @@ public class ApiUsersController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
-    
 
     @PutMapping(value="/player/{id}")
     public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody String password, @RequestBody int division) {
@@ -149,31 +146,27 @@ public class ApiUsersController {
         model.addAttribute("UserExtern", notMyProfile);
         return "succesEdit";
     }
-
-    @GetMapping(value="/makeDoubleWhith/{doubleName}")
-    public ResponseEntity<Double> makeDoubleWith(@PathVariable String doubleName) {
-        Player loggedUser = playerService.findByUsername((String) model.getAttribute("userName"));
-        Player userNewDouble = playerService.findByUsername(doubleName);
-        if(doubleService.findDouble(loggedUser.getUsername(), userNewDouble.getUsername())!=null){
-            model.addAttribute("message", "Ya eres pareja de este usuario.");
-            return "successDoubleCreation";
-        }
-        DoubleOfPlayers newDouble = new DoubleOfPlayers();
+*/
+    @PostMapping(value="/DoubleWith/")
+    public ResponseEntity<DoubleOfPlayers> makeDoubleWith(@RequestBody String doubleName, @RequestBody String creator) {
         
-        newDouble.setPlayer1(loggedUser);
-        newDouble.setPlayer2(userNewDouble);
-
-        loggedUser.getDoubles1().add(newDouble);
-        userNewDouble.getDoubles2().add(newDouble);
-
-        playerService.updatePlayer(loggedUser);
-        playerService.updatePlayer(userNewDouble);
-
+        Player userNewDouble1 = playerService.findByUsername(creator);
+        Player userNewDouble2 = playerService.findByUsername(doubleName);
+        
+        DoubleOfPlayers newDouble = new DoubleOfPlayers();
+        newDouble.setPlayer1(userNewDouble1);
+        newDouble.setPlayer2(userNewDouble2);
+        userNewDouble1.getDoubles1().add(newDouble);
+        userNewDouble2.getDoubles2().add(newDouble);
+        playerService.updatePlayer(userNewDouble1);
+        playerService.updatePlayer(userNewDouble2);
         doubleService.saveDouble(newDouble);
-        model.addAttribute("message", "Exito creando la nueva pareja.");
-        return "successDoubleCreation";
+
+        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newDouble.getId()).toUri();
+        return ResponseEntity.created(location).body(newDouble);
+            
     }
-    */
+    
     
     
 }
