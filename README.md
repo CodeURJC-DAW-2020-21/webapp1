@@ -159,7 +159,7 @@ In this screen the admin user can see all the tournament requests and accept all
 
 # API documentation:
 We are going to have a link that use rawgit that pemit to see all the information related with the API:
-https://raw.githack.com/<org>/<repo>/api-docs/api-docs.html
+https://raw.githack.com/<CodeURJC-DAW-2020-21>/<webapp1>/api-docs/api-docs.html
  
 # Class diagram (Updated):
 
