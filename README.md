@@ -155,5 +155,11 @@ In this screen the admin user can see all the tournament requests and accept all
 |Eduardo Villaverde Espeso | eduvilla97 |[MySQL](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/c0edf83b6bfe5c0633afe902b8adb96fe81fc360)|[Modelation](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/a4dae9073bd428a865b5bead4227e27229995257)|[Join match, join tournament and player profile](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/7ab24d56aaffc9d93563eeddb79f3a91c2ba493a)|[Delete match, choose winner..,](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/12b9d7d14d1287d7d846276a3e6ac418fe5e43f4)|[Sign Up and Use of users](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/7ab24d56aaffc9d93563eeddb79f3a91c2ba493a)|
 |Alberto Morán Cuenca | AlbertoMoranCuenca |[Ajax](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f42f7727c09db2441d24f42418559a875078ce4c)|[Tournaments Creation and elimination](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/46d0fd4f14451f505c15651040e5886dae3b4723)|[Bussiness user](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/2f17979839a2eb78c78e40aa2054eff2983472b9)|[Tournaments sevice and repository](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f89f8dd9b4ecb275b15d332bb466072133ad6e74)|[Bussiness profile](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/2f17979839a2eb78c78e40aa2054eff2983472b9)|
 
+# STAGE 3
 
+# API documentation:
+We are going to have a link that use rawgit that pemit to see all the information related with the API:
+https://raw.githack.com/<org>/<repo>/api-docs/api-docs.html
+ 
+# Class diagram (Updated):
 
