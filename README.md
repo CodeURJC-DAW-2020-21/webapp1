@@ -168,3 +168,44 @@ https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/frien
  
 # Class diagram (Updated):
 
+
+### Members Participation <a name="members-part-3"></a>
+
+#### Eduardo Villaverde Espeso
+
+This team member added the skeleton structure of the rest application, security (jwts), error handling, postman collections, bugfixes, and helped
+team members with everything that was necessary.
+
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | Added JWT (Json Web Tokens) auth | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/f2fceb1201f5fee6d6ca6532691c60e3dc8c92cb) | [TokenRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/jwt/controller/TokenRestController.java) |
+| #2 | Added Postman Collections | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/fad5000847df15a82296dec2bec76e56cf87007a) | [OrderRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/controller/OrderRestController.java) |
+| #3 | Refactored REST API for best practices | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/3acb49075913c56a8c9fa7590d9a5d498c1f8dd1) | [ProductRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/product/controller/ProductRestController.java) |
+| #4 | Integrated image retrieval in find user | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/039e42e05617eee8a62a7970cc950776ca74219f) | [SaleRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/controller/SaleRestController.java) |
+| #5 | Performed general improvements  | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/fac231e27e154d3742383219cec9ab9e5a465b71) | [UserRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/controller/UserRestController.java) |
+
+#### Juan Guillo Bermejo
+
+This team member mainly worked on the order and statisctics controllers, the creation of docker batch scripts (and other docker windows related stuff), helped testing the docker containers and helped team members.
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | Implemented Order Mapper and FinderOrderResponseDto | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/7b5ee8cbc7e9c64130dfdde9db86435f1284ff3b) | [OrderRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/controller/OrderRestController.java) |
+| #2 | Added findServices method (from OrderRestController) | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/232ee3b7f3d1966ac61d91fc8f62a5cfe06d2c07) | [RestOrderMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/mapper/RestOrderMapper.java) |
+| #3 | Added exportOrderToPdf method (from OrderRestController) | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/40493fae6f253c2f6971d3bbeff9dd36e3e93f3a) | [StatisticsRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/statistics/controller/StatisticsRestController.java) |
+| #4 | Created StatisticsResponseDto & StatisticsRestController | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/3856f1c4fb40ddea2b1ccc46ae0b99459ac267fc) | [FindOrderResponseDto.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/dto/FindOrderResponseDto.java) |
+| #5 | Created windows batch docker script | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/eaa64fd3a68ca59d2f221dac4994b2256da58df7) | [create_image.bat](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/docker/create_image.bat) |
+
+#### Eduardo Ivorra Salinas
+
+This team member mainly worked on the sales REST API section, the creation, disabling of the sales, also the adaptation of the existent services to work for both rest and web controllers.
+
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | Added "updates current accumulative discount" | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/eda3ce02ad5a66e6b5d9e70c0dce4fef8f9cb555) | [SaleRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/controller/SaleRestController.java) |
+| #2 | Added "disables current one time discount" | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/cafa1b3ccb3191dd237036cbec442fc24de0ad82) | [RestSaleMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/mapper/RestSaleMapper.java) |
+| #3 | Documented SalesRestController | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/9619041900d1481b36b26c796cf61e7e824024ab) | [UserRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/controller/UserRestController.java) |
+| #4 | Added "disables current accumulative discount" | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/bf83ab0982b789f92832c9c301846bf543530124) | [RestUserMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/mapper/RestUserMapper.java) |
+| #5 | Updated UserRestController | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/7f31d4a0034798cec41e5753137cd56496466123) | [UserServiceImpl.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/service/UserServiceImpl.java) |
+
+
+
