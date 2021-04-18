@@ -155,5 +155,57 @@ In this screen the admin user can see all the tournament requests and accept all
 |Eduardo Villaverde Espeso | eduvilla97 |[MySQL](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/c0edf83b6bfe5c0633afe902b8adb96fe81fc360)|[Modelation](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/a4dae9073bd428a865b5bead4227e27229995257)|[Join match, join tournament and player profile](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/7ab24d56aaffc9d93563eeddb79f3a91c2ba493a)|[Delete match, choose winner..,](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/12b9d7d14d1287d7d846276a3e6ac418fe5e43f4)|[Sign Up and Use of users](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/7ab24d56aaffc9d93563eeddb79f3a91c2ba493a)|
 |Alberto Morán Cuenca | AlbertoMoranCuenca |[Ajax](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f42f7727c09db2441d24f42418559a875078ce4c)|[Tournaments Creation and elimination](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/46d0fd4f14451f505c15651040e5886dae3b4723)|[Bussiness user](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/2f17979839a2eb78c78e40aa2054eff2983472b9)|[Tournaments sevice and repository](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/f89f8dd9b4ecb275b15d332bb466072133ad6e74)|[Bussiness profile](https://github.com/CodeURJC-DAW-2020-21/webapp1/commits/main/2f17979839a2eb78c78e40aa2054eff2983472b9)|
 
+# STAGE 3
+
+# API documentation:
+
+### Java code with SpringDoc
+We are going to have a link that use rawgit that pemit to see all the information related with the API:
+https://rawcdn.githack.com/CodeURJC-DAW-2020-21/webapp1/f133949a8e1baa305bbe714e712552940d34ee48/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.html
+
+### api-docs.yaml:
+https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.yaml
+ 
+# Class diagram (Updated):
+
+
+### Members Participation <a name="members-part-3"></a>
+
+#### Eduardo Villaverde Espeso
+
+This team member added the skeleton structure of the rest application, security (jwts), error handling, postman collections, bugfixes, and helped
+team members with everything that was necessary.
+
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | ApiDocs | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/dde697eeeefeb9d3e4be6b1916ba14d5b0a61fb6) | [TokenRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/jwt/controller/TokenRestController.java) |
+| #2 | Api Match Controller | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1befb61d0d4dc511e4be56a25fe9b4e23d6f6667) | [OrderRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/controller/OrderRestController.java) |
+| #3 | Fixing bugs | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/aa31fc3c60f5e417aca7604addb508a68ee57527) | [ProductRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/product/controller/ProductRestController.java) |
+| #4 | Integration with the ApiRest | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/0da660e1656d74e767453ccbcbe9aa87c839c6d5) | [SaleRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/controller/SaleRestController.java) |
+| #5 | Performed general improvements  | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/665e40d79716bd0b19dd69a98c1c195ba3d3548e) | [UserRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/controller/UserRestController.java) |
+
+#### Juan Guillo Bermejo
+
+This team member mainly worked on the order and statisctics controllers, the creation of docker batch scripts (and other docker windows related stuff), helped testing the docker containers and helped team members.
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | ReadME | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/a201da1e84302def70275a4a027771d76f9921b4) | [OrderRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/controller/OrderRestController.java) |
+| #2 | ApiUsersController | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/874318de753ef1b4ef63b9ed171690695ec0cb49) | [RestOrderMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/mapper/RestOrderMapper.java) |
+| #3 | Fixing bugs, general improvements  | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1467dce6a6fd18f4e4290d07fba7345d911bb0ca) | [StatisticsRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/statistics/controller/StatisticsRestController.java) |
+| #4 | Downloading and uploading images with ApiRest | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/eb19998ac73672dcc731bd43ed19f0f55f73e1b0) | [FindOrderResponseDto.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/order/dto/FindOrderResponseDto.java) |
+| #5 | Security for ApiRest | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a8b03d10dc5f09cf7103b3328474a723d4df8af2) | [create_image.bat](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/docker/create_image.bat) |
+
+#### Eduardo Ivorra Salinas
+
+This team member mainly worked on the area of docker, and created Api for the tournament.
+
+| Number | Description | Commit | Focused on Files |
+| ------------- | ------------- | ------------- | ------------- |
+| #1 | ApiTournaments | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/d5f9664477a7c225da27de6248b5985eae8a1450) | [SaleRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/controller/SaleRestController.java) |
+| #2 | Docker | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/db1c38cded9b7969f7740de724b87ab92b5aa724) | [RestSaleMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/sale/mapper/RestSaleMapper.java) |
+| #3 | ReadME  | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/5664b6d08a0ed86e3c089fb60ee4f6dfc1cc6744) | [UserRestController.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/controller/UserRestController.java) |
+| #4 | Added "disables current accumulative discount" | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/bf83ab0982b789f92832c9c301846bf543530124) | [RestUserMapper.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/api/user/mapper/RestUserMapper.java) |
+| #5 | Updated UserRestController | [> See commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/7f31d4a0034798cec41e5753137cd56496466123) | [UserServiceImpl.class](https://github.com/CodeURJC-DAW-2020-21/webapp11/blob/main/backend/src/main/java/es/urjc/code/daw/marketplace/service/UserServiceImpl.java) |
+
 
 

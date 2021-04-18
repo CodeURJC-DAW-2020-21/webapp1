@@ -1,8 +1,10 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
-
+import java.io.IOException;
 import java.net.URI;
+import java.net.MalformedURLException;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +14,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
-import es.codeurjc.friends_padel_tour.Service.MatchesService;
+import es.codeurjc.friends_padel_tour.Service.ImageService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import org.springframework.web.bind.annotation.RequestParam;
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 
 
 
@@ -37,7 +42,7 @@ public class ApiUsersController {
     @Autowired
     private DoubleService doubleService;
     @Autowired
-    private MatchesService matchesService;
+	private ImageService imgService;
     @Autowired
     private UserService userService;
 
@@ -108,47 +113,40 @@ public class ApiUsersController {
         } 
         return ResponseEntity.status(500).build();
     }
-/*
-//Ver video para esto
+
     @PostMapping(value="/player/{id}/image")
     public ResponseEntity<Object> updateImage(@PathVariable long id, @RequestParam MultipartFile profilePicture) throws IOException {
         Player player = playerService.findById(id);
         if (player != null) {
             URI location = fromCurrentRequest().build().toUri();
-            player.setImage(location.toString());
+            player.setRutaImagen(location.toString());
             playerService.savePlayer(player);
-            imgService.saveImage(, player.getId(), profilePicture);
+            imgService.saveImage("/images", player.getId(), profilePicture);
             return ResponseEntity.created(location).build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    //Ver video para esto
 
     @GetMapping(value="/user/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws SQLException{
-        Player loggedUser = playerService.findById(id);
-        if(loggedUser.getImage() != null){
-            Resource file = new  InputStreamResource(loggedUser.getImage().getBinaryStream());
-            return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").contentLength(loggedUser.getImage().length()).body(file);
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws  MalformedURLException{
+        return this.imgService.createResponseFromImage("/images", id);
     }
     
-
-    //Ver video
-    @PostMapping(value="/updateBussiness/{id}/image")
-    public String updateBussinessImage(@PathVariable long id, @RequestParam MultipartFile profilePicture,Model model) throws IOException {
-        Bussiness loggedBussiness = bussinessService.findById(id);
-        Boolean notMyProfile = false;
-        loggedBussiness.setImage(BlobProxy.generateProxy(
-            profilePicture.getInputStream(), profilePicture.getSize()));
-        loggedBussiness.setHasImage(true);
-        bussinessService.updateBussiness(loggedBussiness);
-        model.addAttribute("UserExtern", notMyProfile);
-        return "succesEdit";
+    @PostMapping(value="/bussiness/{id}/image")
+    public ResponseEntity<Object> updateBussinessImage(@PathVariable long id, @RequestParam MultipartFile profilePicture) throws IOException {
+        Bussiness bussinessUser = bussinessService.findById(id);
+        if(bussinessUser!=null){
+            URI location = fromCurrentRequest().build().toUri();
+            bussinessUser.setPathImage(location.toString());
+            bussinessService.saveBussiness(bussinessUser);
+            imgService.saveImage("/images", bussinessUser.getId(), profilePicture);
+            return ResponseEntity.created(location).build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-*/
+
     @PostMapping(value="/DoubleWith/")
     public ResponseEntity<DoubleOfPlayers> makeDoubleWith(@RequestBody String doubleName, @RequestBody String creator) {
         

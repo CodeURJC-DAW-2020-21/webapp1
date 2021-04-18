@@ -1,5 +1,6 @@
 package es.codeurjc.friends_padel_tour.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,27 +90,42 @@ public class MatchesService {
         }
         if(slot==1){
             matchToJoin.getDouble1().setPlayer1(loggedPlayer);
+            if(loggedPlayer.getDoubles1()==null){
+                loggedPlayer.setDoubles1(new ArrayList<>());
+            }
             loggedPlayer.getDoubles1().add(matchToJoin.getDouble1());
             doubleService.saveDouble(matchToJoin.getDouble1());
         }
         if(slot==2){
             matchToJoin.getDouble1().setPlayer2(loggedPlayer);
+            if(loggedPlayer.getDoubles2()==null){
+                loggedPlayer.setDoubles2(new ArrayList<>());
+            }
             loggedPlayer.getDoubles2().add(matchToJoin.getDouble1());
             doubleService.saveDouble(matchToJoin.getDouble1());
         }
         if(slot==3){
             matchToJoin.getDouble2().setPlayer1(loggedPlayer);
+            if(loggedPlayer.getDoubles1()==null){
+                loggedPlayer.setDoubles1(new ArrayList<>());
+            }
             loggedPlayer.getDoubles1().add(matchToJoin.getDouble2());
             doubleService.saveDouble(matchToJoin.getDouble2());
         }
         if(slot==4){
             matchToJoin.getDouble2().setPlayer2(loggedPlayer);
+            if(loggedPlayer.getDoubles2()==null){
+                loggedPlayer.setDoubles2(new ArrayList<>());
+            }
             loggedPlayer.getDoubles2().add(matchToJoin.getDouble2());
             doubleService.saveDouble(matchToJoin.getDouble2());
         }
         matchToJoin.setnPlayers(matchToJoin.getnPlayers()+1);
 
         if(!matchToJoin.getPlayerCreator().getUsername().equals(loggedPlayer.getUsername())){
+            if(loggedPlayer.getPendingMatches()==null){
+                loggedPlayer.setPendingMatches(new ArrayList<>());
+            }
             loggedPlayer.getPendingMatches().add(matchToJoin);
         }
 

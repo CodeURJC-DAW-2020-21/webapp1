@@ -163,73 +163,6 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/PadelMatch'
-  /api/matches/{id}/lonely/{slot}:
-    put:
-      tags:
-      - api-match-controller
-      operationId: joinMatchInDouble
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: slot
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                player1:
-                  $ref: '#/components/schemas/Player'
-                player2:
-                  $ref: '#/components/schemas/Player'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PadelMatch'
-  /api/matches/{id}/inDouble/{slot}:
-    put:
-      tags:
-      - api-match-controller
-      operationId: joinMatchLonely
-      parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int64
-      - name: slot
-        in: path
-        required: true
-        schema:
-          type: integer
-          format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Player'
-        required: true
-      responses:
-        "200":
-          description: OK
-          content:
-            '*/*':
-              schema:
-                $ref: '#/components/schemas/PadelMatch'
   /api/users/player/:
     post:
       tags:
@@ -343,6 +276,121 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Tournament'
+  /api/matches/{id}/player/{slot}:
+    get:
+      tags:
+      - api-match-controller
+      operationId: getMatchPlayer
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Player'
+    post:
+      tags:
+      - api-match-controller
+      operationId: joinMatchLonely
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+  /api/matches/{id}/double/{slot}:
+    get:
+      tags:
+      - api-match-controller
+      operationId: getMatchDouble
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DoubleOfPlayers'
+    post:
+      tags:
+      - api-match-controller
+      operationId: joinMatchInDouble
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                player1:
+                  $ref: '#/components/schemas/Player'
+                player2:
+                  $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
   /api/matches/:
     post:
       tags:
@@ -681,10 +729,10 @@ components:
         postalCode:
           type: integer
           format: int32
-        bussinnes:
-          $ref: '#/components/schemas/Bussiness'
         full:
           type: boolean
+        bussinnes:
+          $ref: '#/components/schemas/Bussiness'
     PadelMatch:
       type: object
       properties:
@@ -732,8 +780,6 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/Sort'
-        pageable:
-          $ref: '#/components/schemas/Pageable'
         first:
           type: boolean
         last:
@@ -741,6 +787,8 @@ components:
         numberOfElements:
           type: integer
           format: int32
+        pageable:
+          $ref: '#/components/schemas/Pageable'
         empty:
           type: boolean
     Pageable:
@@ -757,9 +805,9 @@ components:
         pageSize:
           type: integer
           format: int32
-        unpaged:
-          type: boolean
         paged:
+          type: boolean
+        unpaged:
           type: boolean
     Sort:
       type: object
