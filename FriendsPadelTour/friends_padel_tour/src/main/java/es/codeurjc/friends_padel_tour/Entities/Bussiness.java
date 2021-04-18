@@ -31,6 +31,15 @@ public class Bussiness{
     private String adress;
     private String bussinessType;
     private int createdTournaments;
+    private String pathImage;
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     @JsonIgnore
@@ -104,9 +113,6 @@ public class Bussiness{
     public void setSchedule(String[][] schedule) {
         this.schedule = schedule;
     }
-
-    
-
 
     public String getUsername() {
         return username;

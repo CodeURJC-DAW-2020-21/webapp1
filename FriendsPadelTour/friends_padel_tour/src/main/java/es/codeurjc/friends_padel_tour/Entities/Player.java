@@ -31,7 +31,16 @@ public class Player{
     private String password;
     private int division;
     private boolean hasImage;
+    private String rutaImagen;
 
+
+    public String getRutaImagen() {
+        return rutaImagen;
+    }
+
+    public void setRutaImagen(String rutaImagen) {
+        this.rutaImagen = rutaImagen;
+    }
 
     private int mathcesWon;
     private int matchesLost;
