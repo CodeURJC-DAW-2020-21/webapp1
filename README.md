@@ -159,7 +159,7 @@ In this screen the admin user can see all the tournament requests and accept all
 
 # API documentation:
 We are going to have a link that use rawgit that pemit to see all the information related with the API:
-https://raw.githack.com/<CodeURJC-DAW-2020-21>/<webapp1>/api-docs/api-docs.html
+https://rawcdn.githack.com/CodeURJC-DAW-2020-21/webapp1/f133949a8e1baa305bbe714e712552940d34ee48/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.html
  
 # Class diagram (Updated):
 
