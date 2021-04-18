@@ -93,6 +93,16 @@ public class ApiMatchController {
         if(slot < 1 || slot >4){
             return ResponseEntity.badRequest().build();
         }
+        if(slot ==1 || slot == 2){
+            if(matchToJoin.getDouble1()==null){
+                return ResponseEntity.notFound().build();
+            }
+        }
+        if(slot == 3 || slot == 4){
+            if(matchToJoin.getDouble2()==null){
+                return ResponseEntity.notFound().build();
+            }
+        }
         if(slot == 1){
             player = matchToJoin.getDouble1().getPlayer1();
         }else
