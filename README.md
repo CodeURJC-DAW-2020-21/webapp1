@@ -158,8 +158,11 @@ In this screen the admin user can see all the tournament requests and accept all
 # STAGE 3
 
 # API documentation:
+
+### Java code with SpringDoc
 We are going to have a link that use rawgit that pemit to see all the information related with the API:
 https://rawcdn.githack.com/CodeURJC-DAW-2020-21/webapp1/f133949a8e1baa305bbe714e712552940d34ee48/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.html
+
 ### api-docs.yaml:
 https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.yaml
  
