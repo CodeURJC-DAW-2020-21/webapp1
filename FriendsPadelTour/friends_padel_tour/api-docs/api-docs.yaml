@@ -1,0 +1,772 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/users/player/{id}:
+    put:
+      tags:
+      - api-users-controller
+      operationId: editProfile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                division:
+                  type: integer
+                  format: int32
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Player'
+  /api/users/bussiness/{id}:
+    put:
+      tags:
+      - api-users-controller
+      operationId: editBussinessProfile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                s1_1:
+                  type: string
+                s1_2:
+                  type: string
+                s1_3:
+                  type: string
+                s1_4:
+                  type: string
+                s1_5:
+                  type: string
+                s1_6:
+                  type: string
+                s1_7:
+                  type: string
+                s2_1:
+                  type: string
+                s2_2:
+                  type: string
+                s2_3:
+                  type: string
+                s2_4:
+                  type: string
+                s2_5:
+                  type: string
+                s2_6:
+                  type: string
+                s2_7:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bussiness'
+  /api/tournaments/acceptedTournament/{id}:
+    put:
+      tags:
+      - api-tournament-controller
+      operationId: acceptTournament
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tournament'
+  /api/tournaments/acceptedTournament/winner/{id}:
+    put:
+      tags:
+      - api-tournament-controller
+      operationId: tournamentWinner
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: integer
+              format: int32
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tournament'
+  /api/matches/{id}/{winnerSlot}:
+    put:
+      tags:
+      - api-match-controller
+      operationId: winAMatch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: winnerSlot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+  /api/matches/{id}/lonely/{slot}:
+    put:
+      tags:
+      - api-match-controller
+      operationId: joinMatchInDouble
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                player1:
+                  $ref: '#/components/schemas/Player'
+                player2:
+                  $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+  /api/matches/{id}/inDouble/{slot}:
+    put:
+      tags:
+      - api-match-controller
+      operationId: joinMatchLonely
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: slot
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+  /api/users/player/:
+    post:
+      tags:
+      - api-users-controller
+      operationId: signUpUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Player'
+  /api/users/bussiness/:
+    post:
+      tags:
+      - api-users-controller
+      operationId: signUpBussiness
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bussiness'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bussiness'
+  /api/users/DoubleWith/:
+    post:
+      tags:
+      - api-users-controller
+      operationId: makeDoubleWith
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doubleName:
+                  type: string
+                creator:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/DoubleOfPlayers'
+  /api/tournaments/{id}:
+    get:
+      tags:
+      - api-tournament-controller
+      operationId: tournamentInfo
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tournament'
+    post:
+      tags:
+      - api-tournament-controller
+      operationId: createTournament
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tournament'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tournament'
+    delete:
+      tags:
+      - api-tournament-controller
+      operationId: deleteTournament
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Tournament'
+  /api/matches/:
+    post:
+      tags:
+      - api-match-controller
+      operationId: createFriendlyMatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newMatch:
+                  $ref: '#/components/schemas/PadelMatch'
+                creator:
+                  $ref: '#/components/schemas/Player'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+  /api/users/player/{username}:
+    get:
+      tags:
+      - api-users-controller
+      operationId: goToOtherPlayerProfile
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Player'
+  /api/users/player/{username}/stats:
+    get:
+      tags:
+      - api-users-controller
+      operationId: getPlayerStats
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+  /api/users/bussiness/{username}:
+    get:
+      tags:
+      - api-users-controller
+      operationId: bussinessProfile
+      parameters:
+      - name: username
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Bussiness'
+  /api/tournaments/nonAceceptedTournaments:
+    get:
+      tags:
+      - api-tournament-controller
+      operationId: getNonAcceptedTournaments
+      parameters:
+      - name: pageNumber
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTournament'
+  /api/tournaments/acceptedTournaments:
+    get:
+      tags:
+      - api-tournament-controller
+      operationId: getTournaments
+      parameters:
+      - name: pageNumber
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageTournament'
+  /api/matches/division/{num}:
+    get:
+      tags:
+      - api-match-controller
+      operationId: getfriendlyMatchesByDivision
+      parameters:
+      - name: num
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PadelMatch'
+  /api/matches/division/{num}/ranking:
+    get:
+      tags:
+      - api-match-controller
+      operationId: getRankingOfDivision
+      parameters:
+      - name: num
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+  /api/matches/{id}:
+    delete:
+      tags:
+      - api-match-controller
+      operationId: deleteAFriendlyMatch
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PadelMatch'
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        name:
+          type: string
+        surname:
+          type: string
+        location:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        division:
+          type: integer
+          format: int32
+        hasImage:
+          type: boolean
+        mathcesWon:
+          type: integer
+          format: int32
+        matchesLost:
+          type: integer
+          format: int32
+        mathesPlayed:
+          type: integer
+          format: int32
+        score:
+          type: integer
+          format: int32
+    Bussiness:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        password:
+          type: string
+        username:
+          type: string
+        bussinessName:
+          type: string
+        ownerName:
+          type: string
+        ownerSurname:
+          type: string
+        location:
+          type: string
+        city:
+          type: string
+        email:
+          type: string
+        adress:
+          type: string
+        bussinessType:
+          type: string
+        createdTournaments:
+          type: integer
+          format: int32
+        schedule:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+        hasImage:
+          type: boolean
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        encodedPassword:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    DoubleOfPlayers:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        player1:
+          $ref: '#/components/schemas/Player'
+        player2:
+          $ref: '#/components/schemas/Player'
+    Tournament:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        tournamentStartDate:
+          type: string
+        tournamentFinishDate:
+          type: string
+        inscriptionStartDate:
+          type: string
+        inscriptionFinishDate:
+          type: string
+        minCouples:
+          type: integer
+          format: int32
+        maxCouples:
+          type: integer
+          format: int32
+        registeredCouples:
+          type: integer
+          format: int32
+        finished:
+          type: boolean
+        firstWinnngCouple:
+          $ref: '#/components/schemas/DoubleOfPlayers'
+        secondWinningCouple:
+          $ref: '#/components/schemas/DoubleOfPlayers'
+        accepted:
+          type: boolean
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/DoubleOfPlayers'
+        category:
+          type: integer
+          format: int32
+        firstPrize:
+          type: integer
+          format: int32
+        secondPrize:
+          type: integer
+          format: int32
+        localization:
+          type: string
+        adress:
+          type: string
+        city:
+          type: string
+        facility:
+          type: string
+        postalCode:
+          type: integer
+          format: int32
+        bussinnes:
+          $ref: '#/components/schemas/Bussiness'
+        full:
+          type: boolean
+    PadelMatch:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        division:
+          type: integer
+          format: int32
+        time:
+          type: string
+        date:
+          type: string
+        city:
+          type: string
+        province:
+          type: string
+        facility:
+          type: string
+        getnPlayers:
+          type: integer
+          format: int32
+        hasWinner:
+          type: boolean
+        location:
+          type: string
+    PageTournament:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tournament'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    Pageable:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        unpaged:
+          type: boolean
+        paged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean

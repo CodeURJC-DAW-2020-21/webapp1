@@ -81,13 +81,10 @@ public class TournamentController {
         if(loggedPlayer !=null){
             userDoubles = doubleService.findDoublesOf(loggedPlayer.getUsername());
         }
-        List<Tournament> tournamentsaccepted = tournamentsService.getAllAccepted();
+
         model.addAttribute("userDoubles", userDoubles);
-        model.addAttribute("tournaments", tournamentsaccepted);
 
-
-
-        Page<Tournament> tournaments = tournamentsService.getPageTournaments(0, pageSize);
+        Page<Tournament> tournaments = tournamentsService.getPageAcceptedTournaments(0, pageSize);
         
         model.addAttribute("tournamentspage", tournaments);
         return "tournaments";
@@ -132,8 +129,8 @@ public class TournamentController {
     }
 
     @PostMapping(value="/joinTournament/{id}")
-    public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, Model model) {
-        tournamentsService.joinTournament(id, doubleSelect,(String)model.getAttribute("userName"));
+    public String joinTournamen(@PathVariable long id, @RequestParam String doubleSelect, @RequestParam String username, Model model) {
+        tournamentsService.joinTournament(id, doubleSelect,username);
         return "joiningSucces";
     }
 

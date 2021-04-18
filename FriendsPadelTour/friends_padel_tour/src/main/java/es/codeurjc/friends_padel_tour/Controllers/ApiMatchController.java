@@ -52,7 +52,8 @@ public class ApiMatchController {
 
     @PostMapping(value="/")
     public ResponseEntity<PadelMatch> createFriendlyMatch(@RequestBody PadelMatch newMatch,@RequestBody Player creator) {
-        matchesService.createFriendlyMatch(newMatch, creator);;
+        
+        matchesService.createFriendlyMatch(newMatch, creator);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newMatch.getId()).toUri();
 
