@@ -1,7 +1,10 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +54,9 @@ public class ApiMatchController {
     }
 
     @PostMapping(value="/")
-    public ResponseEntity<PadelMatch> createFriendlyMatch(@RequestBody PadelMatch newMatch,@RequestBody Player creator) {
+    public ResponseEntity<PadelMatch> createFriendlyMatch(@RequestBody PadelMatch newMatch,HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
+        Player creator = playersService.getPlayer(principal.getName());
         
         matchesService.createFriendlyMatch(newMatch, creator);
 
@@ -61,7 +66,9 @@ public class ApiMatchController {
     }
 
     @PostMapping(value="/{id}/double/{slot}")
-    public ResponseEntity<PadelMatch> joinMatchInDouble(@PathVariable long id, @RequestBody Player player1, @RequestBody Player player2, @PathVariable int slot) {
+    public ResponseEntity<PadelMatch> joinMatchInDouble(@PathVariable long id,HttpServletRequest request, @RequestBody Player player2, @PathVariable int slot) {
+        Principal principal = request.getUserPrincipal();
+        Player player1 = playersService.getPlayer(principal.getName());
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
             return ResponseEntity.notFound().build();
@@ -89,6 +96,16 @@ public class ApiMatchController {
         Player player;
         if(slot < 1 || slot >4){
             return ResponseEntity.badRequest().build();
+        }
+        if(slot ==1 || slot == 2){
+            if(matchToJoin.getDouble1()==null){
+                return ResponseEntity.notFound().build();
+            }
+        }
+        if(slot == 3 || slot == 4){
+            if(matchToJoin.getDouble2()==null){
+                return ResponseEntity.notFound().build();
+            }
         }
         if(slot == 1){
             player = matchToJoin.getDouble1().getPlayer1();

@@ -3,6 +3,9 @@ package es.codeurjc.friends_padel_tour.Controllers;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 import java.net.URI;
+import java.security.Principal;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.codeurjc.friends_padel_tour.Entities.Bussiness;
+import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
+import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.TournamentsService;
 
 @RestController
@@ -27,6 +33,8 @@ public class ApiTournamentController {
 
     @Autowired
     TournamentsService tournamentsService;
+    @Autowired
+    private BussinessService bussinesService;
 
     @GetMapping(value = "/acceptedTournaments")
     public ResponseEntity<Page<Tournament>> getTournaments(@RequestParam int pageNumber){
@@ -46,8 +54,12 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournaments);
     }
 
-    @PostMapping(value="/{id}")
-    public ResponseEntity<Tournament> createTournament(@RequestBody Tournament tournament){
+    @PostMapping(value="/")
+    public ResponseEntity<Tournament> createTournament(@RequestBody Tournament tournament,HttpServletRequest request){
+        Principal principal = request.getUserPrincipal();
+        Bussiness bussiness = bussinesService.findByUsername(principal.getName());
+
+        tournament.setBussinnes(bussiness);
         tournamentsService.save(tournament);
 
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(tournament.getId()).toUri();
@@ -87,15 +99,31 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournament);
     }
 
-    @PutMapping(value = "/acceptedTournament/winner/{id}")
-    public ResponseEntity<Tournament> tournamentWinner(@PathVariable long id, @RequestBody int doublee){
+    @PutMapping(value = "/acceptedTournament/{id}/winner")
+    public ResponseEntity<Tournament> tournamentWinner(@PathVariable long id, @RequestParam int winner){
+        Tournament tournament = tournamentsService.findById(id);
+        if(winner > tournament.getRegisteredCouples()){
+            return ResponseEntity.badRequest().build();
+        }
+        if (tournament==null){
+            return ResponseEntity.notFound().build();
+        }
+        tournamentsService.setTournamentWinners(id, winner);
+        return ResponseEntity.ok(tournament);
+    }
+
+
+    @PostMapping(value="/acceptedTournament/{id}/double/")
+    public ResponseEntity<Tournament> joinATournament(@PathVariable long id, @RequestBody String doubleSelected,HttpServletRequest request) {
+        Principal principal = request.getUserPrincipal();
         Tournament tournament = tournamentsService.findById(id);
         if (tournament==null){
             return ResponseEntity.notFound().build();
         }
-        tournamentsService.setTournamentWinners(id, doublee);
-        return ResponseEntity.ok(tournament);
-    }
+        tournamentsService.joinTournament(id, doubleSelected, principal.getName());
+        URI location = fromCurrentRequest().path("/{nDouble}").buildAndExpand(tournament.getRegisteredCouples()).toUri();
 
+        return ResponseEntity.created(location).body(tournament);
+    }
 
 }
