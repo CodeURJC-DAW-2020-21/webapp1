@@ -50,6 +50,8 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
+
+		/*
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/matches/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/matches/**").hasRole("USER");
@@ -75,6 +77,19 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/bussiness/{username}").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/user/{id}/image").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}/stats").hasRole("USER");
+		*/
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("USER");
+
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("BUSSINESS");
+
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
+
 
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();
