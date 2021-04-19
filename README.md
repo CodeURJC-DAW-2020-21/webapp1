@@ -167,6 +167,7 @@ https://rawcdn.githack.com/CodeURJC-DAW-2020-21/webapp1/f133949a8e1baa305bbe714e
 https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.yaml
  
 # Class diagram (Updated):
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaDeClases.png?raw=true "Class Diagram")
 
 
 ### Members Participation <a name="members-part-3"></a>
