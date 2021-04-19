@@ -167,6 +167,7 @@ https://rawcdn.githack.com/CodeURJC-DAW-2020-21/webapp1/f133949a8e1baa305bbe714e
 https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/friends_padel_tour/api-docs/api-docs.yaml
  
 # Class diagram (Updated):
+![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaDeClases.png?raw=true "Class Diagram")
 
 
 ### Members Participation <a name="members-part-3"></a>
@@ -191,7 +192,7 @@ https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/frien
 | #2 | ApiUsersController | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/874318de753ef1b4ef63b9ed171690695ec0cb49) | 
 | #3 | Fixing bugs, general improvements  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1467dce6a6fd18f4e4290d07fba7345d911bb0ca) | 
 | #4 | Downloading and uploading images with ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/eb19998ac73672dcc731bd43ed19f0f55f73e1b0) | 
-| #5 | Security for ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a8b03d10dc5f09cf7103b3328474a723d4df8af2) |
+| #5 | Security for ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/2d1f94c7cd4629cae5f96203e0484b2bb98f92ca) |
 
 
 
