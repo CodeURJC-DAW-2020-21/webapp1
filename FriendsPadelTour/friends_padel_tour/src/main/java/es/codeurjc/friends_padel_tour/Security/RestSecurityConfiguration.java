@@ -50,27 +50,32 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.antMatcher("/api/**");
 		
 		// URLs that need authentication to access to it
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/matches/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/matches/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/matches/**").hasRole("USER");
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/matches/**").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/tournaments/**").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/{id}").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/winner/{id}").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/tournaments/**").hasRole("BUSSINESS");
-		
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
-		
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/acceptedTournaments").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/nonAceceptedTournaments").hasRole("BUSSINESS");
+
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/{id}/image").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/{id}/image").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/DoubleWith/").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/player/{id}").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/bussiness/{id}").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/bussiness/{username}").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/user/{id}/image").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}/stats").hasRole("USER");
+
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();
 
