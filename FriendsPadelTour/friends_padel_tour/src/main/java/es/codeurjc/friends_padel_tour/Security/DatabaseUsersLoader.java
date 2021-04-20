@@ -21,6 +21,7 @@ import es.codeurjc.friends_padel_tour.Repositories.MatchesRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
+import es.codeurjc.friends_padel_tour.Service.MatchesService;
 
 
 @Component
@@ -40,6 +41,9 @@ public class DatabaseUsersLoader {
     private MatchesRepository matchesRepository;
     @Autowired
 	private PasswordEncoder passwordEncoder;
+
+    //@Autowired
+    //private MatchesService matchesService;
 
     @PostConstruct
     private void initDatabase() {
@@ -117,7 +121,7 @@ public class DatabaseUsersLoader {
         newBussiness.setAdress("Calle de ejemplo");
         bussinessRepository.save(newBussiness);
 
-        PadelMatch match1 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 30).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
+        PadelMatch match1 = new PadelMatch("Hola", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 30).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
         PadelMatch match2 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 29).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer2);
         PadelMatch match3 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 28).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer3);
         PadelMatch match4 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 27).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer4);
@@ -128,6 +132,8 @@ public class DatabaseUsersLoader {
         matchesRepository.save(match3);
         matchesRepository.save(match4);
         matchesRepository.save(match5);
+
+        //matchesService.joinLonely(match1, newPlayer1, 1);
 
         Tournament tournament = new Tournament(newBussiness, "Torneo 1", "Un torneo para novatos", "11/8/21", "12/8/21", "20/7/21", "25/7/21", 1, 5, 1, 500, 200, "Madrid");
         tournament.setAccepted(true);

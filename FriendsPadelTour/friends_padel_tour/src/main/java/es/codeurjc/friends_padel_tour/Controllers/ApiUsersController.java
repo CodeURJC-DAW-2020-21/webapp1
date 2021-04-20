@@ -55,6 +55,7 @@ public class ApiUsersController {
 
     @PostMapping(value="/player/")
     public ResponseEntity<Player> signUpUser(@RequestBody Player newPlayer){
+        playerService.savePlayer(newPlayer);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newPlayer.getId()).toUri();
         return ResponseEntity.created(location).body(newPlayer);
     }

@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "2be8d025-cd55-44b9-84c9-f471dd54cda9",
+		"name": "Match Api Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get ranking division 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/division/1/ranking",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"division",
+						"1",
+						"ranking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get matches of division 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/division/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"division",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post a friendly match",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"division\": 1,\r\n    \"time\": \"16:30\",\r\n    \"date\": \"2021-05-30\",\r\n    \"city\": \"Mostoles\",\r\n    \"province\": \"Madrid\",\r\n    \"facility\": \"Campus de la URJC\",\r\n    \"nPlayers\": 0,\r\n    \"hasWinner\": false,\r\n    \"location\": \"Mostoles\",\r\n    \"creator\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/matches/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Join lonely a match",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"id\": 9,\r\n        \"username\": \"username2\",\r\n        \"name\": \"yo2\",\r\n        \"surname\": \"apellido2\",\r\n        \"location\": \"ciudad2\",\r\n        \"email\": \"email2\",\r\n        \"password\": \"contraseña2\",\r\n        \"division\": 1,\r\n        \"hasImage\": false,\r\n        \"rutaImagen\": null,\r\n        \"mathcesWon\": 0,\r\n        \"matchesLost\": 0,\r\n        \"mathesPlayed\": 0,\r\n        \"score\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18/player/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18",
+						"player",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a player of a match",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18/player/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18",
+						"player",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Join a match as a double",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\": \"username5\",\r\n        \"name\": \"yo4\",\r\n        \"surname\": \"apellido4\",\r\n        \"location\": \"ciudad4\",\r\n        \"email\": \"email4\",\r\n        \"password\": \"contraseña5\",\r\n        \"division\": 1,\r\n        \"hasImage\": false,\r\n        \"rutaImagen\": null,\r\n        \"mathcesWon\": 0,\r\n        \"matchesLost\": 0,\r\n        \"mathesPlayed\": 0,\r\n        \"score\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18/double/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18",
+						"double",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a double of a match",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18/double/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18",
+						"double",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Win a match",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a match",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/matches/18",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"matches",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"username\", \"password\": \"contraseña\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get accepted tournaments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/acceptedTournaments?pageNumber=0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"acceptedTournaments"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non accepted tournaments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/nonAceceptedTournaments?pageNumber=0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"nonAceceptedTournaments"
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"name\": \"Torneo 67\",\r\n            \"description\": \"Un torneo para novatos\",\r\n            \"tournamentStartDate\": \"11/8/21\",\r\n            \"tournamentFinishDate\": \"12/8/21\",\r\n            \"inscriptionStartDate\": \"20/7/21\",\r\n            \"inscriptionFinishDate\": \"25/7/21\",\r\n            \"minCouples\": 1,\r\n            \"maxCouples\": 5,\r\n            \"registeredCouples\": 0,\r\n            \"finished\": false,\r\n            \"firstWinnngCouple\": null,\r\n            \"secondWinningCouple\": null,\r\n            \"accepted\": false,\r\n            \"players\": [],\r\n            \"category\": 1,\r\n            \"firstPrize\": 500,\r\n            \"secondPrize\": 200,\r\n            \"localization\": \"Madrid\",\r\n            \"adress\": null,\r\n            \"city\": null,\r\n            \"facility\": null,\r\n            \"postalCode\": 0,\r\n            \"full\": false\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Accept a tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/acceptedTournament/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"acceptedTournament",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a tournament info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Join a tournament",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"doubleSelected\" : \"username2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/acceptedTournament/32/double/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"acceptedTournament",
+						"32",
+						"double",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Select a winner of a tournament",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/acceptedTournament/32/winner?winner=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"acceptedTournament",
+						"32",
+						"winner"
+					],
+					"query": [
+						{
+							"key": "winner",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a tournament",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/tournaments/32",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"tournaments",
+						"32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get GoToProfilePlayer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9,\r\n    \"username\": \"username2\",\r\n    \"name\": \"yo2\",\r\n    \"surname\": \"apellido2\",\r\n    \"location\": \"ciudad2\",\r\n    \"email\": \"email2\",\r\n    \"password\": \"contraseña2\",\r\n    \"division\": 1,\r\n    \"hasImage\": false,\r\n    \"mathcesWon\": 0,\r\n    \"matchesLost\": 0,\r\n    \"mathesPlayed\": 0,\r\n    \"score\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/username",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"username"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get BussinessProfile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/bussinessUsername",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"bussinessUsername"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post SignUpBussiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post SignUpUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put EditProfilePlayer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put EditProfileBussiness",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post MakeADouble",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/DoubleWith/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"DoubleWith",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post UpdateImagePlayer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get DownloadImage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/user/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"user",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post UpdateBussinessImage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get getPlayerStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/username/stats",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"username",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/auth/logout",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
