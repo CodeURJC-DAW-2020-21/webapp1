@@ -509,6 +509,264 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get GoToProfilePlayer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 9,\r\n    \"username\": \"username2\",\r\n    \"name\": \"yo2\",\r\n    \"surname\": \"apellido2\",\r\n    \"location\": \"ciudad2\",\r\n    \"email\": \"email2\",\r\n    \"password\": \"contraseña2\",\r\n    \"division\": 1,\r\n    \"hasImage\": false,\r\n    \"mathcesWon\": 0,\r\n    \"matchesLost\": 0,\r\n    \"mathesPlayed\": 0,\r\n    \"score\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/username",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"username"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get BussinessProfile",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/bussinessUsername",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"bussinessUsername"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post SignUpBussiness",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post SignUpUser",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put EditProfilePlayer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put EditProfileBussiness",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post MakeADouble",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/DoubleWith/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"DoubleWith",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post UpdateImagePlayer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get DownloadImage",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/user/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"user",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post UpdateBussinessImage",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/bussiness/id/image",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"bussiness",
+						"id",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get getPlayerStats",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8443/api/users/player/username/stats",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8443",
+					"path": [
+						"api",
+						"users",
+						"player",
+						"username",
+						"stats"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
