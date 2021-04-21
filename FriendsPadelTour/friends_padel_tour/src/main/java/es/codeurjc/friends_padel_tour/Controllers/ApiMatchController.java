@@ -56,7 +56,7 @@ public class ApiMatchController {
     @PostMapping(value="/")
     public ResponseEntity<PadelMatch> createFriendlyMatch(@RequestBody PadelMatch newMatch,HttpServletRequest request) {
         Principal principal = request.getUserPrincipal();
-        Player creator = playersService.getPlayer(principal.getName());
+        Player creator = playersService.findByUsername(principal.getName());
         
         matchesService.createFriendlyMatch(newMatch, creator);
 
@@ -68,7 +68,7 @@ public class ApiMatchController {
     @PostMapping(value="/{id}/double/{slot}")
     public ResponseEntity<PadelMatch> joinMatchInDouble(@PathVariable long id,HttpServletRequest request, @RequestBody Player player2, @PathVariable int slot) {
         Principal principal = request.getUserPrincipal();
-        Player player1 = playersService.getPlayer(principal.getName());
+        Player player1 = playersService.findByUsername(principal.getName());
         PadelMatch matchToJoin = matchesService.findById(id);
         if(matchToJoin == null){
             return ResponseEntity.notFound().build();
@@ -78,8 +78,10 @@ public class ApiMatchController {
     }
 
     @PostMapping(value="/{id}/player/{slot}")
-    public ResponseEntity<PadelMatch> joinMatchLonely(@PathVariable long id, @RequestBody Player playerWhoJoin, @PathVariable int slot) {
+    public ResponseEntity<PadelMatch> joinMatchLonely(@PathVariable long id,HttpServletRequest request,  @PathVariable int slot) {
         PadelMatch matchToJoin = matchesService.findById(id);
+        Principal principal = request.getUserPrincipal();
+        Player playerWhoJoin = playersService.findByUsername(principal.getName());
         if(matchToJoin == null){
             return ResponseEntity.notFound().build();
         }

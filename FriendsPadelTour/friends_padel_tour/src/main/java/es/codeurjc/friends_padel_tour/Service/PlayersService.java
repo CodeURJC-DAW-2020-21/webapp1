@@ -40,13 +40,6 @@ public class PlayersService {
         return true;
     }
 
-    //Get a player according to his email
-    public Player getPlayer(String email) {
-        Optional<Player> playerInDB = playerRepository.findByEmail(email);
-        if(playerInDB.isPresent())
-            return playerInDB.get();
-        return null;
-    }
 
     //Find a player by his Username
     public Player findByUsername(String attribute) {
