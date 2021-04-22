@@ -1,13 +1,16 @@
 {
 	"info": {
-		"_postman_id": "2be8d025-cd55-44b9-84c9-f471dd54cda9",
-		"name": "Match Api Collection",
+		"_postman_id": "84037b33-29d8-4782-ace3-15893be568d6",
+		"name": "Match Api Collection Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Get ranking division 1",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -30,9 +33,16 @@
 		},
 		{
 			"name": "Get matches of division 1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "file",
+					"file": {}
+				},
 				"url": {
 					"raw": "https://localhost:8443/api/matches/division/1",
 					"protocol": "https",
@@ -53,6 +63,9 @@
 		{
 			"name": "Post a friendly match",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -237,13 +250,13 @@
 			"name": "Login",
 			"request": {
 				"auth": {
-					"type": "bearer"
+					"type": "noauth"
 				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"username\": \"username\", \"password\": \"contraseña\" }",
+					"raw": "{ \"username\":\"admin\", \"password\":\"adminpass\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -272,7 +285,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/tournaments/acceptedTournaments?pageNumber=0",
+					"raw": "https://localhost:8443/api/tournaments/acceptedTournaments?pageNumber=1",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -286,7 +299,7 @@
 					"query": [
 						{
 							"key": "pageNumber",
-							"value": "0"
+							"value": "1"
 						}
 					]
 				}
@@ -299,7 +312,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:8443/api/tournaments/nonAceceptedTournaments?pageNumber=0",
+					"raw": "https://localhost:8443/api/tournaments/nonAcceptedTournaments?pageNumber=0",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -308,7 +321,7 @@
 					"path": [
 						"api",
 						"tournaments",
-						"nonAceceptedTournaments"
+						"nonAcceptedTournaments"
 					],
 					"query": [
 						{
@@ -323,6 +336,9 @@
 		{
 			"name": "Create a new tournament",
 			"request": {
+				"auth": {
+					"type": "noauth"
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -486,7 +502,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 9,\r\n    \"username\": \"username2\",\r\n    \"name\": \"yo2\",\r\n    \"surname\": \"apellido2\",\r\n    \"location\": \"ciudad2\",\r\n    \"email\": \"email2\",\r\n    \"password\": \"contraseña2\",\r\n    \"division\": 1,\r\n    \"hasImage\": false,\r\n    \"mathcesWon\": 0,\r\n    \"matchesLost\": 0,\r\n    \"mathesPlayed\": 0,\r\n    \"score\": 500\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -625,6 +641,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://localhost:8443/api/users/DoubleWith/",
 					"protocol": "https",
@@ -647,8 +672,18 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "profilePicture",
+							"type": "file",
+							"src": "/C:/Users/MiPcCito/Desktop/La_cosa.jpg"
+						}
+					]
+				},
 				"url": {
-					"raw": "https://localhost:8443/api/users/player/id/image",
+					"raw": "https://localhost:8443/api/users/player/9/image",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -658,7 +693,7 @@
 						"api",
 						"users",
 						"player",
-						"id",
+						"9",
 						"image"
 					]
 				}
@@ -667,11 +702,18 @@
 		},
 		{
 			"name": "Get DownloadImage",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
 				"url": {
-					"raw": "https://localhost:8443/api/users/user/id/image",
+					"raw": "https://localhost:8443/api/users/user/9/image",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -681,7 +723,7 @@
 						"api",
 						"users",
 						"user",
-						"id",
+						"9",
 						"image"
 					]
 				}
@@ -729,30 +771,6 @@
 						"player",
 						"username",
 						"stats"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Logout",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:8443/api/auth/logout",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "8443",
-					"path": [
-						"api",
-						"auth",
-						"logout"
 					]
 				}
 			},
