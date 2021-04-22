@@ -170,6 +170,18 @@ https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/frien
 ![alt-text](https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/Screenshots/DiagramaDeClases.png?raw=true "Class Diagram")
 
 
+BUILD A DOCKER IMAGE AND RUNNING THE WEB APPLICATION
+
+Go to the cmd and use the following script:
+
+If you are a linux user -->
+ $ bash run.sh
+
+If you are a windows user -->
+  $ bash run.bat
+
+
+
 ### Members Participation <a name="members-part-3"></a>
 
 #### Eduardo Villaverde Espeso
