@@ -44,7 +44,7 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournaments);
     }
 
-    @GetMapping(value = "/nonAceceptedTournaments")
+    @GetMapping(value = "/nonAcceptedTournaments")
     public ResponseEntity<Page<Tournament>> getNonAcceptedTournaments(@RequestParam int pageNumber){
         Page<Tournament> tournaments = tournamentsService.getPageNoAcceptedTournaments(pageNumber, 3);
         if(tournaments == null){

@@ -1,6 +1,8 @@
 package es.codeurjc.friends_padel_tour.Security;
 
 
+import javax.annotation.security.PermitAll;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,19 +57,18 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/matches/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/matches/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/matches/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/matches/**").permitAll();
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/tournaments/**").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/{id}").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/winner/{id}").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/tournaments/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/acceptedTournaments").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/nonAceceptedTournaments").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/acceptedTournaments").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/nonAcceptedTournaments").hasRole("ADMIN");
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/");
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/").hasRole("BUSSINESS");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/{id}/image").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/{id}/image").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/DoubleWith/").hasRole("USER");
@@ -77,19 +78,7 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/bussiness/{username}").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/user/{id}/image").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}/stats").hasRole("USER");
-		/*
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("USER");
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("BUSSINESS");
-
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/matches/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournament/**").hasRole("ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN");
-*/
 
 		// Other URLs can be accessed without authentication
 		http.authorizeRequests().anyRequest().permitAll();
