@@ -10,12 +10,12 @@ fi
 
 rem CREATE THE .JAR WITH THE PROJECT
 cd "FriendsPadelTour/friends_padel_tour"
-docker run --rm -v "$PWD":/data -w /data maven mvn package
+docker run --rm -v "%cd%":/data -w /data maven mvn package
 
 
 
 rem COPY THE .JAR ON THE DOCKER FOLDER
-set BUILD_FILENAME=\target\marketplace-0.0.1-SNAPSHOT.jar
+set BUILD_FILENAME=\target\friends_padel_tour-0.0.1-SNAPSHOT.jar
 set DEST_FILENAME=DOCKER
 
 
