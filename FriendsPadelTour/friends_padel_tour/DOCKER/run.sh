@@ -11,7 +11,7 @@ fi
 
 
 # CREATE THE .JAR WITH THE PROJECT
-cd "FriendsPadelTour/friends_padel_tour"
+cd "FriendsPadelTour/friends_padel_tour/DOCKER"
 
 #mvn clean install
 sudo docker run --rm -v "$PWD":/data -w /data maven mvn package
