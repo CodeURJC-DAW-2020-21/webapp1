@@ -172,13 +172,24 @@ https://github.com/CodeURJC-DAW-2020-21/webapp1/blob/main/FriendsPadelTour/frien
 
 ## BUILDING A DOCKER IMAGE AND RUNNING THE WEB APPLICATION
 
+¡The only requirements to use the app are docker and docker-compose on your own machine!
+
+1. If the project is in your machine and you are on the directory webapp1. 
+
 Go to the cmd and use the following script:
 
 If you are a linux user -->
  $ bash run.sh
 
 If you are a windows user -->
-  $ bash run.bat
+  $ run.bat
+  
+2. If you don't have the project on your machine, open your terminal and execute the next steps:
+
+ 2.1 mkdir FriendsPadelTourApp
+ 2.2 cd FriendPadelTourApp
+ 2.3 git clone https://github.com/CodeURJC-DAW-2020-21/webapp1
+ 2.4 Go to step 1
 
 DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltour
 
