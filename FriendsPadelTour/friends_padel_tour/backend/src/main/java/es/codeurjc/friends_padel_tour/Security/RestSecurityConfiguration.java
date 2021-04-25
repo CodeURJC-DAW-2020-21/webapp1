@@ -1,8 +1,6 @@
 package es.codeurjc.friends_padel_tour.Security;
 
 
-import javax.annotation.security.PermitAll;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,13 +57,15 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/matches/**").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/matches/**").permitAll();
 
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/tournaments/**").hasRole("BUSSINESS");
+		
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/{id}").hasRole("ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/tournaments/acceptedTournament/winner/{id}").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/api/tournaments/**").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/{id}").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/acceptedTournaments").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/tournaments/nonAcceptedTournaments").hasRole("ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/tournaments/acceptedTournament/**").hasRole("USER");
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/tournaments/**").hasRole("BUSSINESS");
 
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/bussiness/").hasRole("BUSSINESS");
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/player/").permitAll();
@@ -74,10 +74,6 @@ public class RestSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/users/DoubleWith/").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/player/{id}").hasRole("USER");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/users/bussiness/{id}").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/bussiness/{username}").hasRole("BUSSINESS");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/user/{id}/image").hasRole("USER");
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/users/player/{username}/stats").hasRole("USER");
 
 
 		// Other URLs can be accessed without authentication

@@ -101,11 +101,11 @@ public class ApiTournamentController {
     @PutMapping(value = "/acceptedTournament/{id}/winner")
     public ResponseEntity<Tournament> tournamentWinner(@PathVariable long id, @RequestParam int winner){
         Tournament tournament = tournamentsService.findById(id);
-        if(winner > tournament.getRegisteredCouples()){
-            return ResponseEntity.badRequest().build();
-        }
         if (tournament==null){
             return ResponseEntity.notFound().build();
+        }
+        if(winner > tournament.getRegisteredCouples()){
+            return ResponseEntity.badRequest().build();
         }
         tournamentsService.setTournamentWinners(id, winner);
         return ResponseEntity.ok(tournament);

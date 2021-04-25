@@ -29,8 +29,10 @@ public class PadelMatch {
     private Player playerCreator;
     
     @ManyToOne
+    @JsonIgnore
     private DoubleOfPlayers double1;
     @ManyToOne
+    @JsonIgnore
     private DoubleOfPlayers double2;
 
     @ManyToOne

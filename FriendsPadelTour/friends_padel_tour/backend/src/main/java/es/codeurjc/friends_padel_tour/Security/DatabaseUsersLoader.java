@@ -21,7 +21,6 @@ import es.codeurjc.friends_padel_tour.Repositories.MatchesRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 import es.codeurjc.friends_padel_tour.Repositories.TournamentRepository;
 import es.codeurjc.friends_padel_tour.Repositories.UserRepository;
-import es.codeurjc.friends_padel_tour.Service.MatchesService;
 
 
 @Component

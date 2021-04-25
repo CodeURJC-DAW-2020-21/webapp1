@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,7 +57,7 @@ public class MatchesService {
                 p2.getCreatedMatches().remove(matchToDelete);
                 p2.getPendingMatches().remove(matchToDelete);
             }
-            DoubleOfPlayers d2= matchToDelete.getDouble1();
+            DoubleOfPlayers d2= matchToDelete.getDouble2();
             if(d2!=null){
                 p3 = d2.getPlayer1();
                 p4 = d2.getPlayer2();
@@ -146,9 +147,15 @@ public class MatchesService {
         doubleService.saveDouble(doubleWhoJoins);
 
         if(!matchToJoin.getPlayerCreator().getUsername().equals(loggedPlayer.getUsername())){
+            if(loggedPlayer.getPendingMatches()==null){
+                loggedPlayer.setPendingMatches(new LinkedList<>());
+            }
             loggedPlayer.getPendingMatches().add(matchToJoin);
         }
         if(!matchToJoin.getPlayerCreator().getUsername().equals(playerDouble.getUsername())){
+            if(playerDouble.getPendingMatches()==null){
+                playerDouble.setPendingMatches(new LinkedList<>());
+            }
             playerDouble.getPendingMatches().add(matchToJoin);
         }
 
@@ -183,7 +190,32 @@ public class MatchesService {
         Player winner2 = doubleWinner.getPlayer2();
         Player loser1 = doubleLoss.getPlayer1();
         Player loser2 = doubleLoss.getPlayer2();
+
+        if(winner1.getPlayedMatches()==null){
+            winner1.setPlayedMatches(new LinkedList<>());
+        }
+        if(winner2.getPlayedMatches()==null){
+            winner2.setPlayedMatches(new LinkedList<>());
+        }
+        if(loser1.getPlayedMatches()==null){
+            loser1.setPlayedMatches(new LinkedList<>());
+        }
+        if(loser2.getPlayedMatches()==null){
+            loser2.setPlayedMatches(new LinkedList<>());
+        }
         
+        if(winner1.getPendingMatches()==null){
+            winner1.setPendingMatches(new LinkedList<>());
+        }
+        if(winner2.getPendingMatches()==null){
+            winner2.setPendingMatches(new LinkedList<>());
+        }
+        if(loser1.getPendingMatches()==null){
+            loser1.setPendingMatches(new LinkedList<>());
+        }
+        if(loser2.getPendingMatches()==null){
+            loser2.setPendingMatches(new LinkedList<>());
+        }
         winner1.getPlayedMatches().add(match);
         winner2.getPlayedMatches().add(match);
         loser1.getPlayedMatches().add(match);

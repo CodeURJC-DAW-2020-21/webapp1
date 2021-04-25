@@ -52,6 +52,7 @@ public class Bussiness{
 
 
     @OneToOne
+    @JsonIgnore
     private User user;
 
     public Bussiness(){
