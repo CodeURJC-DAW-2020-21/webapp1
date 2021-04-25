@@ -2,6 +2,9 @@ package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.io.IOException;
 import java.net.URI;
+
+import javax.servlet.http.HttpServletRequest;
+
 import java.net.MalformedURLException;
 
 
@@ -81,12 +84,12 @@ public class ApiUsersController {
     }
 
     @PutMapping(value="/player/{id}")
-    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody String password, @RequestBody int division) {
+    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestParam String password, @RequestParam int division) {
         Player newPlayer = playerService.findById(id);
         if(newPlayer == null){
             return ResponseEntity.notFound().build();
         }
-        if (password.isBlank()) {
+        if (!password.isBlank()) {
             newPlayer.setPassword(password);
             userService.updatePasswordOf(newPlayer.getUser(), password);
             return ResponseEntity.ok(newPlayer);
@@ -99,15 +102,12 @@ public class ApiUsersController {
     }
 
     @PutMapping(value="/bussiness/{id}")
-    public ResponseEntity<Bussiness> editBussinessProfile(@PathVariable long id, @RequestBody String password, @RequestBody String s1_1, @RequestBody String s1_2, @RequestBody String s1_3, @RequestBody String s1_4, @RequestBody String s1_5,@RequestBody String s1_6, @RequestBody String s1_7,@RequestBody String s2_1,@RequestBody String s2_2,@RequestBody String s2_3,@RequestBody String s2_4,@RequestBody String s2_5, @RequestBody String s2_6, @RequestBody String s2_7) {
+    public ResponseEntity<Bussiness> editBussinessProfile(@PathVariable long id, @RequestBody String password) {
         Bussiness newBussiness = bussinessService.findById(id);
         if(newBussiness == null){
             return ResponseEntity.notFound().build();
-        }else{
-            String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{s1_1, s1_2, s1_3, s1_4, s1_5, s1_6, s1_7},{s2_1, s2_2, s2_3, s2_4, s2_5, s2_6, s2_7}};
-            newBussiness.setSchedule(schedule);
         }
-        if (password.isBlank()) {
+        if (!password.isBlank()) {
             newBussiness.setPassword(password);
             userService.updatePasswordOf(newBussiness.getUser(), password);
             return ResponseEntity.ok(newBussiness);
@@ -149,8 +149,8 @@ public class ApiUsersController {
     }
 
     @PostMapping(value="/DoubleWith/")
-    public ResponseEntity<DoubleOfPlayers> makeDoubleWith(@RequestBody String doubleName, @RequestBody String creator) {
-        
+    public ResponseEntity<DoubleOfPlayers> makeDoubleWith(@RequestBody String doubleName,HttpServletRequest request) {
+        String creator = request.getUserPrincipal().getName();
         Player userNewDouble1 = playerService.findByUsername(creator);
         Player userNewDouble2 = playerService.findByUsername(doubleName);
         

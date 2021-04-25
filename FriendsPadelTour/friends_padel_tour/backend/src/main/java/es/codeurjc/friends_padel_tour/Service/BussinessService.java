@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 
 
@@ -46,7 +47,8 @@ public class BussinessService {
     }
 
     public void saveBussiness(Bussiness loggedBussiness) {
-        userService.saveUser(loggedBussiness.getUsername(), loggedBussiness.getPassword(), "BUSSINESS");
+        User businessUser =userService.saveUser(loggedBussiness.getUsername(), loggedBussiness.getPassword(), "BUSSINESS");
+        loggedBussiness.setUser(businessUser);
         bussinessRepository.save(loggedBussiness);
     }
     
