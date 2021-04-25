@@ -7,6 +7,6 @@ then
     exit
 fi
 
-cd "FriendsPadelTour/friends_padel_tour/DOCKER"
+cd "FriendsPadelTour/friends_padel_tour/backend/DOCKER"
 
 docker-compose up -d
