@@ -8,7 +8,7 @@ services:
       - MYSQL_ROOT_PASSWORD=12345678
 
   practica:
-    image: eduardoivorra/friends_padel_tour:latest
+    image: eduvilla97/friendspadeltour:latest
     restart: always
     ports:
       - 8443:8443
