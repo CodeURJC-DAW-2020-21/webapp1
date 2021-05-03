@@ -44,7 +44,6 @@ public class Bussiness{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     @JsonIgnore
     private List<Tournament> tournaments;
-    private String[][] schedule = {{"L", "M", "X", "J", "V", "S", "D"},{"8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00", "8:00-14:00"},{"16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00", "16:00-22:00"}};
     private boolean hasImage = false;
     @Lob
     @JsonIgnore
@@ -107,13 +106,6 @@ public class Bussiness{
         this.createdTournaments = createdTournaments;
     }
 
-    public String[][] getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(String[][] schedule) {
-        this.schedule = schedule;
-    }
 
     public String getUsername() {
         return username;

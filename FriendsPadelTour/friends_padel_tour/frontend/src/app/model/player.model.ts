@@ -15,6 +15,8 @@ export interface Player{
   matchesPlayed: number;
   createdMatches: PadelMatch[];
   pendingMatches: PadelMatch[];
+  playedMatches: PadelMatch[];
   score: number;
   user: User;
+  doubles: Player[];
 }
