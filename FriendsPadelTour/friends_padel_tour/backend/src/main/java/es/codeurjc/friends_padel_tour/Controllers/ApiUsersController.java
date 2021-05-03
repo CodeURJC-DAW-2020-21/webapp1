@@ -148,25 +148,6 @@ public class ApiUsersController {
         }
     }
 
-    @PostMapping(value="/DoubleWith/")
-    public ResponseEntity<DoubleOfPlayers> makeDoubleWith(@RequestBody String doubleName,HttpServletRequest request) {
-        String creator = request.getUserPrincipal().getName();
-        Player userNewDouble1 = playerService.findByUsername(creator);
-        Player userNewDouble2 = playerService.findByUsername(doubleName);
-        
-        DoubleOfPlayers newDouble = new DoubleOfPlayers();
-        newDouble.setPlayer1(userNewDouble1);
-        newDouble.setPlayer2(userNewDouble2);
-        userNewDouble1.getDoubles1().add(newDouble);
-        userNewDouble2.getDoubles2().add(newDouble);
-        playerService.updatePlayer(userNewDouble1);
-        playerService.updatePlayer(userNewDouble2);
-        doubleService.saveDouble(newDouble);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newDouble.getId()).toUri();
-        return ResponseEntity.created(location).body(newDouble);
-            
-    }
 
     @GetMapping(value="/player/{username}/stats")
     public ResponseEntity<int[]> getPlayerStats(@PathVariable String username) {

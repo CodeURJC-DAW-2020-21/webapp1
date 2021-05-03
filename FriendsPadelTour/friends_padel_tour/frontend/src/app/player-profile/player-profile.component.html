@@ -1,1 +1,286 @@
-<p>player-profile works!</p>
+<div *ngIf="usersProfile !== undefined">
+  <div class="site-blocks-cover overlay" style="background-image: url(assets/images/normal_user.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="container">
+      <div class="row align-items-center justify-content-start">
+        <div class="col-md-12" data-aos="fade-up" data-aos-delay="400">
+          <div class="row align-items-center ">
+
+            <div class="col-md-6" >
+              <h3 class="bg-text-line">Nombre: {{usersProfile.name}} {{usersProfile.surname}}<br> Nombre de usuario: {{usersProfile.user.userName}} <br> Categoria: {{usersProfile.division}} <br></h3>
+              <div class="image-player">
+                  <img *ngIf="usersProfile.hasImage;else defaultImage" class="image-main" src="/user/{{usersProfile.id}}/image">
+                  <ng-template #defaultImage>
+                    <img ngTEm class="image-main" src="assets/images/usuariopareja.jpg">
+                  </ng-template>
+              </div>
+              <div *ngIf="loggedUser !==undefined && loggedUser.roles.includes('USER') && isExtern" class="container-button">
+                <div class="center-button">
+                  <a class="center-button" href="/makeDoubleWhith/{{usersProfile.user.userName}}">Invitar a ser pareja</a>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="principalDouble !== undefined" class="my-favourite-couple col-md-6">
+              <h2 class="actual-couple">PAREJA ACTUAL</h2>
+              <div class="container-button">
+                <div class="center-button">
+                  <a href="/users/{{principalDouble.user.userName}}" class="searchcouple">{{principalDouble.user.userName}}</a>
+                </div>
+              </div>
+                  <div class="info-couple col-md-12">
+                    <br> <p> Categoria: {{principalDouble.division}} </p>
+                      <img *ngIf="principalDouble.hasImage;else defaultImage" class="couple-image" src="/user/{{principalDouble.id}}/image">
+                  </div>
+                  <div class="dropdown-couples">
+                    <span>Otras parejas</span>
+                    <div class="dropdown-content">
+                        <a *ngFor="let double of userDoubles" href="/users/{{double.user.userName}}" class="searchcouple">{{double.user.userName}}</a>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="l-grid">
+    <div class="c-ranking-header c-ranking-header--no-image c-ranking-header--table">
+      <div class="l-container l-container--data">
+        <div class="c-ranking-header__data-box">
+          <p class="c-ranking-header__data-title">Partidos jugados</p>
+          <p class="c-ranking-header__data" id="matches_Played">{{usersProfile.matchesPlayed}}</p>
+        </div>
+        <div class="c-ranking-header__data-box">
+          <p class="c-ranking-header__data-title">Partidos ganados</p>
+          <p class="c-ranking-header__data" id="matches_Won">{{usersProfile.matchesWon}}</p>
+        </div>
+        <div class="c-ranking-header__data-box">
+          <p class="c-ranking-header__data-title">Partidos perdidos</p>
+          <p class="c-ranking-header__data" id="matches_Lost">{{usersProfile.matchesLost}}</p>
+        </div>
+        <div class="c-ranking-header__data-box">
+          <p class="c-ranking-header__data-title">Efectividad</p>
+          <p class="c-ranking-header__data"> {{efectivity}} %</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div *ngIf="usersProfile.matchesPlayed!==0; else noMatchesPlayedMessage" class="row">
+    <canvas id="myChart" width="400" height="300"></canvas>
+    <script>
+      var matchesPlayed = document.getElementById('matches_Played').innerHTML;
+      var matchesWon = document.getElementById('matches_Won').innerHTML;
+      var matchesLost = document.getElementById('matches_Lost').innerHTML;
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['JUGADOS', 'GANADOS', 'PERDIDOS'],
+            datasets: [{
+                label: 'GRAFICA PARTIDOS',
+                data: [matchesPlayed,matchesWon,matchesLost], //matchesPlayed, matchesWon, matchesLost],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    </div>
+
+  <ng-template #noMatchesPlayedMessage>
+    <h1>Este usuario todavia no ha jugado ningún partido, por lo tango no hay gráficas disponibles.</h1>
+  </ng-template>
+
+
+
+  <div class="recent-matches">
+    <h1>PARTIDOS CREADOS</h1>
+  </div>
+    <div *ngFor="let match of usersProfile.createdMatches; let index = index" class="row align-items-center">
+      <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
+        <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
+          <div class="text-center text-lg-left">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
+                <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+                <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/1">Elegir como ganadores del partido</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 text-center mb-4 mb-lg-0">
+          <div class="d-inline-block">
+            <div class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded"><a href="/delete/{{match.id}}">Eliminar Partido</a></div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 text-center text-lg-right">
+          <div class="">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
+                <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text order-1 w-100">
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+                <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/2">Elegir como ganadores del partido</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="recent-matches" >
+    <h1>PARTIDOS RECIENTES</h1>
+    <div *ngFor="let match of usersProfile.playedMatches" class="row align-items-center">
+      <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
+        <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
+          <div class="text-center text-lg-left">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
+                <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 text-center text-lg-right">
+          <div class="">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
+                <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text order-1 w-100">
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recent-matches" >
+    <h1>PARTIDOS PENDIENTES</h1>
+    <div *ngFor="let match of usersProfile.pendingMatches" class="row align-items-center">
+      <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
+        <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
+          <div class="text-center text-lg-left">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small text-center mb-3 mb-lg-0 mr-lg-3">
+                <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text">
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-lg-4 text-center text-lg-right">
+          <div class="">
+            <div class="d-block d-lg-flex align-items-center">
+              <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
+                <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
+              </div>
+              <div class="text order-1 w-100">
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+    <div *ngIf="!isExtern" class="container">
+      <div class="text-md-center">
+        <br>
+        <h1>Edita tus datos</h1>
+      </div>
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 bg-white">
+          <form action="/editProfile/{{usersProfile.id}}" method="GET">
+            <div class="form-group">
+              <h3>Contraseña:</h3>
+              <input type="text" class="form-control" name="password" id="pwd" placeholder="Nueva contraseña">
+            </div>
+            <h3>División:</h3>
+            <div class="row">
+              <div class="col-md-6 center-items">
+                <div class="radio">
+                  <label><input type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="division" value="1">División 1</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="division" value="2">División 2</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="division" value="3">División 3</label>
+                </div>
+              </div>
+              <div class="col-md-6 center-items">
+                <div class="radio">
+                  <label><input type="radio" name="division" value="4">División 4</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="division" value="5">División 5</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="division" value="6">División 6</label>
+                </div>
+              </div>
+            </div>
+            <input type="submit" class="btn btn-default" value="Aceptar">
+            <BR>
+          </form>
+          <form action="/update/{{usersProfile.id}}/image" method="POST" enctype="multipart/form-data">
+            <h3>Imagen de perfil:</h3>
+            <input type="file" name="profilePicture" accept=".jpg, .jpeg">
+            <input type="submit" class="btn btn-default" value="Cambiar imagen">
+          </form>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+</div>
