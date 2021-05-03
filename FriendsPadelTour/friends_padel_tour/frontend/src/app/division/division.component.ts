@@ -15,7 +15,7 @@ export class DivisionComponent implements OnInit {
   num: number;
   logged = false;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, service: MatchesService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: MatchesService) {
     this.num = activatedRoute.snapshot.params['num'];
     this.$matches = service.getMatchesOfDivision(this.num);
     this.$top10 = service.getTop10(this.num);
