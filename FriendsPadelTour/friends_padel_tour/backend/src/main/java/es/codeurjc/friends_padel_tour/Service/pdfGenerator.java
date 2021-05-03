@@ -1,4 +1,4 @@
-package es.codeurjc.friends_padel_tour.Entities;
+package es.codeurjc.friends_padel_tour.Service;
 
 
 import java.io.ByteArrayOutputStream;

@@ -1,0 +1,63 @@
+<div class="site-blocks-cover overlay" style="background-image: url(assets/images/PADEL.jpg);" data-aos="fade" data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="row align-items-center justify-content-start">
+      <div class="col-md-6 text-center text-md-left" data-aos="fade-up" data-aos-delay="400">
+        <h1 class="bg-text-line">Torneos</h1>
+        <p class="mt-4">¡Únete a los torneos de nuestra organización! </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="site-section" style="background-color: rgb(224, 198, 198);">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 tournament_head">
+        <a *ngIf="bussiness" href="/tournamentRequest"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
+      </div>
+    </div>
+</div>
+
+<p id="pageSize" style="display: none;">3</p>
+
+<div class="row">
+  <div class="col-md-12 tournaments">
+<div class="eventContainer">
+
+    <ul>
+          <div *ngFor="let tournament of tournaments" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
+
+            <div class="tournament_definition" id="tournament_name"><a href="/tournamentInfo/{{tournament.id}}">{{tournament.name}}</a></div>
+            <div >
+              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="assets/images/inscripcion.png"> {{tournament.inscriptionStartDate}} - {{tournament.inscriptionFinishDate}}</p></div>
+              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="assets/images/reloj.png"> {{tournament.tournamentStartDate}} - {{tournament.tournamentFinishDate}}</p></div>
+            </div>
+            <div >
+              <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="assets/images/personas.png"> {{tournament.registeredCouples}}/{{tournament.maxCouples}}</p></div>
+              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png"> {{tournament.category}}</p></div>
+              <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png">{{tournament.firstPrize}}<img class="tournament_icon" src="assets/images/plata.png">{{tournament.secondPrize}}</p></div>
+                    <a *ngIf="logged && player && !tournament.isFull" href="#popup/{{tournament.id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
+            </div>
+              <div *ngIf="logged && player && !tournament.isFull" id="popup/{{tournament.id}}" class="overlay-formulario">
+                <div id="popup-Body">
+                  <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
+                  <a id="cerrarPestana" href="#">&times;</a>
+                  <div class="popupContent">
+                    <form action="/joinTournament/{{tournament.id}}" method="POST">
+                      <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect" required>
+                        <div *ngFor="let double of userDoubles">
+                          <option>{{double.user.userName}}</option>
+                        </div>
+                      </select></label><br>
+                      <input type="submit" value="Aceptar">
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+    </ul>
+</div>
+</div>
+
+</div>
+<button (onclick)="seeMore()" class="searchcouple" style="margin-left: 20px;">Ver más</button>

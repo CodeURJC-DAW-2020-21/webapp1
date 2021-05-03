@@ -7,14 +7,14 @@ import { LoginService } from '../Service/login.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  loginError : boolean = false;
+  loginError = false;
 
   constructor(public loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
-  logIn(event : any, user : string, pass : string){
+  logIn(event: any, user: string, pass: string){
     event.preventDefault();
 
     this.loginService.logIn(user, pass);

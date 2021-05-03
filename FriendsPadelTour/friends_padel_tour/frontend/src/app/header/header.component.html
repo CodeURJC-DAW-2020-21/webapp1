@@ -64,29 +64,30 @@
             <ul class="site-menu js-clone-nav d-none d-md-block">
               <li><a href="/">INICIO</a></li>
               <li class="has-children">
-                <a href="/friendlyMatch">DIVISIONES Y AMISTOSOS</a>
+                <a [routerLink]="['/friendlyMatches']">DIVISIONES Y AMISTOSOS</a>
                 <ul class="dropdown arrow-top">
-                  <li><a href="/team/1">1ª División</a></li>
-                  <li><a href="/team/2">2ª División</a></li>
-                  <li><a href="/team/3">3ª División</a></li>
-                  <li><a href="/team/4">4ª División</a></li>
-                  <li><a href="/team/5">5ª División</a></li>
-                  <li><a href="/team/6">6ª División</a></li>
+                  <li><a [routerLink]="['/division', 1]">1ª División</a></li>
+                  <li><a [routerLink]="['/division', 2]">2ª División</a></li>
+                  <li><a [routerLink]="['/division', 3]">3ª División</a></li>
+                  <li><a [routerLink]="['/division', 4]">4ª División</a></li>
+                  <li><a [routerLink]="['/division', 5]">5ª División</a></li>
+                  <li><a [routerLink]="['/division', 6]">6ª División</a></li>
                 </ul>
               </li>
-              <li><a href="/tournaments">Torneos</a></li>
-              <li><a href="/AboutUs">Conócenos</a></li>
+              <li><a [routerLink]="['/tournaments']">Torneos</a></li>
+              <li><a [routerLink]="['/aboutUs']">Conócenos</a></li>
 
 
-                  <li *ngIf="logged && user"><a [routerLink]="['player/', userName]">Tu perfil</a></li>
-                  <li *ngIf="logged && bussiness"><a [routerLink]="['bussiness/', userName]">Tu perfil</a></li>
-                <li *ngIf="logged && admin"><a [routerLink]="['tournamentManagment']">Gestion de torneos</a></li>
-                <li class="text-white underline">{{userName}}</li>
-                <li *ngIf="logged"><form action="logout" method="post">
+              <li *ngIf="logged && user"><a [routerLink]="['player/', userName]">Tu perfil</a></li>
+              <li *ngIf="logged && bussiness"><a [routerLink]="['bussiness/', userName]">Tu perfil</a></li>
+              <li *ngIf="logged && admin"><a [routerLink]="['tournamentManagment']">Gestion de torneos</a></li>
+              <li class="text-white underline">{{userName}}</li>
+              <li *ngIf="logged">
+                <form action="logout" method="post">
                   <button class="btn btn-default navbar-btn" type="submit">Log
                     Out</button>
                 </form></li>
-                <li *ngIf="!logged"><a [routerLink]="['login']" routerLinkActive="router-link-active" >Iniciar sesión</a></li>
+              <li *ngIf="!logged"><a [routerLink]="['login']" routerLinkActive="router-link-active" >Iniciar sesión</a></li>
             </ul>
           </div>
         </nav>

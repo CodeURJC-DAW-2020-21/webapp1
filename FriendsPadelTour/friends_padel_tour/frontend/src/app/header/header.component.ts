@@ -5,11 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  logged: boolean = false;
-  user: boolean = false;
-  bussiness : boolean = false;
-  admin : boolean = false;
-  userName : string = '';
+  logged = false;
+  user = false;
+  bussiness = false;
+  admin = false;
+  userName = '';
 
   constructor() { }
 

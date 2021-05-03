@@ -1,27 +1,27 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { User } from "../model/user.model";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { User } from '../model/user.model';
 
 const BASE_URL = '/auth';
 
 @Injectable({providedIn : 'root'})
 export class LoginService{
-  logged: boolean = false;
+  logged = false;
   user: User | undefined;
 
-  constructor(private http : HttpClient){
+  constructor(private http: HttpClient){
     this.reqIsLogged();
   }
 
   reqIsLogged() {
 
-    this.http.get('/api/users/me', { withCredentials: true }).subscribe(
+    this.http.get('api/users/me', { withCredentials: true }).subscribe(
         response => {
             this.user = response as User;
             this.logged = true;
         },
         error => {
-            if (error.status != 404) {
+            if (error.status !== 404) {
                 console.error('Error when asking if logged: ' + JSON.stringify(error));
             }
         }
@@ -31,10 +31,10 @@ export class LoginService{
 
   logIn(user: string, pass: string) {
 
-      this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
+      this.http.post(BASE_URL + '/login', { username: user, password: pass }, { withCredentials: true })
           .subscribe(
               (response) => this.reqIsLogged(),
-              (error) => alert("Wrong credentials")
+              (error) => alert('Wrong credentials')
           );
 
   }
@@ -43,7 +43,7 @@ export class LoginService{
 
       return this.http.post(BASE_URL + '/logout', { withCredentials: true })
           .subscribe((resp: any) => {
-              console.log("LOGOUT: Successfully");
+              console.log('LOGOUT: Successfully');
               this.logged = false;
               this.user = undefined;
           });
