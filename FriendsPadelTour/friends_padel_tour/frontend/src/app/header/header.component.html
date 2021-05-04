@@ -24,33 +24,25 @@
           <div class="container">
             <div class="row align-items-center">
               <div class="col-6 col-md-3">
-                <!--Menu de enlaces a redes sociales del banner superior-->
-                <a href="#" class="text-secondary px-2 pl-0"><span class="icon-facebook"></span></a>
-                <a href="#" class="text-secondary px-2"><span class="icon-instagram"></span></a>
-                <a href="#" class="text-secondary px-2"><span class="icon-twitter"></span></a>
-                <a href="#" class="text-secondary px-2"><span class="icon-linkedin"></span></a>
               </div>
               <div class="col-6 col-md-9 text-right">
-                <div class="d-inline-block"><a href="#" class="text-secondary p-2 d-flex align-items-center"><span class="icon-envelope mr-3"></span> <span class="d-none d-md-block">friendspadeltour@domain.com</span></a></div>
-                <div class="d-inline-block"><a href="#" class="text-secondary p-2 d-flex align-items-center"><span class="icon-phone mr-0 mr-md-3"></span> <span class="d-none d-md-block">+34 123 456 789</span></a></div>
+                <div class="d-inline-block"><a class="text-secondary p-2 d-flex align-items-center"><span class="icon-envelope mr-3"></span> <span class="d-none d-md-block">friendspadeltour@domain.com</span></a></div>
+                <div class="d-inline-block"><a class="text-secondary p-2 d-flex align-items-center"><span class="icon-phone mr-0 mr-md-3"></span> <span class="d-none d-md-block">+34 123 456 789</span></a></div>
               </div>
             </div>
           </div>
         </div>
 
-        <!--Barra de navegacion en ordenador-->
-        <nav class="site-navigation position-relative text-right bg-black text-md-center" role="navigation">
+        <nav class="site-navigation position-relative text-right bg-black text-lg-center" role="navigation">
           <div class="container position-relative">
+
             <div class="site-logo">
               <a [routerLink]="['/']"><img src="assets/images/LOGO.png" alt="" width="190" height="100"></a>
             </div>
 
-
-
               <ul class="site-menu js-clone-nav d-none d-md-block" *ngIf="logged;else userNotLoggedHeader">
-                <li><a [routerLink]="['/']">INICIO</a></li>
                 <li class="has-children">
-                  <a [routerLink]="['/friendlyMatches']">DIVISIONES Y AMISTOSOS</a>
+                  <a [routerLink]="['/friendlyMatches']">Amistosos</a>
                   <ul class="dropdown arrow-top">
                     <li><a [routerLink]="['/division', 1]">1ª División</a></li>
                     <li><a [routerLink]="['/division', 2]">2ª División</a></li>
@@ -67,11 +59,11 @@
                 <li *ngIf="admin"><a class="navbar-btn" (click)="goTournamentManagment()">Gestion de torneos</a></li>
                 <li *ngIf="logged"><button class="navbar-btn" (click)="logout()">Log Out</button></li>
               </ul>
+
               <ng-template #userNotLoggedHeader>
-                <ul class="site-menu js-clone-nav d-none d-md-block">
-                  <li><a [routerLink]="['/']">INICIO</a></li>
+                <ul class="site-menu">
                   <li class="has-children">
-                    <a [routerLink]="['/friendlyMatches']">DIVISIONES Y AMISTOSOS</a>
+                    <a [routerLink]="['/friendlyMatches']">Amistosos</a>
                     <ul class="dropdown arrow-top">
                       <li><a [routerLink]="['/division', 1]">1ª División</a></li>
                       <li><a [routerLink]="['/division', 2]">2ª División</a></li>
@@ -83,11 +75,14 @@
                   </li>
                   <li><a [routerLink]="['/tournaments']">Torneos</a></li>
                   <li><a [routerLink]="['/aboutUs']">Conócenos</a></li>
+                  <li><a [routerLink]="['/previousSignUp']" routerLinkActive="router-link-active" >Registrate</a></li>
                   <li><input [(ngModel)]="userName" type="text" name="username" placeholder="Nombre de usuario"/></li>
                   <li><input [(ngModel)]="password" type="password" name="password" placeholder="Contraseña"/></li>
-                  <li><button class="navbar-btn" (click)="login(userName,password)">Iniciar sesión</button></li>
+                  <li><button class="navbar-btn" (click)="login(userName,password)">Log in</button></li>
                 </ul>
               </ng-template>
+
+
           </div>
         </nav>
       </header>
