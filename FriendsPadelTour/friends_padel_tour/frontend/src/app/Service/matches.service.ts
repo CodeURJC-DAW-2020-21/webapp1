@@ -17,13 +17,13 @@ export class MatchesService{
   }
   getTop10(num: number): Observable<Player[]> {
     return this.http.get(BASE_URL + '/division/' + num.toString() + '/ranking').pipe(
-      catchError(error => this.handleError(error))
+      //catchError(error => this.handleError(error))
     ) as Observable<Player[]>;
   }
 
   getMatchesOfDivision(num: number): Observable<PadelMatch[]>{
     return this.http.get(BASE_URL + '/division/' + num.toString()).pipe(
-      catchError(error => this.handleError(error))
+      //catchError(error => this.handleError(error))
     ) as Observable<PadelMatch[]>;
   }
 

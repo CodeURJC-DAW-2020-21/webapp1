@@ -8,23 +8,22 @@ import { User } from '../model/user.model';
   selector: 'app-bussiness-profile',
   templateUrl: './bussiness-profile.component.html'
 })
-export class BussinessProfileComponent implements OnInit {
+export class BussinessProfileComponent {
   bussinessProfile: Bussiness | undefined;
   loggedUser: User | undefined;
   isExtern = true;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService) {
-    const bussinessUserName = activatedRoute.snapshot.params.userName;
-    service.getBussiness(bussinessUserName).subscribe(
-      bussiness => {
-        this.bussinessProfile = bussiness;
-      },
-      error => console.error('Server error.')
-    );
-    this.isExtern = this.loggedUser !== undefined && this.loggedUser.userName !== bussinessUserName;
+    activatedRoute.params.subscribe(params =>{
+      const bussinessUserName = params['userName'];
+      service.getBussiness(bussinessUserName).subscribe(
+        bussiness => {
+          this.bussinessProfile = bussiness;
+        },
+        error => console.error('Server error.')
+      );
+      this.isExtern = this.loggedUser !== undefined && this.loggedUser.userName !== bussinessUserName;
+    });
    }
-
-  ngOnInit(): void {
-  }
 
 }

@@ -2,6 +2,7 @@ package es.codeurjc.friends_padel_tour.Controllers;
 
 import java.io.IOException;
 import java.net.URI;
+import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.ImageService;
@@ -42,8 +44,6 @@ public class ApiUsersController {
     private PlayersService playerService;
     @Autowired
     private BussinessService bussinessService;
-    @Autowired
-    private DoubleService doubleService;
     @Autowired
 	private ImageService imgService;
     @Autowired
@@ -161,5 +161,17 @@ public class ApiUsersController {
         stats[2] = player.getMatchesLost();
         return ResponseEntity.ok().body(stats);
     }
+
+    @GetMapping("/me")
+	public ResponseEntity<User> me(HttpServletRequest request) {
+		
+		Principal principal = request.getUserPrincipal();
+		
+		if(principal != null) {
+			return ResponseEntity.ok(userService.findByUsername(principal.getName()));
+		} else {
+			return ResponseEntity.notFound().build();
+		}
+	}
     
 }

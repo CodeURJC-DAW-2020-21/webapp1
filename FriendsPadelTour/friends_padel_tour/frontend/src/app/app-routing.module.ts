@@ -9,14 +9,12 @@ import { BussinessProfileComponent } from './bussiness-profile/bussiness-profile
 import { BussinessSignUpFormComponent } from './bussiness-sign-up-form/bussiness-sign-up-form.component';
 import { ErrorsComponent } from './errors/errors.component';
 import { IndexComponent } from './index/index.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PlayerSignUpFormComponent } from './player-sign-up-form/player-sign-up-form.component';
 
 const routes: Routes = [
-  { path: '', component: IndexComponent },
-  { path: 'error', component: ErrorsComponent },
-  { path: 'login', component: LoginFormComponent, },
+ { path: '', component: IndexComponent },
+ { path: 'error', component: ErrorsComponent },
  { path: 'player/signUp', component: PlayerSignUpFormComponent },
  { path: 'bussiness/signUp', component: BussinessSignUpFormComponent },
  { path: 'player/:userName', component: PlayerProfileComponent },

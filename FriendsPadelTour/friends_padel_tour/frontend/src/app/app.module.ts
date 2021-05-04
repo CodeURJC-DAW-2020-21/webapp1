@@ -7,7 +7,6 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { BussinessSignUpFormComponent } from './bussiness-sign-up-form/bussiness-sign-up-form.component';
 import { PlayerSignUpFormComponent } from './player-sign-up-form/player-sign-up-form.component';
-import { LoginFormComponent } from './login-form/login-form.component';
 import { routing } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
@@ -28,7 +27,6 @@ import { AboutUsComponent } from './about-us/about-us.component';
     FooterComponent,
     BussinessSignUpFormComponent,
     PlayerSignUpFormComponent,
-    LoginFormComponent,
     PlayerProfileComponent,
     BussinessProfileComponent,
     IndexComponent,
