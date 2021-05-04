@@ -7,8 +7,9 @@ services:
       - MYSQL_DATABASE=fptdb
       - MYSQL_ROOT_PASSWORD=12345678
 
+      #Cambiar la imagen a la del dockerhub cuando terminemos de desarrollar
   practica:
-    image: eduvilla97/friendspadeltour:latest
+    image: fpt
     restart: always
     ports:
       - 8443:8443
