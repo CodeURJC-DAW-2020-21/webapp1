@@ -6,9 +6,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BussinessSignUpFormComponent implements OnInit {
 
+
+  listProvinces:string[] = ["Álava","Albacete","Alicante","Almería","Ávila","Asturias"];
+  listType:string[] = ["Escuela de Padel","Centro Deportivo","Tienda de material deportivo","Otro"];
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  signUp(){
+
+
   }
 
 }

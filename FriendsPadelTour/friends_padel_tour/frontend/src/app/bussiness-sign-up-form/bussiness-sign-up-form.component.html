@@ -1,1 +1,61 @@
-<p>bussiness-sign-up-form works!</p>
+    
+    <div class="site-section">
+      <div class="row">
+        <div class="container col-md-4"></div>
+        <div class="container col-md-4 form">
+          <h1>Regístrese</h1>
+          <form action="/signUpBussiness" method="POST">
+            <h2>Informacion personal</h2>
+              <div class="form-group">
+                <label for="userName">Nombre:</label>
+                <input #ownerName type="text" class="form-control" name="ownerName">
+              </div>
+              <div class="form-group">
+                <label for="surname">Apellidos:</label>
+                <input #ownerSurname type="text" class="form-control" name="ownerSurname">
+              </div>
+              <label for="email">Correo electronico:</label>
+              <input #email type="email" class="form-control" name="email" placeholder="ejemplo@gmail.com">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="userName">Nombre de usuario:</label>
+                <input #username type="text" class="form-control" name="username">
+              </div>
+              <label for="pwd">Contraseña:</label>
+              <input #password type="password" class="form-control" name="password" placeholder="contraseña">
+            </div>
+            <div class="form-group">
+              <label for="confirm-pwd">Comfirme la contraseña:</label>
+              <input #passwordconfirm type="password" class="form-control" id="userConfirm" placeholder="confirme contraseña">
+            </div>
+            <h2>Informacion de su empresa</h2>
+            <div class="form-group">
+              <label for="bussinessName">Nombre:</label>
+              <input #bussinessName type="text" class="form-control" name="bussinessName">
+            </div>
+            <div class="form-group">
+              <label for="userLocation">Localidad:</label>
+              <input #city type="text" class="form-control" name="city">
+            </div>
+            <div class="form-group">
+              <label for="adress">Direccion:</label>
+              <input #address type="text" class="form-control" name="adress">
+            </div>
+            <label for="userProvince">Provincia:</label>
+            <select class="form-control" name="location">
+                <option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>
+            </select>
+            <br>
+            <label for="bussinessType">Tipo de negocio:</label>
+            <select class="form-control" name="bussinessType">
+                <option>[value]="item" *ngFor="let item of listType">{{item}}</option>
+            </select>
+            <br>
+            <button type="submit" (click)="signUpBussiness(ownerName.value, ownerSurname.value, email.value, username.value, password.value, passwordconfirm.value,bussinessName.value,city.value, type.value ,adress.value)"class="btn btn-default">Enviar</button>
+            <input type="hidden" name="_csrf" value="{{token}}"/>
+          </form>
+        </div>
+        <div class="container col-md-4"></div>
+      </div>
+    </div>
+  </div>
