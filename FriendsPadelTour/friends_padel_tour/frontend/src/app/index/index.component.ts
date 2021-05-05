@@ -4,11 +4,9 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-index',
   templateUrl: './index.component.html'
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent{
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
 
 }

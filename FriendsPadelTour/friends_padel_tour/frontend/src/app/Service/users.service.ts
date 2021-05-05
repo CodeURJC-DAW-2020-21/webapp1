@@ -10,14 +10,14 @@ const BASE_URL = '/users';
   providedIn: 'root'
 })
 export class UserService {
-  getBussiness(bussinessUserName: string): Observable<Bussiness> {
-    throw new Error('Method not implemented.');
-  }
 
   getPlayer(userName: string): Observable<Player> {
     return this.http.get(BASE_URL + '/player/' + userName).pipe() as Observable<Player>;
   }
 
+  getBussiness(userName: string): Observable<Bussiness>{
+    return this.http.get(BASE_URL + '/bussiness/' + userName).pipe() as Observable<Bussiness>;
+  }
 
   constructor(private http: HttpClient) { }
 }
