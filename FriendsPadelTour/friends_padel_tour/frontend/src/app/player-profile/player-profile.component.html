@@ -123,9 +123,9 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
-                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
+              <div *ngIf="match.double1!==null" class="text">
+                <h3  class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
+                <h3  class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/1">Elegir como ganadores del partido</a>
               </div>
             </div>
@@ -144,7 +144,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null" class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/2">Elegir como ganadores del partido</a>
@@ -165,7 +165,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
+              <div *ngIf="match.double1!==null" class="text">
                 <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
@@ -179,7 +179,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null"class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
@@ -200,7 +200,7 @@
               <div class="image image-small text-center mb-3 mb-lg-0 mr-lg-3">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
+              <div *ngIf="match.double1!==null" class="text">
                 <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
@@ -214,7 +214,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null" class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
