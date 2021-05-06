@@ -1,1 +1,66 @@
-<p>player-sign-up-form works!</p>
+
+
+    
+    <div class="site-section">
+      <div class="row">
+        <div class="container col-md-4"></div>
+        <div class="container col-md-4 form">
+          <h1>Regístrate</h1>
+          <form action="" method="POST">
+              <div class="form-group">
+                <label for="Name">Nombre:</label>
+                <input #name type="text" class="form-control" name="name">
+              </div>
+              <div class="form-group">
+                <label for="userSurname">Apellidos:</label>
+                <input #surname type="text" class="form-control" name="surname">
+              </div>
+              <div class="form-group">
+                <label for="nametag">Nombre de usuario:</label>
+                <input #username type="text" class="form-control" name="username">
+                <input #division type="radio" class="form-control" name="division" value=1>
+
+              </div>
+              <label for="userEmail">Correo electronico:</label>
+              <input #email type="email" class="form-control" name="email" placeholder="ejemplo@gmail.com">
+            <div class="form-group">
+              <label for="pwd">Contraseña:</label>
+              <input #password type="password" class="form-control" name="password" placeholder="contraseña">
+            </div>
+            <div class="form-group">
+              <label for="confirm-pwd">Comfirme la contraseña:</label>
+              <input #passwordconfirm type="password" class="form-control" name="userConfirm" placeholder="confirme contraseña">
+            </div>
+            <label for="location">Provincia:</label>
+            <select #location class="form-control" name="location">
+                <!--<option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>-->
+            </select>
+            <br>
+            <label for="userLevel">Seleccione la categoria que considera que tiene (1 la mejor, 6 la peor):</label>
+
+            <!--<div class="radio">
+              <label><input #division type="radio" name="division" value="1">Categoria 1</label>
+              <br>
+              <label><input #division type="radio" name="division" value="2">Categoria 2</label>
+              <br>
+              <label><input #division type="radio" name="division" value="3">Categoria 3</label>
+              <br>
+              <label><input #division type="radio" name="division" value="4">Categoria 4</label>
+              <br>
+              <label><input #division type="radio" name="division" value="5">Categoria 5</label>
+              <br>
+              <label><input #division type="radio" name="division" value="6">Categoria 6</label>
+              <br>
+            </div>-->
+            <p>(Podra cambiar en cualquier momento)</p>
+            <br>
+            <input type="submit" (click)="signUpPlayer(username.value,name.value,surname.value,email.value,password.value,location.value,division.value)" value="Enviar">
+            <!--<input type="hidden" name="_csrf" value="{{token}}">-->
+          </form>
+        </div>
+        <div class="container col-md-4"></div>
+      </div>
+    </div>
+  
+
+  

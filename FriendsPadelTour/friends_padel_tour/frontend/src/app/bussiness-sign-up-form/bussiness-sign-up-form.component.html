@@ -1,11 +1,10 @@
-<<<<<<< HEAD
     
     <div class="site-section">
       <div class="row">
         <div class="container col-md-4"></div>
         <div class="container col-md-4 form">
           <h1>Regístrese</h1>
-          <form action="/signUpBussiness" method="POST">
+          <form action="" method="POST">
             <h2>Informacion personal</h2>
               <div class="form-group">
                 <label for="userName">Nombre:</label>
@@ -43,22 +42,20 @@
               <input #address type="text" class="form-control" name="adress">
             </div>
             <label for="userProvince">Provincia:</label>
-            <select class="form-control" name="location">
-                <option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>
+            <select #location class="form-control" name="location">
+                <!--<option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>-->
             </select>
             <br>
             <label for="bussinessType">Tipo de negocio:</label>
-            <select class="form-control" name="bussinessType">
-                <option>[value]="item" *ngFor="let item of listType">{{item}}</option>
+            <select #bussinessType class="form-control" name="bussinessType">
+                <!--<option>[value]="item" *ngFor="let item of listType">{{item}}</option>-->
             </select>
             <br>
-            <button type="submit" (click)="signUpBussiness(ownerName.value, ownerSurname.value, email.value, username.value, password.value, passwordconfirm.value,bussinessName.value,city.value, type.value ,adress.value)"class="btn btn-default">Enviar</button>
-            <input type="hidden" name="_csrf" value="{{token}}"/>
+            <button type="submit" (click)="signUpBussiness(password.value,username.value,bussinessName.value,ownerName.value,ownerSurname.value,location.value,city.value,email.value,address.value,bussinessType.value)"class="btn btn-default">Enviar</button>
+            <!--<input type="hidden" name="_csrf" value="{{token}}"/>-->
           </form>
         </div>
         <div class="container col-md-4"></div>
       </div>
     </div>
-  </div>
-=======
->>>>>>> 18745050823141702b2e5429060f9de8f84eaab0
+  
