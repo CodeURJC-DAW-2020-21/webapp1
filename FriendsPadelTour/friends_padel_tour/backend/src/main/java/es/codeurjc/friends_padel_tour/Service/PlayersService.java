@@ -25,17 +25,6 @@ public class PlayersService {
 
     //Save a player having in mind his role
     public boolean savePlayer(Player newPlayer){
-        Optional<Player> playerInDB = playerRepository.findByEmail(newPlayer.getEmail());
-        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(newPlayer.getEmail());
-        if(playerInDB.isPresent()) 
-            return false;
-        if(bussinessInDB.isPresent())
-            return false;
-        playerInDB = playerRepository.findByUsername(newPlayer.getUsername());
-        if(playerInDB.isPresent()) 
-            return false;
-        //User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword(),"USER");
-        //newPlayer.setUser(newUser);
         playerRepository.save(newPlayer);
         return true;
     }

@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
+import es.codeurjc.friends_padel_tour.Entities.BussinessRequest;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.PlayerRequest;
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
@@ -50,14 +52,22 @@ public class ApiUsersController {
     private UserService userService;
 
     @PostMapping(value = "/bussiness/")
-    public ResponseEntity<Bussiness> signUpBussiness(@RequestBody Bussiness newBussiness){
+    public ResponseEntity<Bussiness> signUpBussiness(@RequestBody BussinessRequest bussinessRequest){
+        User newUser = bussinessRequest.getUser();
+        userService.saveUser(newUser);
+        Bussiness newBussiness = bussinessRequest.getBussiness();
+        newBussiness.setUser(newUser);
         bussinessService.saveBussiness(newBussiness);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newBussiness.getId()).toUri();
         return ResponseEntity.created(location).body(newBussiness);
     }
 
     @PostMapping(value="/player/")
-    public ResponseEntity<Player> signUpUser(@RequestBody Player newPlayer){
+    public ResponseEntity<Player> signUpUser(@RequestBody PlayerRequest playerRequest){
+        User newUser = playerRequest.getUser();
+        userService.saveUser(newUser);
+        Player newPlayer = playerRequest.getPlayer();
+        newPlayer.setUser(newUser);
         playerService.savePlayer(newPlayer);
         URI location = fromCurrentRequest().path("/{id}").buildAndExpand(newPlayer.getId()).toUri();
         return ResponseEntity.created(location).body(newPlayer);

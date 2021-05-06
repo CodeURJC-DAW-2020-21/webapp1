@@ -61,28 +61,23 @@ public class DatabaseUsersLoader {
         userRepository.save(user5);
         userRepository.save(userBussiness);
 
-    	Player newPlayer1 = new Player("username","yo","apellido","email","ciudad",1);
-        newPlayer1.setUser(user1);
+    	Player newPlayer1 = new Player("username","yo","apellido","email","ciudad",1,user1);
 
         newPlayer1.setMathesPlayed(2);
         newPlayer1.setMathcesWon(1);
         newPlayer1.setMatchesLost(1);
         newPlayer1.setScore(200);
 
-        Player newPlayer2 = new Player("username2","yo2","apellido2","email2","ciudad2",1);
-        newPlayer2.setUser(user2);
+        Player newPlayer2 = new Player("username2","yo2","apellido2","email2","ciudad2",1,user2);
         newPlayer2.setScore(500);
 
-        Player newPlayer3 = new Player("username3","yo3","apellido3","email3","ciudad3",1);
-        newPlayer3.setUser(user3);
+        Player newPlayer3 = new Player("username3","yo3","apellido3","email3","ciudad3",1,user3);
         
 
-        Player newPlayer4 = new Player("username4","yo4","apellido4","email4","ciudad4",1);
-        newPlayer4.setUser(user4);
+        Player newPlayer4 = new Player("username4","yo4","apellido4","email4","ciudad4",1,user4);
         
 
-        Player newPlayer5 = new Player("username5","yo4","apellido4","email4","ciudad4",1);
-        newPlayer5.setUser(user5);
+        Player newPlayer5 = new Player("username5","yo4","apellido4","email4","ciudad4",1,user5);
         
 
 
@@ -120,15 +115,15 @@ public class DatabaseUsersLoader {
         doubleRepository.save(newDouble3);
         doubleRepository.save(newDouble4);
         
-        Bussiness newBussiness = new Bussiness("Padel Arroyo Molinos", "bussinessUsername", "Madrid", "email@gmail.com", userBussiness);
+        Bussiness newBussiness = new Bussiness("Padel Arroyo Molinos", "Propietario" ,"Del Negocio","email@gmail.com", "Madrid", "Calle Tal y Pascual", "Madrid", "Escuela de padel", userBussiness);
         newBussiness.setAdress("Calle de ejemplo");
         bussinessRepository.save(newBussiness);
 
         PadelMatch match1 = new PadelMatch("Hola", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 30).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
-        PadelMatch match2 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 29).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer2);
-        PadelMatch match3 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 28).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer3);
-        PadelMatch match4 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 27).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer4);
-        PadelMatch match5 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 26).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer5);
+        PadelMatch match2 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 29).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
+        PadelMatch match3 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 28).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
+        PadelMatch match4 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 27).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
+        PadelMatch match5 = new PadelMatch("Madrid", "Mostoles", "Campus de la URJC", LocalDate.of(2021, 5, 26).toString(), LocalTime.of(16, 30).toString(), 1, newPlayer1);
 
         matchesRepository.save(match1);
         matchesRepository.save(match2);

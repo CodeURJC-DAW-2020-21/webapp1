@@ -66,6 +66,7 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(User user) {
+		user.setEncodedPassword(passwordEnconder.encode(user.getEncodedPassword()));
 		userRepository.save(user);
     }
 	
