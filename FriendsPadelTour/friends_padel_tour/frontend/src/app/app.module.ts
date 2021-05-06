@@ -22,6 +22,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { Division4Component } from './division4/division4.component';
 import { Division5Component } from './division5/division5.component';
 import { Division6Component } from './division6/division6.component';
+import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-match.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { Division6Component } from './division6/division6.component';
     AboutUsComponent,
     Division4Component,
     Division5Component,
-    Division6Component
+    Division6Component,
+    JoinFriendlyMatchComponent
   ],
   imports: [
     NgxPaginationModule,

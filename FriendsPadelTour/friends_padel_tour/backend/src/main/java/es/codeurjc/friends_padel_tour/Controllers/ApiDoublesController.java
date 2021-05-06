@@ -1,5 +1,7 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.net.URI;
 import java.util.List;
 
@@ -7,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,6 @@ import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 
 @RestController

@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Player } from '../model/player.model';
 import { Bussiness } from '../model/bussiness.model';
 
-const BASE_URL = '/users';
+const BASE_URL = 'api/users';
 
 @Injectable({
   providedIn: 'root'

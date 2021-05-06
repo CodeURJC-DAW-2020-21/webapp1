@@ -1,3 +1,4 @@
+import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-match.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { TournamentsComponent } from './tournaments/tournaments.component';
 import { DivisionComponent } from './division/division.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
  { path: 'division/6', component: Division6Component },
  { path: 'tournaments', component: TournamentsComponent},
  { path: 'aboutUs', component: AboutUsComponent },
+ { path: 'joinFriendlyMatch/:id', component: JoinFriendlyMatchComponent },
  { path: '**', component: ErrorsComponent },
 ];
 

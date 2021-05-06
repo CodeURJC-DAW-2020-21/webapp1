@@ -11,7 +11,6 @@ const BASE_URL = 'api/matches';
 @Injectable({providedIn : 'root'})
 export class MatchesService{
 
-
   constructor(private http: HttpClient){
 
   }
@@ -24,4 +23,20 @@ export class MatchesService{
     return this.http.get(BASE_URL + '/division/' + num.toString()).pipe(
     ) as Observable<PadelMatch[]>;
   }
+
+  getMatch(matchId: number): Observable<PadelMatch> {
+    return this.http.get(BASE_URL + '/' + matchId.toString()).pipe(
+    ) as Observable<PadelMatch>;
+  }
+
+  joinLonely(id: number, slot: number): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/' + id + '/player/' + slot.toString(), undefined).pipe(
+    ) as Observable<PadelMatch>;
+  }
+
+  joinInDouble(id: number, slot: number, double: Player): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/' + id + '/double/' + slot.toString(), double).pipe(
+    ) as Observable<PadelMatch>;
+  }
+
 }

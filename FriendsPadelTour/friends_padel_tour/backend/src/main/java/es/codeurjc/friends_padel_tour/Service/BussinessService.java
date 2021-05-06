@@ -6,16 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
-import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 
 
 @Service
 public class BussinessService {
-
-    //Autowired Section
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private BussinessRepository bussinessRepository;

@@ -54,12 +54,15 @@ public class Player{
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
+    @JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 
@@ -160,13 +163,6 @@ public class Player{
         this.mathcesWon = mathcesWon;
     }
 
-   // public String getPassword() {
-     //   return password;
-   // }
-
-    public void setPassword(String password) {
-        this.user.setEncodedPassword(password);
-    }
 
     public Player(String username, String name, String surname, String email, String location, int division, User user){
         this.username = username;
@@ -248,7 +244,7 @@ public class Player{
     }
 
     public String getUsername() {
-        return username;
+        return this.user.getUsername();
     }
 
     public void setUsername(String username) {

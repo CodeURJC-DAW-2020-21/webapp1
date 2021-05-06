@@ -1,3 +1,4 @@
+import { DoubleService } from './../Service/double.service';
 import { UserService } from './../Service/users.service';
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../model/player.model';
@@ -17,15 +18,17 @@ export class PlayerProfileComponent implements OnInit {
   userDoubles: Player[] = [];
   efectivity: number = 0;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService) {
-    // recibir tambien el usuario loggeado
-    // this.loggedUser = activatedRoute.snapshot.params['a'];
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
     service.getPlayer(playerUserName).subscribe(
       user => {
         this.usersProfile = user;
-        this.principalDouble = this.usersProfile.doubles.pop();
-        this.userDoubles = this.usersProfile.doubles;
+        this.doubleService.getDoublesOf(user.username).subscribe(
+          doubles => {
+            this.userDoubles = doubles;
+            this.principalDouble = doubles.pop();
+          }
+        );
         this.efectivity = this.usersProfile.matchesWon / this.usersProfile.matchesPlayed;
       },
       error => console.error('Bad request')

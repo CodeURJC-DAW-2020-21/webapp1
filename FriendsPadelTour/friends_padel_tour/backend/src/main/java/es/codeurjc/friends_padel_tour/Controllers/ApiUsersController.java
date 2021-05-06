@@ -1,14 +1,13 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
-
-import java.net.MalformedURLException;
-
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.BussinessRequest;
-import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.PlayerRequest;
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
-import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.ImageService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 import es.codeurjc.friends_padel_tour.Service.UserService;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 
 
@@ -100,7 +96,7 @@ public class ApiUsersController {
             return ResponseEntity.notFound().build();
         }
         if (!password.isBlank()) {
-            newPlayer.setPassword(password);
+            newPlayer.getUser().setEncodedPassword(password);
             userService.updatePasswordOf(newPlayer.getUser(), password);
             return ResponseEntity.ok(newPlayer);
         } 
