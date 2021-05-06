@@ -22,7 +22,7 @@ export class BussinessProfileComponent {
         },
         error => console.error('Server error.')
       );
-      this.isExtern = this.loggedUser !== undefined && this.loggedUser.userName !== bussinessUserName;
+      this.isExtern = this.loggedUser !== undefined && this.loggedUser.username !== bussinessUserName;
     });
    }
 

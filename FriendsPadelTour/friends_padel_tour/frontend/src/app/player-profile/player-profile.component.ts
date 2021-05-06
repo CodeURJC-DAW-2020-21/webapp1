@@ -30,7 +30,7 @@ export class PlayerProfileComponent implements OnInit {
       },
       error => console.error('Bad request')
     );
-    this.isExtern = this.loggedUser !== undefined && this.loggedUser.userName !== playerUserName;
+    this.isExtern = this.loggedUser !== undefined && this.loggedUser.username !== playerUserName;
   }
 
   ngOnInit(): void {

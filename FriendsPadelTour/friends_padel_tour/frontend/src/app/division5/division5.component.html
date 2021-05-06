@@ -106,11 +106,11 @@
         </div>
         <div *ngFor="let player of top10; let index = index;" class="scrollmenu">
             <div class="c-player-card__item">
-              <a class="c-trigger" href="/users/{{player.user.userName}}">
+              <a class="c-trigger" href="/users/{{player.user.username}}">
                 <div class="c-player-card__header">
                     <div class="c-player-card__details">
                         <div class="c-player-card__position">{{index}}</div>
-                        <p class="c-player-card__name "><img class="imgplayer" src="/images/personas.png">{{player.user.userName}}<br>{{player.name}}<br>{{player.surname}}<br></p>
+                        <p class="c-player-card__name "><img class="imgplayer" src="/images/personas.png">{{player.user.username}}<br>{{player.name}}<br>{{player.surname}}<br></p>
                     </div>
                 </div>
                 <div class="c-player-card__footer">

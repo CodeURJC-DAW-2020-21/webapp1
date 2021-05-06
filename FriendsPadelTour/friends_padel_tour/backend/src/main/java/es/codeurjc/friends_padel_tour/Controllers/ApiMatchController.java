@@ -24,6 +24,8 @@ import es.codeurjc.friends_padel_tour.Service.PlayersService;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
@@ -169,6 +171,14 @@ public class ApiMatchController {
         return ResponseEntity.ok(match);
     }
 
+    @GetMapping(value="/{id}")
+    public ResponseEntity<PadelMatch> getMatch(@PathVariable long id) {
+        PadelMatch match = matchesService.findById(id);
+        if(match==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(match);
+    }
     
     
     
