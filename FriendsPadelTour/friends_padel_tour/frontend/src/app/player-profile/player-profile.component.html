@@ -6,7 +6,7 @@
           <div class="row align-items-center ">
 
             <div class="col-md-6" >
-              <h3 class="bg-text-line">Nombre: {{usersProfile.name}} {{usersProfile.surname}}<br> Nombre de usuario: {{usersProfile.user.userName}} <br> Categoria: {{usersProfile.division}} <br></h3>
+              <h3 class="bg-text-line">Nombre: {{usersProfile.name}} {{usersProfile.surname}}<br> Nombre de usuario: {{usersProfile.user.username}} <br> Categoria: {{usersProfile.division}} <br></h3>
               <div class="image-player">
                   <img *ngIf="usersProfile.hasImage;else defaultImage" class="image-main" src="/user/{{usersProfile.id}}/image">
                   <ng-template #defaultImage>
@@ -15,7 +15,7 @@
               </div>
               <div *ngIf="loggedUser !==undefined && loggedUser.roles.includes('USER') && isExtern" class="container-button">
                 <div class="center-button">
-                  <a class="center-button" href="/makeDoubleWhith/{{usersProfile.user.userName}}">Invitar a ser pareja</a>
+                  <a class="center-button" href="/makeDoubleWhith/{{usersProfile.user.username}}">Invitar a ser pareja</a>
                 </div>
               </div>
             </div>
@@ -23,7 +23,7 @@
               <h2 class="actual-couple">PAREJA ACTUAL</h2>
               <div class="container-button">
                 <div class="center-button">
-                  <a href="/users/{{principalDouble.user.userName}}" class="searchcouple">{{principalDouble.user.userName}}</a>
+                  <a href="/users/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
                 </div>
               </div>
                   <div class="info-couple col-md-12">
@@ -33,7 +33,7 @@
                   <div class="dropdown-couples">
                     <span>Otras parejas</span>
                     <div class="dropdown-content">
-                        <a *ngFor="let double of userDoubles" href="/users/{{double.user.userName}}" class="searchcouple">{{double.user.userName}}</a>
+                        <a *ngFor="let double of userDoubles" href="/users/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
                     </div>
                   </div>
             </div>
@@ -124,8 +124,8 @@
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text">
-                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/1">Elegir como ganadores del partido</a>
               </div>
             </div>
@@ -145,8 +145,8 @@
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text order-1 w-100">
-                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/2">Elegir como ganadores del partido</a>
               </div>
             </div>
@@ -166,8 +166,8 @@
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text">
-                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
             </div>
           </div>
@@ -180,8 +180,8 @@
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text order-1 w-100">
-                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
             </div>
           </div>
@@ -201,8 +201,8 @@
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text">
-                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
             </div>
           </div>
@@ -215,8 +215,8 @@
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
               <div class="text order-1 w-100">
-                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.userName}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.userName}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
+                <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
             </div>
           </div>

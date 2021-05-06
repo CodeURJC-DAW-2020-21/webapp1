@@ -1,0 +1,51 @@
+<div class="container text-center">
+  <h2 class="center-items" style="background-color: rgb(252, 186, 186);">Unirse al partido</h2><br>
+
+  <label for="lprov" style="font-size: 25px;"><b>Pareja seleccionada para unirse en pareja: <br></b><select [(ngModel)]="doubleSelected" name="doubleSelect">
+    <option *ngFor="let double of userDoubles">{{double.username}}</option>
+  </select></label><br>
+
+  <div class="popupContent">
+      <div *ngIf="double1Joined ;else notJoinedDouble1" class="row">
+              <div *ngIf="player1Joined" class="col-md-6 center-items">{{player1?.username}}</div>
+              <button *ngIf="!player1Joined" class="col-md-6 center-items" (click)="joinLonely(matchId,1)">Unirse solo</button>
+              <div *ngIf="player2Joined" class="col-md-6 center-items">{{player2?.username}}</div>
+              <button *ngIf="!player2Joined" class="col-md-6 center-items" (click)="joinLonely(matchId,2)">Unirse solo</button>
+      </div>
+
+      <ng-template #notJoinedDouble1>
+        <div class="row">
+          <button class="text-center col-md-12" (click)="joinInDouble(matchId,1,doubleSelected)" >Unirse con pareja</button>
+        </div>
+        <div class="row">
+            <button (click)="joinLonely(matchId,1)" class="col-md-6 text-center">Unirse solo</button>
+            <button (click)="joinLonely(matchId,2)" class="col-md-6 text-center">Unirse solo</button>
+        </div>
+      </ng-template>
+
+  </div>
+
+  <div class="center-items">
+      <img src="assets/images/padel_court_for_matches.jpg">
+  </div>
+
+      <div *ngIf="double2Joined ;else notJoinedDouble2" class="row">
+        <div *ngIf="player3Joined" class="col-md-6 center-items">{{player3?.username}}</div>
+        <button *ngIf="!player3Joined" class="col-md-6 center-items" (click)="joinLonely(matchId,3)">Unirse solo</button>
+        <div *ngIf="player4Joined" class="col-md-6 center-items">{{player4?.username}}</div>
+        <button *ngIf="!player4Joined" class="col-md-6 center-items" (click)="joinLonely(matchId,4)">Unirse solo</button>
+      </div>
+
+      <ng-template #notJoinedDouble2>
+        <div class="row">
+          <button class="text-center col-md-12" (click)="joinInDouble(matchId,2,doubleSelected)" >Unirse con pareja</button>
+        </div>
+        <div class="row">
+            <button (click)="joinLonely(matchId,3)" class="col-md-6 text-center">Unirse solo</button>
+            <button (click)="joinLonely(matchId,4)" class="col-md-6 text-center">Unirse solo</button>
+        </div>
+      </ng-template>
+
+</div>
+
+

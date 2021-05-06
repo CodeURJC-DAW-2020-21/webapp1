@@ -46,7 +46,7 @@
                   <form action="/selectTournamentWinner/{{tournament.id}}" method="POST">
                     <label for="lprov" style="font-size: 25px;"><b>Ganadores: <br></b><select name="doubleSelect" required>
                           <option *ngFor="let double of tournament.players; let index = index;"
-                            value="{{-index}}">{{double.player1.user.userName}} y {{double.player2.user.userName}}</option>
+                            value="{{-index}}">{{double.player1.user.username}} y {{double.player2.user.username}}</option>
                     </select></label><br>
                     <input type="submit" value="Aceptar">
                   </form>

@@ -1,6 +1,7 @@
 package es.codeurjc.friends_padel_tour.Entities;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,6 @@ public class Bussiness{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String password;
     private String username;
     private String bussinessName;
     private String ownerName;
@@ -30,7 +30,7 @@ public class Bussiness{
     private String email;
     private String adress;
     private String bussinessType;
-    private int createdTournaments;
+    private int createdTournaments = 0;
     private String pathImage;
 
     public String getPathImage() {
@@ -43,7 +43,7 @@ public class Bussiness{
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bussiness")
     @JsonIgnore
-    private List<Tournament> tournaments;
+    private List<Tournament> tournaments = new ArrayList<>();
     private boolean hasImage = false;
     @Lob
     @JsonIgnore
@@ -51,7 +51,6 @@ public class Bussiness{
 
 
     @OneToOne
-    @JsonIgnore
     private User user;
 
     public Bussiness(){
@@ -128,17 +127,20 @@ public class Bussiness{
         this.ownerName = ownerName;
     }
 
-    public Bussiness(String bussinessName, String userName, String location2, String email2,
-             User user) {
-                this.bussinessName = bussinessName;
-                setUsername(userName);
-                email = email2;
-                location = location2;
-                createdTournaments = 0;
-                this.setUser(user);
-                this.password = getPassword();
-    }
 
+    public Bussiness(String bussinessName, String ownerName, String ownerSurname, String email, String city,
+            String adress, String location, String bussinessType, User user) {
+        this.bussinessName = bussinessName;
+        this.ownerName = ownerName;
+        this.ownerSurname = ownerSurname;
+        this.location = location;
+        this.city = city;
+        this.email = email;
+        this.adress = adress;
+        this.bussinessType = bussinessType;
+        this.username = user.getUsername();
+        this.user = user;
+    }
 
     public String getAdress() {
         return adress;

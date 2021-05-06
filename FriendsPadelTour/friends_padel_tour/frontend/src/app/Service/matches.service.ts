@@ -2,33 +2,46 @@ import { PadelMatch } from './../model/padelMatch.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError } from 'rxjs/operators';
 import { Player } from '../model/player.model';
+import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-const BASE_URL = '/matches';
+const BASE_URL = 'api/matches';
 
 @Injectable({providedIn : 'root'})
 export class MatchesService{
-
 
   constructor(private http: HttpClient){
 
   }
   getTop10(num: number): Observable<Player[]> {
     return this.http.get(BASE_URL + '/division/' + num.toString() + '/ranking').pipe(
-      //catchError(error => this.handleError(error))
     ) as Observable<Player[]>;
   }
 
   getMatchesOfDivision(num: number): Observable<PadelMatch[]>{
     return this.http.get(BASE_URL + '/division/' + num.toString()).pipe(
-      //catchError(error => this.handleError(error))
     ) as Observable<PadelMatch[]>;
   }
 
-  handleError(err: Error){
-    console.error(err.message);
-    return throwError('Server error');
+  getMatch(matchId: number): Observable<PadelMatch> {
+    return this.http.get(BASE_URL + '/' + matchId.toString()).pipe(
+    ) as Observable<PadelMatch>;
   }
+
+  joinLonely(id: number, slot: number): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/' + id + '/player/' + slot.toString(), undefined).pipe(
+    ) as Observable<PadelMatch>;
+  }
+
+  joinInDouble(id: number, slot: number, double: Player): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/' + id + '/double/' + slot.toString(), double).pipe(
+    ) as Observable<PadelMatch>;
+  }
+
+  postMatch(newMatch: PadelMatch): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/', newMatch).pipe(
+    )as Observable<PadelMatch>;
+  }
+
 }

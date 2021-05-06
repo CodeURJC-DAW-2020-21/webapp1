@@ -1,5 +1,7 @@
 package es.codeurjc.friends_padel_tour.Controllers;
 
+import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
+
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +25,6 @@ import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 
 @RestController
@@ -169,6 +170,14 @@ public class ApiMatchController {
         return ResponseEntity.ok(match);
     }
 
+    @GetMapping(value="/{id}")
+    public ResponseEntity<PadelMatch> getMatch(@PathVariable long id) {
+        PadelMatch match = matchesService.findById(id);
+        if(match==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(match);
+    }
     
     
     

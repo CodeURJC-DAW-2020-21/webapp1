@@ -6,36 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.Player;
-import es.codeurjc.friends_padel_tour.Entities.User;
-import es.codeurjc.friends_padel_tour.Repositories.BussinessRepository;
 import es.codeurjc.friends_padel_tour.Repositories.PlayerRepository;
 
 @Service
 public class PlayersService {
     
-    //Autowired section
-    @Autowired
-    private UserService userService;
     @Autowired
     private PlayerRepository playerRepository;
-    @Autowired
-    private BussinessRepository bussinessRepository;
-
     //Save a player having in mind his role
     public boolean savePlayer(Player newPlayer){
-        Optional<Player> playerInDB = playerRepository.findByEmail(newPlayer.getEmail());
-        Optional<Bussiness> bussinessInDB = bussinessRepository.findByEmail(newPlayer.getEmail());
-        if(playerInDB.isPresent()) 
-            return false;
-        if(bussinessInDB.isPresent())
-            return false;
-        playerInDB = playerRepository.findByUsername(newPlayer.getUsername());
-        if(playerInDB.isPresent()) 
-            return false;
-        //User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword(),"USER");
-        //newPlayer.setUser(newUser);
         playerRepository.save(newPlayer);
         return true;
     }

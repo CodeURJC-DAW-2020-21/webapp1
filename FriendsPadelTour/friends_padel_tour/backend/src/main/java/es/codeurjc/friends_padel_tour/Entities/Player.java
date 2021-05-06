@@ -28,7 +28,6 @@ public class Player{
     private String surname;
     private String location;
     private String email;
-    private String password;
     private int division;
     private boolean hasImage;
     private String rutaImagen;
@@ -55,12 +54,15 @@ public class Player{
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
+    @JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
+    @JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 
@@ -69,7 +71,6 @@ public class Player{
     private Blob image;
 
     @OneToOne
-    @JsonIgnore
     private User user;
 
     private int score;
@@ -162,15 +163,8 @@ public class Player{
         this.mathcesWon = mathcesWon;
     }
 
-   // public String getPassword() {
-     //   return password;
-   // }
 
-    public void setPassword(String password) {
-        this.user.setEncodedPassword(password);
-    }
-
-    public Player(String username, String name, String surname, String email, String location, int division){
+    public Player(String username, String name, String surname, String email, String location, int division, User user){
         this.username = username;
         this.name= name;
         this.surname = surname;
@@ -181,8 +175,8 @@ public class Player{
         this.hasImage = false;
         this.doubles1 = new ArrayList<>();
         this.doubles2 = new ArrayList<>();
+        this.user = user;
         this.setScore(0);
-        //this.password = getPassword();
     }
 
     public String getSurname() {
@@ -250,7 +244,7 @@ public class Player{
     }
 
     public String getUsername() {
-        return username;
+        return this.user.getUsername();
     }
 
     public void setUsername(String username) {

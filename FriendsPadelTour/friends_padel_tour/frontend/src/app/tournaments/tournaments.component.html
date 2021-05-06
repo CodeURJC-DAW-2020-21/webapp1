@@ -46,7 +46,7 @@
                     <form action="/joinTournament/{{tournament.id}}" method="POST">
                       <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect" required>
                         <div *ngFor="let double of userDoubles">
-                          <option>{{double.user.userName}}</option>
+                          <option>{{double.user.username}}</option>
                         </div>
                       </select></label><br>
                       <input type="submit" value="Aceptar">

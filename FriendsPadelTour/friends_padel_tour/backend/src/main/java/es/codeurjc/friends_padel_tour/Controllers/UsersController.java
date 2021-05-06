@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -106,30 +105,24 @@ public class UsersController {
 
 
     @PostMapping(value = "/signUpBussiness")
-    public String signUpBussiness(@RequestParam String password, @RequestParam String username,@RequestBody Bussiness loggedBussiness,Model model){
-        User user = new User();
-        List list = new ArrayList();
-        list.add("BUSSINESS");
-        user.setRoles(list);
-        user.setEncodedPassword(password);
-        user.setUsername(username);
+    public String signUpBussiness(@RequestParam String password, @RequestParam String username,@RequestParam String ownerName,@RequestParam String ownerSurname
+    ,@RequestParam String email,@RequestParam String bussinessName,@RequestParam String city,@RequestParam String adress,
+    @RequestParam String location,@RequestParam String bussinessType,Model model){
+        User user = new User(username,password,"BUSSINESS");
         userService.saveUser(user);
-        loggedBussiness.setUser(user);
-        bussinessService.saveBussiness(loggedBussiness);
+        Bussiness newBussiness = new Bussiness(bussinessName, ownerName, ownerSurname, email, city, adress, location, bussinessType, user);
+        bussinessService.saveBussiness(newBussiness);
         return "successSignUp";
     }
 
     @PostMapping(value="/signUpPlayer")
-    public String signUpUser(@RequestParam String password, @RequestParam String username, @RequestBody Player loggedPlayer,Model model) {
-        User user = new User();
-        List list = new ArrayList();
-        list.add("PLAYER");
-        user.setRoles(list);
-        user.setEncodedPassword(password);
-        user.setUsername(username);
+    public String signUpUser(@RequestParam String password, @RequestParam String username,
+     @RequestParam String name, @RequestParam String surname, @RequestParam String email,
+      @RequestParam String location, @RequestParam int division) {
+        User user = new User(username,password,"USER");
         userService.saveUser(user);
-        loggedPlayer.setUser(user);
-        if(!playerService.savePlayer(loggedPlayer))
+        Player newPlayer = new Player(username, name, surname, email, location, division, user);
+        if(!playerService.savePlayer(newPlayer))
             return "404";
         return "successSignUp";
     }
@@ -288,7 +281,7 @@ public class UsersController {
 
     
     @RequestMapping(value="/editBussinessProfile/{id}", method=RequestMethod.GET)
-    public String editBussinessProfile(@PathVariable long id, @RequestParam String password, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6, @RequestParam String s1_7,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4,@RequestParam String s2_5, @RequestParam String s2_6, @RequestParam String s2_7, Model model) {
+    public String editBussinessProfile(@PathVariable long id, @RequestParam String password, Model model) {
         Bussiness loggedBussiness = bussinessService.findById(id);
         if(!password.isBlank()){
             User user = loggedBussiness.getUser();

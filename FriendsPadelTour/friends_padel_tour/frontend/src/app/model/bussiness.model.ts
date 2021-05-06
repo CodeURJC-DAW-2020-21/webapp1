@@ -3,6 +3,7 @@ import { User } from './user.model';
 
 export interface Bussiness{
   id?: number;
+  username: string;
   bussinessName: string;
   ownerName: string;
   ownerSurname: string;

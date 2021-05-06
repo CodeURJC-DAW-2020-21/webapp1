@@ -1,0 +1,125 @@
+<div class="site-section feature-blocks-1 no-margin-top" style="background-color: rgb(224, 198, 198);">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-12 text-center">
+        <h2 class="text-black">ÚNETE A UN PARTIDO AMISTOSO DE PRIMERA DIVISIÓN</h2>
+      </div>
+    </div>
+
+
+
+    <h2 class="h5 text-black" style="text-align: center; font-size: 1.5cm; background-color: rgba(245, 99, 99, 0.507);">5ª DIVISIÓN</h2>
+      <div class="row">
+          <div *ngFor="let match of matches; let indice = index;" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
+            <div class="tournament_definition" id="tournament_name"><p>AMISTOSO {{indice}}</p></div>
+            <div >
+              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="/images/inscripcion.png">{{match.date}}</p></div>
+              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/reloj.png">{{match.time}}</p></div>
+              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/place.jpg">{{match.city}} {{match.province}}</p></div>
+              <br>
+              <div class="tournament_definition" id="tournament_date"><p>{{match.facility}}</p></div>
+            </div>
+            <div >
+              <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="/images/personas.png"> {{match.nPlayers}}/4</p></div>
+              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="/images/categoria.png"> {{match.division}}ª DIVISIÓN</p></div>
+            </div>
+            <a *ngIf="this.logged" href="/joinFriendlyMatch/{{match.id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE AL PARTIDO</span></a>
+          </div>
+
+        </div>
+        <br>
+          <a *ngIf="this.logged" href="#popup1"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
+        <div id="popup1" class="overlay-formulario">
+          <div id="popup-Body">
+            <h2 style="background-color: rgb(252, 186, 186);">Formulario para crear partidos amistosos</h2><br>
+            <a id="cerrarPestana" href="#">&times;</a>
+            <div class="popupContent">
+              <form action="/createFriendlyMatch/1" method="GET">
+                <label for="lprov" style="font-size: 25px;"><b>Provincia: <br></b><select name="fmProvince">
+                  <option>Coruña (La Coruña)</option>
+                  <option>Álava</option>
+                  <option>Albacete
+                  <option>Alicante</option>
+                  <option>Almería</option>
+                  <option>Asturias</option>
+                  <option>Ávila</option>
+                  <option>Badajoz</option>
+                  <option>Baleares</option>
+                  <option>Barcelona</option>
+                  <option>Burgos</option>
+                  <option>Cáceres</option>
+                  <option>Cádiz</option>
+                  <option>Cantabria</option>
+                  <option>Castellón</option>
+                  <option>Ciudad Real</option>
+                  <option>Córdoba</option>
+                  <option>Cuenca</option>
+                  <option>Girona</option>
+                  <option>Granada</option>
+                  <option>Guadalajara</option>
+                  <option>Gipuzkoa</option>
+                  <option>Huelva</option>
+                  <option>Huesca</option>
+                  <option>Jaén</option>
+                  <option>La Rioja</option>
+                  <option>Las Palmas</option>
+                  <option>León</option>
+                  <option>Lérida</option>
+                  <option>Lugo</option>
+                  <option>Madrid</option>
+                  <option>Málaga</option>
+                  <option>Murcia</option>
+                  <option>Navarra</option>
+                  <option>Ourense</option>
+                  <option>Palencia</option>
+                  <option>Pontevedra</option>
+                  <option>Salamanca</option>
+                  <option>Segovia</option>
+                  <option>Sevilla</option>
+                  <option>Soria</option>
+                  <option>Tarragona</option>
+                  <option>Santa Cruz de Tenerife</option>
+                  <option>Teruel</option>
+                  <option>Toledo</option>
+                  <option>Valencia</option>
+                  <option>Valladolid</option>
+                  <option>Vizcaya</option>
+                  <option>Zamora</option>
+                  <option>Zaragoza</option>
+                </select></label><br>
+                <label for="lcity" style="font-size: 25px;"><b>Ciudad:</b></label><br>
+                <input type="text" id="lcity" name="fmcity"required="required" style="background-color: rgb(219, 219, 255);"><br>
+                <label for="lname" style="font-size: 25px;"><b>Nombre de la instalación deportiva:</b></label><br>
+                <input type="text" id="lname" name="fmfacility"required="required" style="background-color: rgb(219, 219, 255);"><br><br>
+                <label for="ffecha" style="font-size: 25px;"><b>Fecha del amistoso:</b></label><br>
+                <input type="date" id="ffecha" name="fmdate" required="required" style="background-color: rgb(219, 219, 255);"><br>
+                <label for="fhora" style="font-size: 25px;"><b>Hora del amistoso:</b></label><br>
+                <input type="time" id="fhora" name="fmtime" required="required" style="background-color: rgb(219, 219, 255);"><br>
+                <input type="submit" value ="Crear partido amistoso" style="font-size: 20px; color:black; font-style: normal; background-color: rgba(245, 99, 99, 0.507);">
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="ranking-title">
+          RANKING MEJORES JUGADORES
+        </div>
+        <div *ngFor="let player of top10; let index = index;" class="scrollmenu">
+            <div class="c-player-card__item">
+              <a class="c-trigger" href="/users/{{player.user.username}}">
+                <div class="c-player-card__header">
+                    <div class="c-player-card__details">
+                        <div class="c-player-card__position">{{index}}</div>
+                        <p class="c-player-card__name "><img class="imgplayer" src="/images/personas.png">{{player.user.username}}<br>{{player.name}}<br>{{player.surname}}<br></p>
+                    </div>
+                </div>
+                <div class="c-player-card__footer">
+                    <div class="c-player-card__score">{{player.score}}</div>
+                </div>
+              </a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
