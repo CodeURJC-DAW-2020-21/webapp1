@@ -11,9 +11,9 @@ export interface PadelMatch{
   facility: string;
   nPlayers: number;
   hasWinner: boolean;
-  double1: DoubleOfPlayers;
-  double2: DoubleOfPlayers;
-  playerCreator: Player;
-  doubleWinner: DoubleOfPlayers;
-  tournament: Tournament;
+  double1: DoubleOfPlayers | null;
+  double2: DoubleOfPlayers | null;
+  playerCreator: Player ;
+  doubleWinner: DoubleOfPlayers| null;
+  tournament: Tournament| null;
 }

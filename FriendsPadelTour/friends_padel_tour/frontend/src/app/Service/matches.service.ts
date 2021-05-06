@@ -39,4 +39,9 @@ export class MatchesService{
     ) as Observable<PadelMatch>;
   }
 
+  postMatch(newMatch: PadelMatch): Observable<PadelMatch> {
+    return this.http.post(BASE_URL + '/', newMatch).pipe(
+    )as Observable<PadelMatch>;
+  }
+
 }

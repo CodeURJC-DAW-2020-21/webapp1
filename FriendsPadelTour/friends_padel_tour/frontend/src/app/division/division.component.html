@@ -29,78 +29,8 @@
 
         </div>
         <br>
-          <a *ngIf="this.logged" href="#popup1"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
-        <div id="popup1" class="overlay-formulario">
-          <div id="popup-Body">
-            <h2 style="background-color: rgb(252, 186, 186);">Formulario para crear partidos amistosos</h2><br>
-            <a id="cerrarPestana" href="#">&times;</a>
-            <div class="popupContent">
-              <form action="/createFriendlyMatch/1" method="GET">
-                <label for="lprov" style="font-size: 25px;"><b>Provincia: <br></b><select name="fmProvince">
-                  <option>Coruña (La Coruña)</option>
-                  <option>Álava</option>
-                  <option>Albacete
-                  <option>Alicante</option>
-                  <option>Almería</option>
-                  <option>Asturias</option>
-                  <option>Ávila</option>
-                  <option>Badajoz</option>
-                  <option>Baleares</option>
-                  <option>Barcelona</option>
-                  <option>Burgos</option>
-                  <option>Cáceres</option>
-                  <option>Cádiz</option>
-                  <option>Cantabria</option>
-                  <option>Castellón</option>
-                  <option>Ciudad Real</option>
-                  <option>Córdoba</option>
-                  <option>Cuenca</option>
-                  <option>Girona</option>
-                  <option>Granada</option>
-                  <option>Guadalajara</option>
-                  <option>Gipuzkoa</option>
-                  <option>Huelva</option>
-                  <option>Huesca</option>
-                  <option>Jaén</option>
-                  <option>La Rioja</option>
-                  <option>Las Palmas</option>
-                  <option>León</option>
-                  <option>Lérida</option>
-                  <option>Lugo</option>
-                  <option>Madrid</option>
-                  <option>Málaga</option>
-                  <option>Murcia</option>
-                  <option>Navarra</option>
-                  <option>Ourense</option>
-                  <option>Palencia</option>
-                  <option>Pontevedra</option>
-                  <option>Salamanca</option>
-                  <option>Segovia</option>
-                  <option>Sevilla</option>
-                  <option>Soria</option>
-                  <option>Tarragona</option>
-                  <option>Santa Cruz de Tenerife</option>
-                  <option>Teruel</option>
-                  <option>Toledo</option>
-                  <option>Valencia</option>
-                  <option>Valladolid</option>
-                  <option>Vizcaya</option>
-                  <option>Zamora</option>
-                  <option>Zaragoza</option>
-                </select></label><br>
-                <label for="lcity" style="font-size: 25px;"><b>Ciudad:</b></label><br>
-                <input type="text" id="lcity" name="fmcity"required="required" style="background-color: rgb(219, 219, 255);"><br>
-                <label for="lname" style="font-size: 25px;"><b>Nombre de la instalación deportiva:</b></label><br>
-                <input type="text" id="lname" name="fmfacility"required="required" style="background-color: rgb(219, 219, 255);"><br><br>
-                <label for="ffecha" style="font-size: 25px;"><b>Fecha del amistoso:</b></label><br>
-                <input type="date" id="ffecha" name="fmdate" required="required" style="background-color: rgb(219, 219, 255);"><br>
-                <label for="fhora" style="font-size: 25px;"><b>Hora del amistoso:</b></label><br>
-                <input type="time" id="fhora" name="fmtime" required="required" style="background-color: rgb(219, 219, 255);"><br>
-                <input type="submit" value ="Crear partido amistoso" style="font-size: 20px; color:black; font-style: normal; background-color: rgba(245, 99, 99, 0.507);">
-              </form>
-            </div>
-          </div>
-        </div>
+          <a *ngIf="this.logged" [routerLink]="['/createAFriendlyMatch', this.num]"
+          routerLinkActive="router-link-active"><p style="text-align: center; ; color: black; font-size: xx-large; background-color: rgba(245, 99, 99, 0.507);"><b>Pincha aquí para crear un partido amistoso</b></p></a>
 
         <div class="ranking-title">
           RANKING MEJORES JUGADORES
