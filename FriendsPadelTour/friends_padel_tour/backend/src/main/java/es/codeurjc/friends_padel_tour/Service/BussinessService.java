@@ -47,8 +47,8 @@ public class BussinessService {
     }
 
     public void saveBussiness(Bussiness loggedBussiness) {
-        User businessUser =userService.saveUser(loggedBussiness.getUsername(), loggedBussiness.getPassword(), "BUSSINESS");
-        loggedBussiness.setUser(businessUser);
+        //User businessUser =userService.saveUser(loggedBussiness.getUsername(), loggedBussiness.getPassword(), "BUSSINESS");
+        //loggedBussiness.setUser(businessUser);
         bussinessRepository.save(loggedBussiness);
     }
     

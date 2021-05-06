@@ -92,6 +92,11 @@ public class Player{
         this.user = user;
     }
 
+    public String getPassword(){
+        User user = this.user;
+        return user.getEncodedPassword();
+    }
+
     public List<PadelMatch> getPendingMatches() {
         return pendingMatches;
     }
@@ -157,20 +162,19 @@ public class Player{
         this.mathcesWon = mathcesWon;
     }
 
-    public String getPassword() {
-        return password;
-    }
+   // public String getPassword() {
+     //   return password;
+   // }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.user.setEncodedPassword(password);
     }
 
-    public Player(String username, String name, String surname, String email, String password, String location, int division){
+    public Player(String username, String name, String surname, String email, String location, int division){
         this.username = username;
         this.name= name;
         this.surname = surname;
         this.email = email;
-        this.password= password;
         this.location = location;
         this.division = division;
         this.matchesLost = this.mathcesWon = this.mathesPlayed = 0;
@@ -178,6 +182,7 @@ public class Player{
         this.doubles1 = new ArrayList<>();
         this.doubles2 = new ArrayList<>();
         this.setScore(0);
+        //this.password = getPassword();
     }
 
     public String getSurname() {

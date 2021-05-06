@@ -62,6 +62,11 @@ public class Bussiness{
         return user;
     }
 
+    public String getPassword(){
+        User user = this.user;
+        return user.getEncodedPassword();
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -90,12 +95,12 @@ public class Bussiness{
         this.hasImage = hasImage;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    //public String getPassword() {
+      //  return password;
+    //}
 
     public void setPassword(String password) {
-        this.password = password;
+        this.user.setEncodedPassword(password);
     }
 
     public int getCreatedTournaments() {
@@ -124,14 +129,14 @@ public class Bussiness{
     }
 
     public Bussiness(String bussinessName, String userName, String location2, String email2,
-            String password, User user) {
+             User user) {
                 this.bussinessName = bussinessName;
                 setUsername(userName);
                 email = email2;
                 location = location2;
-                this.password = password;
                 createdTournaments = 0;
                 this.setUser(user);
+                this.password = getPassword();
     }
 
 

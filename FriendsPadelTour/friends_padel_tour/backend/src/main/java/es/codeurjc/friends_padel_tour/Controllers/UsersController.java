@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,7 @@ import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
+import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
 import es.codeurjc.friends_padel_tour.Service.DoubleService;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
@@ -104,13 +106,29 @@ public class UsersController {
 
 
     @PostMapping(value = "/signUpBussiness")
-    public String signUpBussiness(Bussiness loggedBussiness,Model model){
+    public String signUpBussiness(@RequestParam String password, @RequestParam String username,@RequestBody Bussiness loggedBussiness,Model model){
+        User user = new User();
+        List list = new ArrayList();
+        list.add("BUSSINESS");
+        user.setRoles(list);
+        user.setEncodedPassword(password);
+        user.setUsername(username);
+        userService.saveUser(user);
+        loggedBussiness.setUser(user);
         bussinessService.saveBussiness(loggedBussiness);
         return "successSignUp";
     }
 
     @PostMapping(value="/signUpPlayer")
-    public String signUpUser(Player loggedPlayer,Model model) {
+    public String signUpUser(@RequestParam String password, @RequestParam String username, @RequestBody Player loggedPlayer,Model model) {
+        User user = new User();
+        List list = new ArrayList();
+        list.add("PLAYER");
+        user.setRoles(list);
+        user.setEncodedPassword(password);
+        user.setUsername(username);
+        userService.saveUser(user);
+        loggedPlayer.setUser(user);
         if(!playerService.savePlayer(loggedPlayer))
             return "404";
         return "successSignUp";
@@ -192,7 +210,8 @@ public class UsersController {
             loggedUser.setDivision(division);
         }
         if(!password.isBlank()){
-            loggedUser.setPassword(password);
+            User user = loggedUser.getUser();
+            user.setEncodedPassword(password);
             userService.updatePasswordOf(loggedUser.getUser(),password);
         }
         playerService.updatePlayer(loggedUser);
@@ -272,7 +291,8 @@ public class UsersController {
     public String editBussinessProfile(@PathVariable long id, @RequestParam String password, @RequestParam String s1_1, @RequestParam String s1_2, @RequestParam String s1_3, @RequestParam String s1_4, @RequestParam String s1_5, @RequestParam String s1_6, @RequestParam String s1_7,@RequestParam String s2_1,@RequestParam String s2_2,@RequestParam String s2_3,@RequestParam String s2_4,@RequestParam String s2_5, @RequestParam String s2_6, @RequestParam String s2_7, Model model) {
         Bussiness loggedBussiness = bussinessService.findById(id);
         if(!password.isBlank()){
-            loggedBussiness.setPassword(password);
+            User user = loggedBussiness.getUser();
+            user.setEncodedPassword(password);
             userService.updatePasswordOf(loggedBussiness.getUser(), password);
         }
         bussinessService.updateBussiness(loggedBussiness);

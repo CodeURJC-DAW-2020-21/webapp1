@@ -34,8 +34,8 @@ public class PlayersService {
         playerInDB = playerRepository.findByUsername(newPlayer.getUsername());
         if(playerInDB.isPresent()) 
             return false;
-        User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword(),"USER");
-        newPlayer.setUser(newUser);
+        //User newUser = userService.saveUser(newPlayer.getUsername(),newPlayer.getPassword(),"USER");
+        //newPlayer.setUser(newUser);
         playerRepository.save(newPlayer);
         return true;
     }
