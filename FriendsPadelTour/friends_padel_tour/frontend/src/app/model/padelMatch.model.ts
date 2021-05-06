@@ -1,4 +1,6 @@
+import { Tournament } from './tournament.model';
 import { DoubleOfPlayers } from './doubleOfPlayers.model';
+import { Player } from './player.model';
 export interface PadelMatch{
   id?: number;
   division: number;
@@ -11,4 +13,7 @@ export interface PadelMatch{
   hasWinner: boolean;
   double1: DoubleOfPlayers;
   double2: DoubleOfPlayers;
+  playerCreator: Player;
+  doubleWinner: DoubleOfPlayers;
+  tournament: Tournament;
 }

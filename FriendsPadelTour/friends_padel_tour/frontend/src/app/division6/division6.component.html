@@ -8,23 +8,22 @@
 
 
 
-    <h2 class="h5 text-black" style="text-align: center; font-size: 1.5cm; background-color: rgba(245, 99, 99, 0.507);">{{num}}ª DIVISIÓN</h2>
+    <h2 class="h5 text-black" style="text-align: center; font-size: 1.5cm; background-color: rgba(245, 99, 99, 0.507);">6ª DIVISIÓN</h2>
       <div class="row">
           <div *ngFor="let match of matches; let indice = index;" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
             <div class="tournament_definition" id="tournament_name"><p>AMISTOSO {{indice}}</p></div>
             <div >
-              <div ><p><img src="assets/images/inscripcion.png">{{match.date}}</p></div>
-              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="assets/images/reloj.png">{{match.time}}</p></div>
-              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="assets/images/place.jpg">{{match.city}} {{match.province}}</p></div>
+              <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="/images/inscripcion.png">{{match.date}}</p></div>
+              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/reloj.png">{{match.time}}</p></div>
+              <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="/images/place.jpg">{{match.city}} {{match.province}}</p></div>
               <br>
               <div class="tournament_definition" id="tournament_date"><p>{{match.facility}}</p></div>
             </div>
             <div >
-              <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="assets/images/personas.png"> {{match.nPlayers}}/4</p></div>
-              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png"> {{match.division}}ª DIVISIÓN</p></div>
+              <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="/images/personas.png"> {{match.nPlayers}}/4</p></div>
+              <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="/images/categoria.png"> {{match.division}}ª DIVISIÓN</p></div>
             </div>
-            <a *ngIf="this.logged" [routerLink]="['/joinFriendlyMatch', match.id]"
-             class="tournament_definition" id="tournament_button"><span>UNIRSE AL PARTIDO</span></a>
+            <a *ngIf="this.logged" href="/joinFriendlyMatch/{{match.id}}" class="tournament_definition" id="tournament_button"><span>UNIRSE AL PARTIDO</span></a>
           </div>
 
         </div>
@@ -105,13 +104,13 @@
         <div class="ranking-title">
           RANKING MEJORES JUGADORES
         </div>
-        <div class="scrollmenu">
-            <div *ngFor="let player of top10; let index = index;"class="c-player-card__item">
-              <a class="c-trigger" [routerLink]="['/users', player.username]">
+        <div *ngFor="let player of top10; let index = index;" class="scrollmenu">
+            <div class="c-player-card__item">
+              <a class="c-trigger" href="/users/{{player.user.userName}}">
                 <div class="c-player-card__header">
                     <div class="c-player-card__details">
                         <div class="c-player-card__position">{{index}}</div>
-                        <p class="c-player-card__name "><img class="imgplayer" src="assets/images/personas.png">{{player.username}}<br>{{player.name}}<br>{{player.surname}}<br></p>
+                        <p class="c-player-card__name "><img class="imgplayer" src="/images/personas.png">{{player.user.userName}}<br>{{player.name}}<br>{{player.surname}}<br></p>
                     </div>
                 </div>
                 <div class="c-player-card__footer">
@@ -124,16 +123,3 @@
 
     </div>
 </div>
-
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/jquery-ui.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/jquery.countdown.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-
-  <script src="js/main.js"></script>

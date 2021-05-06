@@ -1,25 +1,22 @@
-import { catchError } from 'rxjs/operators';
-import { LoginService } from './../Service/login.service';
-import { MatchesService } from './../Service/matches.service';
-import { PadelMatch } from './../model/padelMatch.model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { PadelMatch } from '../model/padelMatch.model';
 import { Player } from '../model/player.model';
-import { Observable } from 'rxjs/internal/Observable';
+import { LoginService } from '../Service/login.service';
+import { MatchesService } from '../Service/matches.service';
 
 @Component({
-  selector: 'app-division',
-  templateUrl: './division.component.html',
+  selector: 'app-division6',
+  templateUrl: './division6.component.html'
 })
-export class DivisionComponent implements OnInit{
+export class Division6Component implements OnInit {
   matches: PadelMatch[] | undefined;
   top10: Player[] | undefined;
-  num = 1;
+  num = 6;
   logged = false;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: MatchesService, public loginService: LoginService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: MatchesService, private loginService: LoginService) {
    }
-
   ngOnInit(): void {
     this.service.getMatchesOfDivision(this.num).subscribe(
       matches => this.matches = matches,

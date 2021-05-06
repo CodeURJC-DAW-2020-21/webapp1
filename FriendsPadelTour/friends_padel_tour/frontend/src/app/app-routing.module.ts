@@ -11,6 +11,11 @@ import { ErrorsComponent } from './errors/errors.component';
 import { IndexComponent } from './index/index.component';
 import { PlayerProfileComponent } from './player-profile/player-profile.component';
 import { PlayerSignUpFormComponent } from './player-sign-up-form/player-sign-up-form.component';
+import { Division4Component } from './division4/division4.component';
+import { Division5Component } from './division5/division5.component';
+import { Division6Component } from './division6/division6.component';
+import { Division2Component } from './division2/division2.component';
+import { Division3Component } from './division3/division3.component';
 
 const routes: Routes = [
  { path: '', component: IndexComponent },
@@ -23,7 +28,12 @@ const routes: Routes = [
  { path: 'bussinessSignUpForm', component: BussinessSignUpFormComponent },
  { path: 'playerSignUpForm', component: PlayerSignUpFormComponent},
  { path: 'friendlyMatches', component: FriendlyMatchesComponent },
- { path: 'division/:num', component: DivisionComponent },
+ { path: 'division/1', component: DivisionComponent },
+ { path: 'division/2', component: Division2Component },
+ { path: 'division/3', component: Division3Component },
+ { path: 'division/4', component: Division4Component },
+ { path: 'division/5', component: Division5Component },
+ { path: 'division/6', component: Division6Component },
  { path: 'tournaments', component: TournamentsComponent},
  { path: 'aboutUs', component: AboutUsComponent },
  { path: '**', component: ErrorsComponent },
