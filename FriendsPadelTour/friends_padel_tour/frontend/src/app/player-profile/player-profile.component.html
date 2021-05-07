@@ -23,7 +23,7 @@
               <h2 class="actual-couple">PAREJA ACTUAL</h2>
               <div class="container-button">
                 <div class="center-button">
-                  <a href="/users/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
+                  <a href="/player/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
                 </div>
               </div>
                   <div class="info-couple col-md-12">
@@ -33,7 +33,7 @@
                   <div class="dropdown-couples">
                     <span>Otras parejas</span>
                     <div class="dropdown-content">
-                        <a *ngFor="let double of userDoubles" href="/users/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
+                        <a *ngFor="let double of userDoubles" href="/player/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
                     </div>
                   </div>
             </div>
@@ -48,11 +48,11 @@
       <div class="l-container l-container--data">
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos jugados</p>
-          <p class="c-ranking-header__data" id="matches_Played">{{usersProfile.matchesPlayed}}</p>
+          <p class="c-ranking-header__data" id="matches_Played">{{usersProfile.mathesPlayed}}</p>
         </div>
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos ganados</p>
-          <p class="c-ranking-header__data" id="matches_Won">{{usersProfile.matchesWon}}</p>
+          <p class="c-ranking-header__data" id="matches_Won">{{usersProfile.mathcesWon}}</p>
         </div>
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos perdidos</p>
@@ -66,45 +66,10 @@
     </div>
   </div>
 
-    <div *ngIf="usersProfile.matchesPlayed!==0; else noMatchesPlayedMessage" class="row">
-    <canvas id="myChart" width="400" height="300"></canvas>
-    <script>
-      var matchesPlayed = document.getElementById('matches_Played').innerHTML;
-      var matchesWon = document.getElementById('matches_Won').innerHTML;
-      var matchesLost = document.getElementById('matches_Lost').innerHTML;
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['JUGADOS', 'GANADOS', 'PERDIDOS'],
-            datasets: [{
-                label: 'GRAFICA PARTIDOS',
-                data: [matchesPlayed,matchesWon,matchesLost], //matchesPlayed, matchesWon, matchesLost],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-    </script>
-    </div>
+  <app-chart></app-chart>
+
+
+
 
   <ng-template #noMatchesPlayedMessage>
     <h1>Este usuario todavia no ha jugado ningún partido, por lo tango no hay gráficas disponibles.</h1>

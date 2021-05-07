@@ -29,7 +29,9 @@ export class PlayerProfileComponent implements OnInit {
             this.principalDouble = doubles.pop();
           }
         );
-        this.efectivity = this.usersProfile.matchesWon / this.usersProfile.matchesPlayed;
+        if (this.usersProfile.mathesPlayed!==0){
+          this.efectivity = this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+        }else{this.efectivity == 0}
       },
       error => console.error('Bad request')
     );
@@ -37,6 +39,10 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  generateChart(){
+    this.router.navigate([])
   }
 
 }

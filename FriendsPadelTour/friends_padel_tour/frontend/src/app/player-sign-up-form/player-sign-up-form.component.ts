@@ -22,7 +22,7 @@ export class PlayerSignUpFormComponent implements OnInit {
   signUpPlayer(username:string,name :string,surname:string, email:string,password:string,location:string,division: string){
     this.user = {encodedPassword: password, username:username, roles: ['USER']}
 
-    this.player = {username: username,name: name,surname:surname,email:email,  division: parseInt(division),hasImage:false,location:location,matchesLost: 0,matchesPlayed:0,matchesWon:0,createdMatches:[],pendingMatches:[],playedMatches:[],user: this.user, score: 0,doubles:[],imagePath:''}
+    this.player = {username: username,name: name,surname:surname,email:email,  division: parseInt(division),hasImage:false,location:location,matchesLost: 0,mathesPlayed:0,mathcesWon:0,createdMatches:[],pendingMatches:[],playedMatches:[],user: this.user, score: 0,doubles:[],imagePath:''}
     this.playerRequest = {user: this.user, player: this.player}
     this.SignUpService.signUpPlayer(this.playerRequest).subscribe(
       data => {

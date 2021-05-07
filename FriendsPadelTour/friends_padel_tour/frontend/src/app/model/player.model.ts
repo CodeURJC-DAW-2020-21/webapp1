@@ -11,9 +11,9 @@ export interface Player{
   division: number;
   hasImage: boolean;
   imagePath: string;
-  matchesWon: number;
+  mathcesWon: number;
   matchesLost: number;
-  matchesPlayed: number;
+  mathesPlayed: number;
   createdMatches: PadelMatch[];
   pendingMatches: PadelMatch[];
   playedMatches: PadelMatch[];

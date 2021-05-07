@@ -24,6 +24,8 @@ import { Division5Component } from './division5/division5.component';
 import { Division6Component } from './division6/division6.component';
 import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-match.component';
 import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form/create-afriendly-match-form.component';
+import { chartProfileComponent } from './charts/chart-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form
     Division5Component,
     Division6Component,
     JoinFriendlyMatchComponent,
-    CreateAFriendlyMatchFormComponent
+    CreateAFriendlyMatchFormComponent,
+    chartProfileComponent
   ],
   imports: [
     NgxPaginationModule,
