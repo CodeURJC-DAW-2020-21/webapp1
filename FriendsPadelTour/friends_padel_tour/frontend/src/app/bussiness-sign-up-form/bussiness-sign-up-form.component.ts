@@ -22,7 +22,7 @@ export class BussinessSignUpFormComponent implements OnInit {
   bussinessRequest: bussinessRequest | undefined;
 
   constructor(private SignUpService: SignUpService, private router: Router) {
-    this.user = {username: '', password:'', roles:['']}
+    this.user = {username: '', encodedPassword:'', roles:['']}
   }
 
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class BussinessSignUpFormComponent implements OnInit {
 
 
   signUpBussiness(password: string,username: string, bussinessName:string,ownerName:string,ownerSurname:string,location:string,city:string,email:string,adress:string,bussinessType:string){
-    this.user = {password: password, username:username, roles: ['BUSSINESS']}
+    this.user = {encodedPassword: password, username:username, roles: ['BUSSINESS']}
 
     this.bussiness = {username: username, bussinessName: bussinessName, ownerName:ownerName,ownerSurname:ownerSurname,
       city:city,adress:adress,location:location,email:email,bussinessType:bussinessType,hasImage:false,tournaments:[],createdTournaments:0,imagePath:'',user:this.user};

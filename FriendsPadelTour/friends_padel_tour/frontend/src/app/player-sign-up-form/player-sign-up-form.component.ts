@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Player } from '../model/player.model';
 import { playerRequest } from '../model/playerRequest.model';
 import { User } from '../model/user.model';
@@ -19,19 +20,22 @@ export class PlayerSignUpFormComponent implements OnInit {
 
 
   signUpPlayer(username:string,name :string,surname:string, email:string,password:string,location:string,division: string){
-    this.user = {password: password, username:username, roles: ['PLAYER']}
+    this.user = {encodedPassword: password, username:username, roles: ['USER']}
 
     this.player = {username: username,name: name,surname:surname,email:email,  division: parseInt(division),hasImage:false,location:location,matchesLost: 0,matchesPlayed:0,matchesWon:0,createdMatches:[],pendingMatches:[],playedMatches:[],user: this.user, score: 0,doubles:[],imagePath:''}
     this.playerRequest = {user: this.user, player: this.player}
     this.SignUpService.signUpPlayer(this.playerRequest).subscribe(
-      data => console.log("Jugador registrado correctamente"),
+      data => {
+        alert('Jugador registrado correctamente');
+        this.router.navigate(['/']);
+        },
       error => console.error("Error al crear el jugador")
     )
   }
 
 
-  constructor(private SignUpService: SignUpService) {
-    this.user = {username: '', password:'', roles:['']}
+  constructor(private router: Router, private SignUpService: SignUpService) {
+    this.user = {username: '', encodedPassword:'', roles:['']}
   }
 
   ngOnInit(): void {

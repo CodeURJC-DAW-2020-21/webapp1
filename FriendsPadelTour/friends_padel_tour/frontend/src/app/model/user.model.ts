@@ -1,5 +1,5 @@
 export interface User{
   username: string;
-  password: string;
+  encodedPassword: string;
   roles: string[];
 }

@@ -9,7 +9,7 @@ import { playerRequest } from "../model/playerRequest.model";
 
 
 
-const BASE_URL = '/api/users'
+const BASE_URL = 'api/users';
 
 
 @Injectable({providedIn: 'root'})
@@ -22,14 +22,14 @@ export class SignUpService{
     }
 
     signUpBussiness(Bussiness: bussinessRequest){
-        
+
         return this.http.post(BASE_URL + '/bussiness/' , Bussiness).pipe(
             //catchError(error => this.handleError)
         ) as Observable<Bussiness>
     }
 
     signUpPlayer(Player: playerRequest){
-        return this.http.post(BASE_URL + '/player',Player).pipe(
+        return this.http.post(BASE_URL + '/player/', Player).pipe(
             //catchError(error => this.handleError)
         )   as Observable<Player>;
 
