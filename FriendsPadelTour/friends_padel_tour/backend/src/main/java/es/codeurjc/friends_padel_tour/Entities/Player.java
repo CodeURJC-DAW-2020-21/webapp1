@@ -93,10 +93,6 @@ public class Player{
         this.user = user;
     }
 
-    public String getPassword(){
-        User user = this.user;
-        return user.getEncodedPassword();
-    }
 
     public List<PadelMatch> getPendingMatches() {
         return pendingMatches;
