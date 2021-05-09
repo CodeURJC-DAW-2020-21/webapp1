@@ -40,6 +40,12 @@ public class TournamentsService {
         else return null;
     }
 
+    public Tournament getTournament(long id){
+        Optional<Tournament> tournamentInDB = tournamentRepository.findById(id);
+        if(tournamentInDB.isPresent()) return tournamentInDB.get();
+        else return null;
+    }
+
     //Method that takes the pending tournament
     public List<Tournament> getPending(){
         Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByAccepted(false);

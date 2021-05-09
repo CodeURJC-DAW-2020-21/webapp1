@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { Tournament } from '../model/tournament.model';
+
+//Preguntar lo del page
 
 const BASE_URL = '/tournaments'
 
@@ -11,92 +14,59 @@ const BASE_URL = '/tournaments'
 export class TournamentsService {
 
   constructor(private http: HttpClient) { }
-/*
-  
-    public ResponseEntity<Page<Tournament>> getTournaments(@RequestParam int pageNumber){
-        Page<Tournament> tournaments = tournamentsService.getPageAcceptedTournaments(pageNumber, 3);
-        if(tournaments == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(tournaments);
+
+    getTournaments(pageNumber: number): Observable<Page<Tournament>>{
+      return this.http.get(BASE_URL + '/AcceptedTournaments' + pageNumber).pipe(
+        ) as Observable<Page<Tournament>>;
     }
 
-    getNonAcceptedTournaments(@RequestParam int pageNumber){
-        Page<Tournament> tournaments = tournamentsService.getPageNoAcceptedTournaments(pageNumber, 3);
-        if(tournaments == null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(tournaments);
+    getNonAcceptedTournaments(pageNumber: number): Observable<Page<Tournament>>{
+      return this.http.get(BASE_URL + '/nonAcceptedTournaments' + pageNumber).pipe(
+        ) as Observable<Page<Tournament>>;
     }
 
-    createTournament(@RequestBody Tournament tournament,HttpServletRequest request){
-        Principal principal = request.getUserPrincipal();
-        Bussiness bussiness = bussinesService.findByUsername(principal.getName());
-
-        tournament.setBussinnes(bussiness);
-        tournamentsService.save(tournament);
-
-        URI location = fromCurrentRequest().path("/{id}").buildAndExpand(tournament.getId()).toUri();
-
-        return ResponseEntity.created(location).body(tournament);
-        
+    postTournament(tournament: Tournament): Observable<Tournament>{
+      return this.http.post(BASE_URL + '/', tournament).pipe(
+        )as Observable<Tournament>;   
     }
 
-    acceptTournament(@PathVariable long id){
-        Tournament tournament = tournamentsService.findById(id);
-        if (tournament==null){
-            return ResponseEntity.notFound().build();
-        }
-        tournament.setAccepted(true);
-        tournamentsService.uptdate(tournament);
-        return ResponseEntity.ok(tournament);
+    acceptTournament(id: number): Observable<Tournament>{
+      return this.http.put(BASE_URL + '/acceptedTournament', id).pipe(
+        )as Observable<Tournament>;
     }
 
-
-   deleteTournament(@PathVariable long id){
-        Tournament tournamentToDelete = tournamentsService.findById(id);
-        if(tournamentToDelete==null){
-            return ResponseEntity.notFound().build();
-        }
-        tournamentsService.deleteById(id);
-        return ResponseEntity.ok(tournamentToDelete);
+    declineTournament(id: number): Observable<Tournament>{
+      return this.http.delete(BASE_URL + '/delTournament' + id).pipe(
+        ) as Observable<Tournament>;
     }
 
-    tournamentInfo(@PathVariable long id){
-        Tournament tournament = tournamentsService.findById(id);
-        if (tournament==null){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(tournament);
+    tournamentInfo(id: number): Observable<Tournament>{
+      return this.http.get(BASE_URL + '/' + id).pipe(
+        ) as Observable<Tournament>;
     }
 
-    tournamentWinner(@PathVariable long id, @RequestParam int winner){
-        Tournament tournament = tournamentsService.findById(id);
-        if (tournament==null){
-            return ResponseEntity.notFound().build();
-        }
-        if(winner > tournament.getRegisteredCouples()){
-            return ResponseEntity.badRequest().build();
-        }
-        tournamentsService.setTournamentWinners(id, winner);
-        return ResponseEntity.ok(tournament);
+    joinATournament(id: number, doubleSelected: number): Observable<Tournament>{
+      return this.http.post(BASE_URL + '/acceptedTournament' + id + '/double/' + doubleSelected.toString(), undefined).pipe(
+        ) as Observable<Tournament>;
     }
 
-
-  joinATournament(@PathVariable long id, @RequestBody String doubleSelected,HttpServletRequest request) {
-        Principal principal = request.getUserPrincipal();
-        Tournament tournament = tournamentsService.findById(id);
-        if (tournament==null){
-            return ResponseEntity.notFound().build();
-        }
-        tournamentsService.joinTournament(id, doubleSelected, principal.getName());
-        URI location = fromCurrentRequest().path("/{nDouble}").buildAndExpand(tournament.getRegisteredCouples()).toUri();
-
-        return ResponseEntity.created(location).body(tournament);
+    deleteTournament(id:number): Observable<Tournament>{
+      return this.http.delete(BASE_URL + '/' + id).pipe(
+        ) as Observable<Tournament>;
     }
-*/
-  handleError(err: Error){
-    console.error(err.message);
-    return throwError('Server error');
-  }
+
+    tournamentWinner(id: number, winner: number): Observable<Tournament>{
+      return this.http.put(BASE_URL + '/acceptedTournament/' + id + '/winner', winner).pipe(
+        ) as Observable<Tournament>;
+    }
+
+    getATournament(id: number) {
+      return this.http.get(BASE_URL + '/tournament' + id).pipe(
+        ) as Observable<Tournament>;
+    }
+
+    handleError(err: Error){
+        console.error(err.message);
+        return throwError('Server error');
+    }
 }
