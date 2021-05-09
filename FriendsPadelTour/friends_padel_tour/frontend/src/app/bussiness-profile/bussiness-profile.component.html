@@ -93,9 +93,9 @@
       <div class="col-md-6 bg-white">
         <div class="form-group">
           <h3>Contraseña:</h3>
-          <input type="text" class="form-control" name=password id="pwd" placeholder="Contraseña del usuario">
+          <input #password type="text" class="form-control" name=password id="pwd" placeholder="Contraseña del usuario">
         </div>
-          <button type="submit" class="btn btn-default">Aceptar</button>
+          <button (click)="edit(password.value) "type="submit" class="btn btn-default">Aceptar</button>
       </div>
       <div class="col-md-3"></div>
     </div>

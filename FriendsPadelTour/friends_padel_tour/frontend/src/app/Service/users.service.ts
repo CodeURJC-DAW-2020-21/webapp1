@@ -19,5 +19,13 @@ export class UserService {
     return this.http.get(BASE_URL + '/bussiness/' + userName).pipe() as Observable<Bussiness>;
   }
 
+  updatePlayer(divison: number, password: string, id: number){
+    return this.http.put(BASE_URL + '/player/' + id ,{password: password, division: divison}).pipe() as Observable<Player>;
+  }
+
+  updateBussiness(password: string, id: number){
+    return this.http.put(BASE_URL + '/bussiness/' + id , {password: password}).pipe() as Observable<Bussiness>;
+  }
+
   constructor(private http: HttpClient) { }
 }

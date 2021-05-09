@@ -54,15 +54,15 @@ public class Player{
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 

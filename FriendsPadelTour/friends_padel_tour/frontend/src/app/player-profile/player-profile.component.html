@@ -206,37 +206,37 @@
           <form action="/editProfile/{{usersProfile.id}}" method="GET">
             <div class="form-group">
               <h3>Contraseña:</h3>
-              <input type="text" class="form-control" name="password" id="pwd" placeholder="Nueva contraseña">
+              <input #password type="text" class="form-control" name="password" id="pwd" placeholder="Nueva contraseña">
             </div>
             <h3>División:</h3>
             <div class="row">
               <div class="col-md-6 center-items">
                 <div class="radio">
-                  <label><input type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
+                  <label><input #division type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="1">División 1</label>
+                  <label><input #division type="radio" name="division" value="1">División 1</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="2">División 2</label>
+                  <label><input #division type="radio" name="division" value="2">División 2</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="3">División 3</label>
+                  <label><input #division type="radio" name="division" value="3">División 3</label>
                 </div>
               </div>
               <div class="col-md-6 center-items">
                 <div class="radio">
-                  <label><input type="radio" name="division" value="4">División 4</label>
+                  <label><input #division type="radio" name="division" value="4">División 4</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="5">División 5</label>
+                  <label><input #division type="radio" name="division" value="5">División 5</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="6">División 6</label>
+                  <label><input #division type="radio" name="division" value="6">División 6</label>
                 </div>
               </div>
             </div>
-            <input type="submit" class="btn btn-default" value="Aceptar">
+            <input (click)="edit(division.value,password.value)" type="submit" class="btn btn-default" value="Aceptar">
             <BR>
           </form>
           <form action="/update/{{usersProfile.id}}/image" method="POST" enctype="multipart/form-data">

@@ -26,4 +26,17 @@ export class BussinessProfileComponent {
     });
    }
 
+
+   edit(pass: string){
+    let id = this.bussinessProfile?.id
+    if (id !== undefined)
+    this.service.updateBussiness(pass,id).subscribe(
+      player => {
+        alert('Se ha editado correctamente sus datos')
+        this.router.navigate(['/'])
+      }
+
+    )
+   }
+
 }

@@ -90,7 +90,7 @@ public class ApiUsersController {
     }
 
     @PutMapping(value="/player/{id}")
-    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestParam String password, @RequestParam int division) {
+    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody String password, @RequestBody int division) {
         Player newPlayer = playerService.findById(id);
         if(newPlayer == null){
             return ResponseEntity.notFound().build();

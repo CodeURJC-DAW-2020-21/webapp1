@@ -72,7 +72,7 @@ export class chartProfileComponent implements OnInit {
               }
             ]
           };
-        this.chart = new Chart('chart-container', {
+        this.chart = new Chart('canvas', {
             
             type: 'bar',
             data: data1,
