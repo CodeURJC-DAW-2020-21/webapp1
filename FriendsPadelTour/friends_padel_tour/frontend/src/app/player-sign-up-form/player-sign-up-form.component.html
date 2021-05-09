@@ -1,6 +1,6 @@
 
 
-    
+
     <div class="site-section">
       <div class="row">
         <div class="container col-md-4"></div>
@@ -18,8 +18,6 @@
               <div class="form-group">
                 <label for="nametag">Nombre de usuario:</label>
                 <input #username type="text" class="form-control" name="username">
-                <input #division type="radio" class="form-control" name="division" value=1>
-
               </div>
               <label for="userEmail">Correo electronico:</label>
               <input #email type="email" class="form-control" name="email" placeholder="ejemplo@gmail.com">
@@ -33,12 +31,61 @@
             </div>
             <label for="location">Provincia:</label>
             <select #location class="form-control" name="location">
-                <!--<option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>-->
-            </select>
+              <option>Coruña (La Coruña)</option>
+                <option>Álava</option>
+                <option>Albacete</option>
+                <option>Alicante</option>
+                <option>Almería</option>
+                <option>Asturias</option>
+                <option>Ávila</option>
+                <option>Badajoz</option>
+                <option>Baleares</option>
+                <option>Barcelona</option>
+                <option>Burgos</option>
+                <option>Cáceres</option>
+                <option>Cádiz</option>
+                <option>Cantabria</option>
+                <option>Castellón</option>
+                <option>Ciudad Real</option>
+                <option>Córdoba</option>
+                <option>Cuenca</option>
+                <option>Girona</option>
+                <option>Granada</option>
+                <option>Guadalajara</option>
+                <option>Gipuzkoa</option>
+                <option>Huelva</option>
+                <option>Huesca</option>
+                <option>Jaén</option>
+                <option>La Rioja</option>
+                <option>Las Palmas</option>
+                <option>León</option>
+                <option>Lérida</option>
+                <option>Lugo</option>
+                <option>Madrid</option>
+                <option>Málaga</option>
+                <option>Murcia</option>
+                <option>Navarra</option>
+                <option>Ourense</option>
+                <option>Palencia</option>
+                <option>Pontevedra</option>
+                <option>Salamanca</option>
+                <option>Segovia</option>
+                <option>Sevilla</option>
+                <option>Soria</option>
+                <option>Tarragona</option>
+                <option>Santa Cruz de Tenerife</option>
+                <option>Teruel</option>
+                <option>Toledo</option>
+                <option>Valencia</option>
+                <option>Valladolid</option>
+                <option>Vizcaya</option>
+                <option>Zamora</option>
+                <option>Zaragoza</option>
+          </select>
             <br>
             <label for="userLevel">Seleccione la categoria que considera que tiene (1 la mejor, 6 la peor):</label>
 
-            <!--<div class="radio">
+            <div class="radio">
               <label><input #division type="radio" name="division" value="1">Categoria 1</label>
               <br>
               <label><input #division type="radio" name="division" value="2">Categoria 2</label>
@@ -51,7 +98,7 @@
               <br>
               <label><input #division type="radio" name="division" value="6">Categoria 6</label>
               <br>
-            </div>-->
+            </div>
             <p>(Podra cambiar en cualquier momento)</p>
             <br>
             <input type="submit" (click)="signUpPlayer(username.value,name.value,surname.value,email.value,password.value,location.value,division.value)" value="Enviar">
@@ -61,6 +108,5 @@
         <div class="container col-md-4"></div>
       </div>
     </div>
-  
 
-  
+

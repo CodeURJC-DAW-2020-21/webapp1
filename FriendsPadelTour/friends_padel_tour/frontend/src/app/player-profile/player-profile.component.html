@@ -23,7 +23,7 @@
               <h2 class="actual-couple">PAREJA ACTUAL</h2>
               <div class="container-button">
                 <div class="center-button">
-                  <a href="/users/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
+                  <a href="/player/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
                 </div>
               </div>
                   <div class="info-couple col-md-12">
@@ -33,7 +33,7 @@
                   <div class="dropdown-couples">
                     <span>Otras parejas</span>
                     <div class="dropdown-content">
-                        <a *ngFor="let double of userDoubles" href="/users/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
+                        <a *ngFor="let double of userDoubles" href="/player/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
                     </div>
                   </div>
             </div>
@@ -48,11 +48,11 @@
       <div class="l-container l-container--data">
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos jugados</p>
-          <p class="c-ranking-header__data" id="matches_Played">{{usersProfile.matchesPlayed}}</p>
+          <p class="c-ranking-header__data" id="matches_Played">{{usersProfile.mathesPlayed}}</p>
         </div>
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos ganados</p>
-          <p class="c-ranking-header__data" id="matches_Won">{{usersProfile.matchesWon}}</p>
+          <p class="c-ranking-header__data" id="matches_Won">{{usersProfile.mathcesWon}}</p>
         </div>
         <div class="c-ranking-header__data-box">
           <p class="c-ranking-header__data-title">Partidos perdidos</p>
@@ -66,45 +66,10 @@
     </div>
   </div>
 
-    <div *ngIf="usersProfile.matchesPlayed!==0; else noMatchesPlayedMessage" class="row">
-    <canvas id="myChart" width="400" height="300"></canvas>
-    <script>
-      var matchesPlayed = document.getElementById('matches_Played').innerHTML;
-      var matchesWon = document.getElementById('matches_Won').innerHTML;
-      var matchesLost = document.getElementById('matches_Lost').innerHTML;
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['JUGADOS', 'GANADOS', 'PERDIDOS'],
-            datasets: [{
-                label: 'GRAFICA PARTIDOS',
-                data: [matchesPlayed,matchesWon,matchesLost], //matchesPlayed, matchesWon, matchesLost],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-    </script>
-    </div>
+  <app-chart></app-chart>
+
+
+
 
   <ng-template #noMatchesPlayedMessage>
     <h1>Este usuario todavia no ha jugado ningún partido, por lo tango no hay gráficas disponibles.</h1>
@@ -123,9 +88,9 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
-                <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
-                <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
+              <div *ngIf="match.double1!==null" class="text">
+                <h3  class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
+                <h3  class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/1">Elegir como ganadores del partido</a>
               </div>
             </div>
@@ -144,7 +109,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null" class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
                 <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/2">Elegir como ganadores del partido</a>
@@ -165,7 +130,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
+              <div *ngIf="match.double1!==null" class="text">
                 <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
@@ -179,7 +144,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null"class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
@@ -200,7 +165,7 @@
               <div class="image image-small text-center mb-3 mb-lg-0 mr-lg-3">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text">
+              <div *ngIf="match.double1!==null" class="text">
                 <h3 class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
               </div>
@@ -214,7 +179,7 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div class="text order-1 w-100">
+              <div *ngIf="match.double2!==null" class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
               </div>
@@ -241,37 +206,37 @@
           <form action="/editProfile/{{usersProfile.id}}" method="GET">
             <div class="form-group">
               <h3>Contraseña:</h3>
-              <input type="text" class="form-control" name="password" id="pwd" placeholder="Nueva contraseña">
+              <input #password type="text" class="form-control" name="password" id="pwd" placeholder="Nueva contraseña">
             </div>
             <h3>División:</h3>
             <div class="row">
               <div class="col-md-6 center-items">
                 <div class="radio">
-                  <label><input type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
+                  <label><input #division type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="1">División 1</label>
+                  <label><input #division type="radio" name="division" value="1">División 1</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="2">División 2</label>
+                  <label><input #division type="radio" name="division" value="2">División 2</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="3">División 3</label>
+                  <label><input #division type="radio" name="division" value="3">División 3</label>
                 </div>
               </div>
               <div class="col-md-6 center-items">
                 <div class="radio">
-                  <label><input type="radio" name="division" value="4">División 4</label>
+                  <label><input #division type="radio" name="division" value="4">División 4</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="5">División 5</label>
+                  <label><input #division type="radio" name="division" value="5">División 5</label>
                 </div>
                 <div class="radio">
-                  <label><input type="radio" name="division" value="6">División 6</label>
+                  <label><input #division type="radio" name="division" value="6">División 6</label>
                 </div>
               </div>
             </div>
-            <input type="submit" class="btn btn-default" value="Aceptar">
+            <input (click)="edit(division.value,password.value)" type="submit" class="btn btn-default" value="Aceptar">
             <BR>
           </form>
           <form action="/update/{{usersProfile.id}}/image" method="POST" enctype="multipart/form-data">

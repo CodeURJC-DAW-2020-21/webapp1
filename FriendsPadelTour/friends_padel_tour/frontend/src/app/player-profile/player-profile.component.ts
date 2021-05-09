@@ -5,6 +5,7 @@ import { Player } from '../model/player.model';
 import { User } from '../model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { PadelMatch } from '../model/padelMatch.model';
 
 @Component({
   selector: 'app-player-profile',
@@ -17,6 +18,7 @@ export class PlayerProfileComponent implements OnInit {
   principalDouble: Player | undefined;
   userDoubles: Player[] = [];
   efectivity: number = 0;
+  
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
@@ -29,14 +31,34 @@ export class PlayerProfileComponent implements OnInit {
             this.principalDouble = doubles.pop();
           }
         );
-        this.efectivity = this.usersProfile.matchesWon / this.usersProfile.matchesPlayed;
+        if (this.usersProfile.mathesPlayed!==0){
+          this.efectivity = this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+        }else{this.efectivity == 0}
       },
       error => console.error('Bad request')
     );
     this.isExtern = this.loggedUser !== undefined && this.loggedUser.username !== playerUserName;
   }
 
+  //falta pasarle al template los partidos 
+
+
   ngOnInit(): void {
   }
+
+  edit(divison: string, pass: string){
+    let div = parseInt(divison)
+    let id = this.usersProfile?.id
+    if (id !== undefined)
+    this.service.updatePlayer(div,pass,id).subscribe(
+      player => {
+        alert('Se ha editado correctamente sus datos')
+        this.router.navigate(['/'])
+      }
+
+    )
+    
+  }
+  
 
 }

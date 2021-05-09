@@ -54,15 +54,15 @@ public class Player{
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
-    @JsonIgnore
+    //@JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 
@@ -93,10 +93,6 @@ public class Player{
         this.user = user;
     }
 
-    public String getPassword(){
-        User user = this.user;
-        return user.getEncodedPassword();
-    }
 
     public List<PadelMatch> getPendingMatches() {
         return pendingMatches;

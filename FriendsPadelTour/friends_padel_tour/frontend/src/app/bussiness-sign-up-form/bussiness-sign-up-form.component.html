@@ -43,12 +43,64 @@
             </div>
             <label for="userProvince">Provincia:</label>
             <select #location class="form-control" name="location">
-                <!--<option>[value]="item" *ngFor="let item of listProvinces">{{item}}</option>-->
-            </select>
+              <option>Coruña (La Coruña)</option>
+                <option>Álava</option>
+                <option>Albacete</option>
+                <option>Alicante</option>
+                <option>Almería</option>
+                <option>Asturias</option>
+                <option>Ávila</option>
+                <option>Badajoz</option>
+                <option>Baleares</option>
+                <option>Barcelona</option>
+                <option>Burgos</option>
+                <option>Cáceres</option>
+                <option>Cádiz</option>
+                <option>Cantabria</option>
+                <option>Castellón</option>
+                <option>Ciudad Real</option>
+                <option>Córdoba</option>
+                <option>Cuenca</option>
+                <option>Girona</option>
+                <option>Granada</option>
+                <option>Guadalajara</option>
+                <option>Gipuzkoa</option>
+                <option>Huelva</option>
+                <option>Huesca</option>
+                <option>Jaén</option>
+                <option>La Rioja</option>
+                <option>Las Palmas</option>
+                <option>León</option>
+                <option>Lérida</option>
+                <option>Lugo</option>
+                <option>Madrid</option>
+                <option>Málaga</option>
+                <option>Murcia</option>
+                <option>Navarra</option>
+                <option>Ourense</option>
+                <option>Palencia</option>
+                <option>Pontevedra</option>
+                <option>Salamanca</option>
+                <option>Segovia</option>
+                <option>Sevilla</option>
+                <option>Soria</option>
+                <option>Tarragona</option>
+                <option>Santa Cruz de Tenerife</option>
+                <option>Teruel</option>
+                <option>Toledo</option>
+                <option>Valencia</option>
+                <option>Valladolid</option>
+                <option>Vizcaya</option>
+                <option>Zamora</option>
+                <option>Zaragoza</option>
+          </select>
             <br>
             <label for="bussinessType">Tipo de negocio:</label>
             <select #bussinessType class="form-control" name="bussinessType">
-                <!--<option>[value]="item" *ngFor="let item of listType">{{item}}</option>-->
+                <option>Escuela de padel</option>
+                <option>Centro deportivo</option>
+                <option>Tienda de material deportivo</option>
+                <option>Otro</option>
             </select>
             <br>
             <button type="submit" (click)="signUpBussiness(password.value,username.value,bussinessName.value,ownerName.value,ownerSurname.value,location.value,city.value,email.value,address.value,bussinessType.value)"class="btn btn-default">Enviar</button>
