@@ -19,6 +19,11 @@ export class PlayerProfileComponent implements OnInit {
   userDoubles: Player[] = [];
   efectivity: number = 0;
 
+  player: Player;
+
+  @ViewChild("file")
+  file: any;
+
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
@@ -59,7 +64,7 @@ export class PlayerProfileComponent implements OnInit {
     )
     
   }
-
+/*
   updateImage(image: any){
     //const profilePicture = this.file.nativeElement.files[0];
     console.log(image.files[0])
@@ -72,7 +77,7 @@ export class PlayerProfileComponent implements OnInit {
     
 
       reader.addEventListener('load', (event: any) => {
-        if (id !== undefined /*&& profilePicture*/){
+        if (id !== undefined /*&& profilePicture*/ /*){
         this.service.updateImage(id,file).subscribe(
           (res) => {alert('Se ha editado correctamente su imagen')
           this.router.navigate(['/'])},
@@ -82,6 +87,16 @@ export class PlayerProfileComponent implements OnInit {
       });
     reader.readAsDataURL(file);
   }
-  
+  */
+  updateImage(player: Player): void {
+
+    const image = this.file.nativeElement.files[0];
+    if (image) {
+      let formData = new FormData();
+      formData.append("imageFile", image);
+      this.service.updateImage(this.player, formData).subscribe()
+      
+    }
+  }
 
 }

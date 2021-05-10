@@ -15,14 +15,14 @@ export class TournamentsService {
 
   constructor(private http: HttpClient) { }
 
-    getTournaments(pageNumber: number): Observable<Page<Tournament>>{
+    getTournaments(pageNumber: number): Observable<Tournament>{
       return this.http.get(BASE_URL + '/AcceptedTournaments' + pageNumber).pipe(
-        ) as Observable<Page<Tournament>>;
+        ) as Observable<Tournament>;
     }
 
-    getNonAcceptedTournaments(pageNumber: number): Observable<Page<Tournament>>{
+    getNonAcceptedTournaments(pageNumber: number): Observable<Tournament>{
       return this.http.get(BASE_URL + '/nonAcceptedTournaments' + pageNumber).pipe(
-        ) as Observable<Page<Tournament>>;
+        ) as Observable<Tournament>;
     }
 
     postTournament(tournament: Tournament): Observable<Tournament>{
