@@ -6,6 +6,7 @@ import { User } from '../model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PadelMatch } from '../model/padelMatch.model';
+import { LoginService } from '../Service/login.service';
 
 @Component({
   selector: 'app-player-profile',
@@ -20,11 +21,14 @@ export class PlayerProfileComponent implements OnInit {
   efectivity: number = 0;
 
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService, private login: LoginService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
     service.getPlayer(playerUserName).subscribe(
       user => {
         this.usersProfile = user;
+        this.login.me().subscribe(
+          user => this.isExtern = user !== undefined && user.username !== playerUserName
+        )
         this.doubleService.getDoublesOf(user.username).subscribe(
           doubles => {
             this.userDoubles = doubles;
@@ -37,7 +41,6 @@ export class PlayerProfileComponent implements OnInit {
       },
       error => console.error('Bad request')
     );
-    this.isExtern = this.loggedUser !== undefined && this.loggedUser.username !== playerUserName;
   }
 
   //falta pasarle al template los partidos 

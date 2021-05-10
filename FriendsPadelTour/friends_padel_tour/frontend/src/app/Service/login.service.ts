@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { pipe } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { User } from '../model/user.model';
 
 const BASE_URL = '/api/auth';
@@ -8,8 +8,8 @@ const BASE_URL = '/api/auth';
 @Injectable({providedIn : 'root'})
 export class LoginService{
 
-  me() {
-    return this.http.get('/api/users/me').pipe();
+  me(): Observable<User> {
+    return this.http.get('/api/users/me').pipe() as Observable<User>;
   }
 
   constructor(private http: HttpClient){
