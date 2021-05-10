@@ -44,6 +44,15 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournaments);
     }
 
+    @GetMapping(value="/tournament")
+    public ResponseEntity<Tournament> getATournament(@PathVariable Long id) {
+        Tournament tournaments = tournamentsService.getTournament(id);
+        if(tournaments == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tournaments);
+    }
+
     @GetMapping(value = "/nonAcceptedTournaments")
     public ResponseEntity<Page<Tournament>> getNonAcceptedTournaments(@RequestParam int pageNumber){
         Page<Tournament> tournaments = tournamentsService.getPageNoAcceptedTournaments(pageNumber, 3);
@@ -65,6 +74,16 @@ public class ApiTournamentController {
 
         return ResponseEntity.created(location).body(tournament);
         
+    }
+
+    @DeleteMapping(value="/delTournament/{id}")
+    public ResponseEntity<Tournament> declineTournament(@PathVariable Long id){
+        Tournament tournamentToDelete = tournamentsService.findById(id);
+        if(tournamentToDelete==null){
+            return ResponseEntity.notFound().build();
+        }
+        tournamentsService.deleteById(id);
+        return ResponseEntity.ok(tournamentToDelete);
     }
 
     @PutMapping(value="/acceptedTournament/{id}")

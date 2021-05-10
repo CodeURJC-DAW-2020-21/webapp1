@@ -14,8 +14,8 @@ export interface Tournament{
   registeredCouples: number;
   finished: boolean;
   isFull: boolean;
-  firstWinningCouple: DoubleOfPlayers;
-  secondWinningCouple: DoubleOfPlayers;
+  firstWinningCouple: DoubleOfPlayers | null;
+  secondWinningCouple: DoubleOfPlayers | null;
   accepted: boolean;
   players: DoubleOfPlayers[];
   category: number;
