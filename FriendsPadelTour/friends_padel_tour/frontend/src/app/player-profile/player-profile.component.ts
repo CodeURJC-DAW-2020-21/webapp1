@@ -1,6 +1,6 @@
 import { DoubleService } from './../Service/double.service';
 import { UserService } from './../Service/users.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Player } from '../model/player.model';
 import { User } from '../model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,7 +18,7 @@ export class PlayerProfileComponent implements OnInit {
   principalDouble: Player | undefined;
   userDoubles: Player[] = [];
   efectivity: number = 0;
-  
+
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
@@ -58,6 +58,29 @@ export class PlayerProfileComponent implements OnInit {
 
     )
     
+  }
+
+  updateImage(image: any){
+    //const profilePicture = this.file.nativeElement.files[0];
+    console.log(image.files[0])
+    const file: File = image.files[0];
+    const reader = new FileReader()
+
+
+
+    let id = this.usersProfile?.id
+    
+
+      reader.addEventListener('load', (event: any) => {
+        if (id !== undefined /*&& profilePicture*/){
+        this.service.updateImage(id,file).subscribe(
+          (res) => {alert('Se ha editado correctamente su imagen')
+          this.router.navigate(['/'])},
+          (err) => alert('Error uploading user image: ' + err)
+          )
+        }
+      });
+    reader.readAsDataURL(file);
   }
   
 
