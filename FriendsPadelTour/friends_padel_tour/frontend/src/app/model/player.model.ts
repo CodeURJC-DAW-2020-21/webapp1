@@ -8,7 +8,7 @@ export interface Player{
   surname: string;
   location: string;
   email: string;
-  division: number;
+  division: number | null;
   hasImage: boolean;
   imagePath: string;
   mathcesWon: number;

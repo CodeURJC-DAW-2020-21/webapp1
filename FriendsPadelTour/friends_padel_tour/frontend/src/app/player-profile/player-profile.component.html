@@ -223,7 +223,7 @@
           <form action="/update/{{usersProfile.id}}/image" method="POST" enctype="multipart/form-data">
             <h3>Imagen de perfil:</h3>
             <input #image1  type="file" name="profilePicture" accept=".jpg, .jpeg">
-            <input  (click)="updateImage(image1)" type="submit" class="btn btn-default" value="Cambiar imagen">
+            <input type="submit" class="btn btn-default" (click)="updateImage()" value="Cambiar imagen">
           </form>
         </div>
         <div class="col-md-3"></div>

@@ -21,7 +21,7 @@ export class TournamentsComponent {
   loggedUser: User | undefined;
   userDoubles: Player[] = [];
   tournamentId: number;
-  doubleSelected: string = '';
+  doubleSelected: number = 0;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: TournamentsService, public loginService: LoginService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
