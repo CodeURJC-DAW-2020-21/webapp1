@@ -108,14 +108,14 @@ public class ApiUsersController {
     }
 
     @PutMapping(value="/bussiness/{id}")
-    public ResponseEntity<Bussiness> editBussinessProfile(@PathVariable long id, @RequestBody String password) {
+    public ResponseEntity<Bussiness> editBussinessProfile(@PathVariable long id, @RequestBody String pass) {
         Bussiness newBussiness = bussinessService.findById(id);
         if(newBussiness == null){
             return ResponseEntity.notFound().build();
         }
-        if (!password.isBlank()) {
-            newBussiness.setPassword(password);
-            userService.updatePasswordOf(newBussiness.getUser(), password);
+        if (!pass.isBlank()) {
+            User myuser = newBussiness.getUser();
+            userService.updatePasswordOf(myuser, pass);
             return ResponseEntity.ok(newBussiness);
         } 
         return ResponseEntity.status(500).build();

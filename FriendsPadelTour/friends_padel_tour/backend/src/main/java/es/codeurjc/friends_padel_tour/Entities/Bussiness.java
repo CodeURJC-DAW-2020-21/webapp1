@@ -98,9 +98,9 @@ public class Bussiness{
       //  return password;
     //}
 
-    public void setPassword(String password) {
+    /*public void setPassword(String password) {
         this.user.setEncodedPassword(password);
-    }
+    }*/
 
     public int getCreatedTournaments() {
         return createdTournaments;

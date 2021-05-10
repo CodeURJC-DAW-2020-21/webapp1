@@ -54,6 +54,8 @@
               </div>
             </div>
         </div>
+        </div>
+        </div>
 
 
       <div class="recent-matches">
@@ -82,7 +84,7 @@
       </div>
 
 
-<div class="container">
+<div *ngIf="!isExtern" class="container">
   <div class="text-md-center">
     <br>
     <h1>Edita tus datos</h1>
@@ -100,5 +102,4 @@
       <div class="col-md-3"></div>
     </div>
   </form>
-</div>
 </div>
