@@ -18,7 +18,7 @@ export class BussinessProfileComponent {
   tournamentId: number;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, public tournamentService: TournamentsService) {
-     this.tournamentId = activatedRoute.snapshot.params['id'];
+    this.tournamentId = activatedRoute.snapshot.params['id'];
     activatedRoute.params.subscribe(params =>{
       const bussinessUserName = params['userName'];
       service.getBussiness(bussinessUserName).subscribe(
@@ -31,9 +31,6 @@ export class BussinessProfileComponent {
     });
    }
 
-<<<<<<< HEAD
-   
-   
 /*
    private refresh(tournament: Tournament){
     this.tournamentToDelete = tournament;
@@ -48,17 +45,18 @@ export class BussinessProfileComponent {
 */
 
    deleteATournament(){  
-    this.tournamentService.deleteTournament(this.tournamentId).subscribe( 
-      tournament => {
-        alert('Torneo eliminado con exito.');
-        this.router.navigate(['/']);
-       }
-     );
+    const okResponse = window.confirm('Do you want to remove this book?');
+        if (okResponse) {
+          this.tournamentService.deleteTournament(this.tournamentId).subscribe( 
+            tournament => {
+              alert('Torneo eliminado con exito.');
+              this.router.navigate(['/']);
+            }
+          );
+        }
    }
 
-   
-
-=======
+  
 
    edit(pass: string){
     let id = this.bussinessProfile?.id
@@ -72,5 +70,4 @@ export class BussinessProfileComponent {
     )
    }
 
->>>>>>> e251e926282ec177b86f55ed09cfff64e1bf2c64
 }

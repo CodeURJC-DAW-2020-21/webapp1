@@ -32,8 +32,8 @@
           <div>
               <h4>EMPRESA SOLICITANTE: <a href="/bussinessProfile/{{bussiness.username}}">{{bussiness.bussinessName}}</a></h4>
           </div>
-          <a href="/acceptTournament/{{id}}" class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></a>
-          <a href="/declineTournament/{{id}}" class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></a>
+          <a (click) = "acceptTournament(tournament.id)" href="/acceptTournament/{{id}}" class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></a>
+          <a (click) = "declineTournament(tournament.id)" href="/declineTournament/{{id}}" class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></a>
         </div>
         {{/pendingTournaments }}
     </div>

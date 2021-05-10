@@ -12,7 +12,7 @@ import { LoginService } from '../Service/login.service';
 })
 export class TournamentsComponent {
 
-  tournamentToJoin: Tournament | undefined;
+  tournament: Tournament | undefined;
   p = 1;
   bussiness = false;
   player = false;
