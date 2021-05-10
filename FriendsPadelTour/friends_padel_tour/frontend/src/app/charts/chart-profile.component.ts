@@ -19,7 +19,7 @@ export class chartProfileComponent implements OnInit {
     
 
   
-    view: [number,number] = [700, 400];
+    view: [number,number] = [1650, 400];
     
 
 

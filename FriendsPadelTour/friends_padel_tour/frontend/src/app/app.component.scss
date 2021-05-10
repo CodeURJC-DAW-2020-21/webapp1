@@ -1923,5 +1923,9 @@ input:focus {
     text-decoration: underline;
   }
 
+  .white {
+    margin-top: 900px
+  }
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
