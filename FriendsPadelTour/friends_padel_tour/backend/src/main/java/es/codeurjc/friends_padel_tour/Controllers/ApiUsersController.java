@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.BussinessRequest;
 import es.codeurjc.friends_padel_tour.Entities.Player;
+import es.codeurjc.friends_padel_tour.Entities.PlayerEditRequest;
 import es.codeurjc.friends_padel_tour.Entities.PlayerRequest;
 import es.codeurjc.friends_padel_tour.Entities.User;
 import es.codeurjc.friends_padel_tour.Service.BussinessService;
@@ -90,7 +91,9 @@ public class ApiUsersController {
     }
 
     @PutMapping(value="/player/{id}")
-    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody String password, @RequestBody int division) {
+    public ResponseEntity<Player> editProfile(@PathVariable long id, @RequestBody PlayerEditRequest pRequest) {
+        String password = pRequest.password;
+        int division = pRequest.division;
         Player newPlayer = playerService.findById(id);
         if(newPlayer == null){
             return ResponseEntity.notFound().build();
