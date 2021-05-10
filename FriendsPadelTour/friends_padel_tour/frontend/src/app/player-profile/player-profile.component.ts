@@ -21,6 +21,7 @@ export class PlayerProfileComponent implements OnInit {
   userDoubles: Player[] = [];
   efectivity: number = 0;
   division: number= 0;
+  usersImage: any;
 
   player: Player | undefined;
 
@@ -30,14 +31,9 @@ export class PlayerProfileComponent implements OnInit {
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService, private login: LoginService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
-    const id = activatedRoute.snapshot.params['id'];
-    if (id) {
-    service.getPlayer(id).subscribe(
-        player => this.player = player,
-        error => console.error(error));
-    }
     service.getPlayer(playerUserName).subscribe(
       user => {
+        this.player = user;
         this.usersProfile = user;
         this.login.me().subscribe(
           user => this.isExtern = user !== undefined && user.username !== playerUserName
@@ -56,11 +52,11 @@ export class PlayerProfileComponent implements OnInit {
     );
   }
 
-  //falta pasarle al template los partidos 
+  //falta pasarle al template los partidos
 
 
   ngOnInit(): void {
-    
+
   }
 
   edit(pass: string){
@@ -74,7 +70,7 @@ export class PlayerProfileComponent implements OnInit {
       }
 
     )
-    
+
   }
 /*
   updateImage(image: any){
@@ -86,7 +82,7 @@ export class PlayerProfileComponent implements OnInit {
 
 
     let id = this.usersProfile?.id
-    
+
 
       reader.addEventListener('load', (event: any) => {
         if (id !== undefined /*&& profilePicture*/ /*){
@@ -105,13 +101,23 @@ export class PlayerProfileComponent implements OnInit {
     const image = this.file.nativeElement.files[0];
     if (image) {
       let formData = new FormData();
-      formData.append("imageFile", image);
+      formData.append("profilePicture", image);
       if(this.player)
         this.service.updateImage(this.player, formData).subscribe(
           _ => alert('Imagen subida de forma correcta'),
           error => alert('Error uploading user image')
         );
 
+    }
+  }
+
+  downloadImage(){
+    if(this.player?.id){
+      this.service.getImage(this.player.id).subscribe(
+        image => {
+          this.usersImage = image;
+          return this.player?.imagePath;
+        });
     }
   }
 

@@ -10,6 +10,9 @@ const BASE_URL = 'api/users';
   providedIn: 'root'
 })
 export class UserService {
+  getImage(id: number): Observable<Object>{
+    return this.http.get(BASE_URL + '/player/' + id.toString() + '/image').pipe() as Observable<Object>;
+  }
 
   getPlayer(userName: string): Observable<Player> {
     return this.http.get(BASE_URL + '/player/' + userName).pipe() as Observable<Player>;
@@ -28,7 +31,7 @@ export class UserService {
   }
 
   updateImage(player: Player, formData: FormData){
-    return this.http.post(BASE_URL+'/player' + player.id + '/image', formData).pipe();
+    return this.http.post(BASE_URL + '/player/' + player.id + '/image', formData).pipe();
 	}
 
   constructor(private http: HttpClient) { }

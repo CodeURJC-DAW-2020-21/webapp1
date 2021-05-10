@@ -125,11 +125,12 @@ public class ApiUsersController {
     }
 
     @PostMapping(value="/player/{id}/image")
-    public ResponseEntity<Object> updateImage(@PathVariable long id, @RequestParam MultipartFile profilePicture) throws IOException {
+    public ResponseEntity<Object> updateImage(@PathVariable long id, @RequestBody MultipartFile profilePicture) throws IOException {
         Player player = playerService.findById(id);
         if (player != null) {
             URI location = fromCurrentRequest().build().toUri();
             player.setRutaImagen(location.toString());
+            player.setHasImage(true);
             playerService.savePlayer(player);
             imgService.saveImage("/images", player.getId(), profilePicture);
             return ResponseEntity.created(location).build();
@@ -138,9 +139,19 @@ public class ApiUsersController {
         }
     }
 
-    @GetMapping(value="/user/{id}/image")
-    public ResponseEntity<Object> downloadImage(@PathVariable long id) throws  MalformedURLException{
-        return this.imgService.createResponseFromImage("/images", id);
+    @GetMapping(value="/player/{id}/image")
+    public ResponseEntity<Object> downloadImagePlayer(@PathVariable long id) throws  MalformedURLException{
+        Player player = playerService.findById(id);
+        if(player!= null){
+            var a = this.imgService.createResponseFromImage("/images",id);    
+            return a;
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping(value="/bussiness/{id}/image")
+    public ResponseEntity<Object> downloadImageBussiness(@PathVariable long id) throws  MalformedURLException{
+        return this.imgService.createResponseFromImage("",id);
     }
     
     @PostMapping(value="/bussiness/{id}/image")
