@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PadelMatch } from '../model/padelMatch.model';
 import { LoginService } from '../Service/login.service';
+import { error } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-player-profile',
@@ -20,7 +21,7 @@ export class PlayerProfileComponent implements OnInit {
   userDoubles: Player[] = [];
   efectivity: number = 0;
 
-  player: Player;
+  player: Player | undefined;
 
   @ViewChild("file")
   file: any;
@@ -28,6 +29,12 @@ export class PlayerProfileComponent implements OnInit {
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService, private login: LoginService) {
     const playerUserName = activatedRoute.snapshot.params['userName'];
+    const id = activatedRoute.snapshot.params['id'];
+    if (id) {
+    service.getPlayer(id).subscribe(
+        player => this.player = player,
+        error => console.error(error));
+    }
     service.getPlayer(playerUserName).subscribe(
       user => {
         this.usersProfile = user;
@@ -52,6 +59,7 @@ export class PlayerProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
   }
 
   edit(divison: string, pass: string){
@@ -91,14 +99,18 @@ export class PlayerProfileComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   */
-  updateImage(player: Player): void {
+  updateImage():void {
 
     const image = this.file.nativeElement.files[0];
     if (image) {
       let formData = new FormData();
       formData.append("imageFile", image);
-      this.service.updateImage(this.player, formData).subscribe()
-      
+      if(this.player)
+        this.service.updateImage(this.player, formData).subscribe(
+          _ => alert('Imagen subida de forma correcta'),
+          error => alert('Error uploading user image')
+        );
+
     }
   }
 

@@ -27,12 +27,9 @@ export class UserService {
     return this.http.put(BASE_URL + '/bussiness/' + id , {password: password}).pipe() as Observable<Bussiness>;
   }
 
-  updateImage(id: number,profilePicture: File){
-    const formData = new FormData();
-
-    formData.append('image', profilePicture);
-    return this.http.put(BASE_URL + '/player/' +   id + '/image', {profilePicture: profilePicture}).pipe() as Observable<Object>;
-  }
+  updateImage(player: Player, formData: FormData){
+    return this.http.post(BASE_URL+'/player' + player.id + '/image', formData).pipe();
+	}
 
   constructor(private http: HttpClient) { }
 }
