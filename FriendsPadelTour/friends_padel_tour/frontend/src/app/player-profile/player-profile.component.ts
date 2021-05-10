@@ -19,6 +19,7 @@ export class PlayerProfileComponent implements OnInit {
   principalDouble: Player | undefined;
   userDoubles: Player[] = [];
   efectivity: number = 0;
+  division: number= 0;
 
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService, private login: LoginService) {
@@ -49,8 +50,8 @@ export class PlayerProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  edit(divison: string, pass: string){
-    let div = parseInt(divison)
+  edit(pass: string){
+    let div = this.division
     let id = this.usersProfile?.id
     if (id !== undefined)
     this.service.updatePlayer(div,pass,id).subscribe(

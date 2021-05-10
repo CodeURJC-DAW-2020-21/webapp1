@@ -76,7 +76,7 @@
   </ng-template>
 
 
-
+<div></div>
   <div class="recent-matches">
     <h1>PARTIDOS CREADOS</h1>
   </div>
@@ -211,32 +211,13 @@
             <h3>División:</h3>
             <div class="row">
               <div class="col-md-6 center-items">
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="0" checked="true">Mantenerse en la actual</label>
-                </div>
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="1">División 1</label>
-                </div>
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="2">División 2</label>
-                </div>
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="3">División 3</label>
-                </div>
-              </div>
-              <div class="col-md-6 center-items">
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="4">División 4</label>
-                </div>
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="5">División 5</label>
-                </div>
-                <div class="radio">
-                  <label><input #division type="radio" name="division" value="6">División 6</label>
-                </div>
-              </div>
-            </div>
-            <input (click)="edit(division.value,password.value)" type="submit" class="btn btn-default" value="Aceptar">
+                <input type="radio" value=1 name="division" [(ngModel)]="division" > 1
+                <input type="radio" value=2 name="division" [ngModel]="division" > 2 
+                <input type="radio" value=3 name="division" [(ngModel)]="division" > 3
+                <input type="radio" value=4 name="division" [ngModel]="division" > 4 
+                <input type="radio" value=5 name="division" [(ngModel)]="division" > 5
+                <input type="radio" value=6 name="division" [ngModel]="division" > 6         </div></div>
+            <input (click)="edit(password.value)" type="submit" class="btn btn-default" value="Aceptar">
             <BR>
           </form>
           <form action="/update/{{usersProfile.id}}/image" method="POST" enctype="multipart/form-data">
