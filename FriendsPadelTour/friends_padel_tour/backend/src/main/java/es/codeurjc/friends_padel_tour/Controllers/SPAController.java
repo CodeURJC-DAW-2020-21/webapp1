@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class SPAController {
     
-    @GetMapping({"/new/**/{path:[^\\.]*}", "/{path:spa[^\\.]*}"})
+    @GetMapping({"/new/**/{path:[^\\.]*}", "/{path:new[^\\.]*}"})
     public String redirect() {
         return "forward:/new/index.html";
     }
