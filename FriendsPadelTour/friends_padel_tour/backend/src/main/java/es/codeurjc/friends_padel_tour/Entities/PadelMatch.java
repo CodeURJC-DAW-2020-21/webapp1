@@ -34,7 +34,6 @@ public class PadelMatch {
     private DoubleOfPlayers double2;
 
     @ManyToOne
-    @JsonIgnore
     private DoubleOfPlayers doubleWinner;
 
     @ManyToOne

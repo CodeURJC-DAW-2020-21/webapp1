@@ -97,7 +97,7 @@
   <div class="recent-matches">
     <h1>PARTIDOS CREADOS</h1>
   </div>
-    <div *ngFor="let match of usersProfile.createdMatches; let index = index" class="row align-items-center">
+    <div *ngFor="let match of createdMatches; let index = index" class="row align-items-center">
       <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
         <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
           <div class="text-center text-lg-left">
@@ -108,7 +108,7 @@
               <div *ngIf="match.double1!==null" class="text">
                 <h3  class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3  class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
-                <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/1">Elegir como ganadores del partido</a>
+                <button *ngIf="!match.hasWinner" (click)="selectMatchWinner(match,1)">Elegir como ganadores del partido</button>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@
 
         <div class="col-md-4 col-lg-4 text-center mb-4 mb-lg-0">
           <div class="d-inline-block">
-            <div class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded"><a href="/delete/{{match.id}}">Eliminar Partido</a></div>
+            <div class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded"><button (click)="deleteMatch(match.id)">Eliminar Partido</button></div>
           </div>
         </div>
 
@@ -129,7 +129,7 @@
               <div *ngIf="match.double2!==null" class="text order-1 w-100">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
-                <a href="/selectMatchWinner/{{usersProfile.id}}/{{index}}/2">Elegir como ganadores del partido</a>
+                <button *ngIf="!match.hasWinner" (click)="selectMatchWinner(match,2)">Elegir como ganadores del partido</button>
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@
 
   <div class="recent-matches" >
     <h1>PARTIDOS RECIENTES</h1>
-    <div *ngFor="let match of usersProfile.playedMatches" class="row align-items-center">
+    <div *ngFor="let match of playedMatches" class="row align-items-center">
       <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
         <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
           <div class="text-center text-lg-left">
@@ -174,7 +174,7 @@
 
   <div class="recent-matches" >
     <h1>PARTIDOS PENDIENTES</h1>
-    <div *ngFor="let match of usersProfile.pendingMatches" class="row align-items-center">
+    <div *ngFor="let match of pendingMatches" class="row align-items-center">
       <div class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry">
         <div class="col-md-4 col-lg-4 mb-4 mb-lg-0">
           <div class="text-center text-lg-left">
