@@ -63,7 +63,7 @@ export class MatchesService{
   }
 
   deleteMatch(id: number) {
-    return this.http.delete(BASE_URL + '/' + id.toString).pipe(
+    return this.http.delete(BASE_URL + '/' + id).pipe(
       )as Observable<PadelMatch>;
   }
 

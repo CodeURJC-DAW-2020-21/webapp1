@@ -73,7 +73,8 @@ export class PlayerProfileComponent implements OnInit {
           }
         );
         if (this.usersProfile.mathesPlayed!==0){
-          this.efectivity = this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+          this.efectivity =  this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+          this.efectivity = parseFloat(this.efectivity.toPrecision(2))
         }else{this.efectivity == 0}
       },
       error => console.error('Bad request')
@@ -145,7 +146,7 @@ export class PlayerProfileComponent implements OnInit {
   selectMatchWinner(match: PadelMatch, slot: number){
       this.matchesService.selectWinner(match, slot).subscribe(
         _ => {
-          this.router.navigate(['success', 'Exito eligiendo ganadores del partido']);
+          window.location.reload()
         }
       )
   }
@@ -154,8 +155,7 @@ export class PlayerProfileComponent implements OnInit {
     if(id){
       this.matchesService.deleteMatch(id).subscribe(
         _ => {
-          this.router.navigate(['success', 'Exito eliminando el partido']);
-        }
+          window.location.reload()        }
       )
     }
   }

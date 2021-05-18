@@ -226,6 +226,8 @@ public class MatchesService {
         loser2.getPendingMatches().remove(match);
         creator.getCreatedMatches().remove(match);
 
+
+        
         winner1.setScore(winner1.getScore()+3);
         winner2.setScore(winner2.getScore()+3);
         loser1.setScore(loser1.getScore()-3);
