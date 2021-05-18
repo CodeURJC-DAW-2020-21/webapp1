@@ -24,6 +24,8 @@ import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -179,7 +181,31 @@ public class ApiMatchController {
         return ResponseEntity.ok(match);
     }
     
-    
-    
+    @GetMapping(value="/createdBy/{username}")
+    public ResponseEntity<List<PadelMatch>> getMatchesCreatedBy(@PathVariable String username) {
+        Player p = playersService.findByUsername(username);
+        if(p==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(p.getCreatedMatches());
+    }
+
+    @GetMapping(value="/pendingMatchesOf/{username}")
+    public ResponseEntity<List<PadelMatch>> getPendingMatchesOf(@PathVariable String username) {
+        Player p = playersService.findByUsername(username);
+        if(p==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(p.getPendingMatches());
+    }
+
+    @GetMapping(value="/playedMatchesOf/{username}")
+    public ResponseEntity<List<PadelMatch>> getplayedMatchesOf(@PathVariable String username) {
+        Player p = playersService.findByUsername(username);
+        if(p==null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(p.getPlayedMatches());
+    }
     
 }

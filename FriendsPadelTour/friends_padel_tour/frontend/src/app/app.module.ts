@@ -26,6 +26,7 @@ import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-
 import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form/create-afriendly-match-form.component';
 import { chartProfileComponent } from './charts/chart-profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { InfoMessageComponent } from './info-message/info-message.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     Division6Component,
     JoinFriendlyMatchComponent,
     CreateAFriendlyMatchFormComponent,
-    chartProfileComponent
+    chartProfileComponent,
+    InfoMessageComponent
   ],
   imports: [
     NgxPaginationModule,

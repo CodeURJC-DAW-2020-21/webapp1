@@ -1,3 +1,4 @@
+import { InfoMessageComponent } from './info-message/info-message.component';
 import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form/create-afriendly-match-form.component';
 import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-match.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
  { path: 'joinFriendlyMatch/:id', component: JoinFriendlyMatchComponent },
  { path: 'createAFriendlyMatch/:division', component: CreateAFriendlyMatchFormComponent },
  { path: '**', component: ErrorsComponent },
+ { path: 'success/:message', component: InfoMessageComponent },
 ];
 
 @NgModule({
