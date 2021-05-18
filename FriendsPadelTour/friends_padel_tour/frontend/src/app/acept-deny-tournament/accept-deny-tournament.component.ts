@@ -16,11 +16,17 @@ import { Bussiness } from '../model/bussiness.model';
 export class AcceptDenyTournamentComponent implements OnInit {
   creator!: Bussiness;
   tournamentId: number;
+  pendingTournaments: Tournament[];
   //tournament: Tournament;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,
               public service: TournamentsService, public loginService: LoginService, public userService: UserService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
+    this.pendingTournaments = []
+    service.getNonAcceptedTournaments(3).subscribe(
+      //tour => this.pendingTournaments = tour
+
+    )
     /*const id = activatedRoute.snapshot.params['id'];
         service.getATournament(id).subscribe(
             tournament => this.tournament = this.tournament,
