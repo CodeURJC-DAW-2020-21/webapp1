@@ -1,10 +1,10 @@
+import { Player } from './../model/player.model';
 import { UserService } from '../Service/users.service';
 import { LoginService } from '../Service/login.service';
 import { PadelMatch } from '../model/padelMatch.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TournamentsService } from '../Service/tournaments.service';
-import { Player } from '../model/player.model';
 import { User } from '../model/user.model';
 import { Tournament } from '../model/tournament.model';
 import { DoubleOfPlayers } from '../model/doubleOfPlayers.model';
@@ -16,7 +16,7 @@ import { Bussiness } from '../model/bussiness.model';
 })
 export class CreateATournamentFormComponent implements OnInit {
   creator!: Bussiness;
-  tournament: Tournament | undefined;   
+  tournament: Tournament | undefined;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,
               public tournamentService: TournamentsService, public loginService: LoginService, public userService: UserService) {
@@ -33,15 +33,26 @@ export class CreateATournamentFormComponent implements OnInit {
 //Cuantos parámetros tengo que meter
 
 
-  createTournament(name: string, description: string, firstPrize: number, secondPrize:number, minCouples: number,
-     maxCouples: number, facility: string, adress: string, city: string, localization: string,
-     postalCode: number, inscriptionStartDate: string, tournamentStartDate: string, inscriptionFinishDate:string, tournamentFinishDate: string, category: number){
-      this.tournament = {name: name, desription: description, firstPrize: firstPrize, secondPrize: secondPrize, minCouples: minCouples, 
-      maxCouples: maxCouples, facility: facility, adress: adress, city: city, localization: localization,
-      postalCode: postalCode, inscriptionStartDate: inscriptionStartDate, tournamentStartDate: tournamentStartDate, inscriptionFinishDate: inscriptionFinishDate,
-      tournamentFinishDate: tournamentFinishDate, registeredCouples:0, isFull: false, accepted: false,
-    finished: false, players: [], category: category, secondWinningCouple: null, firstWinningCouple: null }
-  
+
+
+  createTournament(name: string, description: string, firstPrize: string, secondPrize:string, minCouples: string,
+     maxCouples: string, facility: string, adress: string, city: string, localization: string,
+     postalCode: string, inscriptionStartDate: string, tournamentStartDate: string, inscriptionFinishDate:string, tournamentFinishDate: string, category: string){
+     let isFull = false;
+     let registeredCouples = 0
+     let accepted= false
+     let finished = false
+     let firstWinningCouple = null
+     let secondWinningCouple = null
+     let players: DoubleOfPlayers[] = []
+
+      this.tournament = {name: name, desription: description, firstPrize: parseInt(firstPrize), secondPrize: parseInt(secondPrize), minCouples: parseInt(minCouples),
+      maxCouples: parseInt(maxCouples), facility: facility, adress: adress, city: city, localization: localization,
+      postalCode: parseInt(postalCode), inscriptionStartDate: inscriptionStartDate, tournamentStartDate: tournamentStartDate, inscriptionFinishDate: inscriptionFinishDate,
+      tournamentFinishDate: tournamentFinishDate,registeredCouples: registeredCouples , isFull: isFull, accepted: accepted,
+      finished: finished, players: players, category: parseInt(category), secondWinningCouple: secondWinningCouple, firstWinningCouple: firstWinningCouple }
+
+
       this.tournamentService.postTournament(this.tournament).subscribe(
         tournament => {
           alert('Torneo creado con exito.');
@@ -50,6 +61,6 @@ export class CreateATournamentFormComponent implements OnInit {
       );
     }
   }
-  
+
 
 

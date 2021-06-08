@@ -18,6 +18,8 @@ import { Division5Component } from './division5/division5.component';
 import { Division6Component } from './division6/division6.component';
 import { Division2Component } from './division2/division2.component';
 import { Division3Component } from './division3/division3.component';
+import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
+import { AcceptDenyTournamentComponent } from './acept-deny-tournament/accept-deny-tournament.component';
 
 const routes: Routes = [
  { path: '', component: IndexComponent },
@@ -36,10 +38,12 @@ const routes: Routes = [
  { path: 'division/4', component: Division4Component },
  { path: 'division/5', component: Division5Component },
  { path: 'division/6', component: Division6Component },
+ { path: 'tournamentRequest', component: CreateATournamentFormComponent},
  { path: 'tournaments', component: TournamentsComponent},
  { path: 'aboutUs', component: AboutUsComponent },
  { path: 'joinFriendlyMatch/:id', component: JoinFriendlyMatchComponent },
  { path: 'createAFriendlyMatch/:division', component: CreateAFriendlyMatchFormComponent },
+ { path: 'tournamentManagment', component: AcceptDenyTournamentComponent},
  { path: '**', component: ErrorsComponent },
 ];
 

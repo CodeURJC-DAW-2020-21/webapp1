@@ -16,16 +16,16 @@ import { Bussiness } from '../model/bussiness.model';
 export class AcceptDenyTournamentComponent implements OnInit {
   creator!: Bussiness;
   tournamentId: number;
-  //tournament: Tournament;
+  logged = false;
+  bussiness: boolean | undefined;
+  userName: string = '';
+
+  tournaments: Tournament[] | undefined;
+
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,
               public service: TournamentsService, public loginService: LoginService, public userService: UserService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
-    /*const id = activatedRoute.snapshot.params['id'];
-        service.getATournament(id).subscribe(
-            tournament => this.tournament = this.tournament,
-            error => console.error(error)
-        );*/
    }
 
   ngOnInit(): void {
@@ -36,7 +36,7 @@ export class AcceptDenyTournamentComponent implements OnInit {
     )
   }
 
-  acceptATournament(){    
+  acceptATournament(){
       this.service.acceptTournament(this.tournamentId).subscribe(
         tournament => {
           alert('Torneo aceptado con exito.');
@@ -45,7 +45,15 @@ export class AcceptDenyTournamentComponent implements OnInit {
       );
   }
 
-  declineTournament(){    
+  goBussinessProfile(){
+    if(this.bussiness){
+      this.router.navigate(['/bussiness', this.userName]);
+    }else{
+      this.router.navigate(['/error']);
+    }
+   }
+
+  declineTournament(){
     this.service.declineTournament(this.tournamentId).subscribe(
       tournament => {
         alert('Torneo rechazado con exito.');

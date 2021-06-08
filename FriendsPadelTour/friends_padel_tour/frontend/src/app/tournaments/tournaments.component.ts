@@ -5,6 +5,7 @@ import { User } from '../model/user.model';
 import { TournamentsService } from '../Service/tournaments.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../Service/login.service';
+import { UserService } from '../Service/users.service';
 
 @Component({
   selector: 'app-tournaments',
@@ -12,6 +13,7 @@ import { LoginService } from '../Service/login.service';
 })
 export class TournamentsComponent {
 
+  tournamentList: Tournament[] | undefined;
   tournament: Tournament | undefined;
   p = 1;
   bussiness = false;
@@ -23,8 +25,27 @@ export class TournamentsComponent {
   tournamentId: number;
   doubleSelected: number = 0;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: TournamentsService, public loginService: LoginService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute,public userService: UserService, public service: TournamentsService, public loginService: LoginService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
+    const bussinessUserName = params['userName'];
+    userService.getBussiness(bussinessUserName).subscribe(
+        bussiness => {
+          this.bussinessProfile = bussiness;
+          this.login.me().subscribe(
+            user => this.isExtern = user !== undefined && user.username !== bussinessUserName
+          )
+        },
+        error => console.error('Server error.')
+      );
+   }
+   }
+
+   ngOnInit(): void {
+    this.service.getTournaments(this.p).subscribe(
+      tournaments => this.tournament = tournaments,
+      error => console.log(error)
+    );
+
    }
 
   joinATournament(tournamentId: number, doubleSelected: number){
@@ -35,6 +56,15 @@ export class TournamentsComponent {
          }
        );
       }
+
+  tournamentInfo(tournamentId: number){
+    this.service.tournamentInfo(tournamentId).subscribe(
+      tournament => {
+        alert('Info del torneo.');
+        this.router.navigate(['/']);
+       }
+     );
+    }
 
   seeMore(){
     this.p = this.p + 1;
