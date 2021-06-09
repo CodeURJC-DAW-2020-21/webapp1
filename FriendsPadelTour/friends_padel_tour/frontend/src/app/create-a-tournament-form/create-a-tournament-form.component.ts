@@ -16,7 +16,7 @@ import { Bussiness } from '../model/bussiness.model';
 })
 export class CreateATournamentFormComponent implements OnInit {
   creator!: Bussiness;
-  tournament: Tournament | undefined;   
+  tournament: Tournament | undefined;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,
               public tournamentService: TournamentsService, public loginService: LoginService, public userService: UserService) {
@@ -36,12 +36,12 @@ export class CreateATournamentFormComponent implements OnInit {
   createTournament(name: string, description: string, firstPrize: number, secondPrize:number, minCouples: number,
      maxCouples: number, facility: string, adress: string, city: string, localization: string,
      postalCode: number, inscriptionStartDate: string, tournamentStartDate: string, inscriptionFinishDate:string, tournamentFinishDate: string, category: number){
-      this.tournament = {name: name, desription: description, firstPrize: firstPrize, secondPrize: secondPrize, minCouples: minCouples, 
+      this.tournament = {name: name, desription: description, firstPrize: firstPrize, secondPrize: secondPrize, minCouples: minCouples,
       maxCouples: maxCouples, facility: facility, adress: adress, city: city, localization: localization,
       postalCode: postalCode, inscriptionStartDate: inscriptionStartDate, tournamentStartDate: tournamentStartDate, inscriptionFinishDate: inscriptionFinishDate,
       tournamentFinishDate: tournamentFinishDate, registeredCouples:0, isFull: false, accepted: false,
     finished: false, players: [], category: category, secondWinningCouple: null, firstWinningCouple: null }
-  
+
       this.tournamentService.postTournament(this.tournament).subscribe(
         tournament => {
           alert('Torneo creado con exito.');
@@ -50,6 +50,6 @@ export class CreateATournamentFormComponent implements OnInit {
       );
     }
   }
-  
+
 
 

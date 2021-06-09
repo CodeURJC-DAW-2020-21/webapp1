@@ -1,3 +1,4 @@
+import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
 import { InfoMessageComponent } from './info-message/info-message.component';
 import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form/create-afriendly-match-form.component';
 import { JoinFriendlyMatchComponent } from './join-friendly-match/join-friendly-match.component';
@@ -43,6 +44,7 @@ const routes: Routes = [
  { path: 'createAFriendlyMatch/:division', component: CreateAFriendlyMatchFormComponent },
  { path: '**', component: ErrorsComponent },
  { path: 'success/:message', component: InfoMessageComponent },
+ { path: 'tournament', component: CreateATournamentFormComponent}
 ];
 
 @NgModule({
