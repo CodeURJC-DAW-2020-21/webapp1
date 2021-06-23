@@ -25,3 +25,4 @@ FriendsPadelTour/.vscode/launch.json
 FriendsPadelTour/.vscode/settings.json
 FriendsPadelTour/friends_padel_tour/pom.xml
 FriendsPadelTour/friends_padel_tour/pom.xml
+FriendsPadelTour/friends_padel_tour/backend/src/main/resources/application.properties

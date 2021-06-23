@@ -46,6 +46,35 @@ export class TournamentsComponent {
       error => console.log(error)
     );
 
+  constructor(private router: Router, activatedRoute: ActivatedRoute,
+              public service: TournamentsService, public loginService: LoginService) {
+    this.tournamentId = activatedRoute.snapshot.params['id'];
+    loginService.me().subscribe(//ver que clase de usuario esta loggeado
+      userLogged => {
+        switch (userLogged.roles[0]) {
+          case 'ADMIN':
+            this.logged = true;
+            this.bussiness = false;
+            this.player = false;
+            break;
+          case 'USER':
+            this.logged = true;
+            this.bussiness = false;
+            this.player = true;
+            break;
+          case 'BUSSINESS':
+            this.logged = true;
+            this.bussiness = true;
+            this.player = false;
+            break;
+          default:
+            this.logged = false;
+            this.bussiness = false;
+            this.player = false;
+            break;
+        }
+      }
+    )
    }
 
   joinATournament(tournamentId: number, doubleSelected: number){
