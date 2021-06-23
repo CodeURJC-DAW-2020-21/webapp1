@@ -1,9 +1,10 @@
+import { MatchesService } from './../Service/matches.service';
 import { DoubleService } from './../Service/double.service';
 import { UserService } from './../Service/users.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Player } from '../model/player.model';
 import { User } from '../model/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { PadelMatch } from '../model/padelMatch.model';
 import { LoginService } from '../Service/login.service';
@@ -14,6 +15,7 @@ import { error } from '@angular/compiler/src/util';
   templateUrl: './player-profile.component.html'
 })
 export class PlayerProfileComponent implements OnInit {
+  playerUserName: string;
   loggedUser: User | undefined;
   usersProfile: Player | undefined;
   isExtern: boolean = true;
@@ -23,40 +25,60 @@ export class PlayerProfileComponent implements OnInit {
   division: number= 0;
   usersImage: any;
 
+  createdMatches: PadelMatch[] = [];
+  pendingMatches: PadelMatch[] = [];
+  playedMatches: PadelMatch[] = [];
+
   player: Player | undefined;
 
   @ViewChild("file")
   file: any;
 
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService : DoubleService, private login: LoginService) {
-    const playerUserName = activatedRoute.snapshot.params['userName'];
-    service.getPlayer(playerUserName).subscribe(
-      user => {
-        this.player = user;
-        this.usersProfile = user;
-        this.login.me().subscribe(
-          user => this.isExtern = user !== undefined && user.username !== playerUserName
-        )
-        this.doubleService.getDoublesOf(user.username).subscribe(
-          doubles => {
-            this.userDoubles = doubles;
-            this.principalDouble = doubles.pop();
-          }
-        );
-        if (this.usersProfile.mathesPlayed!==0){
-          this.efectivity = this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
-        }else{this.efectivity == 0}
-      },
-      error => console.error('Bad request')
-    );
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService: DoubleService,
+              private login: LoginService, private matchesService: MatchesService) {
+    this.playerUserName = activatedRoute.snapshot.params['userName'];
   }
 
   //falta pasarle al template los partidos
 
 
   ngOnInit(): void {
-
+    this.service.getPlayer(this.playerUserName).subscribe(
+      user => {
+        this.player = user;
+        this.usersProfile = user;
+        this.login.me().subscribe(
+          user => this.isExtern = user !== undefined && user.username !== this.playerUserName
+        );
+        this.doubleService.getDoublesOf(user.username).subscribe(
+          doubles => {
+            this.userDoubles = doubles;
+            this.principalDouble = doubles.pop();
+          }
+        );
+        this.matchesService.getCreatedMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.createdMatches = matches;
+          }
+        );
+        this.matchesService.getPendingMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.pendingMatches = matches;
+          }
+        );
+        this.matchesService.getPlayedMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.playedMatches = matches;
+          }
+        );
+        if (this.usersProfile.mathesPlayed!==0){
+          this.efectivity =  this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+          this.efectivity = parseFloat(this.efectivity.toPrecision(2))
+        }else{this.efectivity == 0}
+      },
+      error => console.error('Bad request')
+    );
   }
 
   edit(pass: string){
@@ -118,6 +140,23 @@ export class PlayerProfileComponent implements OnInit {
           this.usersImage = image;
           return this.player?.imagePath;
         });
+    }
+  }
+
+  selectMatchWinner(match: PadelMatch, slot: number){
+      this.matchesService.selectWinner(match, slot).subscribe(
+        _ => {
+          window.location.reload()
+        }
+      )
+  }
+
+  deleteMatch(id: number|undefined){
+    if(id){
+      this.matchesService.deleteMatch(id).subscribe(
+        _ => {
+          window.location.reload()        }
+      )
     }
   }
 

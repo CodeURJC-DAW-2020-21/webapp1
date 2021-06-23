@@ -14,10 +14,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 
 @Entity
 public class Player{
+
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,15 +56,15 @@ public class Player{
     private List<DoubleOfPlayers> doubles2;
 
     @OneToMany(mappedBy = "playerCreator")
-    //@JsonIgnore
+    @JsonIgnore
     private List<PadelMatch> createdMatches;
 
     @ManyToMany
-    //@JsonIgnore
+    @JsonIgnore
     private List<PadelMatch> playedMatches;
 
     @ManyToMany
-    //@JsonIgnore
+    @JsonIgnore
     private List<PadelMatch> pendingMatches;
     
 

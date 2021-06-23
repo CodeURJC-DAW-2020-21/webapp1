@@ -44,4 +44,28 @@ export class MatchesService{
     )as Observable<PadelMatch>;
   }
 
+  getPlayedMatchesOf(playerUserName: string): Observable<PadelMatch[]>{
+    return this.http.get(BASE_URL + '/playedMatchesOf/' + playerUserName).pipe(
+    ) as Observable<PadelMatch[]>;
+  }
+  getPendingMatchesOf(playerUserName: string): Observable<PadelMatch[]>{
+    return this.http.get(BASE_URL + '/pendingMatchesOf/' + playerUserName).pipe(
+      ) as Observable<PadelMatch[]>;
+  }
+  getCreatedMatchesOf(playerUserName: string): Observable<PadelMatch[]>{
+    return this.http.get(BASE_URL + '/createdBy/' + playerUserName).pipe(
+      ) as Observable<PadelMatch[]>;
+  }
+
+  selectWinner(match: PadelMatch, slot: number): Observable<PadelMatch> {
+    return this.http.put(BASE_URL + '/' + match.id?.toString() + '/' + slot.toString(), match).pipe(
+      )as Observable<PadelMatch>;
+  }
+
+  deleteMatch(id: number) {
+    return this.http.delete(BASE_URL + '/' + id).pipe(
+      )as Observable<PadelMatch>;
+  }
+
+
 }

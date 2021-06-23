@@ -37,7 +37,7 @@
         </div>
         <div class="scrollmenu">
             <div *ngFor="let player of top10; let index = index;"class="c-player-card__item">
-              <a class="c-trigger" [routerLink]="['/users', player.username]">
+              <a class="c-trigger" [routerLink]="['/player', player.username]">
                 <div class="c-player-card__header">
                     <div class="c-player-card__details">
                         <div class="c-player-card__position">{{index+1}}</div>

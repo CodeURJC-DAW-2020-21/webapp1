@@ -1922,3 +1922,13 @@ input:focus {
   .underline{
     text-decoration: underline;
   }
+
+  
+  .l-container{
+    display: grid;
+  }
+  
+  .text-inform{
+  
+    color: black
+  }
