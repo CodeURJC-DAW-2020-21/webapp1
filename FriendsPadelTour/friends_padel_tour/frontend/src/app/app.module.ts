@@ -27,6 +27,9 @@ import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form
 import { chartProfileComponent } from './charts/chart-profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { InfoMessageComponent } from './info-message/info-message.component';
+import { AcceptDenyTournamentComponent } from './acept-deny-tournament/accept-deny-tournament.component';
+import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
+import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 
 
 @NgModule({
@@ -43,7 +46,11 @@ import { InfoMessageComponent } from './info-message/info-message.component';
     PreviousSignUpComponent,
     FriendlyMatchesComponent,
     DivisionComponent,
+    TournamentInfoComponent,
     TournamentsComponent,
+    AcceptDenyTournamentComponent,
+    CreateATournamentFormComponent,
+    TournamentInfoComponent,
     AboutUsComponent,
     Division4Component,
     Division5Component,

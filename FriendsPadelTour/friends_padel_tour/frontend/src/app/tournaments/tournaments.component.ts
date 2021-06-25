@@ -15,11 +15,10 @@ export class TournamentsComponent {
 
   tournamentList: Tournament[] | undefined;
   tournament: Tournament | undefined;
-  p = 1;
+  p = 0;
   bussiness = false;
   player = false;
   logged = false;
-  tournaments: Tournament[] = [];
   loggedUser: User | undefined;
   userDoubles: Player[] = [];
   tournamentId: number;
@@ -27,76 +26,33 @@ export class TournamentsComponent {
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,public userService: UserService, public service: TournamentsService, public loginService: LoginService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
-    const bussinessUserName = params['userName'];
-    userService.getBussiness(bussinessUserName).subscribe(
-        bussiness => {
-          this.bussinessProfile = bussiness;
-          this.login.me().subscribe(
-            user => this.isExtern = user !== undefined && user.username !== bussinessUserName
-          )
-        },
-        error => console.error('Server error.')
-      );
-   }
-   }
-
-   ngOnInit(): void {
-    this.service.getTournaments(this.p).subscribe(
-      tournaments => this.tournament = tournaments,
-      error => console.log(error)
+    loginService.me().subscribe(
+      user => {this.loggedUser = user;
+        this.bussiness = this.loggedUser.roles.includes("BUSSINESS");
+        this.player = this.loggedUser.roles.includes("USER");
+        this.logged = true;
+      }
     );
+  }
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute,
-              public service: TournamentsService, public loginService: LoginService) {
-    this.tournamentId = activatedRoute.snapshot.params['id'];
-    loginService.me().subscribe(//ver que clase de usuario esta loggeado
-      userLogged => {
-        switch (userLogged.roles[0]) {
-          case 'ADMIN':
-            this.logged = true;
-            this.bussiness = false;
-            this.player = false;
-            break;
-          case 'USER':
-            this.logged = true;
-            this.bussiness = false;
-            this.player = true;
-            break;
-          case 'BUSSINESS':
-            this.logged = true;
-            this.bussiness = true;
-            this.player = false;
-            break;
-          default:
-            this.logged = false;
-            this.bussiness = false;
-            this.player = false;
-            break;
-        }
-      }
-    )
-   }
-
-  joinATournament(tournamentId: number, doubleSelected: number){
-    this.service.joinATournament(tournamentId, doubleSelected).subscribe(
-        tournament => {
-          alert('T con exito.');
-          this.router.navigate(['/']);
-         }
-       );
-      }
-
-  tournamentInfo(tournamentId: number){
-    this.service.tournamentInfo(tournamentId).subscribe(
-      tournament => {
-        alert('Info del torneo.');
-        this.router.navigate(['/']);
-       }
-     );
-    }
+  ngOnInit(): void {
+    this.service.getTournaments(this.p).subscribe(
+      tournament => this.tournamentList = tournament
+    );
+  }
+    // Añadir join dentro del popup porque el double selected se elige ahí con input
+  joinATournament(tournamentId: number, doubleSelected:string){
+    this.service.joinATournament(tournamentId, doubleSelected).subscribe(); //el double lo cojo del input del popup
+  }
 
   seeMore(){
     this.p = this.p + 1;
+    this.service.getTournaments(this.p).subscribe(
+      tournament => {
+        for (let t of tournament){
+            this.tournamentList?.push(t)}
+        }
+    );
   }
 
 }

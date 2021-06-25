@@ -36,7 +36,6 @@
             <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="assets/images/plata.png"> {{tournament.secondPrize}}</p></div>
           </div>
           <a (click) = "deleteATournament()" class="tournament_definition"  id="tournament_button"><span>ELIMINAR TORNEO</span></a>
-<!--href="/deleteTournament/{{tournament.id}}"-->
             <a *ngIf="tournament.finished" href="#popup/{{tournament.id}}" class="tournament_definition" id="tournament_button"><span>TORNEO FINALIZADO</span></a>
             <div *ngIf="tournament.finished" id="popup/{{tournament.id}}" class="overlay-formulario">
               <div id="popup-Body">

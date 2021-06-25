@@ -14,7 +14,6 @@
     <div class="row">
       <div class="col-md-12 tournament_head">
         <a *ngIf="bussiness" [routerLink]="['/tournamentRequest']"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
-        <a *ngIf="bussiness" [routerLink]="['/tournament']"><button class="searchcouple" id="addTournament" ><span>AÑADIR TORNEO</span></button></a>
       </div>
     </div>
 </div>
@@ -26,9 +25,8 @@
 <div class="eventContainer">
 
     <ul>
-          <div *ngFor="let tournament of tournaments" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
-
-            <div class="tournament_definition" id="tournament_name"><a href="/tournamentInfo/{{tournament.id}}">{{tournament.name}}</a></div>
+          <div *ngFor="let tournament of tournamentList let indice = index;" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament">
+            <div class="tournament_definition" id="tournament_name"><a [routerLink]="['/tournamentInfo', tournament.id]">{{tournament.name}}</a></div>
             <div >
               <div class="tournament_definition" id="tournament_inscription"><p><img class="tournament_icon" src="assets/images/inscripcion.png"> {{tournament.inscriptionStartDate}} - {{tournament.inscriptionFinishDate}}</p></div>
               <div class="tournament_definition" id="tournament_date"><p><img class="tournament_icon" src="assets/images/reloj.png"> {{tournament.tournamentStartDate}} - {{tournament.tournamentFinishDate}}</p></div>
@@ -37,10 +35,9 @@
               <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="assets/images/personas.png"> {{tournament.registeredCouples}}/{{tournament.maxCouples}}</p></div>
               <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png"> {{tournament.category}}</p></div>
               <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png">{{tournament.firstPrize}}<img class="tournament_icon" src="assets/images/plata.png">{{tournament.secondPrize}}</p></div>
-                    <a *ngIf="logged && player && !tournament.isFull" (click)="joinATournament(tournamentId, doubleSelected)"  class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
-                  <!--href="#popup/{{tournament.id}}"-->
+                  <a href="#popup/torneo" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
                   </div>
-              <div *ngIf="logged && player && !tournament.isFull" id="popup/{{tournament.id}}" class="overlay-formulario">
+              <div *ngIf="logged && player && !tournament.isFull" id="popup/torneo" class="overlay-formulario">
                 <div id="popup-Body">
                   <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
                   <a id="cerrarPestana" href="#">&times;</a>
@@ -62,4 +59,4 @@
 </div>
 
 </div>
-<button (onclick)="seeMore()" class="searchcouple" style="margin-left: 20px;">Ver más</button>
+<button (click)="seeMore()" class="searchcouple" style="margin-left: 20px;">Ver más</button>

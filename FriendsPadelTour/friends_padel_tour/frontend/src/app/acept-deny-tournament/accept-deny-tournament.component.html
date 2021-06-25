@@ -31,7 +31,7 @@
           </div>
           <div>
             <!--Revisar si funciona esto y si hace falta añadir algo-->
-              <a *ngIf="this.logged" (click) = goBussinessProfile()>{{tournament.creator}}</a><h4>EMPRESA SOLICITANTE: </h4>
+              <a *ngIf="this.logged" (click) = goBussinessProfile()>{{creator}}</a><h4>EMPRESA SOLICITANTE: </h4>
           </div>
           <a (click) = "acceptATournament()" class="tournament_definition" id="accept-button"><span>ACEPTAR TORNEO</span></a>
           <a (click) = "declineTournament()" class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></a>

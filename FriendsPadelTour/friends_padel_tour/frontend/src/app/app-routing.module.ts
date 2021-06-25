@@ -1,3 +1,4 @@
+import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
 import { InfoMessageComponent } from './info-message/info-message.component';
 import { CreateAFriendlyMatchFormComponent } from './create-afriendly-match-form/create-afriendly-match-form.component';
@@ -20,7 +21,6 @@ import { Division5Component } from './division5/division5.component';
 import { Division6Component } from './division6/division6.component';
 import { Division2Component } from './division2/division2.component';
 import { Division3Component } from './division3/division3.component';
-import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
 import { AcceptDenyTournamentComponent } from './acept-deny-tournament/accept-deny-tournament.component';
 
 const routes: Routes = [
@@ -41,6 +41,7 @@ const routes: Routes = [
  { path: 'division/5', component: Division5Component },
  { path: 'division/6', component: Division6Component },
  { path: 'tournamentRequest', component: CreateATournamentFormComponent},
+ { path: 'tournamentInfo/:id', component: TournamentInfoComponent},
  { path: 'tournaments', component: TournamentsComponent},
  { path: 'aboutUs', component: AboutUsComponent },
  { path: 'joinFriendlyMatch/:id', component: JoinFriendlyMatchComponent },
@@ -48,7 +49,6 @@ const routes: Routes = [
  { path: 'tournamentManagment', component: AcceptDenyTournamentComponent},
  { path: '**', component: ErrorsComponent },
  { path: 'success/:message', component: InfoMessageComponent },
- { path: 'tournament', component: CreateATournamentFormComponent}
 ];
 
 @NgModule({
