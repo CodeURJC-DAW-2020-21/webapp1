@@ -23,7 +23,7 @@
 </div>
 
 <div class="row">
-    <div *ngFor="let tournament of bussinessProfile.tournaments" class="col-lg-12 tournaments">
+    <div *ngFor="let tournament of tournamentsAccepted" class="col-lg-12 tournaments">
         <div *ngIf="tournament.accepted" class="row bg-white align-items-center match-entry tournament-company">
 
           <div class="tournament_definition" id="tournament_name"><p>{{tournament.name}}</p></div>
@@ -35,7 +35,7 @@
             <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png">{{tournament.category}}</p></div>
             <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="assets/images/plata.png"> {{tournament.secondPrize}}</p></div>
           </div>
-          <a (click) = "deleteATournament()" class="tournament_definition"  id="tournament_button"><span>ELIMINAR TORNEO</span></a>
+          <a (click) = "deleteATournament(tournament.id)" class="tournament_definition"  id="tournament_button"><span>ELIMINAR TORNEO</span></a>
             <a *ngIf="tournament.finished" href="#popup/{{tournament.id}}" class="tournament_definition" id="tournament_button"><span>TORNEO FINALIZADO</span></a>
             <div *ngIf="tournament.finished" id="popup/{{tournament.id}}" class="overlay-formulario">
               <div id="popup-Body">
@@ -60,7 +60,7 @@
       <div class="recent-matches">
         <h1>TORNEOS PENDIENTES</h1>
       </div>
-      <div *ngFor="let tournament of bussinessProfile.tournaments" class="col-lg-12 tournaments">
+      <div *ngFor="let tournament of tournamentsNoAccepted" class="col-lg-12 tournaments">
         <div *ngIf="!tournament.accepted" class="row bg-white align-items-center match-entry tournament-company">
 
           <div class="tournament_definition" id="tournament_name"><p>{{tournament.name}}</p></div>
@@ -72,7 +72,7 @@
             <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png">{{tournament.category}}</p></div>
             <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="assets/images/plata.png"> {{tournament.secondPrize}}</p></div>
           </div>
-          <a class="tournament_definition" (click)="deleteATournament()" id="tournament_button"><span>ELIMINAR TORNEO</span></a>
+          <a class="tournament_definition" (click)="deleteATournament(tournament.id)" id="tournament_button"><span>ELIMINAR TORNEO</span></a>
         </div>
       <!--{{#hasPrev2}}
         <a href="/?page={{prevPage2}}">Anterior</a>

@@ -18,12 +18,17 @@ export class BussinessProfileComponent {
   loggedUser: User | undefined;
   isExtern = true;
   tournamentId: number;
-
+  tournamentsNoAccepted: Tournament[] | undefined;
+  tournamentsAccepted: Tournament[] | undefined;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, public tournamentService: TournamentsService, public login: LoginService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
-    //MIRAR SI SE HACE ESTO
-    this.tournamentService.getATournament(this.tournamentId).subscribe();
+    this.tournamentService.getAllNonAccepted().subscribe(
+      tournament => this.tournamentsNoAccepted = tournament
+    );
+    this.tournamentService.getAllAccepted().subscribe(
+      tournament => this.tournamentsAccepted = tournament
+    );
     activatedRoute.params.subscribe(params =>{
       const bussinessUserName = params['userName'];
       service.getBussiness(bussinessUserName).subscribe(
@@ -51,15 +56,17 @@ export class BussinessProfileComponent {
   }
 */
 
-   deleteATournament(){
-    const okResponse = window.confirm('Do you want to remove this book?');
+   deleteATournament(id: number|undefined){
+    const okResponse = window.confirm('Do you want to remove this tournament?');
         if (okResponse) {
-          this.tournamentService.deleteTournament(this.tournamentId).subscribe(
-            tournament => {
-              alert('Torneo eliminado con exito.');
-              this.router.navigate(['/']);
+          if(id){
+            this.tournamentService.deleteTournament(id).subscribe(
+              tournament => {
+                alert('Torneo eliminado con exito.');
+                this.router.navigate(['/']);
+              }
+            );
             }
-          );
         }
    }
 
