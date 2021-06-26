@@ -44,13 +44,13 @@ export class TournamentsService {
         )as Observable<Tournament>;
     }
 
-    acceptTournament(id: number): Observable<Tournament>{
-      return this.http.put(BASE_URL + '/acceptedTournament/', id).pipe(
-        )as Observable<Tournament>;
+    acceptTournament(id: number):Observable<Tournament>{
+      return this.http.put(BASE_URL + '/acceptedTournament/' + id, id).pipe(
+        ) as Observable<Tournament>;
     }
 
     declineTournament(id: number): Observable<Tournament>{
-      return this.http.delete(BASE_URL + '/delTournament/' + id).pipe(
+      return this.http.put(BASE_URL + '/delTournament/' + id, id).pipe(
         ) as Observable<Tournament>;
     }
 
