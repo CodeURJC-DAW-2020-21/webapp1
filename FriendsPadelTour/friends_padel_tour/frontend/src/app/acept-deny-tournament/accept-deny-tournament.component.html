@@ -16,7 +16,6 @@
     </div>
     <div class="row">
       <div class="col-md-12 tournaments">
-        <div *nfIf="!tournament.accepted"><!--{{#pendingTournaments }}-->
         <div *ngFor="let tournament of tournaments; let indice = index;" class="row bg-white align-items-center ml-0 mr-0 py-4 match-entry tournament-management">
           <div class="tournament_definition" id="tournament_name"><p>TORNEO {{indice+1}}</p></div>
           <div class="tournament_definition" id="tournament_name"><p>{{tournament.name}}</p></div>
@@ -37,7 +36,19 @@
           <a (click) = "declineTournament()" class="tournament_definition" id="reject-button"><span>RECHAZAR TORNEO</span></a>
         </div>
         <!--{{/pendingTournaments }}-->
-      </div>
     </div>
   </div>
 </div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/jquery-ui.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/jquery.countdown.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+
+  <script src="js/main.js"></script>

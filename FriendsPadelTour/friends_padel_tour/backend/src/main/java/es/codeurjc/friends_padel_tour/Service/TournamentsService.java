@@ -84,6 +84,14 @@ public class TournamentsService {
         else return null;
     }
 
+    public List<Tournament> getAllNonAccepted(){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByAccepted(false);
+        if(tournamentsInDB.isPresent()){
+            return tournamentsInDB.get();
+        } 
+        else return null;
+    }
+
     //Set First winning couple 
     public void setFirstWinnngCouple(DoubleOfPlayers couple, Long id){
         tournamentRepository.setFirstWinningCouple(couple, id);

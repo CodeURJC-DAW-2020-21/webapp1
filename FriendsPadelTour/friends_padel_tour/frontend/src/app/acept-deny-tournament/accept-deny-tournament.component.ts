@@ -19,34 +19,21 @@ export class AcceptDenyTournamentComponent implements OnInit {
   logged = false;
   bussiness: boolean | undefined;
   userName: string = '';
+  loggedUser: User | undefined;
 
   tournaments: Tournament[] | undefined;
+  tournament: Tournament | undefined;
 
-  pendingTournaments: Tournament[];
   //tournament: Tournament;
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute,
-              public service: TournamentsService, public loginService: LoginService, public userService: UserService) {
+  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: TournamentsService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
-    this.pendingTournaments = []
-    service.getNonAcceptedTournaments(3).subscribe(
-      //tour => this.pendingTournaments = tour
-
-    )
-    /*const id = activatedRoute.snapshot.params['id'];
-        service.getATournament(id).subscribe(
-            tournament => this.tournament = this.tournament,
-            error => console.error(error)
-        );*/
+    this.service.getAllNonAccepted().subscribe(
+      tournament => this.tournaments = tournament
+    );
    }
 
-  ngOnInit(): void {
-    this.loginService.me().subscribe(
-      loggedUser => this.userService.getBussiness((loggedUser as User).username).subscribe(
-        bussiness => this.creator = bussiness
-      )
-    )
-  }
+  ngOnInit(): void {}
 
   acceptATournament(){
       this.service.acceptTournament(this.tournamentId).subscribe(

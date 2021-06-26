@@ -23,6 +23,7 @@ import { Division2Component } from './division2/division2.component';
 import { Division3Component } from './division3/division3.component';
 import { AcceptDenyTournamentComponent } from './acept-deny-tournament/accept-deny-tournament.component';
 
+
 const routes: Routes = [
  { path: '', component: IndexComponent },
  { path: 'error', component: ErrorsComponent },

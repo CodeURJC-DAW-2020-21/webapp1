@@ -40,11 +40,13 @@ export class TournamentsComponent {
       tournament => this.tournamentList = tournament
     );
   }
-    // Añadir join dentro del popup porque el double selected se elige ahí con input
+
+  //Añadir join dentro del popup porque el double selected se elige ahí con input
   joinATournament(tournamentId: number, doubleSelected:string){
     this.service.joinATournament(tournamentId, doubleSelected).subscribe(); //el double lo cojo del input del popup
   }
 
+  //Pagination
   seeMore(){
     this.p = this.p + 1;
     this.service.getTournaments(this.p).subscribe(

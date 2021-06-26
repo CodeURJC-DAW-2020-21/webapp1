@@ -4,6 +4,8 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 
 import java.net.URI;
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,6 +44,24 @@ public class ApiTournamentController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(tournaments);
+    }
+
+    @GetMapping(value = "/allAccepted")
+    public ResponseEntity<List<Tournament>> getAllAccepted(){
+        List<Tournament> tournamentsInDB = tournamentsService.getAllAccepted();
+        if(tournamentsInDB == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tournamentsInDB);
+    }
+
+    @GetMapping(value = "/allNonAccepted")
+    public ResponseEntity<List<Tournament>> getAllNonAccepted(){
+        List<Tournament> tournamentsInDB = tournamentsService.getAllNonAccepted();
+        if(tournamentsInDB == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tournamentsInDB);
     }
 
     @GetMapping(value="/tournament")

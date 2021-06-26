@@ -24,6 +24,16 @@ export class TournamentsService {
       return response.content;
     }
 
+    getAllAccepted():Observable<Tournament[]>{
+      return this.http.get(BASE_URL + '/allAccepted').pipe(
+      ) as Observable<Tournament[]>;
+      }
+
+    getAllNonAccepted():Observable<Tournament[]>{
+      return this.http.get(BASE_URL + '/allNonAccepted').pipe(
+      ) as Observable<Tournament[]>;
+      }
+
     getNonAcceptedTournaments(pageNumber: number): Observable<Tournament[]>{
       return this.http.get(BASE_URL + '/nonAcceptedTournaments?pageNumber=' + pageNumber).pipe(map(response => (response as any))
         ) as Observable<Tournament[]>;
