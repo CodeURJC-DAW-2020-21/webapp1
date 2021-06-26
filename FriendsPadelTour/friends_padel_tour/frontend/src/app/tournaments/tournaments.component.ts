@@ -41,10 +41,6 @@ export class TournamentsComponent {
     );
   }
 
-  //Añadir join dentro del popup porque el double selected se elige ahí con input
-  joinATournament(tournamentId: number, doubleSelected:string){
-    this.service.joinATournament(tournamentId, doubleSelected).subscribe(); //el double lo cojo del input del popup
-  }
 
   //Pagination
   seeMore(){

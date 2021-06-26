@@ -30,10 +30,11 @@ import { InfoMessageComponent } from './info-message/info-message.component';
 import { AcceptDenyTournamentComponent } from './acept-deny-tournament/accept-deny-tournament.component';
 import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
 import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
+import { SelectADoubleForATournamentComponent } from './selectADoubleForATournament/selectADoubleForATournament.component';
 
 
 @NgModule({
-  declarations: [
+  declarations: [	
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -58,8 +59,9 @@ import { TournamentInfoComponent } from './tournament-info/tournament-info.compo
     JoinFriendlyMatchComponent,
     CreateAFriendlyMatchFormComponent,
     chartProfileComponent,
-    InfoMessageComponent
-  ],
+    InfoMessageComponent,
+      SelectADoubleForATournamentComponent
+   ],
   imports: [
     NgxPaginationModule,
     BrowserModule,

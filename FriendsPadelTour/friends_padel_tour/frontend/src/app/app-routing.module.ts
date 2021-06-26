@@ -1,3 +1,4 @@
+import { SelectADoubleForATournamentComponent } from './selectADoubleForATournament/selectADoubleForATournament.component';
 import { TournamentInfoComponent } from './tournament-info/tournament-info.component';
 import { CreateATournamentFormComponent } from './create-a-tournament-form/create-a-tournament-form.component';
 import { InfoMessageComponent } from './info-message/info-message.component';
@@ -48,8 +49,9 @@ const routes: Routes = [
  { path: 'joinFriendlyMatch/:id', component: JoinFriendlyMatchComponent },
  { path: 'createAFriendlyMatch/:division', component: CreateAFriendlyMatchFormComponent },
  { path: 'tournamentManagment', component: AcceptDenyTournamentComponent},
- { path: '**', component: ErrorsComponent },
  { path: 'success/:message', component: InfoMessageComponent },
+ { path: 'selectADouble/:tournamentId', component: SelectADoubleForATournamentComponent },
+ { path: '**', component: ErrorsComponent }
 ];
 
 @NgModule({

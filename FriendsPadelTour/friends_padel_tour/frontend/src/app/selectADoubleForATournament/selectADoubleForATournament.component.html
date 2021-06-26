@@ -1,0 +1,11 @@
+
+<br>
+<div class="container">
+  <label for="lprov" style="font-size: 25px;">Pareja:</label>
+    <select [(ngModel)]="doubleSelected" name="doubleSelect" class="form">
+      <option *ngFor="let double of userDoubles">
+        {{double.username}}
+      </option>
+  </select><br>
+  <button (click)="joinATournament()" id="tournament_button"><span>UNIRSE</span></button>
+</div>
