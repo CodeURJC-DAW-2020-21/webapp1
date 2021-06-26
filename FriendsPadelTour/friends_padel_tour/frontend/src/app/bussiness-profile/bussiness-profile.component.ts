@@ -19,8 +19,11 @@ export class BussinessProfileComponent {
   isExtern = true;
   tournamentId: number;
 
+
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, public tournamentService: TournamentsService, public login: LoginService) {
     this.tournamentId = activatedRoute.snapshot.params['id'];
+    //MIRAR SI SE HACE ESTO
+    this.tournamentService.getATournament(this.tournamentId).subscribe();
     activatedRoute.params.subscribe(params =>{
       const bussinessUserName = params['userName'];
       service.getBussiness(bussinessUserName).subscribe(
@@ -48,10 +51,10 @@ export class BussinessProfileComponent {
   }
 */
 
-   deleteATournament(){  
+   deleteATournament(){
     const okResponse = window.confirm('Do you want to remove this book?');
         if (okResponse) {
-          this.tournamentService.deleteTournament(this.tournamentId).subscribe( 
+          this.tournamentService.deleteTournament(this.tournamentId).subscribe(
             tournament => {
               alert('Torneo eliminado con exito.');
               this.router.navigate(['/']);
@@ -60,7 +63,7 @@ export class BussinessProfileComponent {
         }
    }
 
-  
+
 
    edit(pass: string){
     let id = this.bussinessProfile?.id

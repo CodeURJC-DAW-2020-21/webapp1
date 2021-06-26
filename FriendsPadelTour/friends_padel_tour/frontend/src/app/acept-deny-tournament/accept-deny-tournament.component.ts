@@ -15,7 +15,7 @@ import { Bussiness } from '../model/bussiness.model';
 })
 export class AcceptDenyTournamentComponent implements OnInit {
   creator!: Bussiness;
-  tournamentId: number;
+  //tournamentId: number;
   logged = false;
   bussiness: boolean | undefined;
   userName: string = '';
@@ -27,7 +27,7 @@ export class AcceptDenyTournamentComponent implements OnInit {
   //tournament: Tournament;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: TournamentsService) {
-    this.tournamentId = activatedRoute.snapshot.params['id'];
+    //this.tournamentId = activatedRoute.snapshot.params['id'];
     this.service.getAllNonAccepted().subscribe(
       tournament => this.tournaments = tournament
     );
@@ -35,13 +35,14 @@ export class AcceptDenyTournamentComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  acceptATournament(){
-      this.service.acceptTournament(this.tournamentId).subscribe(
-        tournament => {
-          alert('Torneo aceptado con exito.');
-          this.router.navigate(['/']);
-        }
-      );
+  acceptATournament(id: number|undefined){
+    if(id){
+      this.service.acceptTournament(id).subscribe(
+      tournament => {
+        alert('Torneo aceptado con exito.');
+        this.router.navigate(['/']);
+      });
+    }
   }
 
   goBussinessProfile(){
@@ -52,14 +53,15 @@ export class AcceptDenyTournamentComponent implements OnInit {
     }
    }
 
-  declineTournament(){
-    this.service.declineTournament(this.tournamentId).subscribe(
+  declineATournament(id: number|undefined){
+    if(id){
+      this.service.declineTournament(id).subscribe(
       tournament => {
         alert('Torneo rechazado con exito.');
         this.router.navigate(['/']);
-      }
-    );
-}
+      });
+    }
+  }
 
 
 }

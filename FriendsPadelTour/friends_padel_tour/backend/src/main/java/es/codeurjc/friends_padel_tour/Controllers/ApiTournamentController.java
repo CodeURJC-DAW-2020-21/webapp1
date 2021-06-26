@@ -96,13 +96,14 @@ public class ApiTournamentController {
         
     }
 
-    @DeleteMapping(value="/delTournament/{id}")
+    @PutMapping(value="/delTournament/{id}")
     public ResponseEntity<Tournament> declineTournament(@PathVariable Long id){
         Tournament tournamentToDelete = tournamentsService.findById(id);
         if(tournamentToDelete==null){
             return ResponseEntity.notFound().build();
         }
-        tournamentsService.deleteById(id);
+        tournamentToDelete.setAccepted(false);
+        tournamentsService.uptdate(tournamentToDelete);
         return ResponseEntity.ok(tournamentToDelete);
     }
 
