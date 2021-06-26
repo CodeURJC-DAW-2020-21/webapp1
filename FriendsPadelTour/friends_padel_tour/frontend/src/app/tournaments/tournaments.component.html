@@ -35,27 +35,9 @@
               <div class="tournament_definition" id="tournament_couple"><p><img class="tournament_icon" src="assets/images/personas.png"> {{tournament.registeredCouples}}/{{tournament.maxCouples}}</p></div>
               <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png"> {{tournament.category}}</p></div>
               <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png">{{tournament.firstPrize}}<img class="tournament_icon" src="assets/images/plata.png">{{tournament.secondPrize}}</p></div>
-                  <a href="popup/torneo" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
-              </div>
-              <div class="popupContent" id="popup/torneo">
-              <div *ngIf="logged && player && !tournament.isFull" class="overlay-formulario">
-                <div id="popup-Body">
-                  <h2 style="background-color: rgb(252, 186, 186);">Elija una pareja</h2><br>
-                  <a id="cerrarPestana" href="#">&times;</a>
-                  <div class="popupContent">
-                    <form action="/joinTournament/{{tournament.id}}" method="POST">
-                      <label for="lprov" style="font-size: 25px;"><b>Pareja: <br></b><select name="doubleSelect" required>
-                        <div *ngFor="let double of userDoubles">
-                          <option>{{double.user.username}}</option>
-                        </div>
-                      </select></label><br>
-                      <input type="submit" value="Aceptar">
-                    </form>
-                  </div>
-                </div>
+                  <a *ngIf="player && !tournament.isFull" [routerLink]="['/selectADouble', tournament.id]" class="tournament_definition" id="tournament_button"><span>UNIRSE</span></a>
               </div>
             </div>
-          </div>
     </ul>
 </div>
 </div>
