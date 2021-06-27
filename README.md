@@ -3,7 +3,7 @@
 # Friends-Padel-Tour
 It is a Social Network where you can find players of your same level to play with. Create tournaments with your friends and compete with them in a friendly way.
 
-#LINK YOUTUBE - PHASE 4: https://www.youtube.com/watch?v=VubaNrlHLdo
+# LINK YOUTUBE - PHASE 4: https://www.youtube.com/watch?v=VubaNrlHLdo
 
 # MEMBERS
 | Name | Email | User GitHub |
