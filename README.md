@@ -245,11 +245,11 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 
 | Number | Description | Commit | 
 | ------------- | ------------- | ------------- | 
-| #1 | ApiDocs | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/dde697eeeefeb9d3e4be6b1916ba14d5b0a61fb6) | 
-| #2 | Api Match Controller | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1befb61d0d4dc511e4be56a25fe9b4e23d6f6667) |
-| #3 | Fixing bugs | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/aa31fc3c60f5e417aca7604addb508a68ee57527) | 
-| #4 | Integration with the ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/0da660e1656d74e767453ccbcbe9aa87c839c6d5) | 
-| #5 | Performed general improvements  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/665e40d79716bd0b19dd69a98c1c195ba3d3548e) 
+| #1 | Matches | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/0a1c385cb0f0f28b95c0fab435a4977983e01e6d) | 
+| #2 | User profile | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/78f94b59e914fd6ee2745476b500c2ad33c99ff5) |
+| #3 | Fixing bugs | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/51f8139c134386e7061377027067864a5635bd29) | 
+| #4 | SPA Controller | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/5382b9df25aebb97b60bce7eb9905dbcc1eae00b) | 
+| #5 | Last details  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/51f8139c134386e7061377027067864a5635bd29) 
 
 
 
@@ -257,11 +257,11 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 
 | Number | Description | Commit | 
 | ------------- | ------------- | ------------- |
-| #1 | ReadME | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/a201da1e84302def70275a4a027771d76f9921b4) | 
-| #2 | ApiUsersController | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/874318de753ef1b4ef63b9ed171690695ec0cb49) | 
-| #3 | Fixing bugs, general improvements  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1467dce6a6fd18f4e4290d07fba7345d911bb0ca) | 
-| #4 | Downloading and uploading images with ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/eb19998ac73672dcc731bd43ed19f0f55f73e1b0) | 
-| #5 | Security for ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/2d1f94c7cd4629cae5f96203e0484b2bb98f92ca) |
+| #1 | Tournaments | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/33ba29c453e89b6eb418f62cdd0006edd3ff5fcc) | 
+| #2 | ReadME | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a7406aed6b1c85df22967acbdc5ba9ca8ec6b7dc) | 
+| #3 | Fixing bugs  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/2860636d25a0b4a1834db2ed7f9cb420c427d2fd) | 
+| #4 | Uploading images | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/d41b702ed31dabb61a6a082a138a6469eeb70610) | 
+| #5 | General improvements | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/39a3015d5d262f8b6a9857ee4f07b5136ade74bc) |
 
 
 
@@ -269,11 +269,11 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 
 | Number | Description | Commit |
 | ------------- | ------------- | ------------- |
-| #1 | ApiTournaments | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/d5f9664477a7c225da27de6248b5985eae8a1450) | 
-| #2 | Docker | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/db1c38cded9b7969f7740de724b87ab92b5aa724) | 
-| #3 | ReadME  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/5664b6d08a0ed86e3c089fb60ee4f6dfc1cc6744) | 
-| #4 | General Improvements | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1264119b553ec0bbeeaffb72abeb21f4f50c7c90) |
-| #5 | Docker-compose | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a1f2861b77de8085e95e1e47de7af0e3160dfe2a) | 
+| #1 | SignUp | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/e064b00344b2e75c013ea34fc0010a5a5058e223) | 
+| #2 | Register | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/ec44f16716a1aa7fb5a4d659661502f1fa27adc3) | 
+| #3 | Charts  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/e251e926282ec177b86f55ed09cfff64e1bf2c64) | 
+| #4 | Docker | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/2c1a11adccecc0aa2e7a9c504e749eb0c7330f4d) |
+| #5 | Bugs and general improvements | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/01dc1c3807389f40734dce350797e2e7fc426a85) | 
 
 
 
