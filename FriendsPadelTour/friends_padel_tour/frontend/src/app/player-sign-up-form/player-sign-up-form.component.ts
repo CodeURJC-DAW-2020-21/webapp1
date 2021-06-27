@@ -1,3 +1,4 @@
+import { LoginService } from './../Service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Player } from '../model/player.model';
@@ -25,16 +26,16 @@ export class PlayerSignUpFormComponent implements OnInit {
     this.player = {username: username,name: name,surname:surname,email:email,  division: parseInt(division),hasImage:false,location:location,matchesLost: 0,mathesPlayed:0,mathcesWon:0,createdMatches:[],pendingMatches:[],playedMatches:[],user: this.user, score: 0,doubles:[],imagePath:''}
     this.playerRequest = {user: this.user, player: this.player}
     this.SignUpService.signUpPlayer(this.playerRequest).subscribe(
-      data => {
-        alert('Jugador registrado correctamente');
-        this.router.navigate(['/']);
-        },
+      data =>{
+            window.alert("Usuario creado correctarmente");
+            this.router.navigate(['/']);
+      },
       error => console.error("Error al crear el jugador")
     )
   }
 
 
-  constructor(private router: Router, private SignUpService: SignUpService) {
+  constructor(private router: Router, private SignUpService: SignUpService, private loginService: LoginService) {
     this.user = {username: '', encodedPassword:'', roles:['']}
   }
 

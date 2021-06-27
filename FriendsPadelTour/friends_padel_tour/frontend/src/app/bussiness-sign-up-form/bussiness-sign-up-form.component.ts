@@ -1,3 +1,4 @@
+import { LoginService } from './../Service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Bussiness } from '../model/bussiness.model';
@@ -21,7 +22,7 @@ export class BussinessSignUpFormComponent implements OnInit {
   user: User;
   bussinessRequest: bussinessRequest | undefined;
 
-  constructor(private SignUpService: SignUpService, private router: Router) {
+  constructor(private SignUpService: SignUpService, private loginService: LoginService, private router: Router) {
     this.user = {username: '', encodedPassword:'', roles:['']}
   }
 
@@ -37,8 +38,14 @@ export class BussinessSignUpFormComponent implements OnInit {
       city:city,adress:adress,location:location,email:email,bussinessType:bussinessType,hasImage:false,tournaments:[],createdTournaments:0,imagePath:'',user:this.user};
       this.bussinessRequest = {user: this.user, bussiness: this.bussiness}
     this.SignUpService.signUpBussiness(this.bussinessRequest).subscribe(
-      data => {console.log("Usuario creado correctarmente")},
-      error => console.log("Error al crear el usuario")
+      data => {
+          window.alert("Usuario creado correctarmente");
+          this.router.navigate(['/']);
+      },
+      error => {
+        window.alert("Error al crear el usuario");
+        this.router.navigate(['/']);
+      }
     //this.router.navigate(['succeesPage']);
 
     )
