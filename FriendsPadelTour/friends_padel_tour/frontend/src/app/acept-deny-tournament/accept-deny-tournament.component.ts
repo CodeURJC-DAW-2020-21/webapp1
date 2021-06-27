@@ -15,19 +15,15 @@ import { Bussiness } from '../model/bussiness.model';
 })
 export class AcceptDenyTournamentComponent implements OnInit {
   creator!: Bussiness;
-  //tournamentId: number;
   logged = false;
   bussiness: boolean | undefined;
   userName: string = '';
   loggedUser: User | undefined;
-
   tournaments: Tournament[] | undefined;
   tournament: Tournament | undefined;
 
-  //tournament: Tournament;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: TournamentsService) {
-    //this.tournamentId = activatedRoute.snapshot.params['id'];
     this.service.getAllNonAccepted().subscribe(
       tournament => this.tournaments = tournament
     );
