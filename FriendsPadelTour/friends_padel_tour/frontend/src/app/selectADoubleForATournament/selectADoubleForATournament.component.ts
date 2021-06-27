@@ -12,14 +12,14 @@ import { LoginService } from '../Service/login.service';
 })
 export class SelectADoubleForATournamentComponent implements OnInit {
 
-  tournamentId : number = 1;
-  user : User | undefined;
-  userDoubles : Player[] = [];
-  doubleSelected : string = '';
+  tournamentId = 1;
+  user: User | undefined;
+  userDoubles: Player[] = [];
+  doubleSelected = '';
 
   constructor(private router: Router, activatedRoute: ActivatedRoute,
               public tournamentsService: TournamentsService, public loginService: LoginService, public doublesService: DoubleService) {
-    this.tournamentId = activatedRoute.snapshot.params['tournamentId'];
+    this.tournamentId = activatedRoute.snapshot.params.tournamentId;
    }
 
   ngOnInit() {
@@ -28,16 +28,16 @@ export class SelectADoubleForATournamentComponent implements OnInit {
         this.user = u;
         this.doublesService.getDoublesOf(this.user.username).subscribe(
           doubles => this.userDoubles = doubles
-        )
+        );
       }
-    )
+    );
   }
 
   joinATournament(){
-    if(this.tournamentId === undefined) this.tournamentId = 1;
+    if (this.tournamentId === undefined) { this.tournamentId = 1; }
     this.tournamentsService.joinATournament(this.tournamentId, this.doubleSelected).subscribe(
-       response => this.router.navigate(["success","Exito al unirse al torneo"]),
-       error => this.router.navigate(["**"])
+       response => this.router.navigate(['success', 'Exito al unirse al torneo']),
+       error => this.router.navigate(['**'])
     );
 
   }

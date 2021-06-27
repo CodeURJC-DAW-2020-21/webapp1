@@ -24,7 +24,6 @@ import es.codeurjc.friends_padel_tour.Entities.PadelMatch;
 import es.codeurjc.friends_padel_tour.Entities.Player;
 import es.codeurjc.friends_padel_tour.Service.MatchesService;
 import es.codeurjc.friends_padel_tour.Service.PlayersService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
