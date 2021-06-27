@@ -14,7 +14,6 @@ import { LoginService } from '../Service/login.service';
 })
 export class BussinessProfileComponent {
   bussinessProfile: Bussiness | undefined;
-  // tournamentToDelete: Tournament | undefined;
   loggedUser: User | undefined;
   isExtern = true;
   tournamentId: number;
@@ -43,34 +42,15 @@ export class BussinessProfileComponent {
     });
    }
 
-/*
-   private refresh(tournament: Tournament){
-    this.tournamentToDelete = tournament;
-   }
-
-   //Tengo que cambiar el get tournaments y añadir uno que me devuelva torneos
-   ngOnInit(): void {
-    this.tournamentService.getTournaments(this.tournamentId).subscribe(
-      tournament => this.refresh(tournament)
-    );
-  }
-*/
-
-   deleteATournament(id: number|undefined){
-    const okResponse = window.confirm('Do you want to remove this tournament?');
-        if (okResponse) {
-          if(id){
-            this.tournamentService.deleteTournament(id).subscribe(
-              tournament => {
-                alert('Torneo eliminado con exito.');
-                this.router.navigate(['/']);
-              }
-            );
+  deleteATournament(id: number|undefined){
+      if(id){
+        this.tournamentService.deleteTournament(id).subscribe(
+          _ => {
+            window.location.reload()
             }
-        }
-   }
-
-
+        );
+      }
+  }
 
    edit(pass: string){
     let id = this.bussinessProfile?.id

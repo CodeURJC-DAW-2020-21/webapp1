@@ -72,7 +72,7 @@
             <div class="tournament_definition" id="tournament_category"><p><img class="tournament_icon" src="assets/images/categoria.png">{{tournament.category}}</p></div>
             <div class="tournament_definition" id="tournament_reward"><p><img class="tournament_icon" src="assets/images/oro.png"> {{tournament.firstPrize}} <img class="tournament_icon" src="assets/images/plata.png"> {{tournament.secondPrize}}</p></div>
           </div>
-          <a class="tournament_definition" (click)="deleteATournament(tournament.id)" id="tournament_button"><span>ELIMINAR TORNEO</span></a>
+          <button (click)="deleteATournament(tournament.id)" id="tournament_button">ELIMINAR TORNEO</button>
         </div>
       <!--{{#hasPrev2}}
         <a href="/?page={{prevPage2}}">Anterior</a>
