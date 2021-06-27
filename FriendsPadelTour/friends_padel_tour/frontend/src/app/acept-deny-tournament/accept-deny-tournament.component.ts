@@ -51,11 +51,13 @@ export class AcceptDenyTournamentComponent implements OnInit {
 
   declineATournament(id: number|undefined){
     if(id){
-      this.service.declineTournament(id).subscribe(
-      tournament => {
-        alert('Torneo rechazado con exito.');
-        this.router.navigate(['/']);
+      this.service.deleteTournament(id).subscribe(
+        r => {
+          alert('Torneo rechazado con exito.');
+          this.router.navigate(['/']);
       });
+      alert('Torneo rechazado con exito.');
+      this.router.navigate(['/']);
     }
   }
 

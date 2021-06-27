@@ -103,7 +103,7 @@ public class ApiTournamentController {
             return ResponseEntity.notFound().build();
         }
         tournamentToDelete.setAccepted(false);
-        tournamentsService.uptdate(tournamentToDelete);
+        tournamentsService.deleteById(tournamentToDelete.getId());
         return ResponseEntity.ok(tournamentToDelete);
     }
 

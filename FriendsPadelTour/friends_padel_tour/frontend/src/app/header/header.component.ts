@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent{
+export class HeaderComponent implements OnInit{
   logged: boolean | undefined;
   player: boolean | undefined;
   bussiness: boolean | undefined;
@@ -20,9 +20,20 @@ export class HeaderComponent{
   constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService) {
   }
 
+  ngOnInit(): void {
+    this.loginService.me().subscribe(
+      r => this.refresh(r)
+    );
+  }
+
   refresh(response: any){
     this.user = response as User;
-    this.logged = true;
+    if (this.user !== undefined) {
+      this.logged = true;
+    }
+    else {
+      this.logged = false;
+    }
     this.player = this.isPlayer();
     this.bussiness = this.isBussiness();
     this.admin = this.isAdmin();
@@ -52,7 +63,7 @@ export class HeaderComponent{
    }
 
    goPlayerProfile(){
-    if(this.player){
+    if (this.player){
       this.router.navigate(['player/', this.userName]);
     }else{
       this.router.navigate(['/error']);
@@ -60,7 +71,7 @@ export class HeaderComponent{
    }
 
    goBussinessProfile(){
-    if(this.bussiness){
+    if (this.bussiness){
       this.router.navigate(['/bussiness', this.userName]);
     }else{
       this.router.navigate(['/error']);
@@ -68,7 +79,7 @@ export class HeaderComponent{
    }
 
    goTournamentManagment(){
-    if(this.admin){
+    if (this.admin){
       this.router.navigate(['/tournamentManagment']);
     }else{
       this.router.navigate(['/error']);
@@ -77,9 +88,9 @@ export class HeaderComponent{
 
   login(user: string, pass: string){
     this.loginService.logIn(user, pass).subscribe(
-      response =>{
+      response => {
         this.loginService.me().subscribe(
-          response2 =>{
+          response2 => {
             this.refresh(response2);
           }
         );
