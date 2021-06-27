@@ -22,7 +22,7 @@ export class PlayerProfileComponent implements OnInit {
   principalDouble: Player | undefined;
   userDoubles: Player[] = [];
   efectivity: number = 0;
-  division: number= 0;
+  division: boolean[] = [false, false, false, false, false, false, false];
   usersImage: any;
 
   createdMatches: PadelMatch[] = [];
@@ -35,7 +35,7 @@ export class PlayerProfileComponent implements OnInit {
   file: any;
 
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, private doubleService: DoubleService,
+  constructor(private router: Router, public activatedRoute: ActivatedRoute, public service: UserService, private doubleService: DoubleService,
               private login: LoginService, private matchesService: MatchesService) {
     this.playerUserName = activatedRoute.snapshot.params['userName'];
   }
@@ -44,48 +44,17 @@ export class PlayerProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.service.getPlayer(this.playerUserName).subscribe(
-      user => {
-        this.player = user;
-        this.usersProfile = user;
-        this.login.me().subscribe(
-          user => this.isExtern = user !== undefined && user.username !== this.playerUserName
-        );
-        this.doubleService.getDoublesOf(user.username).subscribe(
-          doubles => {
-            this.userDoubles = doubles;
-            this.principalDouble = doubles.pop();
-          }
-        );
-        this.matchesService.getCreatedMatchesOf(this.playerUserName).subscribe(
-          matches => {
-            this.createdMatches = matches;
-          }
-        );
-        this.matchesService.getPendingMatchesOf(this.playerUserName).subscribe(
-          matches => {
-            this.pendingMatches = matches;
-          }
-        );
-        this.matchesService.getPlayedMatchesOf(this.playerUserName).subscribe(
-          matches => {
-            this.playedMatches = matches;
-          }
-        );
-        if (this.usersProfile.mathesPlayed!==0){
-          this.efectivity =  this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
-          this.efectivity = parseFloat(this.efectivity.toPrecision(2))
-        }else{this.efectivity == 0}
-      },
-      error => console.error('Bad request')
-    );
+    this.refresh();
   }
 
   edit(pass: string){
-    let div = this.division
-    let id = this.usersProfile?.id
+    let div = this.division.indexOf(true);
+    if(div === -1 ){
+      div = 1;
+    }
+    let id = this.usersProfile?.id;
     if (id !== undefined)
-    this.service.updatePlayer(div,pass,id).subscribe(
+    this.service.updatePlayer(div, pass, id).subscribe(
       player => {
         alert('Se ha editado correctamente sus datos')
         this.router.navigate(['/'])
@@ -118,15 +87,15 @@ export class PlayerProfileComponent implements OnInit {
     reader.readAsDataURL(file);
   }
   */
-  updateImage():void {
+  updateImage(): void {
 
     const image = this.file.nativeElement.files[0];
     if (image) {
       let formData = new FormData();
       formData.append("profilePicture", image);
-      if(this.player)
+      if (this.player)
         this.service.updateImage(this.player, formData).subscribe(
-          _ => alert('Imagen subida de forma correcta'),
+          response => alert('Imagen subida de forma correcta'),
           error => alert('Error uploading user image')
         );
 
@@ -134,11 +103,11 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   downloadImage(){
-    if(this.player?.id){
+    if (this.player?.id){
       this.service.getImage(this.player.id).subscribe(
         image => {
           this.usersImage = image;
-          return this.player?.imagePath;
+          return this.usersImage;
         });
     }
   }
@@ -152,12 +121,64 @@ export class PlayerProfileComponent implements OnInit {
   }
 
   deleteMatch(id: number|undefined){
-    if(id){
+    if (id){
       this.matchesService.deleteMatch(id).subscribe(
         _ => {
           window.location.reload()        }
       )
     }
   }
+
+  inviteToDouble() {
+  }
+
+  refresh(){
+    this.playerUserName = this.activatedRoute.snapshot.params['userName'];
+    this.service.getPlayer(this.playerUserName).subscribe(
+      user => {
+        this.player = user;
+        this.usersProfile = user;
+        this.login.me().subscribe(
+          userLogged => {
+            this.isExtern = userLogged === undefined || userLogged.username !== this.playerUserName;
+            this.loggedUser = userLogged;
+          }
+        );
+        this.doubleService.getDoublesOf(user.username).subscribe(
+          doubles => {
+            this.userDoubles = doubles;
+            this.principalDouble = doubles.pop();
+          }
+        );
+        this.matchesService.getCreatedMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.createdMatches = matches;
+          }
+        );
+        this.matchesService.getPendingMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.pendingMatches = matches;
+          }
+        );
+        this.matchesService.getPlayedMatchesOf(this.playerUserName).subscribe(
+          matches => {
+            this.playedMatches = matches;
+          }
+        );
+        if (this.usersProfile.mathesPlayed !== 0){
+          this.efectivity =  this.usersProfile.mathcesWon / this.usersProfile.mathesPlayed;
+          this.efectivity = parseFloat(this.efectivity.toPrecision(2)) *100;
+        }else{this.efectivity == 0}
+      },
+      error => console.error('Bad request')
+    );
+  }
+
+  navigateToProfile(player: string){
+    this.router.navigate(["/player", player]);
+    this.refresh();
+  }
+
+
 
 }

@@ -8,32 +8,30 @@
             <div class="col-md-6" >
               <h3 class="bg-text-line">Nombre: {{usersProfile.name}} {{usersProfile.surname}}<br> Nombre de usuario: {{usersProfile.user.username}} <br> Categoria: {{usersProfile.division}} <br></h3>
               <div class="image-player">
-                  <img *ngIf="usersProfile.hasImage;else defaultImage" class="image-main" (src)="downloadImage()">
+                  <img *ngIf="usersProfile.hasImage;else defaultImage" class="image-main" src="/api/users/player/{{usersProfile.id}}/image/">
                   <ng-template #defaultImage>
                     <img ngTEm class="image-main" src="assets/images/usuariopareja.jpg">
                   </ng-template>
               </div>
-              <div *ngIf="loggedUser !==undefined && loggedUser.roles.includes('USER') && isExtern" class="container-button">
-                <div class="center-button">
-                  <a class="center-button" href="/makeDoubleWhith/{{usersProfile.user.username}}">Invitar a ser pareja</a>
-                </div>
+              <div *ngIf="player !==undefined && isExtern" class="container-button">
+                  <button (click)="inviteToDouble()" class="center-button">Invitar a ser pareja</button>
               </div>
             </div>
             <div *ngIf="principalDouble !== undefined" class="my-favourite-couple col-md-6">
               <h2 class="actual-couple">PAREJA ACTUAL</h2>
               <div class="container-button">
                 <div class="center-button">
-                  <a href="/player/{{principalDouble.user.username}}" class="searchcouple">{{principalDouble.user.username}}</a>
+                  <a (click)="navigateToProfile(principalDouble.user.username)" class="searchcouple">{{principalDouble.user.username}}</a>
                 </div>
               </div>
                   <div class="info-couple col-md-12">
                     <br> <p> Categoria: {{principalDouble.division}} </p>
-                      <img *ngIf="principalDouble.hasImage;else defaultImage" class="couple-image" src="/user/{{principalDouble.id}}/image">
+                      <img *ngIf="principalDouble.hasImage;else defaultImage" class="couple-image" src="/api/users/player/{{principalDouble.id}}/image/">
                   </div>
                   <div class="dropdown-couples">
                     <span>Otras parejas</span>
                     <div class="dropdown-content">
-                        <a *ngFor="let double of userDoubles" href="/player/{{double.user.username}}" class="searchcouple">{{double.user.username}}</a>
+                        <a *ngFor="let double of userDoubles" (click)="navigateToProfile(double.user.username)" class="searchcouple">{{double.user.username}}</a>
                     </div>
                   </div>
             </div>
@@ -68,9 +66,9 @@
 
 
   <div *ngIf="usersProfile.mathesPlayed!=0">
-    
+
   <app-chart></app-chart>
-    
+
   <br>
   <br>
   <br>
@@ -241,12 +239,12 @@
             <h3>División:</h3>
             <div class="row">
               <div class="col-md-6 center-items">
-                <input type="radio" value=1 name="division" [(ngModel)]="division" > 1
-                <input type="radio" value=2 name="division" [ngModel]="division" > 2
-                <input type="radio" value=3 name="division" [(ngModel)]="division" > 3
-                <input type="radio" value=4 name="division" [ngModel]="division" > 4
-                <input type="radio" value=5 name="division" [(ngModel)]="division" > 5
-                <input type="radio" value=6 name="division" [ngModel]="division" > 6         </div></div>
+                <input type="radio" value="1" name="division" [(ngModel)]="division[0]" > 1
+                <input type="radio" value="2" name="division" [(ngModel)]="division[1]" > 2
+                <input type="radio" value="3" name="division" [(ngModel)]="division[2]" > 3
+                <input type="radio" value="4" name="division" [(ngModel)]="division[3]" > 4
+                <input type="radio" value="5" name="division" [(ngModel)]="division[4]" > 5
+                <input type="radio" value="6" name="division" [(ngModel)]="division[5]" > 6         </div></div>
             <input (click)="edit(password.value)" type="submit" class="btn btn-default" value="Aceptar">
             <BR>
           </form>
