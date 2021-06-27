@@ -104,9 +104,11 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/fer_sanyo.jpg" alt="Image" class="img-fluid">
               </div>
-              <div *ngIf="match.double1!==null && match.double2!==null" class="text">
+              <div *ngIf="match.double1 !== null">
                 <h3  class="h5 mb-0 text-black">{{match.double1.player1.user.username}}</h3>
                 <h3  class="h5 mb-0 text-black">{{match.double1.player2.user.username}}</h3>
+              </div>
+              <div *ngIf="match.double1!==null && match.double2!==null" class="text">
                 <button class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded" *ngIf="!match.hasWinner" (click)="selectMatchWinner(match,1)">Elegir como ganadores del partido</button>
               </div>
             </div>
@@ -125,9 +127,11 @@
               <div class="image image-small ml-lg-3 mb-3 mb-lg-0 order-2">
                 <img src="assets/images/lima_tapia.jpg" alt="Image" class="img-fluid">
               </div>
-              <div *ngIf="match.double1!==null && match.double2!==null" class="text order-1 w-100">
+              <div *ngIf="match.double2 !== null">
                 <h3 class="h5 mb-0 text-black">{{match.double2.player1.user.username}}</h3>
                 <h3 class="h5 mb-0 text-black">{{match.double2.player2.user.username}}</h3>
+              </div>
+              <div *ngIf="match.double1!==null && match.double2!==null" class="text order-1 w-100">
                 <button class="bg-black py-2 px-4 mb-2 text-white d-inline-block rounded" *ngIf="!match.hasWinner" (click)="selectMatchWinner(match,2)">Elegir como ganadores del partido</button>
               </div>
             </div>

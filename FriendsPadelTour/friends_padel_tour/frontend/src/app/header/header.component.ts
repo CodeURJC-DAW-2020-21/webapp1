@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit{
-  logged: boolean | undefined;
+  logged: boolean = false;
   player: boolean | undefined;
   bussiness: boolean | undefined;
   admin: boolean | undefined;
@@ -18,6 +18,9 @@ export class HeaderComponent implements OnInit{
   user: User | undefined;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public loginService: LoginService) {
+    this.loginService.me().subscribe(
+      r => this.refresh(r)
+    );
   }
 
   ngOnInit(): void {
