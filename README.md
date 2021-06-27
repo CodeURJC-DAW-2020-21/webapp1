@@ -233,10 +233,11 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 # STAGE 4
 
 # WEB IMPLEMENTATION WITH SPA ARCHITECTURE
-#
+
 ### Development environment preparation: 
 #
 ### SPA: Class and templates diagram:
+
 #
 ### Members Participation <a name="members-part-3"></a>
 
