@@ -83,4 +83,14 @@ export class TournamentsService {
         console.error(err.message);
         return throwError('Server error');
     }
+
+    getAcceptedTournametsOf(bussiness:string): Observable<Tournament[]>{
+        return this.http.get(BASE_URL + '/acceptedTournamentsOf/' + bussiness).pipe() as Observable<Tournament[]>;
+    }
+
+
+
+    getNotAcceptedTournamentsOf(bussiness:string): Observable<Tournament[]>{
+      return this.http.get(BASE_URL + '/notAcceptedTournamentsOf/' + bussiness).pipe() as Observable<Tournament[]>;
+  }
 }

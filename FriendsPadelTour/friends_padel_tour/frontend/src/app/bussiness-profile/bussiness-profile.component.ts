@@ -16,18 +16,10 @@ export class BussinessProfileComponent {
   bussinessProfile: Bussiness | undefined;
   loggedUser: User | undefined;
   isExtern = true;
-  tournamentId: number;
   tournamentsNoAccepted: Tournament[] | undefined;
   tournamentsAccepted: Tournament[] | undefined;
 
   constructor(private router: Router, activatedRoute: ActivatedRoute, public service: UserService, public tournamentService: TournamentsService, public login: LoginService) {
-    this.tournamentId = activatedRoute.snapshot.params['id'];
-    this.tournamentService.getAllNonAccepted().subscribe(
-      tournament => this.tournamentsNoAccepted = tournament
-    );
-    this.tournamentService.getAllAccepted().subscribe(
-      tournament => this.tournamentsAccepted = tournament
-    );
     activatedRoute.params.subscribe(params =>{
       const bussinessUserName = params['userName'];
       service.getBussiness(bussinessUserName).subscribe(
@@ -35,7 +27,13 @@ export class BussinessProfileComponent {
           this.bussinessProfile = bussiness;
           this.login.me().subscribe(
             user => this.isExtern = user !== undefined && user.username !== bussinessUserName
-          )
+          );
+          this.tournamentService.getNotAcceptedTournamentsOf(bussinessUserName).subscribe(
+            tournament => this.tournamentsNoAccepted = tournament
+          );
+          this.tournamentService.getAcceptedTournametsOf(bussinessUserName).subscribe(
+            tournament => this.tournamentsAccepted = tournament
+          );
         },
         error => console.error('Server error.')
       );
@@ -53,14 +51,13 @@ export class BussinessProfileComponent {
   }
 
    edit(pass: string){
-    let id = this.bussinessProfile?.id
+    let id = this.bussinessProfile?.id;
     if (id !== undefined)
     this.service.updateBussiness(pass,id).subscribe(
-      player => {
+      _ => {
         alert('Se ha editado correctamente sus datos')
         this.router.navigate(['/'])
       }
-
     )
    }
 

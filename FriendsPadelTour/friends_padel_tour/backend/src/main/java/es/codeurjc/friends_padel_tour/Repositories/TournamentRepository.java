@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import es.codeurjc.friends_padel_tour.Entities.Bussiness;
 import es.codeurjc.friends_padel_tour.Entities.DoubleOfPlayers;
 import es.codeurjc.friends_padel_tour.Entities.Tournament;
 
@@ -33,5 +34,7 @@ public interface TournamentRepository extends JpaRepository<Tournament,Long> {
 
     
     Page<Tournament> findAllByAccepted(boolean b, Pageable p);
+
+    Optional<List<Tournament>> findByBussinessAndAccepted(Bussiness bussiness, boolean b);
 
 }

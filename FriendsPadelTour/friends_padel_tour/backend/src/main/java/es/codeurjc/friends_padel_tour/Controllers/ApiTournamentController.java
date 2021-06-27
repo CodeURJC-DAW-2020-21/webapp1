@@ -46,6 +46,32 @@ public class ApiTournamentController {
         return ResponseEntity.ok(tournaments);
     }
 
+    @GetMapping(value = "/acceptedTournamentsOf/{bussinessName}")
+    public ResponseEntity<List<Tournament>> getAcceptedTournamentsOf(@PathVariable String bussinessName){
+        Bussiness bussiness = this.bussinesService.findByUsername(bussinessName);
+        if(bussiness == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<Tournament> ts = tournamentsService.getAccepted(bussiness);
+        if(ts == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ts);
+    }
+
+    @GetMapping(value = "/notAcceptedTournamentsOf/{bussinessName}")
+    public ResponseEntity<List<Tournament>> getNotAcceptedTournamentsOf(@PathVariable String bussinessName){
+        Bussiness bussiness = this.bussinesService.findByUsername(bussinessName);
+        if(bussiness == null){
+            return ResponseEntity.notFound().build();
+        }
+        List<Tournament> ts = tournamentsService.getNotAccepted(bussiness);
+        if(ts == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(ts);
+    }
+
     @GetMapping(value = "/allAccepted")
     public ResponseEntity<List<Tournament>> getAllAccepted(){
         List<Tournament> tournamentsInDB = tournamentsService.getAllAccepted();

@@ -60,16 +60,16 @@ public class TournamentsService {
         tournamentRepository.save(tournament);    
     }
 
-    public Page<Tournament> getAccepted(Bussiness bussiness, Pageable pageable){
-        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),true, pageable);
+    public List<Tournament> getAccepted(Bussiness bussiness){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByBussinessAndAccepted(bussiness,true);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
         else return null;
     }
 
-    public Page<Tournament> getNotAccepted(Bussiness bussiness, Pageable pageable){
-        Optional<Page<Tournament>> tournamentsInDB = tournamentRepository.findByIdAndAccepted(bussiness.getId(),false, pageable);
+    public List<Tournament> getNotAccepted(Bussiness bussiness){
+        Optional<List<Tournament>> tournamentsInDB = tournamentRepository.findByBussinessAndAccepted(bussiness,false);
         if(tournamentsInDB.isPresent()){
             return tournamentsInDB.get();
         } 
