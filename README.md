@@ -237,7 +237,7 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 ### Development environment preparation: 
 #
 ### SPA: Class and templates diagram:
-
+![CLASS AND TEMPLATE DIAGRAM](https://user-images.githubusercontent.com/61882333/123547613-c6ada380-d761-11eb-99ea-0cee1267a4a0.png)
 #
 ### Members Participation <a name="members-part-3"></a>
 
