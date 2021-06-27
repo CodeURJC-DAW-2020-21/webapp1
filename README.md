@@ -230,3 +230,47 @@ DockerHub link: https://hub.docker.com/repository/docker/jgburjc/friendspadeltou
 | #5 | Docker-compose | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a1f2861b77de8085e95e1e47de7af0e3160dfe2a) | 
 
 
+# STAGE 4
+
+# WEB IMPLEMENTATION with SPA architecture
+
+
+### Members Participation <a name="members-part-3"></a>
+
+#### Eduardo Villaverde Espeso
+
+| Number | Description | Commit | 
+| ------------- | ------------- | ------------- | 
+| #1 | ApiDocs | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/dde697eeeefeb9d3e4be6b1916ba14d5b0a61fb6) | 
+| #2 | Api Match Controller | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1befb61d0d4dc511e4be56a25fe9b4e23d6f6667) |
+| #3 | Fixing bugs | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/aa31fc3c60f5e417aca7604addb508a68ee57527) | 
+| #4 | Integration with the ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/0da660e1656d74e767453ccbcbe9aa87c839c6d5) | 
+| #5 | Performed general improvements  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/665e40d79716bd0b19dd69a98c1c195ba3d3548e) 
+
+
+
+#### Juan Guillo Bermejo
+
+| Number | Description | Commit | 
+| ------------- | ------------- | ------------- |
+| #1 | ReadME | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp11/commit/a201da1e84302def70275a4a027771d76f9921b4) | 
+| #2 | ApiUsersController | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/874318de753ef1b4ef63b9ed171690695ec0cb49) | 
+| #3 | Fixing bugs, general improvements  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1467dce6a6fd18f4e4290d07fba7345d911bb0ca) | 
+| #4 | Downloading and uploading images with ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/eb19998ac73672dcc731bd43ed19f0f55f73e1b0) | 
+| #5 | Security for ApiRest | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/2d1f94c7cd4629cae5f96203e0484b2bb98f92ca) |
+
+
+
+#### Eduardo Ivorra Salinas
+
+| Number | Description | Commit |
+| ------------- | ------------- | ------------- |
+| #1 | ApiTournaments | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/d5f9664477a7c225da27de6248b5985eae8a1450) | 
+| #2 | Docker | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/db1c38cded9b7969f7740de724b87ab92b5aa724) | 
+| #3 | ReadME  | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/5664b6d08a0ed86e3c089fb60ee4f6dfc1cc6744) | 
+| #4 | General Improvements | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/1264119b553ec0bbeeaffb72abeb21f4f50c7c90) |
+| #5 | Docker-compose | [Commit](https://github.com/CodeURJC-DAW-2020-21/webapp1/commit/a1f2861b77de8085e95e1e47de7af0e3160dfe2a) | 
+
+
+
+
