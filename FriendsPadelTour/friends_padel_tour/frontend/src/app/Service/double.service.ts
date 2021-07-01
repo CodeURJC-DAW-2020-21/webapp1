@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Player } from '../model/player.model';
 import { DoubleOfPlayers } from '../model/doubleOfPlayers.model';
 
-const BASE_URL = 'api/doubles';
+const BASE_URL = '/api/doubles';
 
 @Injectable({
   providedIn: 'root'

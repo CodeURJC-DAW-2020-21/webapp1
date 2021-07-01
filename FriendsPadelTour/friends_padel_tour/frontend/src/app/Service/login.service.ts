@@ -17,10 +17,10 @@ export class LoginService{
 
 
   logIn(user: string, pass: string){
-    return this.http.post(BASE_URL + '/login', { username: user, password: pass }, { withCredentials: true }).pipe();
+    return this.http.post('/api/auth/login', { username: user, password: pass }, { withCredentials: true }).pipe();
   }
 
   logOut() {
-    return this.http.post(BASE_URL + '/logout', { withCredentials: true }).pipe();
+    return this.http.post('/api/auth/logout', { withCredentials: true }).pipe();
   }
 }

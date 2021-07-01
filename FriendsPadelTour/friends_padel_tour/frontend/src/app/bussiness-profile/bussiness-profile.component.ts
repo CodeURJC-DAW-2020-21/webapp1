@@ -41,12 +41,10 @@ export class BussinessProfileComponent {
    }
 
   deleteATournament(id: number|undefined){
-      if(id){
-        this.tournamentService.deleteTournament(id).subscribe(
-          _ => {
-            window.location.reload()
-            }
-        );
+      if (id){
+        this.tournamentService.deleteTournament(id).subscribe();
+        alert('Torneo eliminado con exito');
+        this.router.navigate(['/']);
       }
   }
 
@@ -55,8 +53,8 @@ export class BussinessProfileComponent {
     if (id !== undefined)
     this.service.updateBussiness(pass,id).subscribe(
       _ => {
-        alert('Se ha editado correctamente sus datos')
-        this.router.navigate(['/'])
+        alert('Se ha editado correctamente sus datos');
+        this.router.navigate(['/']);
       }
     )
    }

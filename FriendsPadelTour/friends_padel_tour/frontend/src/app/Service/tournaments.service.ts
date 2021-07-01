@@ -6,7 +6,7 @@ import { Tournament } from '../model/tournament.model';
 
 //Preguntar lo del page
 
-const BASE_URL = 'api/tournaments';
+const BASE_URL = '/api/tournaments';
 
 @Injectable({
   providedIn: 'root'

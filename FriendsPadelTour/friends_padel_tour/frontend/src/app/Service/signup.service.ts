@@ -9,7 +9,7 @@ import { playerRequest } from "../model/playerRequest.model";
 
 
 
-const BASE_URL = 'api/users';
+const BASE_URL = '/api/users';
 
 
 @Injectable({providedIn: 'root'})
