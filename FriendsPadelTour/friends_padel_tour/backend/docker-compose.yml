@@ -9,7 +9,7 @@ services:
 
       #Cambiar la imagen a la del dockerhub cuando terminemos de desarrollar
   practica:
-    image: fpt
+    image: jgburjc/fpt
     restart: always
     ports:
       - 8443:8443
